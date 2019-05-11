@@ -1,3 +1,14 @@
+#allen ignore
+*.jpg
+*.png
+*.swf
+*.fla
+*.xls
+*.ttf
+*.iso
+*.img
+*.lst
+
 # Prerequisites
 *.d
 

@@ -1,0 +1,74 @@
+#!/bin/sh
+# udhcpc script edited by Tim Riker <Tim@Rikers.org>
+
+RESOLV_CONF="/mnt/vram/wifi/resolv.conf"
+DNSMASQ_CONF="/tmp/dnsmasq.conf"
+DNSMASQ_CONF_BAK="/etc/dnsmasq.conf"
+
+[ -n "$1" ] || { echo "Error: should be called from udhcpc"; exit 1; }
+
+echo "copy dnsmasq configuration"
+cp -f $DNSMASQ_CONF_BAK $DNSMASQ_CONF
+
+NETMASK=""
+[ -n "$subnet" ] && NETMASK="netmask $subnet"
+BROADCAST="broadcast 255.255.255.255"
+[ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
+
+echo "cmd is $1"
+echo "interface is $interface"
+echo "ip is $ip"
+echo "router is $router"
+echo "domain is $domain"
+echo "dns is $dns"
+echo "NETMASK is $NETMASK"
+echo "BROADCAST is $BROADCAST"
+
+case "$1" in
+	deconfig)
+		echo "Setting IP address 0.0.0.0 on $interface"
+		ifconfig $interface 0.0.0.0
+		;;
+
+	renew|bound)
+		echo "Setting IP address $ip on $interface"
+		ifconfig $interface $ip $NETMASK $BROADCAST
+		rm -rf /tmp/amgw.txt
+
+		if [ -n "$router" ] ; then
+			echo "Deleting routers"
+			while route del default gw 0.0.0.0 dev $interface ; do
+				:
+			done
+
+			metric=0
+			for i in $router ; do
+				echo "Adding router $i"
+				route add default gw $i dev $interface
+				echo "intf=$interface,gw=$i," >/tmp/amgw.txt
+			done
+		fi
+
+		echo "Recreating $RESOLV_CONF"
+		echo -n > $RESOLV_CONF-$$
+		[ -n "$domain" ] && echo "search $domain" >> $RESOLV_CONF-$$
+		for i in $dns ; do
+			echo "dns is $i"
+			if [ "$i" != "0.0.0.0" ];then
+				echo " Adding DNS server $i"
+				echo "nameserver $i" >> $RESOLV_CONF-$$
+				echo -e "\nserver=$i" >> $DNSMASQ_CONF
+			fi
+		done
+
+		mv $RESOLV_CONF-$$ $RESOLV_CONF
+
+        #Mos: Sync time with ntp_server
+        /usr/bin/sync_ntp_time.sh &
+		;;
+esac
+
+#echo "sync"
+#/bin/sync
+
+exit 0

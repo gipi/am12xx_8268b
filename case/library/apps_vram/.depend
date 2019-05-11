@@ -1,0 +1,4 @@
+apps_vram.o: apps_vram.c ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h

@@ -1,0 +1,43 @@
+include .config
+##=======================================##
+## For AM7X-Linux modules installation   ##
+
+INITRD_DIR = ../bin/$(CONFIG_AM_CHIP_ID)/initrd
+ROOTFS_DIR = ../bin/$(CONFIG_AM_CHIP_ID)/rootfs
+
+INITRD_MODULES = am7x_nftl.ko am7x_recover.ko
+ROOTFS_MODULES = *
+##======================================##
+include include/config/auto.conf
+include scripts/Kbuild.include
+
+# When building external modules load the Kbuild file to retreive EXTRA_SYMBOLS info
+ifneq ($(KBUILD_EXTMOD),)
+
+# set src + obj - they may be used when building the .mod.c file
+obj := $(KBUILD_EXTMOD)
+src := $(obj)
+
+# Include the module's Makefile to find KBUILD_EXTRA_SYMBOLS
+include $(if $(wildcard $(KBUILD_EXTMOD)/Kbuild), \
+             $(KBUILD_EXTMOD)/Kbuild, $(KBUILD_EXTMOD)/Makefile)
+endif
+
+include scripts/Makefile.lib
+
+initrd_modules = $(filter-out *,$(INITRD_MODULES) $(ROOTFS_MODULES))
+
+modules = $(shell awk '{if((NR+1)%2==0)print $0}' $(MODVERDIR)/*.mod 2>/dev/null)
+
+#initrd_modules = $(filter %/$(filter),$(modules))
+#rootfs_modules = $(filter-out %/$(filter),$(modules))
+initrd_modules := $(strip $(foreach i,$(initrd_modules),$(filter %/$i,$(modules))))
+rootfs_modules  = $(strip $(filter-out $(initrd_modules),$(modules)))
+
+PHONY += am_install_modules
+#am_install_modules: subdir := /lib/modules
+am_install_modules:
+	@$(if $(initrd_modules),/bin/cp -f $(initrd_modules) $(INITRD_DIR)$(subdir))
+	@$(if $(rootfs_modules),/bin/cp -f $(rootfs_modules) $(ROOTFS_DIR)$(subdir))
+
+.PHONY: $(PHONY)

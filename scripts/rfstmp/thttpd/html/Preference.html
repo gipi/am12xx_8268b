@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>Preference</title>
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="js/main.js?1.0"></script>
+<script src="js/jquery.md5.js"></script>
+
+<!--
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+
+-->
+</head>
+<script type="text/javascript">
+ 
+    $(document).ready(function(){
+        $('a.active').removeAttr('href');
+		
+	// Get_height_width_of_screen();
+	//creatmenu();	
+	delay_get_data();
+      });
+
+
+var screen_width;
+var screen_height;
+function Get_height_width_of_screen()
+{
+	
+	if(!!(window.attachEvent && !window.opera))
+	{
+		screen_height = document.documentElement.clientHeight;
+		screen_width = document.documentElement.clientWidth;
+	}
+	else
+	{
+		screen_height =window.innerHeight;
+		screen_width = window.innerWidth;
+	}
+	$("#windows_size").text('width:' + screen_width + '; height:'+screen_height);
+}
+
+
+ 
+function creatmenu(){
+
+
+var wifilist = "<li data-icon='delete' class='ui-first-child' id='clear'><a href='#' class='ui-btn ui-btn-icon-right ui-icon-delete' >Close menu</a></li><li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='main.html'  target='_self'>main.html</a></li>\
+<li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='conference.html'  target='_self'>Conference Control</a></li>\
+<li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='Preference.html'  target='_self'>Preference</a></li>\
+<li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='#Password'  target='_self'>Password</a></li>\
+<li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='LinkStatus.html'  target='_self'>Link Status</a></li>\
+<li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='cbv.html'  target='_self'>Air view</a></li>\
+<li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='rs232_ctrl.html'  target='_self'>Air Control</a></li>\
+<li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='airdisk.html'  target='_self'>Air Disk</a></li>\
+<li class='ui-last-child'><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' href='websetting.html'  target='_self'>Air Setup</a></li>";
+
+
+$("#nav-panel ul").append(wifilist);
+
+
+}
+
+
+ 
+</script>
+<style type="text/css">
+<!--
+.aa_center{  
+	position:absolute;  
+	top:50%;  
+	left:50%;  
+	margin-top:-120px;  
+	margin-left:-110px;  
+	/*此时宽和高都要固定*/  
+	width:250px;  
+	//height:250px;  
+	//border: 1px solid #0000FF;
+	text-align:left;
+	
+
+}
+-->
+</style>
+
+<body style="" class="ui-mobile-viewport ui-overlay-a"  align="center">
+  <div data-role="page" class="jqm-demos" id="panel-fixed-page1">
+
+    <div data-role="header" data-position="fixed">
+        <h1>Preference</h1>
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+         <div   align="right" id="show_usrname" ></div>	
+    </div><!-- /header -->
+	
+<div role="main" class="ui-content jqm-content jqm-fullwidth">
+	
+<div class="aa_center">Preference
+<h4><span >Firmware Version : </span><span id="cur_ver">13761</span></h4>
+<h4><span id="ap_psk_txt">Default Password : </span><span id="ap_psk">0000</span></h4>
+</div>
+</div><!-- /main -->
+
+    <div data-role="footer" data-position="fixed">
+    	<h4> </h4>
+    </div><!-- /footer -->
+	<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+		<ul data-role="listview">
+            <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
+			<li><a href="main.html" target="_self" >main.html</a></li>
+			<li><a href="conference.html" target="_self">Conference Control</a></li>
+			<li><a href="Preference.html"  target="_self">Preference</a></li>
+			<li><a href="Password.html"  target="_self">Password</a></li>
+			<li><a href="LinkStatus.html" target="_self">Link Status</a></li>
+			<li><a href="cbv.html" target="_self">Air view</a></li>
+			<!-- 
+			<li><a href="rs232_ctrl.html"  target="_self">Air Control</a></li>
+			<li><a href="airdisk.html"  target="_self">Air Disk</a></li>
+			-->
+			<li><a href="websetting.html"  target="_self">Air Setup</a></li>
+		</ul>
+	</div><!-- /panel -->
+<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
+        <form class="userform">
+        	<h2>Login</h2>
+            <label for="name">Username:</label>
+            <input type="text" name="name" id="usr_name" value="" data-clear-btn="true" data-mini="true">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="usr_password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+            <div class="ui-grid-a">
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" id="cancle_login">Cancel</a></div>
+                <div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" id="login_usrname_ok">Save</a></div>
+			</div>
+        </form>
+	</div><!-- /panel -->
+</div><!-- /page -->
+</body>
+</html>

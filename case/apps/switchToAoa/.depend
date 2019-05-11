@@ -1,0 +1,1 @@
+switchToAoa.o: switchToAoa.c ../../../case/include/libusb.h

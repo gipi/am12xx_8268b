@@ -1,0 +1,464 @@
+alarm_engine.o: alarm_engine.c ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/multialarm.h ../../../sdk/include/sys_rtc.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h
+album.o: album.c album.h ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../sdk/include/mlib_api.h ../../../sdk/include/act_media_info.h \
+  include/sys_resource.h ../../../sdk/include/iconv.h
+audio_common.o: audio_common.c include/audio_common.h \
+  ../../../sdk/include/fileselector.h ../../../sdk/include/ipc_key.h \
+  ../../../sdk/include/audio_midware.h ../../../sdk/include/mmm_music.h \
+  ../../../sdk/include/sys_buf.h \
+  ../../../case/include/stream/stream_api.h
+audio_db_engine.o: audio_db_engine.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/db_audio.h ../../../sdk/include/sqlite3.h
+audio_engine.o: audio_engine.c ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/audio_engine.h \
+  ../../../sdk/include/fileselector.h ../../../sdk/include/ipc_key.h \
+  include/lyric_analysis.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/audio_midware.h \
+  ../../../case/include/sys_conf.h include/sys_resource.h \
+  ../../../sdk/include/iconv.h ../../../sdk/include/id3.h \
+  include/load_image_engine.h ../../../sdk/include/load_photo_api.h \
+  include/fui_memfs.h include/audio_common.h \
+  ../../../sdk/include/mmm_music.h ../../../sdk/include/sys_buf.h \
+  ../../../case/include/stream/stream_api.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+Audio_record_engine.o: Audio_record_engine.c
+bt_engine.o: bt_engine.c ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h ../../../case/include/bluetooth/swf_ext.h \
+  ../../../case/include/bluetooth/fui_list.h
+btvd.o: btvd.c ../../../sdk/include/btvd_api.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h ../../../sdk/include/display.h \
+  ../../../sdk/include/sys_pmu.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/sys_conf.h \
+  ../../../sdk/include/hantro_misc.h ../../../sdk/include/am7x_dac.h
+cardupgrade.o: cardupgrade.c ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_gpio.h \
+  ../../../sdk/include/sys_rtc.h ../../../sdk/include/sys_timer.h \
+  ../../../sdk/include/upgrade_fw.h ../../../sdk/include/sysinfo.h \
+  ../../../sdk/include/comval.h include/cardupgrade.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/sys_nand.h \
+  ../../../sdk/include/am_types.h
+customization.o: customization.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/system_info.h \
+  ../../../sdk/include/sys_rtc.h ../../../sdk/include/fileselector.h \
+  ../../../sdk/include/ipc_key.h include/media_hotplug.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/am7x_dac.h ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../case/include/multialarm.h ../../../sdk/include/lcm_op.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/display.h include/cardupgrade.h image_decode.h \
+  ../../../sdk/include/mmm_image.h ../../../sdk/include/act_media_info.h \
+  ../../../sdk/include/sys_pmu.h ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h include/wifi_engine.h \
+  ../../../sdk/include/sys_gpio.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  websetting.h include/customization_info.h
+dlna_dmp_engine.o: dlna_dmp_engine.c include/fui_common.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h
+dlna_dmr_engine.o: dlna_dmr_engine.c
+ebook_engine.o: ebook_engine.c
+ebook_parser.o: ebook_parser.c
+filelist_engine.o: filelist_engine.c \
+  ../../../case/include/bluetooth/filelist_engine.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/bluetooth/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h ../../../sdk/include/mnavi_fop.h \
+  ../../../case/include/file_list.h include/system_res.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+file_ops.o: file_ops.c ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../sdk/include/mnavi_fop.h \
+  ../../../case/include/bluetooth/filelist_engine.h \
+  ../../../case/include/bluetooth/swf_ext.h \
+  ../../../case/include/bluetooth/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h
+flash_engine.o: flash_engine.c include/fui_common.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../sdk/include/display.h ../../../sdk/include/iconv.h
+fs_io_layer.o: fs_io_layer.c
+ftpclient_engine.o: ftpclient_engine.c
+fui.o: fui.c ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  include/fui_common.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  ../../../sdk/include/sys_buf.h ../../../sdk/include/display.h \
+  include/media_hotplug.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h \
+  ../../../sdk/include/am7x_dac.h ../../../sdk/include/buf_encoder.h \
+  ../../../sdk/include/sys_pmu.h ../../../sdk/include/sys_gpio.h
+fui_key.o: fui_key.c ../../../case/include/key_map.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  include/fui_common.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h ../../../sdk/include/am7x_dac.h \
+  ../../../sdk/include/sys_timer.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/apps_vram.h ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h
+fui_memfs.o: fui_memfs.c include/fui_memfs.h
+GuiDraw.o: GuiDraw.c ../../../sdk/include/swf_types.h \
+  ../../../case/include/GuiDraw.h ../../../sdk/include/am_types.h \
+  ../../../case/include/ebook_interface.h ../../../sdk/include/swf_gui.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/osapi.h
+hid_engine.o: hid_engine.c include/hid_engine.h include/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h include/fui_list.h \
+  ../../../case/include/file_list.h ../../../sdk/include/mnavi_api.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/ipc_key.h \
+  ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/sys_msg.h
+htmlsetting_fun.o: htmlsetting_fun.c htmlsetting.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h include/system_info.h \
+  ../../../sdk/include/lcm_op.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/sys_cfg.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h \
+  ../../../sdk/include/display.h
+htmlsetting_main.o: htmlsetting_main.c htmlsetting.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+image_decode.o: image_decode.c image_decode.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/mmm_image.h ../../../sdk/include/act_media_info.h \
+  include/system_info.h ../../../sdk/include/display.h \
+  ../../../case/include/stream/stream_api.h
+image_radiant.o: image_radiant.c image_decode.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/mmm_image.h ../../../sdk/include/act_media_info.h
+ip_calculation_common.o: ip_calculation_common.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/wifi_engine.h
+key_map.o: key_map.c ../../../case/include/key_map.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h
+lan_engine.o: lan_engine.c
+load_image_engine.o: load_image_engine.c include/load_image_engine.h \
+  ../../../sdk/include/load_photo_api.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h
+load_sound_engine.o: load_sound_engine.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../sdk/include/fileselector.h ../../../sdk/include/ipc_key.h \
+  include/audio_common.h ../../../sdk/include/audio_midware.h \
+  ../../../sdk/include/mmm_music.h ../../../sdk/include/sys_buf.h
+locale_engine.o: locale_engine.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/locale_engine.h \
+  include/fui_input.h include/fui_input.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  include/sys_resource.h ../../../sdk/include/iconv.h
+lyric_analysis.o: lyric_analysis.c
+lyric_hash.o: lyric_hash.c
+media_hotplug.o: media_hotplug.c include/media_hotplug.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/swf_types.h include/subdisplay.h \
+  ../../../case/include/ez_subdisplay.h include/fui_common.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h include/system_info.h \
+  ../../../case/include/libusb.h ../../../sdk/include/curl/curl.h \
+  ../../../sdk/include/curl/curlver.h \
+  ../../../sdk/include/curl/curlbuild.h \
+  ../../../sdk/include/curl/curlrules.h ../../../sdk/include/curl/easy.h \
+  ../../../sdk/include/curl/multi.h ../../../sdk/include/curl/curl.h \
+  ../../../sdk/include/curl/typecheck-gcc.h \
+  ../../../sdk/include/am7x_dac.h
+miracast_engine.o: miracast_engine.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/video_engine.h \
+  ../../../sdk/include/av_api.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  ../../../sdk/include/display.h include/fui_common.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/am7x_dac.h
+net_config_info.o: net_config_info.c include/net_config_info.h \
+  ../../../case/include/ezcastpro.h
+office_db_engine.o: office_db_engine.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/db_office.h ../../../sdk/include/sqlite3.h
+osd_engine.o: osd_engine.c include/fui_common.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../sdk/include/display.h
+otaupgrade.o: otaupgrade.c ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_gpio.h \
+  ../../../sdk/include/sys_rtc.h ../../../sdk/include/sys_timer.h \
+  ../../../sdk/include/ota_updata.h ../../../sdk/include/sysinfo.h \
+  ../../../sdk/include/comval.h ../../../sdk/include/swf_types.h \
+  ../../../case/include/stream/stream_api.h \
+  ../../../sdk/include/sys_nand.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/zlib.h ../../../sdk/include/zconf.h \
+  ../../../sdk/include/zconf.h ../../../sdk/include/ota_fw.h \
+  ../../../sdk/include/curl/curl.h ../../../sdk/include/curl/curlver.h \
+  ../../../sdk/include/curl/curlbuild.h \
+  ../../../sdk/include/curl/curlrules.h ../../../sdk/include/curl/easy.h \
+  ../../../sdk/include/curl/multi.h ../../../sdk/include/curl/curl.h \
+  ../../../sdk/include/curl/typecheck-gcc.h include/fui_common.h \
+  ../../../sdk/include/sys_cfg.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  ../../../sdk/include/display.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../case/include/multialarm.h websetting.h
+photo_db_engine.o: photo_db_engine.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/db_photo.h ../../../sdk/include/sqlite3.h
+photo_engine.o: photo_engine.c ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h ../../../case/include/sys_conf.h \
+  ../../../case/include/bluetooth/swf_ext.h \
+  ../../../case/include/bluetooth/fui_list.h include/photo_engine.h \
+  image_decode.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/mmm_image.h \
+  ../../../sdk/include/act_media_info.h include/load_image_engine.h \
+  ../../../sdk/include/load_photo_api.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h \
+  include/system_info.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  ../../../sdk/include/display.h
+pll_change.o: pll_change.c ../../../sdk/include/sys_pmu.h \
+  ../../../sdk/include/sys_rtc.h
+qr_code_engine.o: qr_code_engine.c
+rb_gui.o: rb_gui.c include/rb_gui.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../sdk/include/load_photo_api.h include/fui_memfs.h \
+  include/fui_common.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+rotate_sensor.o: rotate_sensor.c
+route_common.o: route_common.c ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h include/wifi_engine.h \
+  ../../../case/include/bluetooth/filelist_engine.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/bluetooth/file_list.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+subdisplay.o: subdisplay.c include/subdisplay.h \
+  ../../../case/include/ez_subdisplay.h
+swf_ext.o: swf_ext.c ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  include/fui_common.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+sys_resource.o: sys_resource.c ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/iconv.h \
+  include/sys_resource.h ../../../sdk/include/ipc_key.h \
+  include/fui_common.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+system_info.o: system_info.c ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/system_info.h \
+  ../../../sdk/include/sys_rtc.h ../../../sdk/include/fileselector.h \
+  ../../../sdk/include/ipc_key.h include/media_hotplug.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/am7x_dac.h ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../case/include/multialarm.h ../../../sdk/include/lcm_op.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/display.h include/cardupgrade.h image_decode.h \
+  ../../../sdk/include/mmm_image.h ../../../sdk/include/act_media_info.h \
+  ../../../sdk/include/sys_pmu.h ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h include/wifi_engine.h \
+  ../../../sdk/include/sys_gpio.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  websetting.h include/audio_engine.h include/ez_json.h \
+  ../../../sdk/include/openssl/md5.h ../../../sdk/include/openssl/e_os2.h \
+  ../../../sdk/include/openssl/opensslconf.h
+ts_calibrate.o: ts_calibrate.c
+udisk_format.o: udisk_format.c
+Usb_debugtool.o: Usb_debugtool.c
+uvc_engine.o: uvc_engine.c
+video_db_engine.o: video_db_engine.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/db_video.h ../../../sdk/include/sqlite3.h
+video_engine.o: video_engine.c ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/video_engine.h \
+  ../../../sdk/include/av_api.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  include/fui_common.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/display.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h \
+  ../../../sdk/include/lcm_op.h include/system_info.h \
+  ../../../sdk/include/sys_buf.h \
+  ../../../case/include/stream/stream_api.h \
+  ../../../sdk/include/sys_gpio.h
+video_subtilte_lan.o: video_subtilte_lan.c include/sys_resource.h \
+  ../../../sdk/include/iconv.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h
+video_subtitle_parser.o: video_subtitle_parser.c \
+  ../../../case/include/subtitle_parser.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/sys_resource.h \
+  ../../../sdk/include/iconv.h include/system_info.h
+video_withoutui_test.o: video_withoutui_test.c \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/video_engine.h \
+  ../../../sdk/include/av_api.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  include/fui_common.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/display.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h \
+  ../../../sdk/include/lcm_op.h include/system_info.h \
+  ../../../sdk/include/osapi.h ../../../sdk/include/sys_buf.h
+vvd_engine.o: vvd_engine.c
+webalbum_engine.o: webalbum_engine.c
+webmail_engine.o: webmail_engine.c
+websetting.o: websetting.c websetting.h ../../../sdk/include/sys_gpio.h \
+  ../../../sdk/include/display.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h include/ez_json.h \
+  ../../../case/include/config.h ../../../case/include/am_net_snmp.h \
+  ../../../sdk/include/am7x_dac.h ../../../sdk/include/openssl/md5.h \
+  ../../../sdk/include/openssl/e_os2.h \
+  ../../../sdk/include/openssl/opensslconf.h include/wifi_engine.h \
+  ../../../case/include/apps_vram.h ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h \
+  ../../../sdk/include/swf_types.h ../../../scripts/mconfig.h
+wifi_bridge.o: wifi_bridge.c ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h include/wifi_engine.h \
+  ../../../case/include/bluetooth/filelist_engine.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/bluetooth/file_list.h
+wifi_common.o: wifi_common.c
+wifi_direct.o: wifi_direct.c ../../../case/include/bluetooth/swf_ext.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h \
+  ../../../case/include/wifi_direct.h include/iwlib.h include/wireless.h \
+  include/wireless.h include/ez_json.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+wifi_dongle_set.o: wifi_dongle_set.c include/wifi_engine.h \
+  include/media_hotplug.h ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/multialarm.h \
+  ../../../case/include/ezcast_public.h ../../../case/include/ezcastpro.h \
+  ../../../case/include/ezcast_config.h
+wifi_engine.o: wifi_engine.c
+wifi_remote_control.o: wifi_remote_control.c \
+  ../../../sdk/include/sys_pmu.h ../../../sdk/include/sys_rtc.h \
+  ../../../sdk/include/swf_types.h \
+  ../../../case/include/wifi_remote_control.h \
+  ../../../case/include/bluetooth/swf_ext.h ../../../sdk/include/swfdec.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/swf_2d.h \
+  ../../../case/include/bluetooth/fui_list.h include/wifi_engine.h
+wifi_subdisplay.o: wifi_subdisplay.c
+zmem.o: zmem.c ../../../sdk/include/zlib.h ../../../sdk/include/zconf.h
+fui_common.o: common/fui_common.c include/fui_common.h \
+  ../../../sdk/include/swf_types.h ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h \
+  ../../../sdk/include/swf_2d.h ../../../sdk/include/swf_types.h \
+  ../../../sdk/include/swfdec.h ../../../sdk/include/swf_2d.h \
+  image_decode.h ../../../sdk/include/mmm_image.h \
+  ../../../sdk/include/act_media_info.h include/photo_engine.h \
+  ../../../sdk/include/load_photo_api.h ../../../sdk/include/osapi.h \
+  include/fui_memfs.h ../../../sdk/include/audio_midware.h \
+  include/audio_common.h ../../../sdk/include/fileselector.h \
+  ../../../sdk/include/ipc_key.h ../../../sdk/include/mmm_music.h \
+  ../../../sdk/include/sys_buf.h common/../../../include/ezcast_public.h
+fui_input.o: common/fui_input.c include/fui_input.h
+usb_get_partition.o: common/usb_get_partition.c

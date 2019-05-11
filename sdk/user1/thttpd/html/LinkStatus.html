@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>LinkStatus</title>
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="js/ConferenceControl.js"></script>
+<script src="js/main.js?1.0"></script>
+<script src="js/jquery.md5.js"></script>
+
+<!--
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+-->
+</head>
+<script type="text/javascript">
+ 
+    $(document).ready(function(){
+        $('a.active').removeAttr('href');
+		main();
+		Get_confer_language();
+
+      });
+ 
+</script>
+<style type="text/css">
+<!--
+.ui-mobile .ui-page {
+background-color:#211C39;
+}
+.ui-page-theme-a .ui-panel-wrapper {
+ text-shadow: none;
+ font-weight:normal;
+ background-color:transparent;
+//border: 3px solid #FF0000;
+}
+.ui-header .ui-title{
+margin: 0 10%;
+}
+
+
+
+.ui-list > li > a{
+	margin: 0px;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    list-style: outside none none;
+}
+
+a:active {
+color: #ffffff /*{a-link-active}; */;
+}
+#customers
+{
+    width:100%;
+//	border-radius: 10px;	
+//	border: 1px solid #d6d6d6;
+	//padding-bottom:20px;
+//	background-color: #ffffff;
+}
+.cus_bottom{
+width:100%;
+height:20px;
+	background-color: #eeeeee;
+   	border-bottom-left-radius: 10px;	
+	border-bottom-right-radius: 10px;
+
+}
+.menu {
+	//background-image: url(img/seb_board_bg.png);
+	//background-repeat: repeat;
+//	background-color: #0099FF;
+	padding-bottom:10px;
+	padding-top:10px;
+	margin: auto;
+   //	border-top-left-radius: 10px;	
+	//border-top-right-radius: 10px;
+	max-width: 100%;
+	//height:50px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-bottom-color: #FFFFFF;
+	height:20px;
+}
+.select  {
+	font-size: 14px;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.list_main{
+	margin: auto;
+	padding-top: 5px;
+	//padding-bottom: 5px;
+    //background-color: #CCCCCC;
+	//border: 1px inset #AEBEEE;
+	//border-top:1px inset #CCCCCC;
+	border-bottom:1px inset #ffffff;
+    //border-radius: 5px;
+    //max-width: 97%;
+	//height:44px;
+
+}
+.list{
+	margin: auto;
+	padding-top: 5px;
+	padding-bottom: 15px;
+    //background-color: #CCCCCC;
+	//border: 1px inset #AEBEEE;
+	//border-top:1px inset #CCCCCC;
+	//border-bottom:1px inset #CCCCCC;
+    //border-radius: 5px;
+    //max-width: 97%;
+	height:44px;
+	text-align:center;
+
+}
+.list_active_bk{
+	background-image: url(img/conference/bak_on.png);
+}
+
+.linebk{
+	//background-image: url(img/conference/table_saperation_horizontal.png);
+	background-repeat: repeat;
+	height:1px;
+}
+
+.icon_bk{
+	background-image: url(img/conference/bak_icon.png);
+}
+
+.coll{
+	display:none;
+    //background-color: #CCCCCC;
+	//max-width: 97%;
+	//height:50px;
+	position:relative;
+	//margin-top: 0px;
+	margin-right: auto;
+	//margin-bottom: 25px;
+	margin-left: auto;
+
+}
+
+.list_left{
+	//width:150px;
+	//border: 1px inset #d6d6d6;
+	float:left;
+	//position:relative;
+	text-align:center;
+	display: inline;
+	margin-top:2px;
+	margin-left: 5px;
+	//padding:5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-weight:normal;
+	color:#FFFFFF;
+
+}
+.list_right{
+	//width:150px;
+	//border: 1px inset #d6d6d6;
+	float:right;
+	//position:relative;
+	//padding:0px;
+	margin-top: 8px;
+	margin-right: 10px;
+	//text-align:center;
+	display: inline;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.text1{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-shadow: 0 /*{a-page-shadow-x}*/ 0px /*{a-page-shadow-y}*/ 0 /*{a-page-shadow-radius}*/ #f3f3f3 /*{a-page-shadow-color}*/;
+
+}
+.text2{
+	overflow: hidden;
+	text-overflow: ellipsis;
+    color:#199DE2;
+	text-shadow: 0 /*{a-page-shadow-x}*/ 0px /*{a-page-shadow-y}*/ 0 /*{a-page-shadow-radius}*/ #f3f3f3 /*{a-page-shadow-color}*/;
+
+}
+.host{
+	//position:fixed;
+	margin-right:5px;
+	//margin-top:-5px;
+
+	width:20px;
+	//height:25px;
+	//right:10px;
+	//padding-right:20px;
+	//padding-top:10px;
+	float:left;
+	//border: 1px inset #d6d6d6;
+//overflow: hidden;
+}
+.img_arrow{
+	position:absolute;
+	width:16px;
+	height:9px;
+	margin-top:6px;
+	margin-right:8px;
+	//border: 1px inset #d6d6d6;
+	background-image: url(img/conference/arrow_up.png);
+	background-repeat:no-repeat;
+	background-size:16px 8px;
+	background-position:left;
+	//-webkit-background-origin:content-box; /* Safari */
+	//background-origin:-10px ;
+
+}
+.img_arrow_down{
+	background-image: url(img/conference/arrow_down.png);
+}
+
+.img{
+	width:30px;
+	margin:3px;
+	//border: 1px inset #d6d6d6;
+
+}
+.img:hover{
+	-webkit-box-shadow: 0px 0px 10px /*{global-box-shadow-size}*/ 		#E68125 /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 0px 0px 10px /*{global-box-shadow-size}*/ 		#E68125 /*{global-box-shadow-color}*/;
+	box-shadow: 0px 0px 10px /*{global-box-shadow-size}*/ 			#E68125 /*{global-box-shadow-color}*/;
+	border-radius: 5px;
+	-moz-border-radius:5px; /* Old Firefox */
+	
+}
+.img2{
+	width:30px;
+	margin:3px;
+	padding: 3px;
+	//border: 3px solid ;
+}
+.img2:hover{
+	border: 3px solid #199DE2;
+	padding: 0px;
+
+
+}
+
+.switch_onoff{
+	height:23px;
+	width:70px;
+	text-align:center;
+	padding-top:6px;
+	//background-image:url(img/buttom.png);
+	//	background-image:url(img/seb_board_bg.png);
+	background-color: #0099FF;
+
+	border-radius: 50%;
+	-moz-border-radius:50%; /* Old Firefox */
+	-webkit-box-shadow: 0px 0px 10px /*{global-box-shadow-size}*/ 		#3DA8DC /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 0px 0px 10px /*{global-box-shadow-size}*/ 		#3DA8DC /*{global-box-shadow-color}*/;
+	box-shadow: 0px 0px 10px /*{global-box-shadow-size}*/ 		#3DA8DC /*{global-box-shadow-color}*/;
+
+}
+.button_on{
+	height:23px;
+	width:50px;
+	padding-top:6px;
+	background-image:url(img/seb_board_bg.png);
+	border-radius: 5px;
+	-webkit-box-shadow: -2px -2px 5px /*{global-box-shadow-size}*/ 		#3DA8DC /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 2px 2px 5px /*{global-box-shadow-size}*/ 		#3DA8DC /*{global-box-shadow-color}*/;
+	box-shadow: 0px 0px 5px /*{global-box-shadow-size}*/ 			#ffffff /*{global-box-shadow-color}*/;
+
+}
+.button_off{
+	background-image:url(img/left1.png);
+}	
+
+.arrow_ico{
+	background-image:url(img/select-up.png);
+	height:23px;
+	width:50px;
+
+}
+
+.buton_img{
+
+width:20%;
+min-width:100px;
+max-width: 180px;
+}
+
+@media screen and (max-width: 400px)
+{
+	#customers
+	{
+//	width:100%;
+	min-width:260px;
+	}
+.list_left{
+//width:125px;
+}
+
+.list_right{
+//width:70px;
+}
+
+.img2{
+	width:25px;
+	margin:3px;
+	//border: 1px inset #d6d6d6;
+}
+}
+
+@media screen and (min-width: 400px) and (max-width: 600px){
+
+#customers
+{
+width:100%;
+min-width:400px;
+}
+	
+.list_left{
+//width:125px;
+}
+
+.list_right{
+//width:100px;
+}
+	
+}
+@media screen and (min-width: 600px)
+{
+	#customers
+	{
+	width:100%;
+	max-width:1000px;
+	}
+	body {
+	background-image: url(img/ezcastbk.jpg);
+  }
+  
+}
+
+@media screen and (max-width: 999px)
+{
+.list_center{
+    //margin:0px;
+	//  margin-left: 160px;
+	//  float:left;
+	//border: 1px inset #d6d6d6;
+	display: none;
+}
+.list_center1{
+	//margin:0px;
+	//  margin-left: 160px;
+	//  float:left;
+	//border: 1px inset #d6d6d6;
+	display: inline;
+}
+
+.on{
+  display: inline;
+}
+}
+@media screen and (min-width: 1000px)
+{
+
+.list_center{
+ display: inline;
+   }
+.list_center1{
+  display: none;
+  }
+.on{
+  display: inline;
+}
+}
+
+
+
+
+-->
+</style>
+
+<body style="" class="ui-mobile-viewport ui-overlay-a"  align="center">
+
+<div data-role="page" class="jqm-demos" id="panel-fixed-page1" data-title="Conference control">
+
+    <div data-role="header" data-position="fixed">
+        <h1 id="title_link"  style="margin:0;margin-left:40px; margin-right:80px;" ></h1>
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+		<span  id="log_txt" style="position:absolute; top:13px; right:42px; font-weight:normal; font-size:80%;"></span>
+
+    </div><!-- /header -->
+	
+<div role="main" class="ui-content jqm-content jqm-fullwidth">
+	
+<div id="windows_size"></div>
+
+<div id="customers" style="margin:0 auto;">	
+<!--
+ <div id = "Conf_Control">Conference Control</div>
+       <input type="radio" name="conference" id="conference_on" value="on" onClick="ConfCrtl_onoff()"><span id="ConfCtrl_on_display">ON &nbsp;</span>
+	  <input type="radio" name="conference" id="conference_off" value="off" onClick="ConfCrtl_onoff()" checked><span id="ConfCtrl_off_display">OFF</span>
+
+<div align="right" style="margin:10px; margin-right:30px;">
+	<p id="ConfCtrl_on_off_display" class="switch_onoff">ON</p>
+</div>
+-->
+	<div class="menu">
+		<span class="list_left" id="link_ip" style="color:#FFFFFF; margin-left:2px;"></span>
+		<span class="list_right" style="margin-top:0px; color:#FFFFFF;" id="link_role"></span>
+	</div>  
+	
+<div id="scan_client" style="color:#FFFFFF;"> 
+
+<!--
+  <div class="list_main">
+	<div id="list_1" class="list" align="center">
+	  <span class="list_left">
+		  <span style="margin-left:0px;"> 192.168.255.255</span>
+		  <span style="margin-left:5px;">nullz402</span>
+		  <div style="margin-left:0px; margin-top:5px;" align="left"><span class='text1'>EZcast-stream</span></div>
+	  </span>
+		<span class="list_right">Host</span>
+	</div> 
+ </div> 
+
+
+  <div class="list_main">
+	<div id="list_1" class="list" align="center">
+	  <span class="list_left">
+		  <span style="margin-left:0px;"> 192.168.255.255</span>
+		  <span style="margin-left:5px;">nullz402</span>
+		  <div style="margin-left:0px; margin-top:5px;" align="left"><span class='text1'>EZcast-stream</span></div>
+	  </span>
+		<span class="list_right">Host</span>
+	</div> 
+ </div> 
+-->
+
+</div><!-- /scan client -->
+
+	</div><!-- /customers -->
+	
+		</div><!-- /main -->
+
+	<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+		<ul data-role="listview" >
+            <li data-icon="delete"><a href="#" data-rel="close"  id="IDS_MENU_LAN6">Close menu</a></li>
+				<span  id="add_menu" class="ui-list"></span>
+
+		</ul>
+	</div><!-- /panel -->
+<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
+	<form class="userform" >
+		<h2 id="user_login">Login</h2>
+		<label for="name" id="IDS_MENU_LAN2">Username:</label>
+		<input type="text" name="name" id="usr_name" value="admin" data-clear-btn="true" data-mini="true" disabled="disabled" >
+		<label for="password" id="IDS_STTING_PAS">Password:</label>
+		<input type="password" name="password" id="usr_password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" id="cancle_login">Cancel</a></div>
+			<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" id="login_usrname_ok">OK</a></div>
+		</div>
+		<div id="IDS_MENU_LAN3" style="text-align:left; margin-top:20px; font-size:80%;">Forget admin password: email to forgetpassword@iezvu.com.</div> 
+	</form>
+
+		<div id="loginin_txt" style="display:none;"> 	
+			<div style="margin-top:20px;" align="center"><span id="show_usrname"></span> ,<span id="IDS_MENU_LAN5">welcome</span> <span> ! </span></div>
+			<p align="center"><a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="login_out">Logout</a></p>
+		</div>
+	</div><!-- /panel -->
+	
+	
+
+
+
+</div><!-- /page -->
+</body>
+</html>

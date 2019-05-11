@@ -1,0 +1,83 @@
+
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+Provider=%VENDOR%
+CatalogFile=usbezdisplay.cat
+DriverVer=08/12/2009,1.0.0.1
+
+
+[Manufacturer]                          
+%VENDOR%=DeviceList, NTamd64
+
+[DestinationDirs]                       
+DefaultDestDir=10,System32\Drivers
+DriverCopyFiles = 12
+DriverCopyFiles64 = 12
+
+[SourceDisksFiles]      
+usbezdisplay.sys=1
+usbezdisplay64.sys=1
+
+[SourceDisksNames]                      
+1=%INSTDISK%,,,
+
+[DeviceList]            
+%EZDISPLAYNameUSB%=DriverInstall,USB\VID_1DE1&PID_5501
+
+
+[DeviceList.NTamd64]
+%EZDISPLAYNameUSB%=DriverInstall,USB\VID_1DE1&PID_5501
+
+
+
+[ControlFlags]                          
+ExcludeFromSelect=*
+
+[DriverCopyFiles]
+usbezdisplay.sys,,,2
+
+[DriverInstall.NT]
+CopyFiles=DriverCopyFiles
+
+[DriverInstall.NTamd64]
+CopyFiles=DriverCopyFiles64
+
+[DriverCopyFiles64]
+usbezdisplay64.sys,,,2
+
+[DriverInstall.NT.Services]
+AddService=usbezdisplay,2,DriverService
+
+[DriverInstall.NTamd64.Services]
+AddService=usbezdisplay64,2,DriverService64
+
+[DriverService]
+DisplayName=%DISPLAYNAME%
+Description=%DESCRIPTION%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\usbezdisplay.sys
+
+[DriverService64]
+DisplayName=%DISPLAYNAME%
+Description=%DESCRIPTION%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\usbezdisplay64.sys
+
+[Strings]
+
+
+
+VENDOR="EZ Display"
+DISPLAYNAME="EZ USB"
+DESCRIPTION="EZ USB"
+
+INSTDISK="USB Installation Disk"
+
+EZDISPLAYNameUSB="EZ USB"

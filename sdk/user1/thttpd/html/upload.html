@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>Password</title>
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="js/main.js"></script>
+<script src="js/jquery.md5.js"></script>
+<script src="js/upload.js"></script>
+<!--
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+-->
+</head>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('a.active').removeAttr('href');
+		main();
+		Get_fileupload_language();
+		$("#s_fileName").parent().css({'background-color':'transparent','text-shadow':'none','color':'#ffffff','border-color':'rgba(255, 255, 255, 0.1)'});
+		$("#s_fileName1").parent().css({'background-color':'transparent','text-shadow':'none','color':'#ffffff','border-color':'rgba(255, 255, 255, 0.1)'});
+		$("#s_fileName2").parent().css({'background-color':'transparent','text-shadow':'none','color':'#ffffff','border-color':'rgba(255, 255, 255, 0.1)'});
+		$("#s_fileName3").parent().css({'background-color':'transparent','text-shadow':'none','color':'#ffffff','border-color':'rgba(255, 255, 255, 0.1)'});
+		//parameter_check();
+      });
+
+</script>
+<style type="text/css">
+<!--
+
+.ui-mobile .ui-page {
+//border: 10px solid #33FF00;
+	background-image: url(img/airdiskbg.jpg);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	-webkit-background-origin:content-box; /* Safari */
+	background-origin:content-box;
+}
+
+.ui-header .ui-title{
+margin: 0 10%;
+}
+
+.ui-page-theme-a .ui-panel-wrapper {
+ text-shadow: none;
+ font-weight:normal;
+ background-color:transparent;
+//border: 3px solid #FF0000;
+ 
+}
+
+
+.psk_input
+{
+	text-shadow: none;
+	color:#ffffff;
+	background-color:transparent;
+
+}
+
+.from_txt{
+ text-shadow: none;
+ color:#ffffff;
+
+}
+
+.aa_center{  
+	//position:absolute;  
+	padding: 20px;
+	top:50%;  
+	//left:50%;  
+	margin-top:-140px;  
+	//margin-left:-140px;  
+	margin:auto;
+	/*此时宽和高都要固定*/  
+	max-width:600px;  
+	//height:250px;  
+	//border: 1px solid #0000FF;
+	text-align:center;
+
+}
+
+.tit_txt{
+font-size:110%;
+margin-left:2px;
+margin-bottom:20px;
+color:#199DE2;
+ text-shadow: none;
+font-weight:bold;
+
+}
+.tit_txt2{
+	font-size:100%;
+	margin-left:2px;
+	margin-bottom:20px;
+	color:#FFFFFF;
+	text-shadow: none;
+	font-weight:bold;
+	border-color:rgba(255, 255, 255, 0.4);
+}
+.txt_center{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-150px;
+	margin-left: -185px;
+	/*此时宽和高都要固定*/  
+	width: 380px;
+	//height:250px;  
+	//border: 1px solid #0000FF;
+	text-align:center;
+	color: red;
+}
+
+.ui-list > li > a{
+	margin: 0px;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    list-style: outside none none;
+}
+
+.warn_txt {
+	font-size:13px;
+	text-align:center;
+	color: #ffffff;
+//margin-bottom:10px;
+//	width:280px;
+//	height:30px;
+//border: 1px solid #d6d6d6;
+	display: block;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.ok_botn{
+	color:#FFFFFF;
+	width:30%;;
+	margin:auto;
+	margin-top:30px;
+	margin-bottom:10px;
+	padding:5px;
+	border: 1px solid #ffffff;
+	-webkit-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#ffffff /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#ffffff /*{global-box-shadow-color}*/;
+	box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 			#ffffff /*{global-box-shadow-color}*/;
+	border-radius: 5px;
+	-moz-border-radius:5px; /* Old Firefox */
+	text-decoration: none;
+	font-weight: normal;
+	cursor:pointer;
+}
+.ok_botn:hover{
+	border: 1px solid #199DE2;
+	background-color: #199DE2;
+}
+.upload_board{
+	color:#FFFFFF;
+	//width:150px;;
+	margin:auto;
+	margin-top:30px;
+	margin-bottom:10px;
+	padding:5px;
+	border: 1px solid #999999;
+	-webkit-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#ffffff /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#ffffff /*{global-box-shadow-color}*/;
+	box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 			#ffffff /*{global-box-shadow-color}*/;
+	border-radius: 5px;
+	-moz-border-radius:5px; /* Old Firefox */
+	text-decoration: none;
+	font-weight: normal;
+	cursor:pointer;
+}
+
+
+@media screen and (max-width: 400px)
+{
+
+.txt_center{
+
+	margin-top:-150px;  
+	/*此时宽和高都要固定*/  
+	width: 300px;
+	margin-left: -150px;
+
+}
+
+}
+
+@media screen and (min-width: 600px)
+{
+
+.ui-panel-wrapper {
+	background-image: url(img/ezcastbk.jpg);
+}  
+  
+}
+-->
+</style>
+
+<body style="" class="ui-mobile-viewport ui-overlay-a"  align="center">
+  <div data-role="page" class="jqm-demos" id="panel-fixed-page1">
+
+    <div data-role="header" data-position="fixed">
+		<div><a href="javascript:void(0)" onClick="To_adminsetup()" target="_self"><img src="img/return.png" class="bk-ico ui-btn-right" style="width:40px;"></a></div>
+		<h1  id="title_txt" style="margin:0;">WIFI_Enterprise</h1>
+	</div><!-- /header -->
+	
+<div role="main" class="ui-content jqm-content jqm-fullwidth">
+
+<div class="aa_center">
+
+
+<div id="txt_acuplod" align="center" class="tit_txt"></div>
+
+<div align="left" class="upload_board">
+<div id="txt_eapmschap" class="tit_txt2"></div>
+<form id="fileName" method="post" enctype="multipart/form-data"  action="cgi-bin/upload.cgi">
+	<label for="fileName"  align="left" style="text-align:left;" class="from_txt">&nbsp;Certificate.pem</label>
+	<input type="file" name="fileName" id="s_fileName" value="" data-clear-btn="true" data-mini="true" >
+</form>
+
+<p id="upload_ok" align="center" class="ok_botn"></p>
+
+</div>
+<div align="left" class="upload_board " style="margin-top:20px; ">
+<div id="txt_eaptls" class="tit_txt2"></div>
+
+<form id="fileName1" method="post" enctype="multipart/form-data"  action="cgi-bin/upload1.cgi">
+	<label for="tls_fileName"  align="left" style="text-align:left;" class="from_txt">&nbsp; CA.pem</label>
+	<input type="file"   name="fileName1"id="s_fileName1" value="" data-clear-btn="true" data-mini="true" >
+</form>	
+
+<form id="fileName2" method="post" enctype="multipart/form-data"  action="cgi-bin/upload2.cgi">
+		<label for="tls_fileName2"  align="left" style="text-align:left;" class="from_txt">&nbsp;Certificate.pem</label>
+	<input type="file"  name="fileName2" id="s_fileName2"  value="" data-clear-btn="true" data-mini="true" >
+</form>	
+
+<form id="fileName3" method="post" enctype="multipart/form-data"  action="cgi-bin/upload3.cgi">
+		<label for="tls_fileName3"  align="left" style="text-align:left;" class="from_txt">&nbsp;Privatekey.pem</label>
+	<input type="file"  name="fileName3" id="s_fileName3"  value="" data-clear-btn="true" data-mini="true" >
+</form>
+<p id="upload_ok2" align="center" class="ok_botn"></p>
+</div>
+	
+	<div id="upload_warn" align="left" class="warn_txt"></div>
+
+	
+</div><!-- aa_center -->
+</div><!-- /main -->
+
+
+	<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+		<ul data-role="listview" >
+            <li data-icon="delete"><a href="#" data-rel="close"  id="IDS_MENU_LAN6">Close menu</a></li>
+				<span  id="add_menu" class="ui-list"></span>
+
+		</ul>
+	</div><!-- /panel -->
+<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
+	<form class="userform" >
+		<h2 id="user_login">Login</h2>
+		<label for="name" id="IDS_MENU_LAN2">Username:</label>
+		<input type="text" name="name" id="usr_name" value="admin" data-clear-btn="true" data-mini="true" disabled="disabled" >
+		<label for="password" id="IDS_STTING_PAS">Password:</label>
+		<input type="password" name="password" id="usr_password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" id="cancle_login">Cancel</a></div>
+			<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" id="login_usrname_ok">OK</a></div>
+		</div>
+		<div id="IDS_MENU_LAN3" style="text-align:left; margin-top:20px; font-size:80%;">Forget admin password: email to forgetpassword@iezvu.com.</div> 
+	</form>
+		<div id="loginin_txt" style="display:none;"> 	
+			<div style="margin-top:20px;" align="center"><span id="show_usrname"></span> ,<span id="IDS_MENU_LAN5">welcome</span> <span> ! </span></div>
+			<p align="center"><a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="login_out">Logout</a></p>
+		</div>
+	</div><!-- /panel -->
+	
+<div data-role="popup" id="alert_warn" data-overlay-theme="b" style="min-width:300px;min-height:150px;">
+	 <div id="warn_txt" style="text-align:center;border: 0px solid #26D6FE;margin:8%;">The system will reboot!</div>
+	 <div style="text-align:center;border: 0px solid #26D6FE;margin:8%;"><span id="warn_tim"></span>Sec</div>
+	 <p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" id="sys_boot" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">OK</a>
+		<a href="#" id="sys_canel" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Cancel</a>
+	</p>
+</div>
+<div data-role="popup" id="fail_warn" data-overlay-theme="b" style="min-width:300px;min-height:150px;">
+	 <div id="fail_txt" style="text-align:center;border: 0px solid #26D6FE;margin:8%;">Upload Certificate Fail,Pelease Reload!!!</div>
+	 <p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" id="reupload_ok" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">OK</a>
+		<a href="#" id="reupload_cal" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Cancel</a>
+	</p>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>
+

@@ -1,0 +1,49 @@
+boot.o: boot.c boot.h ../../../../../../sdk/include/sys_msg.h \
+  ../../../../../../sdk/include/am_types.h \
+  ../../../../../../sdk/include/sys_gpio.h \
+  ../../../../../../sdk/include/sys_rtc.h \
+  ../../../../../../sdk/include/sys_timer.h \
+  ../../../../../../sdk/include/sys_vram.h
+destory_boot.o: destory_boot.c destory_boot.h \
+  ../../../../../../sdk/include/sys_msg.h \
+  ../../../../../../sdk/include/am_types.h \
+  ../../../../../../sdk/include/sys_gpio.h \
+  ../../../../../../sdk/include/sys_rtc.h \
+  ../../../../../../sdk/include/sys_timer.h \
+  ../../../../../../sdk/include/sys_vram.h
+destory_fw.o: destory_fw.c destory_fw.h \
+  ../../../../../../sdk/include/sys_msg.h \
+  ../../../../../../sdk/include/am_types.h \
+  ../../../../../../sdk/include/sys_gpio.h \
+  ../../../../../../sdk/include/sys_rtc.h \
+  ../../../../../../sdk/include/sys_timer.h \
+  ../../../../../../sdk/include/sys_vram.h
+poweroff.o: poweroff.c poweroff.h ../../../../../../sdk/include/sys_msg.h \
+  ../../../../../../sdk/include/am_types.h \
+  ../../../../../../sdk/include/sys_gpio.h \
+  ../../../../../../sdk/include/sys_rtc.h \
+  ../../../../../../sdk/include/sys_timer.h
+read_flash.o: read_flash.c read_flash.h \
+  ../../../../../../sdk/include/sys_msg.h \
+  ../../../../../../sdk/include/am_types.h \
+  ../../../../../../sdk/include/sys_gpio.h \
+  ../../../../../../sdk/include/sys_rtc.h \
+  ../../../../../../sdk/include/sys_timer.h
+rw_speed.o: rw_speed.c rw_speed.h ../../../../../../sdk/include/sys_msg.h \
+  ../../../../../../sdk/include/am_types.h \
+  ../../../../../../sdk/include/sys_gpio.h \
+  ../../../../../../sdk/include/sys_rtc.h \
+  ../../../../../../sdk/include/sys_timer.h
+test.o: test.c test.h ../../../../../../sdk/include/sys_vram.h \
+  write_flash.h ../../../../../../sdk/include/sys_msg.h \
+  ../../../../../../sdk/include/am_types.h \
+  ../../../../../../sdk/include/sys_gpio.h \
+  ../../../../../../sdk/include/sys_rtc.h \
+  ../../../../../../sdk/include/sys_timer.h read_flash.h rw_speed.h \
+  destory_boot.h boot.h destory_fw.h poweroff.h
+write_flsh.o: write_flsh.c write_flash.h \
+  ../../../../../../sdk/include/sys_msg.h \
+  ../../../../../../sdk/include/am_types.h \
+  ../../../../../../sdk/include/sys_gpio.h \
+  ../../../../../../sdk/include/sys_rtc.h \
+  ../../../../../../sdk/include/sys_timer.h

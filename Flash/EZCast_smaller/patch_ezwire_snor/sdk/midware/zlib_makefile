@@ -1,0 +1,44 @@
+#################################################
+##   zlib
+##   Using GNU gcc Compiler
+##   First created by Lei Yuan 2011-1-20
+##
+#################################################
+
+
+TARGET := zlib.a
+CC := mips-linux-gnu-gcc
+AR := mips-linux-gnu-ar rvs
+
+
+DEFS = -DMIPS
+
+CFLAGS = -EL -msoft-float -muclibc -fPIC -fvisibility=hidden -mips32r2 -Wall -O3
+
+LIBS = -lm -lpthread -lrt
+
+INCLUDES = -I.
+
+OBJ = adler32.o compress.o crc32.o deflate.o gzclose.o gzlib.o gzread.o \
+       gzwrite.o inffast.o infback.o inflate.o inftrees.o trees.o uncompr.o zutil.o
+
+
+STATICLIB = 
+
+.SUFFIXES : .c .o
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDES) $(DEFS) -c $? -o $@
+
+all: $(TARGET)
+
+
+$(TARGET): $(OBJ) $(STATICLIB)
+	$(AR) $(TARGET) $(OBJ)
+
+
+clean:
+	rm -f $(OBJ) $(TARGET)
+
+
+

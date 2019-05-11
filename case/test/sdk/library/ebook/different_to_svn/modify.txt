@@ -1,0 +1,38 @@
+一。内存大小改动
+// sdk\bin\1211\bootarg.txt
+reserved_mem=15M
+
+///case/apps/fui/include/fui_common.h
+#define HEAP_BASIC_ADDR   0
+#define HEAP_BASIC_SIZE   (5*1024*1024+8*1024)
+#define HEAP_SHARE_ADDR   0
+//#define HEAP_SHARE_SIZE   (38*1024*1024+512*1024)
+#define HEAP_SHARE_SIZE   (8*1024*1024+512*1024)
+
+
+二。UI的改动
+//case/data/ebook.swf
+//case/data/msyh.ttf
+
+
+三。tmp文件位置的改动
+//sdk\initrd\linuxrc
+mount -t $AM7X_ROOTFS -o noatime -o nodiratime  /dev/nftla1 $NEWROOT || { echo Failed to mount / >&2; exit 1; }
+
+sdk\rootfs\etc\init.d\rcS
+#/bin/mount -t tmpfs tmpfs /tmp
+
+四。显示的改动
+//case\apps\fui\fui.c
+	//ctxInfo.frameNumber = 4;
+	ctxInfo.frameNumber = 2;
+//sdk\linux\drivers\char\lcm\DEdrive.c
+	
+//sdk\include\swf_types.h	
+//#define INDEPENDENT_DISPLAY_EN
+
+//LSDK\sdk\linux\drivers\char\lcm.DEdrive.c
+ImageSet函数中
+	ExitFrameOver(&flag);
+	
+	return ImageSetError(outimage,inimage,display);

@@ -1,0 +1,12 @@
+#
+# KS884X network device configuration
+#
+
+
+config KS884X
+	bool "KS8841/2 Ethernet controller support"
+	depends on NET_ETHERNET
+	help
+	  Micrel KS8841/2 Ethernet controller support.
+
+

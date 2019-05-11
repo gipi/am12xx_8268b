@@ -1,0 +1,11 @@
+config.o: config.c ../../../../sdk/include/sys_cfg.h \
+  ../../../../sdk/include/am_types.h ../../../../sdk/include/display.h \
+  ../../../../sdk/include/lcm_op.h ../../../../sdk/include/am7x_cec.h \
+  ../../../../case/include/apps_vram.h ../../../../sdk/include/sys_vram.h \
+  ../../../../case/include/apps_vram_default.h \
+  ../../../../sdk/include/sys_rtc.h ../../../../case/include/multialarm.h \
+  ../../../../sdk/include/am7x_dac.h \
+  ../../../../case/include/am7x_mconfig.h \
+  ../../../../case/include/ezcast_public.h \
+  ../../../../case/include/ezcastpro.h \
+  ../../../../case/include/ezcast_config.h

@@ -1,0 +1,4 @@
+audio_linein.o: audio_linein.c audio_linein.h \
+  ../../../sdk/include/audio_record.h
+linein_main.o: linein_main.c ../../../sdk/include/sys_buf.h \
+  audio_linein.h ../../../sdk/include/audio_record.h

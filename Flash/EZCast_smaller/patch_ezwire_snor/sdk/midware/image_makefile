@@ -1,0 +1,239 @@
+#################################################
+##   DEC DLL
+##   Using GNU gcc Compiler
+##   First created by NeoYuan 2010-05-03
+##
+#################################################
+
+### add your directory here
+
+LIB_DIR			= ../../lib
+OUT_DIR			= ../../lib
+HANTRO_DIR		= ../../hantro/1211/source
+OSAPI_DIR		= ../../osapi
+DECODER_DIR		= ./decoder
+
+HEADERS_FLAG	 = -I../../inc
+HEADERS_FLAG	+= -I$(DECODER_DIR)
+HEADERS_FLAG	+= -I$(DECODER_DIR)/jpeg_baseline_dec_soft
+HEADERS_FLAG	+= -I$(HANTRO_DIR)/config
+HEADERS_FLAG	+= -I$(HANTRO_DIR)/inc
+HEADERS_FLAG	+= -I$(HANTRO_DIR)/jpeg
+HEADERS_FLAG	+= -I$(HANTRO_DIR)/pp
+HEADERS_FLAG	+= -I$(OSAPI_DIR)
+HEADERS_FLAG	+= -I$(DECODER_DIR)/libtiff
+HEADERS_FLAG	+= -I$(DECODER_DIR)/libpng
+HEADERS_FLAG	+= -I$(DECODER_DIR)/zlib
+HEADERS_FLAG	+= -I$(DECODER_DIR)/libungif
+HEADERS_FLAG	+= -I$(DECODER_DIR)/libbmp
+##HEADERS_FLAG    += -I../../../../include
+
+OPTI_FLAG 		= -O3
+
+DEFINE_FLAG		= -DMIPS #-DDEBUG
+#-DNDEBUG
+
+#CCFLAG		= -EL -muclibc -fPIC -msoft-float -c -mips32 -Wall $(OPTI_FLAG) $(HEADERS_FLAG) $(DEFINE_FLAG) -fvisibility=hidden
+#LDFLAG		= -EL -muclibc -O1 -msoft-float -lpthread -lrt -ldl -shared
+
+ifneq ($(ARCH_CCFLAGS),)
+CCFLAG		= $(ARCH_CCFLAGS) -c -mips32r2 -Wall $(OPTI_FLAG) $(HEADERS_FLAG) $(DEFINE_FLAG)
+else
+CCFLAG		= -EL -muclibc -fPIC -msoft-float -c -mips32 -Wall $(OPTI_FLAG) $(HEADERS_FLAG) $(DEFINE_FLAG) -fvisibility=hidden
+endif
+
+ifneq ($(ARCH_LDFLAGS),)
+LDFLAG		= $(ARCH_LDFLAGS) -O1 -lpthread -lrt -ldl -shared
+else
+LDFLAG		= -EL -muclibc -O1 -msoft-float -lpthread -lrt -ldl -shared
+endif
+
+GCC			= mips-linux-gnu-gcc
+OBJDUMP		= mips-linux-gnu-objdump
+OBJCOPY		= mips-linux-gnu-objcopy
+OBJSIZE		= mips-linux-gnu-size
+AR			= mips-linux-gnu-ar rvs
+
+CC			= $(GCC) $(CCFLAG)
+LD			= $(GCC) $(LDFLAG)
+
+JPEG_OBJS	 = $(DECODER_DIR)/jpeg_decoder.o
+JPEG_OBJS	+= $(DECODER_DIR)/pp.o
+JPEG_OBJS	+= $(DECODER_DIR)/idct.o
+JPEG_OBJS	+= $(DECODER_DIR)/jpg_prog_dec.o
+JPEG_OBJS	+= $(DECODER_DIR)/jpeg_baseline_dec_soft/jpeg_dec.o
+JPEG_OBJS	+= $(DECODER_DIR)/exif_dec.o
+JPEG_OBJS	+= $(DECODER_DIR)/jpgprog_decoder.o
+JPEG_OBJS	+= $(DECODER_DIR)/jpgsoft_decoder.o
+JPEG_OBJS	+= jpeg_plugin.o
+JPEG_OBJS	+= $(LIB_DIR)/lib_dec_jpeg.a
+JPEG_OBJS	+= $(LIB_DIR)/lib_pp_jpeg.a
+JPEG_OBJS	+= $(LIB_DIR)/lib_dwl_irq.a
+#JPEG_OBJS	+= $(LIB_DIR)/lib_osapi.so
+
+BMP_OBJS	 = bmp_plugin.o
+BMP_OBJS	+= $(DECODER_DIR)/bmp_decoder.o
+BMP_OBJS	+= $(DECODER_DIR)/pp.o
+BMP_OBJS	+= $(DECODER_DIR)/libbmp/libbmp.a
+BMP_OBJS	+= $(LIB_DIR)/lib_pp_jpeg.a
+BMP_OBJS	+= $(LIB_DIR)/lib_dwl_irq.a
+#BMP_OBJS	+= $(LIB_DIR)/lib_osapi.so
+
+TIF_OBJS	 = tif_plugin.o
+TIF_OBJS    += $(DECODER_DIR)/tif_decoder.o
+TIF_OBJS    += $(DECODER_DIR)/libtiff/libtiff.a
+TIF_OBJS    += $(DECODER_DIR)/libjpeg/libjpeg.a
+TIF_OBJS    += $(DECODER_DIR)/zlib/zlib.a
+TIF_OBJS	+= $(DECODER_DIR)/pp.o
+TIF_OBJS	+= $(LIB_DIR)/lib_pp_jpeg.a
+TIF_OBJS	+= $(LIB_DIR)/lib_dwl_irq.a
+#TIF_OBJS	+= $(LIB_DIR)/lib_osapi.so
+
+PNG_OBJS	 = png_plugin.o
+PNG_OBJS    += $(DECODER_DIR)/png_decoder.o
+PNG_OBJS    += $(DECODER_DIR)/libpng/libpng.a
+PNG_OBJS    += $(DECODER_DIR)/zlib/zlib.a
+PNG_OBJS	+= $(DECODER_DIR)/pp.o
+PNG_OBJS	+= $(LIB_DIR)/lib_pp_jpeg.a
+PNG_OBJS	+= $(LIB_DIR)/lib_dwl_irq.a
+#PNG_OBJS	+= $(LIB_DIR)/lib_osapi.so
+
+GIF_OBJS	 = gif_plugin.o
+GIF_OBJS    += $(DECODER_DIR)/gif_decoder.o
+GIF_OBJS    += $(DECODER_DIR)/libungif/libungif.a
+GIF_OBJS	+= $(DECODER_DIR)/pp.o
+GIF_OBJS	+= $(LIB_DIR)/lib_pp_jpeg.a
+GIF_OBJS	+= $(LIB_DIR)/lib_dwl_irq.a
+#GIF_OBJS	+= $(LIB_DIR)/lib_osapi.so
+
+IMGDEC_OBJS	 = image_decoder.o
+#IMGDEC_OBJS	+= $(LIB_DIR)/lib_osapi.so
+
+DEPS	 = image_decoder.h
+DEPS	+= ../../inc/mmm_image.h
+DEPS	+= $(DECODER_DIR)/decoder.h
+DEPS	+= $(DECODER_DIR)/decoder_def.h
+DEPS	+= $(DECODER_DIR)/exif_dec.h
+DEPS	+= $(DECODER_DIR)/idct.h
+DEPS	+= $(DECODER_DIR)/jpg_prog_dec.h
+DEPS	+= $(DECODER_DIR)/jpeg_baseline_dec_soft/idct.h
+DEPS	+= $(DECODER_DIR)/jpeg_baseline_dec_soft/jpeg_dec.h
+DEPS	+= $(HANTRO_DIR)/config/ppcfg.h
+DEPS	+= $(HANTRO_DIR)/config/deccfg.h
+DEPS	+= $(HANTRO_DIR)/inc/basetype.h
+DEPS	+= $(HANTRO_DIR)/inc/dwl.h
+DEPS	+= $(HANTRO_DIR)/inc/jpegdecapi.h
+DEPS	+= $(HANTRO_DIR)/inc/ppapi.h
+DEPS	+= $(HANTRO_DIR)/pp/ppinternal.h
+DEPS	+= $(HANTRO_DIR)/pp/pphwregdrv.h
+DEPS	+= $(OSAPI_DIR)/osapi.h
+DEPS	+= makefile
+
+OUT_ALL		 = $(OUT_DIR)/lib_id_jpg.so
+OUT_ALL		+= $(OUT_DIR)/lib_id_bmp.so
+OUT_ALL		+= $(OUT_DIR)/lib_id_tif.so
+OUT_ALL		+= $(OUT_DIR)/lib_id_png.so
+OUT_ALL		+= $(OUT_DIR)/lib_id_gif.so
+OUT_ALL		+= $(OUT_DIR)/lib_image.so
+
+all: $(OUT_ALL)
+	$(OBJSIZE) $(OUT_DIR)/lib_id_jpg.so
+	$(OBJSIZE) $(OUT_DIR)/lib_id_bmp.so
+	$(OBJSIZE) $(OUT_DIR)/lib_id_tif.so
+	$(OBJSIZE) $(OUT_DIR)/lib_id_png.so
+	$(OBJSIZE) $(OUT_DIR)/lib_id_gif.so
+	$(OBJSIZE) $(OUT_DIR)/lib_image.so
+
+image_decoder.o: image_decoder.c $(DEPS)
+	$(CC) -o $@ $<
+
+jpeg_plugin.o: jpeg_plugin.c $(DEPS)
+	$(CC) -o $@ $<
+	
+bmp_plugin.o: bmp_plugin.c $(DEPS)
+	$(CC) -o $@ $<
+	
+tif_plugin.o: tif_plugin.c $(DEPS)
+	$(CC) -o $@ $<
+
+png_plugin.o: png_plugin.c $(DEPS)
+	$(CC) -o $@ $<
+
+gif_plugin.o: gif_plugin.c $(DEPS)
+	$(CC) -o $@ $<
+
+$(DECODER_DIR)/pp.o: $(DECODER_DIR)/pp.c $(DEPS)
+	$(CC) -o $@ $<
+
+$(DECODER_DIR)/jpeg_decoder.o: $(DECODER_DIR)/jpeg_decoder.c $(DEPS)
+	$(CC) -o $@ $<
+
+$(DECODER_DIR)/idct.o: $(DECODER_DIR)/idct.c $(DEPS)
+	$(CC) -o $@ $<
+
+$(DECODER_DIR)/jpg_prog_dec.o: $(DECODER_DIR)/jpg_prog_dec.c $(DEPS)
+	$(CC) -o $@ $<
+	
+$(DECODER_DIR)/jpeg_baseline_dec_soft/jpeg_dec.o: $(DECODER_DIR)/jpeg_baseline_dec_soft/jpeg_dec.c $(DEPS)
+	$(CC) -o $@ $<
+
+$(DECODER_DIR)/exif_dec.o: $(DECODER_DIR)/exif_dec.c $(DEPS)
+	$(CC) -o $@ $<
+	
+$(DECODER_DIR)/jpgprog_decoder.o: $(DECODER_DIR)/jpgprog_decoder.c $(DEPS)
+	$(CC) -o $@ $<
+	
+$(DECODER_DIR)/jpgsoft_decoder.o: $(DECODER_DIR)/jpgsoft_decoder.c $(DEPS)
+	$(CC) -o $@ $<
+	
+$(DECODER_DIR)/bmp_decoder.o: $(DECODER_DIR)/bmp_decoder.c $(DEPS)
+	$(CC) -o $@ $<
+	
+$(DECODER_DIR)/tif_decoder.o: $(DECODER_DIR)/tif_decoder.c $(DEPS)
+	$(CC) -o $@ $<
+
+$(DECODER_DIR)/png_decoder.o: $(DECODER_DIR)/png_decoder.c $(DEPS)
+	$(CC) -o $@ $<
+
+$(DECODER_DIR)/gif_decoder.o: $(DECODER_DIR)/gif_decoder.c $(DEPS)
+	$(CC) -o $@ $<
+	
+### link all obj files 
+
+$(OUT_DIR)/lib_id_jpg.so: $(JPEG_OBJS)
+	rm -f $(OUT_DIR)/lib_id_jpg.so
+	$(LD) -o $(OUT_DIR)/lib_id_jpg.so $(JPEG_OBJS)
+	$(OBJDUMP) $(OUT_DIR)/lib_id_jpg.so --disassemble >lib_id_jpg_disasm.txt
+	
+$(OUT_DIR)/lib_id_bmp.so: $(BMP_OBJS) 
+	rm -f $(OUT_DIR)/lib_id_bmp.so
+	$(LD) -o $(OUT_DIR)/lib_id_bmp.so $(BMP_OBJS)
+	$(OBJDUMP) $(OUT_DIR)/lib_id_bmp.so --disassemble >lib_id_bmp_disasm.txt
+	
+$(OUT_DIR)/lib_id_tif.so: $(TIF_OBJS) 
+	rm -f $(OUT_DIR)/lib_id_tif.so
+	$(LD) -o $(OUT_DIR)/lib_id_tif.so $(TIF_OBJS)
+	$(OBJDUMP) $(OUT_DIR)/lib_id_tif.so --disassemble >lib_id_tif_disasm.txt
+
+$(OUT_DIR)/lib_id_png.so: $(PNG_OBJS) 
+	rm -f $(OUT_DIR)/lib_id_png.so
+	$(LD) -o $(OUT_DIR)/lib_id_png.so $(PNG_OBJS)
+	$(OBJDUMP) $(OUT_DIR)/lib_id_png.so --disassemble >lib_id_png_disasm.txt
+
+$(OUT_DIR)/lib_id_gif.so: $(GIF_OBJS) 
+	rm -f $(OUT_DIR)/lib_id_gif.so
+	$(LD) -o $(OUT_DIR)/lib_id_gif.so $(GIF_OBJS)
+	$(OBJDUMP) $(OUT_DIR)/lib_id_gif.so --disassemble >lib_id_gif_disasm.txt
+
+$(OUT_DIR)/lib_image.so: $(IMGDEC_OBJS) 
+	rm -f $(OUT_DIR)/lib_image.so
+	$(LD) -o $(OUT_DIR)/lib_image.so $(IMGDEC_OBJS)
+	$(OBJDUMP) $(OUT_DIR)/lib_image.so --disassemble >lib_image_disasm.txt
+
+clean:
+	rm -f *.o
+	rm -f $(DECODER_DIR)/*.o
+	rm -f $(DECODER_DIR)/tif/*.o
+	rm -f $(DECODER_DIR)/jpeg_baseline_dec_soft/*.o
+	rm -f *.txt
+

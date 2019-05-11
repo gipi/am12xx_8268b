@@ -1,0 +1,1189 @@
+
+<head>
+<body onresize="size()"   ontouchmove="touchstart()" ></body>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.7, minimum-scale=0.7, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8;">
+
+<title id="title">Dir List</title>
+<input type="text" id="dir" name="dir" value="/mnt/user1/thttpd/html/airusb"  style="display:none" />
+<input type="button" value="showdir" onclick="show()" style="display:none" />
+
+
+<input type="text" id="filename" name="filename" value="/mnt/user1/thttpd/html/airusb" style="display:none" /><!--style="display:none"-->
+<style> 
+
+<!--
+           
+
+html, body, #wrap {height:100%;width:100%;background:#000000; overflow:hidden;position:absolute}
+body > 
+
+#wrap1 {height:100%; width:86%;left:10.4%;top:0px;border: 0px solid #999999;position:absolute}
+
+#main {padding-bottom:40px;}  /* 必须使用和footer相同的高度 */
+
+#footer {position: relative;
+    height: 100%;
+    clear:both;
+    overflow:hidden;
+		border: 3px solid #000000;
+		left:0;
+}
+
+#top{
+	positon:fixed;
+	//left:(-3)%;
+	 margin-top:-3px;
+	 margin-left:-1px;
+	width:10%;
+	height:100%;
+	border: 0px solid #46A3FF;}
+
+#top1
+{
+top:0px;
+left:0px;
+width:15%;
+height:80px;
+
+position:absolute;
+background-image:url(img/left0.png);
+//border:3px solid #999999 ;
+//double #999999;
+//border-width:3px;
+border-bottom:2px solid #FFECEC ;
+}
+#top2{
+top:82px;
+left:0px;
+width:15%;
+height:80px;
+border: 0px solid #46A3FF;
+position:absolute;
+background-image:url(img/left0.png);
+//border:3px solid #999999 ;
+//double #999999;
+//border-width:3px;
+border-bottom:2px solid #FFECEC  ;
+	}
+
+#top3{
+top:166px;
+left:0px;
+width:15%;
+height:100%;
+border: 0px solid #46A3FF;
+position:absolute;
+background-image:url(img/left1.png);
+border-bottom:3px solid #999999 ;
+	}
+	
+#tbbg
+{
+left:37px;
+width:100%;
+height:30px;
+border: 0px solid #46A3FF;
+position: absolute;
+}
+#content{
+	height: 100%;
+	border: 0px solid #999999;
+	overflow-x:hidden;
+	background:#000000;
+	color:#FFFFFF;
+	
+}	
+body
+{
+margin:0px;
+}
+
+#div{
+	position: absolute;
+	height: 10000%;
+	border: 0px solid #999999;
+	background:#46A3FF;
+	width:80px;
+	//border-bottom:7px solid #999999 ;
+	background-size:100% 100%;
+	background-image:url(img/stoq1.png);
+}	
+#div1{
+	position: absolute;
+	height: 100%;
+	border: 0px solid #999999;
+	
+	
+}	
+
+
+.div-a
+{ 
+	position: absolute;
+    margin-top: -43px; /* footer高度的负值 */
+    height: 40px;
+    clear:both;
+	border: 0px solid #999999;
+	background:#000000;
+	width:100%;
+	z-index:1000;
+
+		
+}
+.div-b
+{ 
+	position: absolute;
+    height: 104px;
+    clear:both;
+    width:160px;
+    top:30%;
+    left:45%;
+	//border: 1px solid #46A3FF;
+   	border-radius: 5px;
+	background-image:url(img/poph.png);
+}
+
+.div-c
+{ 
+	position: absolute;
+    height: 104px;
+    clear:both;
+    width:240px;
+    top:30%;
+    left:30%;
+	//border: 1px solid #46A3FF;
+   	border-radius: 7px;
+	background-image:url(img/pop3h.png);
+}
+.mid{
+        width: 40px;
+        height: 70px;
+        position: absolute;
+        left:35%;
+        top: 23%;
+        margin-left:-15px; 
+        margin-top: 2px;
+        background:  #FFFFFF;
+      }
+      
+      
+ .mid0{
+          
+        height: 100%;
+        position: relative;
+        left: 40px;
+        margin-left:0px; 
+        margin-top: 5px;
+        background: #000000;
+        border: 0px solid #999999;
+        width:90%;
+      }
+ .mid2{
+          
+        width: 30px;
+      height: 30px;
+      position: absolute;
+      left: 73px;
+      top: 15px;
+      margin-left:10px; 
+      margin-top: 10px;
+      background: #FFFFFF;
+      }
+.mid1{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 50%;
+        top: 0%;
+        margin-left:-10px; 
+        margin-top: 0px;
+      }
+      
+.left0{
+      width: 40px;
+      height: 100%;
+      position: absolute;
+      left: 0%;
+      margin-left:0px; 
+      margin-top: 0px;
+      background: #46A3FF;
+	//border-bottom:1px solid #999999; ;
+  }
+.left1{
+      width:50%;
+      height: 2%;
+      position: relative;
+      left: 50%;
+      left:4px; 
+      margin-top: -10px;
+      background: #46A3FF;
+      border: 0px solid #999999;
+	
+  }
+.left{
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      margin-left:-5px; 
+      margin-top: 10px;
+      background: #FFFFFF;
+  }
+.right{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 25px;
+    right:25px;
+    margin-right:23px; 
+    margin-top: 0px;
+    background: #FFFFFF;
+}
+	-->
+</style>
+<script  src="js/jquery.js">
+</script>
+
+<script>
+	
+	
+urlinfo=window.location.href;  //获取当前页面的url
+len=urlinfo.length;              //获取url的长度
+offset=urlinfo.indexOf("?");   
+//alert(urlinfo);                    //设置参数字符串开始的位置
+if(offset==-1){                          //判断参数是否存在
+  
+}
+else
+{
+    newsidinfo=urlinfo.substr(offset+1,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+    newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割
+   
+
+	var type=decodeURI(newsids[1]);
+		
+	document.getElementById("dir").value=type;
+	document.getElementById("filename").value=type;
+
+    
+  //  
+}
+
+
+showdir((document.getElementById("dir").value)); 
+
+//document.getElementById("play").style.display="none"; \ 
+var id=0;
+//get the hrefname when href was clicked  then send to cgi  and clear it 
+var hrefname="";
+var clickflag=0;
+//tmpname 
+var tmpname="";
+var Cdir="";
+
+
+
+
+ 
+function show()
+{	
+	
+	
+	addRow("0","/mntKODRE");
+	addRow("1","sajlkfjreareqwrqwrqwreqwrqewreqwrqewrqwreqwrqwereqwwer.MP4");
+	addRow("2","LORDE.mp3");
+	addRow("3","1fdasf今天.jpg");
+	addRow("4","fadsfda1.doc");
+	addRow("5","1.nnw");
+	
+	
+	
+	//alert(getCookie("mediaflag"));
+}
+function addRow(filetype,filename){
+	
+	//添加一行
+	var t = document.getElementById("dirtable");
+	//t.style.height=30px;
+	//t.font-size
+	var objCell = document.getElementById("dirtable");      
+	    
+		//objCell.style.height=100px;
+	var newTr = t.insertRow(++id);
+
+	//newTr.id="tr"+id;
+	//newTr.bgColor=#0000FF;
+	//newTr.style.backgroundColor="#333399";
+	//添加两列
+	var newTd0 = newTr.insertCell(0);
+	newTd0.bgColor="#999999";
+	//newTd0.style.width=100px;
+	//newTd0.style.backgroundColor="#46A3FF";
+	var newTd1 = newTr.insertCell(1);
+	//newTd1.style.backgroundColor="#000000";
+	//newTd1.style.Color="#000000";
+
+//	newTd1.style.overflow="hidden";
+	switch(filetype)
+	{
+		case "0"://dir
+		newTd0.innerHTML ='<div class="left1"><img src="img/dir.png" width=55px height=55px></div>';
+		break;
+		case "1"://video
+		newTd0.innerHTML ='<div class="left1"><img src="img/video.png" width=55px height=55px ></div>';
+		break;
+		case "2"://audio
+		newTd0.innerHTML ='<div class="left1"><img src="img/audio.png" width=55px height=55px></div>';
+		break;
+		case "3"://pic
+		newTd0.innerHTML ='<div class="left1"><img src="img/img.png" width=55px height=55px></div>';
+		break;
+		case "4"://doc
+		case "5":
+		newTd0.innerHTML ='<div class="left1"><img src="img/doc.png" width=55px height=55px></div>';
+		break;
+		default:
+			newTd0.innerHTML="";
+			break;
+		
+	}
+
+
+	//dir 
+	if((filename!="")&&(filetype=="0"))
+	{
+		hrefname=document.getElementById("dir").value;
+		hrefname=hrefname.concat("/",filename);
+		var len=filename.length;
+		if(len>300)
+		{
+			var filename0=filename.substr(0,150);
+			var filename1=filename.substr(len-150);
+			var filename2=filename0+"...";
+			filename2=filename2+filename1;
+		}
+		else
+		{
+		filename2=filename;
+		}
+		var str="<a id='"+filename+"' name='"+filename+"' href='javascript:;'onclick='document.getElementById(\"dir\").value=\""+hrefname+"\";getclick();' style='text-decoration:none'><h2 style=\" text-indent:1em;cursor:hand;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;color:white;font-family:verdana;font-weight:500;font-size:26px;padding-top:8px;\">"+filename2+"</h2></a>";
+		newTd1.innerHTML=str;
+		showtablecolor();
+	}
+	
+	//audio
+	if((filename!="")&&(filetype=="2"))
+	{
+		hrefname=document.getElementById("dir").value;
+		hrefname=hrefname.concat("/",filename);
+		
+		var len=filename.length;
+		if(len>300)
+		{
+			var filename0=filename.substr(0,150);
+			var filename1=filename.substr(len-150);
+			var filename2=filename0+"...";
+			filename2=filename2+filename1;
+		}
+		else
+			{filename2=filename;}
+		
+		filename2=filename;
+		var str="<a id='"+filename+"' name='"+filename+"' href='javascript:;' onclick='document.getElementById(\"filename\").value=\""+hrefname+"\";audioplay();' style='text-decoration:none'><h2 style=\" text-indent:1em;cursor:hand;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;color:white;font-family:verdana;font-weight:500;font-size:26px;padding-top:8px;\">"+filename2+"</h2></a>";
+		newTd1.innerHTML=str;
+		document.getElementById("dirtable");
+		showtablecolor();
+		
+	}
+
+	//img file 
+	if((filename!="")&&(filetype=="3"))
+	{
+		hrefname=document.getElementById("dir").value;
+		hrefname=hrefname.concat("/",filename);
+		var len=filename.length;
+		if(len>300)
+		{
+			var filename0=filename.substr(0,150);
+			var filename1=filename.substr(len-150);
+			var filename2=filename0+"...";
+			filename2=filename2+filename1;
+		}
+		else
+			{filename2=filename;}
+		var str="<a id='"+filename+"' name='"+filename+"' href='javascript:;' onclick='document.getElementById(\"filename\").value=\""+hrefname+"\";imgplay();' style='text-decoration:none'><h2 style=\" text-indent:1em;cursor:hand;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;color:white;font-family:verdana;font-weight:500;font-size:26px;padding-top:8px;\">"+filename2+"</h2></a>";
+		newTd1.innerHTML=str;
+		document.getElementById("dirtable");
+		showtablecolor();
+		
+	}
+	//video file
+	if((filename!="")&&((filetype=="1")))
+	{
+		hrefname=document.getElementById("dir").value;
+		hrefname=hrefname.concat("/",filename);
+		
+		var len=filename.length;
+		if(len>300)
+		{
+			var filename0=filename.substr(0,150);
+			var filename1=filename.substr(len-150);
+			var filename2=filename0+"...";
+			filename2=filename2+filename1;
+		}
+		else
+			{filename2=filename;}
+		var str="<a id='"+filename+"' name='"+filename+"' href='javascript:;' onclick='document.getElementById(\"filename\").value=\""+hrefname+"\";videoplay();' style='text-decoration:none'><h2 style=\" text-indent:1em;cursor:hand;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;color:white;font-family:verdana;font-weight:500;font-size:26px;padding-top:8px;\">"+filename2+"</h2></a>";
+		newTd1.innerHTML=str;
+		showtablecolor();
+		
+	}
+	//doc file
+
+	if((filename!="")&&((filetype=="4"))||((filetype=="5")))
+	{
+		hrefname=document.getElementById("dir").value;
+		hrefname=hrefname.concat("/",filename);
+		
+		var len=filename.length;
+		if(len>300)
+		{
+			var filename0=filename.substr(0,150);
+			var filename1=filename.substr(len-150);
+			var filename2=filename0+"...";
+			filename2=filename2+filename1;
+		}else
+			{filename2=filename;}
+		var str="<a id='"+filename+"' name='"+filename+"' href='javascript:;' onclick='document.getElementById(\"filename\").value=\""+hrefname+"\";docplay();' style='text-decoration:none'><h2 style=\" text-indent:1em;cursor:hand;overflow: hidden;text-overflow:ellipsis;white-space:nowrap;color:white;font-family:verdana;font-weight:500;font-size:26px;padding-top:8px;\">"+filename2+"</h2></a>";
+		newTd1.innerHTML=str;
+		
+		showtablecolor();
+	}
+	if(filename=="") newTd1.innerHTML=" ";
+
+}
+
+function docplay()
+{
+	clickflag=1;
+	div_pos_cha("get");
+	
+	document.getElementById("get").style.display="block"; 
+	
+	document.getElementById("audio").style.display="none";
+	//document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none"; 
+  
+  	setTimeout("clear_flag()",500);
+}
+function videoplay()
+{
+
+	  
+	clickflag=1;
+
+	//document.getElementById("tbbg").style.display="none";
+	div_pos_cha("video");
+	document.getElementById("video").style.display="block"; 
+	
+	
+	
+	document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	///document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none"; 
+  
+  
+ // var href="play.html?filename=";
+    var filename=document.getElementById("filename").value;
+ 	var index=filename.lastIndexOf("/");
+	var title=filename.substr(index+1);
+	
+	document.title=title;
+ // href=href.concat(filename);
+  //href=encodeURI(href);
+	filename=filename.substr(23);
+	filename=encodeURI(filename);
+ 	 var hrefid=document.getElementById("videoplay");
+ 	// filename="";
+    hrefid.innerHTML="<a href="+filename+"><img src=\"img/play.png\" width=80px height=80px></a>";
+  	setTimeout("clear_flag()",500);
+}
+
+//audio  img play
+function audioplay()
+{
+	clickflag=1;
+	
+	div_pos_cha("audio");
+	//document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none"; 
+	document.getElementById("audio").style.display="block"; 
+	
+	//document.getElementById("play").style.display="none";
+	//document.getElementById("upload").style.display="none"; 
+  	
+	
+	var filename=document.getElementById("filename").value;
+
+	var index=filename.lastIndexOf("/");
+	var title=filename.substr(index+1);
+	
+	document.title=title;
+	filename=filename.substr(23);
+	filename=encodeURI(filename);
+    
+	var hrefid=document.getElementById("audioplay");
+	//if(ind<0) //audio href
+	//{
+  	//setCookie("mediaflag","airdisk",7);
+  	hrefid.innerHTML="<a href="+filename+"  onclick='nochange()'><img src=\"img/play.png\" width=80px height=80px></a>";
+	//}
+	//else //img
+	//{
+		//hrefid.innerHTML="<a href=\"javascript:\" onclick=\"toPlay()\"><img src=\"img/play.png\"></a>";
+	//}
+  	setTimeout("clear_flag()",500);
+}
+function imgplay()
+{
+	clickflag=1;
+	
+	div_pos_cha("img");
+	//document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="block"; 
+	document.getElementById("audio").style.display="none"; 
+	
+	//document.getElementById("play").style.display="none";
+	//document.getElementById("upload").style.display="none"; 
+  	
+	
+	var filename=document.getElementById("filename").value;
+
+	var index=filename.lastIndexOf("/");
+	var title=filename.substr(index+1);
+	
+	document.title=title;
+	filename=filename.substr(23);
+	filename=encodeURI(filename);
+ 
+
+    
+	var hrefid=document.getElementById("imgplay");
+	//if(ind<0) //audio href
+	//{
+  	//setCookie("mediaflag","airdisk",7);
+  	hrefid.innerHTML="<a href="+filename+"  onclick='nochange()'><img src=\"img/play.png\" width=80px height=80px></a>";
+	//}
+	//else //img
+	//{
+		//hrefid.innerHTML="<a href=\"javascript:\" onclick=\"toPlay()\"><img src=\"img/play.png\"></a>";
+	//}
+  	setTimeout("clear_flag()",500);
+}
+	
+	//get the href click filename and turn to the dir  
+function getclick()
+{
+  //div_pos_cha(); 
+  clickflag=1;                 
+  //clear last div 
+  	document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none";
+  
+	//alert("click");
+	
+	
+	//alert(idval);
+	var myhref=document.getElementById("dir");
+ 	 hrefname=myhref.name;
+	//alert(hrefname);	
+	Cdir=document.getElementById("dir").value;
+	var href="diskh.html?filename=";
+	href=href.concat(Cdir);
+	href=encodeURI(href);
+	location.replace(href);
+	//document.getElementById("dir").value=Cdir;
+	//document.getElementById("filename").value=Cdir;
+	
+	setTimeout("clear_flag()",500);
+	
+}
+function dirback()
+{
+	clickflag=1;
+	
+	
+  
+  	document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none";
+  
+	//alert("click");
+
+	
+	//alert(idval);
+	var myhref=document.getElementById("dir");
+	hrefname=myhref.name;
+	
+  
+	//alert(hrefname);	
+	
+	Cdir=document.getElementById("dir").value;
+
+	
+	if((Cdir!="/mnt/user1/thttpd/html/airusb/usb")&&(Cdir!="/mnt/user1/thttpd/html/airusb/sdcard")&&(Cdir!="/mnt/user1/thttpd/html/airusb/memory")&&(Cdir!="/mnt/user1/thttpd/html/airusb/windows"))
+	{
+
+	var bitindex=Cdir.lastIndexOf("/");
+				
+	Cdir=Cdir.substr(0,bitindex);
+	var href="diskh.html?filename=";
+	href=href.concat(Cdir);
+	href=encodeURI(href);
+	location.replace(href);
+	
+	
+	}
+	else
+	{
+		location.replace("airdisk.html");	
+
+	}
+	setTimeout("clear_flag()",500);
+}
+
+function showtablecolor(){
+	var ybgcolor='#000000';
+	var mbgcolor='#46A3FF'; 
+	var t=0;
+	var tablename=document.getElementById("dirtable");
+	var li=tablename.getElementsByTagName("td");
+    for (var i=0;i<li.length;i++){
+  	
+	  if((i%2)==1)
+	  {
+
+	   
+	 
+	  li[i].onmouseover=function(){
+	
+	 
+	  	this.style.backgroundImage="url(img/stoq.png)";
+
+		this.style.backgroundRepeat="no-repeat";
+		this.style.backgroundSize="100% 100%";
+
+
+
+     }
+  
+  	 li[i].onmouseout=function(){this.style.backgroundImage="url(img/stoq3.png)";}
+
+ }
+ /*
+ else
+ 	{
+ //	li[i].style.left=10px;	
+ 	}*/
+ }
+}
+
+function deltable()
+{
+  var table=document.getElementById("dirtable");
+  var len=table.rows.length;
+  for(var n=table.rows.length-1;n>0;n--)
+  {
+  	table.deleteRow(n);
+ 	
+  
+	}
+  //table.deleteRow();
+  
+	id=0;
+	
+}
+function touchstart(){
+ 	document.getElementById("play").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+
+				 
+}
+	
+// send fullpath name to cgi and get dir list data to show 
+function showdir(urlname)
+{
+	
+
+	
+	var filetype= new Array(100);
+    var filename=new Array(100);
+	  
+	$.get("cgi-bin/dir.cgi", {fullname:urlname}, function(dir_list)
+		{	
+		//	document.write(dir_list);
+		//alert(dir_list);
+		  errindex=dir_list.indexOf("dir open Error");
+		  if(errindex!=-1)
+		  {
+		  //	alert("please check your udisk in");	
+		  }
+			var i=0;
+			len=dir_list.length;
+			if(len>0)
+			{
+				offset=dir_list.indexOf("#"); 
+				if(offset<0)
+				{
+				 	//document.write (" read null form udisk directory  !");
+				 	
+				}
+				else
+				{ 
+					
+					dir=dir_list.substr(offset+1);
+					//document.write(dir);
+					while((dir.length)>0)
+					{
+						idex=dir.indexOf(",");
+						filetype[i]=dir.slice((idex-1),idex);
+						//document.write("type"+filetype+*  [i]);
+						idex1=dir.indexOf("*");
+						filename[i]=dir.slice((idex+1),idex1);
+						addRow(filetype[i],filename[i]);
+						//document.write("name"+filename[i]);
+			 		 	if((idex1+1)==len)
+							dir="";
+						else
+							dir=dir.substr((idex1+1));
+						//document.write(dir);
+						i++;
+						
+						//document.write(i);
+				  }
+				
+					
+			}
+		}
+		
+		else
+		{
+			document.write("NULL");
+			
+		}
+	
+	//addRow("6","");			
+	});
+		
+	
+}
+function toUpload()
+{
+	clickflag=1;
+	var updir=document.getElementById("dir").value;
+	window.location.href="usbfileupload.html?dir="+updir+"";
+	setTimeout("clear_flag()",500);
+	
+}
+function toDownload()
+{	clickflag=1;
+	var ezcast="ezcast://ezcast.app/download?url=";
+	var ip=location.host;
+	var ipaddr="http://"+ip+"/";
+	var dwfilename=document.getElementById("filename").value;
+	
+	
+	var index=dwfilename.lastIndexOf("/");
+	var title=dwfilename.substr(index+1);
+	
+	document.title=title;
+	dwfilename=dwfilename.substr(23);
+	dwfilename=ipaddr+dwfilename;
+	dwfilename=encodeURIComponent(dwfilename);
+	dwfilename=ezcast+dwfilename;
+	window.location.href=dwfilename;
+	//alert(dwfilename);
+	//window.location.href="cgi-bin/d ownload.cgi?name="+dwfilename+"";
+	
+	//var idex=dwfilename.lastIndexOf("/");
+	//dwfilename=dwfilename.substr(idex+1);
+	//alert(dwfilename);
+//	document.getElementById("play").style.display="none"; 
+
+	document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none"; 
+	setTimeout("clear_flag()",500);
+
+
+}
+function toEZchannel()
+{
+	clickflag=1;
+	var ezcast_ch="ezchannel://ezcast.app/add?url=";
+	var ip=location.host;
+	//ip="http://192.168.203.1";
+	var ipaddr="http://"+ip+"/";
+	var fullpath=document.getElementById("filename").value;
+	
+	
+	var index=fullpath.lastIndexOf("/");
+
+	var title=fullpath.substr(index+1);  
+	document.title=title;// filename
+	 fullpath=fullpath.substr(23);  //airusb/filename
+	fullpath=ipaddr+fullpath;  //replace /mnt/user1/thttpd/html/ with ip http://192.168.203.1/				   //fullpath=http://192.168.203.1/airusb/filename
+	//var tmp_url=fullpath.substr(0,index-1);  //
+	fullpath=encodeURIComponent(fullpath);  //encode URL
+	title=encodeURIComponent(title);     //encode title
+	//fullpath=tmp_url;  //encode URL
+	//title=encodeURIComponent(title);     //encode title
+	fullpath=ezcast_ch+fullpath+"&name="+title;
+	fullpath=fullpath+"&source_from=airdisk&source_type=stream";
+	window.location.href=fullpath;
+	//salert(fullpath);
+	//window.location.href="cgi-bin/d ownload.cgi?name="+dwfilename+"";
+	
+	//var idex=dwfilename.lastIndexOf("/");
+	//dwfilename=dwfilename.substr(idex+1);
+	//alert(dwfilename);
+//	document.getElementById("play").style.display="none"; 
+
+	document.getElementById("img").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none";
+	document.getElementById("audio").style.display="none";
+	setTimeout("clear_flag()",500);
+}
+
+function toPlay()
+{
+	clickflag=1;
+	var playname=document.getElementById("filename").value;
+	
+	document.getElementById("play").style.display="none"; 	
+	
+		setTimeout("clear_flag()",500);
+}
+
+function div_pos_cha(divid)
+{
+	
+	var oLeft=window.event.clientX+document.body.scrollLeft;
+	var oTop=window.event.clientY+document.body.scrollTop-50;
+	if(oTop<50)
+		oTop=30;
+	//oLeft=0+"px";
+	oTop=oTop+"px"
+	oLeft=oLeft+"px";
+	document.getElementById(divid).style.top=oTop;
+	//document.getElementById(divid).style.left=document.body.clientwidth;
+	
+
+		
+}
+
+
+function showtbbg(top,id)
+{
+
+	if(id==1)
+	{
+		var oLeft=50;
+		var oTop=window.event.clientY+document.body.scrollTop;
+		 oTop-=7;
+		//oTop+=window.screenTop +document.documentElement.scrollTop - document.documentElement.clientTop;
+		oTop=oTop+"px";
+		document.getElementById("tbbg").style.top=oTop;
+		
+		
+		document.getElementById("tbbg").style.display="block"; 
+	}
+	else if(id==0)
+	{
+		document.getElementById("tbbg").style.display="none"; 
+	}
+
+}
+
+
+document.onclick=function()
+{
+	
+	if(clickflag==0)
+	{
+		 
+		document.getElementById("audio").style.display="none";
+		document.getElementById("get").style.display="none"; 
+		document.getElementById("video").style.display="none"; 
+		document.getElementById("img").style.display="none"; 
+
+		document.getElementById("upload").style.display="block"; 
+		
+		
+	}
+}
+function nochange()
+{
+	clickflag=1;
+	
+	document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none"; 
+}
+	
+
+function clear_flag()
+{
+	clickflag=0;
+	
+}
+
+function airdisk()
+{
+	window.location.href="airdisk.html";
+
+
+
+
+}
+
+function size()
+{
+	//test=document.getElementById("block");
+     //test.style.width=(document.body.clientWidth-45+"px");
+	 test1=document.getElementById("content");
+     test1.style.height=(document.body.clientHeight-40+"px");
+    
+	/*
+	if((navigator.userAgent.match(/iPad/i))&&(window.orientation==90||window.orientation==-90))
+		{
+	 test2=document.getElementById("wrap");
+	 test2.style.height=(document.body.clientHeight*0.68+"px");
+		}
+
+	if((navigator.userAgent.match(/iPad/i))&&(window.orientation==180||window.orientation==0))
+		{
+	 test2=document.getElementById("wrap");
+	 test2.style.height=(document.body.clientHeight*0.9+"px");
+	}
+	*/
+}
+
+
+///cookies
+function setCookie(name,value) 
+{ 
+var Days = 30; 
+var exp = new Date(); 
+exp.setTime(exp.getTime() + Days*24*60*60*1000); 
+document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+} 
+//¶¡cookies 
+function getCookie(name) 
+{ 
+var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
+if(arr=document.cookie.match(reg)) return unescape(arr[2]); 
+else return null; 
+} 
+//ɾ³�es 
+function delCookie(name) 
+{ 
+var exp = new Date(); 
+exp.setTime(exp.getTime() - 1); 
+var cval=getCookie(name); 
+if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
+} 
+
+//$(document).bind('touchmove', false); 
+$(document).ready(function()
+ {
+
+ 	 
+	//show();
+
+	
+	 /*
+if((navigator.userAgent.match(/iPad/i))&&(window.orientation==90||window.orientation==-90))
+		{
+		
+	
+	 test2=document.getElementById("wrap");
+	 test2.style.height=(document.body.clientHeight*0.68+"px");
+	}
+
+
+	
+if((navigator.userAgent.match(/iPad/i))&&(window.orientation==180||window.orientation==0))
+		{
+		
+	 test2=document.getElementById("wrap");
+	 test2.style.height=(document.body.clientHeight*0.9+"px");
+	}
+	*/
+});
+/*
+function set(s) {  
+	
+	size=s;
+          document.body.style.cssText = document.body.style.cssText + '; -webkit-transform: scale(' + size + '); ';  
+} 
+*/
+</script>
+</head>
+
+<div id="top"></div>
+
+
+<div id="top1"><a href='javascript:' onclick="dirback()" ><center><img src="img/back.png" width=18% height=width style="margin-left:-30%;margin-top:30px;"></center></a></div>
+<div id="top2"><a  ><center><img src="" width=18% height=width style="margin-left:-30%;margin-top:30px;"></center></a></div>
+<div id="top3"><a href='javascript:' onclick="airdisk()" ><center><img src="img/airdisk.png" width=50% height=width style="margin-left:-30%;margin-top:70%;"></center></a></div>
+
+<div id="wrap1" >
+
+<div id="footer" >
+<div id="content" >
+ <div id="div" >
+ 	</div>	
+ 	
+<table width="99%" id="dirtable"  frame="void"  border=0px  style="table-layout:fixed;" >
+<tr id="tr1">
+<td   style="width:76px;" bgColor=#999999></td>
+<td ></td>
+</tr>
+
+</table> 
+
+</div>  
+</div>
+</div>
+<div id="side"></div>
+</div>	
+		
+
+
+
+<!--
+
+	
+			<div id="upload" class="div-a" >
+			
+			<div class="left0"  >	
+		
+			<div id="mid1">
+	 	<a href='javascript:' onclick="dirback()" ><img src="img/return.png"></a>
+	 	</div>
+
+	  	</div>
+	  	<!--
+			<div id="block"  style="width:100%;height: 40px; position: relative;left:40px;margin-left:0px; margin-top: -0px; background: #000000;border: 2px solid #999999;"  >
+			
+			<div class="mid1">	
+		<a href='javascript:' onclick="toUpload()" ><img src="img/upload.png" ></a></div>
+
+		</div>
+
+ 	  </div>
+ 	  
+	   </div>
+   
+    -->
+	 
+<div id="get" class="div-b" onclick="nochange()">
+
+
+<div class="mid">	
+<a href='javascript:' onclick="toDownload()"><img src="img/get.png" width=80px height=80px></a>
+</div>
+
+</div>
+
+
+
+
+
+	<!--for video  div -->	  	
+		<div id="video" class="div-b" onclick="nochange()">	
+		
+	  	<div id="videoplay" class="left">	
+		 <a href=""><img src="img/play.png"  width=80px height=80px></a>
+		 </div>
+	
+		<div class="right">	
+			<a href='javascript:' onclick="toEZchannel()"><img src="img/ezchannel.png" width=80px height=80px></a>
+		</div>
+			
+		
+		</div>
+
+
+<!--for image div -->	
+ 		<div id="img" class="div-b" onclick="nochange()">	
+	  	<div id="imgplay" class="left">	
+		 <a href=""><img src="img/play.png"  width=80px height=80px></a>
+		 </div>
+		 
+		
+		<div class="right">	
+			<a href='javascript:' onclick="toDownload()"><img src="img/get.png" width=80px height=80px></a>
+		</div>
+			
+		
+		</div>
+	
+<!--for mp3 div -->	  
+	    <div id="audio" class="div-c" onclick="nochange()">	
+
+  		<div id="audioplay" class="left">	
+		 <a href=""><img src="img/play.png"  width=80px height=80px></a>
+		 </div>
+		 
+			
+		<div class="mid2">	
+			<a href='javascript:' onclick="toDownload()"><img src="img/get.png" width=80px height=80px></a>
+		</div>
+		
+		<div class="right">	
+			<a href='javascript:' onclick="toEZchannel()"><img src="img/ezchannel.png" width=80px height=80px></a>
+		</div>
+		</div>
+	
+<script>
+	
+	
+   
+	document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none"; 
+	//document.getElementById("tbbg").style.display="none"; 
+	if((navigator.userAgent.match(/iPad/i))&&(document.body.clientWidth>document.body.clientHeight))
+	{
+		test2=document.getElementById("wrap");
+	 	test2.style.height=(document.body.clientHeight*0.65+"px");
+	}
+
+	if((navigator.userAgent.match(/iPad/i))&&(document.body.clientWidth<=document.body.clientHeight))
+	{
+	 	test2=document.getElementById("wrap");
+		test2.style.height=(document.body.clientHeight*0.9+"px");
+	}
+	
+		
+</script>
+
+<!--style="display:none"-->

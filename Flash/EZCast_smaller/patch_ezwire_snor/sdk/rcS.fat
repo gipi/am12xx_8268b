@@ -1,0 +1,181 @@
+#! /bin/sh
+runlevel=S
+prevlevel=N
+umask 022
+#export PATH runlevel prevlevel LD_LIBRARY_PATH
+#
+#       Trap CTRL-C &c only in this shell so we can interrupt subprocesses.
+#
+trap ":" INT QUIT TSTP
+/bin/mount -t proc  yan   /proc
+/bin/mount -t tmpfs tmpfs /tmp
+/bin/mount -t sysfs sysfs /sys
+/bin/mount -t ramfs dev /dev
+/bin/mount -t tmpfs tmpfs /mnt
+mkdir /dev/partitions
+
+mkdir /mnt/vram
+mkdir /mnt/usb1
+mkdir /mnt/usb2
+mkdir /mnt/usb3
+mkdir /mnt/usb4
+mkdir /mnt/usb5
+mkdir /mnt/usb6
+mkdir /mnt/usb7
+mkdir /mnt/usb8
+mkdir /mnt/usb9
+mkdir /mnt/usb10
+
+OLDIFS="$IFS"
+IFS=,
+
+id=1
+#for name in $AM7X_PARTS
+#do
+#	cmd="mknod /dev/partitions/$name b 93 $id"
+#	echo $cmd
+#	eval $cmd
+#	id=$(expr $id + 1)
+#done
+IFS="$OLDIFS"
+
+mdev  -s
+exec </dev/console >/dev/console 2>&1
+echo "init console OK..."
+
+
+#add by kewen for usb device fs
+/bin/mount -t usbfs none /proc/bus/usb
+#if [ -b /dev/partitions/debug ]; then
+#/bin/mount -o noatime -o nodiratime /dev/partitions/debug /mnt/debug
+#fi
+#/bin/mount -o noatime -o nodiratime /dev/partitions/udisk /mnt/udisk
+
+#if [ "$?" -ne 0 ]
+#then
+#echo "format udisk"
+#/sbin/mkfs.vfat /dev/partitions/udisk
+#/bin/mount -o noatime -o nodiratime /dev/partitions/udisk  /mnt/udisk
+#fi
+#/am7x/bin/reset.app &
+echo "fsck.fat -a vram"
+ln -n /dev/mtdblocka2 /dev/partitions/vram
+#/sbin/fsck.fat -a /dev/partitions/vram >/tmp/vram_check.txt 2>&1
+#vram_check_result=`cat /tmp/vram_check.txt | grep /dev/partitions/vram`
+#echo ">>>>>>vram_check_result=$vram_check_result"
+#if [ "$vram_check_result" == "" ]; then
+#    echo ">>>>>>>check vram error"
+#	/sbin/mkfs.vfat	/dev/partitions/vram
+#fi
+#/sbin/fsck.ext2 -p /dev/partitions/vram 2>&1
+echo "creat reset.app"
+./am7x/bin/reset.app &
+
+vram_ro=0
+/bin/mount -o noatime -o nodiratime -o rw /dev/partitions/vram  /mnt/vram
+if [ $? -ne 0 ]; then
+	echo "# 			  mount vram error 			  #"
+	/sbin/mkfs.vfat	/dev/partitions/vram		
+	/bin/mount -o noatime -o nodiratime -o rw /dev/partitions/vram  /mnt/vram
+else
+	touch /mnt/vram/buyuiooppppppp
+	if [ -f /mnt/vram/buyuiooppppppp ];then
+		mount 
+		vram_ro=`mount | grep vram | grep -c ro`
+		echo $vram_ro
+		if [ $vram_ro -ne 0 ]; then
+			echo "# 			  mount vram read	only		  #"
+			/bin/umount  /mnt/vram
+			/sbin/mkfs.vfat	/dev/partitions/vram		
+			/bin/mount -o noatime -o nodiratime -o rw /dev/partitions/vram  /mnt/vram	
+		else
+			rm /mnt/vram/buyuiooppppppp
+			vram_check_reset=`cat /mnt/vram/ezcast/reset.txt`
+			echo ">>>>>>vram_check_reset=$vram_check_reset"
+			if [ "$vram_check_reset" != "" ]; then
+			   	 echo ">>>>>>>reset vram"
+				/bin/umount  /mnt/vram
+				/sbin/mkfs.vfat	/dev/partitions/vram		
+				/bin/mount -o noatime -o nodiratime -o rw /dev/partitions/vram  /mnt/vram
+			fi
+			
+
+		fi
+	else
+		echo "# 			  mount vram read	only,format it		  #"
+		/bin/umount  /mnt/vram
+		/sbin/mkfs.vfat	/dev/partitions/vram		
+		/bin/mount -o noatime -o nodiratime -o rw /dev/partitions/vram  /mnt/vram	
+		
+	fi
+fi
+
+#add by liucan[2010.9.29]
+#we use mdev as the default userspace hotplug utilities
+#/proc/sys/kernel/hotplug rely on kernel config CONFIG_HOTPLUG 
+#&CONFIG_NET ,if this file does not exist,please check!
+
+echo /sbin/mdev >/proc/sys/kernel/hotplug
+echo 'Root filesystem on nand'
+echo 'Start AM7531 Console'
+#insmod /lib/modules/am7x_carddet.ko 
+#insmod /lib/modules/mmc_core.ko 
+#insmod /lib/modules/mmc_block.ko 
+#insmod /lib/modules/am7x_sd.ko
+
+#/bin/mount / -o remount,rw
+. /etc/init.d/set-path
+export runlevel prevlevel
+
+#echo ">>>>>> check user1"
+#if [ -d /mnt/vram/user1 ]; then
+#	echo "/mnt/vram/user1 is exist..."
+#else
+#	mkdir /mnt/vram/user1
+#	mkdir /mnt/vram/user1/system_setting
+#	echo "MY_DPF" > /mnt/vram/user1/system_setting/hostname.dat
+#	cp -rf /am7x/ezdata /mnt/vram/user1/
+#	sync
+#fi
+
+echo ">>>>>> check dev"
+cat /etc/mkdev.conf | while read line
+do
+	if [ -n "$line" ];then
+		name=$(echo $line | awk '{print $1}')
+		if [ ! -e /dev/$name ];then
+			echo "**** mknod /dev/$line"
+			mknod /dev/$line
+		fi
+	fi
+done
+
+if [ ! -e /mnt/vram/user1 ]; then
+	echo "Create user1"
+	mkdir /mnt/vram/user1
+fi
+
+if [ ! -e /mnt/vram/user1/thttpd/html ]; then
+	echo "Link thttpd"
+	cd /mnt/vram/user1/
+	ln -sf /usr/share/thttpd ./thttpd
+fi
+
+if [ ! -e /mnt/vram/user1/ezdata/ezosdpalette.plt ]; then
+	echo "Link ezdata"
+	cd /mnt/vram/user1/
+	ln -sf /usr/share/ezdata ./ezdata
+fi
+
+ln -s /mnt/vram/user1 /mnt/user1
+
+manager.app &
+#/bin/mount /dev/pts
+#/usr/sbin/telnetd
+#dmesg > /var/log/dmesg
+
+#/sbin/fsck.ext2 -p /dev/partitions/user1 2>&1
+#/bin/mount -o noatime -o nodiratime -o sync /dev/partitions/user1 /mnt/user1
+
+#/bin/mount -o noatime -o nodiratime /dev/partitions/cdrom /mnt/cdrom
+#/bin/mount -o noatime -o nodiratime /dev/partitions/bak /mnt/bak

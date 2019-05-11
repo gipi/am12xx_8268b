@@ -1,0 +1,2604 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Actions-Micro | index </title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+<!--
+body
+{
+       // background:url('img/ezcastbk.jpg');    
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/ezcastbk.jpg', sizingMethod='scale');
+        width:100%;
+        height:100%;
+ }
+.STYLE1 {
+	font-size: 14px;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.menu {
+	font-size: 14px;
+//	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.select  {
+	font-size: 14px;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 800px)
+{
+
+	#customers
+	{
+	width:100%;
+	}
+}
+
+@media screen and (min-width: 800px)
+{
+	#customers
+	{
+	width:800px;
+	}
+}
+
+	#bg{
+	position:absolute;
+	position:fixed !important;
+	position: fixed;
+	top:0px;
+	left:0px;
+	z-index:-999;
+	border:1px solid #FF0000;
+	}
+.background 
+{
+	background-image:url('img/ezcastbk.jpg');
+	background-repeat:no-repeat;
+	background-size:cover;
+	position:fixed;
+	position:fixed !important;
+	position: fixed;
+	left:0;
+	top:0;
+	width: 100%;
+	height: 100%;
+//	border:1px solid #FF0000;
+	z-index:-100;
+	overflow: scroll;
+}
+.black_overlay
+{ 
+	display: none; 
+	position: fixed; 
+	top: 0%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	background-color: black; 
+	z-index:1001; 
+	-moz-opacity: 0.8; 
+	opacity:.80; 
+	filter: alpha(opacity=80); 
+} 
+.white_content 
+{ 
+	display:none;
+	//width: 100%; 
+	//height: 100%; 
+	//position: absolute;
+	//top: 50%; 
+	//left: 50%; 
+	overflow: auto; 
+	//margin-left: -185px;
+	//margin-right: 0px;
+	//margin-top: -136px;
+	//margin-bottom: 0px;	
+	z-index:1002;
+	//left: auto;
+	//top: auto;
+	//right: auto;
+	//bottom: auto;
+	//visibility: hidden;
+} 
+.appsk_style
+{
+	width:121px;
+	height:27px;
+	border-radius:5px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;	
+}
+
+.lay1
+{
+	width:100%;
+	position: relative;
+	top: -4px;
+	border: 0px solid #FFFFFF;
+	z-index: 101;
+	left: 1px;
+}
+.lay2
+{
+	width:100%;
+	position: relative;
+	top: -18px;
+	border: 0px solid #FFFFFF;
+	z-index: 100;
+	left: 1px;
+}
+.STYLE2 {
+	color: #FFFFFF;
+	font-size: 8px;
+}
+.STYLE3 {
+	color: #FFFFFF;
+	font-size: 1px;
+}
+.boxx{
+	position: relative;
+	//background-image:url('img/seb_board_bg.png');
+	background-repeat:repeat;
+	//background-size:cover;
+	width: 165px;
+	height: 230px;
+	border: 2px solid #26D6FE;
+	border-radius: 3px;
+	-moz-border-radius:3px; /* Old Firefox */
+
+	margin-top:10px;
+	margin-bottom:10px;
+}
+-->
+</style>
+<script type="text/javascript" src="js/jquery.js">
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+</head>
+<body>
+<div id="bk" class="background">
+<form id="config-form" name="config-form">
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#F0F0F0" id="customers">
+<tr background="img/bk1.png">
+  <td colspan="3" align="center" valign="top"><table width="100%" height="150%" border="0" bordercolor="#FF0000">
+<tr >
+<td width="16%"align="left"><img src="img/logo_setting.png"></td>
+<td width="7%"align="left"valign="bottom" ><div class="lay1"><table width="100%" height="100%" border="0">
+  <tr>
+    <td><p align="left"><font style="color:#FFFFFF;" size="3" id="ap_ssid_txt">SSID : </font></p></td>
+  </tr>
+</table></div>
+</td>
+<td width="19%"align="left" valign="bottom"><div class="lay1"><table width="100%" height="100%" border="0">
+  <tr>
+    <td><p align="left"><font style="color:#FFFFFF;" size="3" id="ap_ssid"></font></p></td>
+  </tr>
+</table></div></td>
+<td width="12%"align="left" valign="bottom"><div class="lay1"><table width="100%" height="100%" border="0">
+  <tr>
+    <td><p align="left"><font style="color:#FFFFFF;" size="3" id="ap_psk_txt">Password : </font></p></td>
+  </tr>
+</table></div></td>
+<td width="7%"align="left" valign="bottom"><div class="lay1"><table width="100%" height="100%" border="0">
+  <tr>
+    <td><p align="left"><font style="color:#FFFFFF;" size="3" id="ap_psk"></font></p></td>
+  </tr>
+</table></div></td>
+<td width="5%"align="right"><img src="img/phone.png"></td>
+<td width="8%"align="center"><img src="img/dongle_not_connected.png" id="dongle_connect_status"></td>
+<td width="10%"align="center"><img src="img/dongle.png" id="upgrade_status"></td>
+<td width="8%"align="center"><img src="img/dongle_not_connected.png" id="client_connect_status"></td>
+<td width="5%"align="left"><img src="img/internet_little.png"></td>
+</tr>
+
+</table></td>
+</tr>
+<tr>
+  <td colspan="3" align="center" valign="top" style="line-height:0px;"><div class="lay2"><table width="100%" border="0" bordercolor="#00FF00">
+    <tr>
+      <td width="75%"><table width="100%" border="0" bordercolor="#FF00FF">
+        <tr>
+          <td width="94%">&nbsp;</td>
+          <td width="6%"align="center"><span class="STYLE2" id="dongle_icon_txt"></span></td>
+        </tr>
+      </table></td>
+      <td width="25%"><table width="100%" border="0" bordercolor="#FF0000">
+        <tr>
+		<td width="3%"align="center">&nbsp;</td>
+         <td width="97%"align="center"><span class="STYLE2" id="internet_icon_txt"></span></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table></div></td>
+</tr>
+
+    <tr>
+      <td height="260" align="center" valign="top">
+	  	  <div class="boxx" style="background-image:url(img/resolution_ico.png);background-repeat:no-repeat;background-position:50% 40%;">
+ 		<table width="150">
+			<tr>
+				<td height="90" align="center">
+				<p align="center"><font style="color:#FFFFFF;" size="5" id="resolution_txt"></font></p>				</td>
+			</tr>	
+			<tr height="45">			</tr>
+			<tr>
+				<td  align="center" style="margin-top: 0px;">
+					<img src="img/select-Down_cover.png" onClick="select_resolution_down()" id="select_down_res"></td>
+			</tr>
+			<tr>
+				<td  align="center"><input name="submit3" type="submit"  id="resolution"  style="border-radius:5px;color:#FFFFFF;background:url('img/bar_cover.png');width:120px;margin-left:auto;margin-right:auto;" value="" align="center"></td>
+			</tr>
+			<tr>
+				<td  align="center" style="margin-top: 0px;">
+					<img src="img/select-up_cover.png" onClick="select_resolution_up()" id="select_up_res"></td>
+			</tr>
+		</table>	  </div></td>
+      <td height="260" align="center" valign="top">
+	  <div class="boxx" style="background-image:url(img/psw_icon.png);background-repeat:no-repeat;background-position:50% 40%;">
+	  <table width="150" border="0" bordercolor="#F0F0F0">
+        <tr >
+          <td height="90" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="password_txt"></font></p></td>
+        </tr>
+        <tr >
+          <td height="51px"></td>
+        </tr>
+        <tr>
+          <td align="center"><input type="text"  id="appsk" name="appsk" value="" style="padding:0px;width:121px;height:27px;border-radius:5px;border:none;background:url('img/appsk_bk.png');background-repeat: no-repeat;background-position:center;color:#FFFFFF;text-align:center;"></td>
+        </tr>
+        <tr>
+          <td align="center"><input type="submit" name="APPLY" value="" id="set_appsk_apply" style="color:#FFFFFF; border:none;background:url('img/apply.png');width:101px; height:34px;background-repeat:no-repeat;">          </td>
+        </tr>
+      </table>  </div></td>
+      <td height="260" align="center" valign="top">
+	  <div class="boxx" style="background-image:url(img/internet_icon_4.png);background-repeat:no-repeat;background-position:50% 40%;">
+	  <table width="150">
+        <tr>
+          <td height="90" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="internet_txt"></font></p></td>
+        </tr>
+        <tr height="50"> </tr>
+        <tr>
+          <td align="center"><input type="submit" name="APPLY" value="" id="internet" style="color:#FFFFFF; border:none;background:url('img/wifi_scan.png');width:101px; height:35px;background-repeat:no-repeat;">          </td>
+        </tr>
+        <tr>
+          <td  align="center"><font style="color:#FFFFFF;" size="2" id="connect_mac_address"></font></td>
+        </tr>
+        <tr>
+          <td  align="center"><font style="color:#FFFFFF;" size="2" id="connected_ssid"></font></td>
+        </tr>
+      </table> </div></td>
+    </tr>
+    
+    <tr>
+      <td height="260" align="center" valign="top">
+	 <div class="boxx" style="background-image:url(img/language_ico.png);background-repeat:no-repeat;background-position:50% 40%;">
+	  <table width="150">
+        <tr>
+          <td height="90" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="language_txt"></font></p></td>
+        </tr>
+        <tr height="45"> </tr>
+        <tr>
+          <td  align="center" style="margin-top: 0px;"><img src="img/select-Down_cover.png" onClick="select_language_down()" id="select_down_language"></td>
+        </tr>
+        <tr>
+          <td  align="center"><input name="language" type="submit"  id="language"  style="border-radius:5px;width:120px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;" value="" align="center">          </td>
+        </tr>
+        <tr>
+          <td  align="center" style="margin-top: 0px;"><img src="img/select-up_cover.png" onClick="select_language_up()" id="select_up_language"></td>
+        </tr>
+      </table></div></td>
+      <td height="260" align="center" valign="top">
+	  <div class="boxx" style="background-image:url(img/defaultmode_ico.png);background-repeat:no-repeat;background-position:50% 40%;">
+	  <table width="150">
+        <tr>
+          <td height="90" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="defaultmode_txt"></font></p></td>
+        </tr>
+        <tr height="45"> </tr>
+        <tr>
+          <td  align="center" style="margin-top: 0px;"><img src="img/select-Down_cover.png" onClick="select_defaultmode()" id="select_down_defaultmode"></td>
+        </tr>
+        <tr>
+          <td  align="center"><input name="defaultmode" type="submit"  id="defaultmode"  style="border-radius:5px;width:120px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;" value="" align="center">          </td>
+        </tr>
+        <tr>
+          <td  align="center" style="margin-top: 0px;"><img src="img/select-up_cover.png" onClick="select_defaultmode()" id="select_up_defaultmode"></td>
+            </tr>
+          </table>
+      </div></td>
+	  <td height="260" align="center" valign="top">
+	  <div class="boxx" id="devicename_active" style="background-image:url(img/devicename_active.png);background-repeat:no-repeat;background-position:50% 40%;">
+	  <table width="150" border="0" bordercolor="#F0F0F0">
+        <tr >
+			<td height="100" align="center">
+				<p align="center"><font style="color:#FFFFFF;" size="5" id="devicename_txt">Device name</font></p>				</td>
+		</tr>
+        <tr >
+          <td height="51px"></td>
+        </tr>
+        <tr>
+          <td align="center"><input type="text"  id="devicename" name="devicename" value="" style="padding:0px;width:121px;height:27px;border-radius:5px;border:none;background:url('img/appsk_bk.png');background-repeat: no-repeat;background-position:center;color:#FFFFFF;text-align:center;"></td>
+        </tr>
+        <tr>
+          <td align="center"><input type="submit" name="APPLY" value="" id="set_devicename_apply" style="color:#FFFFFF; border:none;background:url('img/apply.png');width:101px; height:34px;background-repeat:no-repeat;">          </td>
+        </tr>
+      </table>  </div></td>
+	  </tr>
+	  <tr>
+	   <td height="260" align="center" valign="top">
+	  <div class="boxx" style="background-image:url(img/upgrade_ico.png);background-repeat:no-repeat;background-position:50% 40%;">
+	  <table width="150">
+          <tr>
+            <td height="90" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="upgrade_txt">upgrade</font></p></td>
+          </tr>
+          <tr height="75"> </tr>
+          <tr align="center">
+            <td  align="center"><input name="new_version" type="submit"  id="new_version" style="border-radius:5px;width:120px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;" value="" align="center">
+            </td>
+          </tr>
+      </table></div></td>
+      <td height="260" align="center" valign="top" id="connection_mode_background">
+	  <div class="boxx">
+	  <table width="150">
+          <td height="50" align="center" valign="bottom"><p align="center"><font style="color:#FFFFFF;" size="5" id="connection_mode_txt"></font></p></td>
+          </tr>
+          <tr >
+            <td align="center" valign="top"><img src="img/connection_mode_direct.png" id="connection_mode_icon"></td>
+          </tr>
+          <tr>
+            <td><table align="center">
+              <tr>
+                <td valign="top" align="left"><img src="img/ip1.png" id="ip1"></td>
+                <td align="center"><span class="STYLE3" id="ip1_txt"></span></td>
+              </tr>
+              <tr>
+                <td valign="top" align="left"><img src="img/ip0.png" id="ip0"></td>
+                <td align="center"><span class="STYLE3" id="ip0_txt"></span></td>
+              </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td  align="center" style="margin-top: 0px;"><img src="img/select-Down_cover.png" onClick="select_connection_mode()" id="select_down_connection_mode"></td>
+          </tr>
+          <tr>
+            <td  align="center"><input name="submit" type="submit"  id="connection_mode"  style="border-radius:5px;width:120px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;" value="" align="center">            </td>
+          </tr>
+          <tr>
+            <td  align="center" style="margin-top: 0px;"><img src="img/select-up_cover.png" onClick="select_connection_mode()" id="select_up_connection_mode"> </td>
+          </tr>
+        </table>
+		 </div></td>
+    </tr>
+  </table>
+  <div id="light" class="white_content" align="center" width="344" height="282">
+    <table  cellpadding="0" cellspacing="0" width="344" height="236" border="0" background="img/pop-up_box.png"style="background-repeat: no-repeat;background-position:center;">
+      <tr>
+        <td><table  border="0" >
+            <tr align="center" >
+              <p align="center"><font style="color:#FFFFFF" size="3" id="dialog_msg" align="center"></font></p>
+            </tr>
+            <tr>
+			<p align="center"><font style="color:#FFFFFF" size="3" align="center"><span id="tick"></span><span id="time_tick_msg"></span></font></p>
+            </tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td><table  border="0" align="center">
+            <tr>
+              <p align="center">
+              <input type="submit" name="OK2" value="OK" id="OK" style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+                <input type="submit" name="CANCEL2" value="CANCEL" id="CANCEL" style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+                <input type="submit" name="FORGET" value="FORGET" id="FORGET" style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+              </p>
+            </tr>
+            <tr>
+              <p align="center"><font style="color:#FFFFFF" size="3" id="reboot_msg" align="center"></font></p>
+            </tr>
+        </table></td>
+      </tr>
+    </table>
+     <input name="current_res_value" type="hidden" id="current_res_value" >
+    <input name="res_value" type="hidden" id="res_value" >
+    <input name="Default_mode_value" type="hidden" id="Default_mode_value" value="1">
+    <input name="lan_index" type="hidden" id="lan_index">
+    <input name="cgi_sun_path" type="hidden" id="cgi_sun_path">
+    <input name="connection_mode_value" type="hidden" id="connection_mode_value">
+  </div>
+  <div id="upgrade_light" class="white_content" align="center">
+<table  cellpadding="0" cellspacing="2" width="344" height="236" border="0"  background="img/pop-up_box.png" style="background-repeat: no-repeat;background-position:center;">
+<tr>
+	<td align="center"><table width="100%" border="0" cellspacing="0" bordercolor="#F0F0F0">
+	<tr>
+	<td height="15">
+	</td>
+	</tr>
+      <tr>
+        <td align="center" valign="top"><span><font style="color:#FFFFFF" size="3" id="upgrade_dialog_msg"></font></span></td>
+      </tr>
+    </table>
+	
+	  <table width="90%" border="0" bordercolor="#F0F0F0">
+        <tr>
+          <td><p align="center"><font style="color:#FFFFFF" size="3" id="server_text" align="center"></font></p></td>
+          <td><p align="center"><input type="text"  id="local_version"  value="" align="center" style="width:110px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;"></p></td>
+        </tr>
+        <tr>
+          <td><p align="center"><font style="color:#FFFFFF" size="3" id="local_text" align="center"></font></p></td>
+          <td><p align="center"><input type="text"  id="server_version"  value="" align="center" style="width:110px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;"></p></td>
+        </tr>
+      </table>
+	  
+	  <table width="100%" border="0" bordercolor="#F0F0F0">
+        <tr>
+          <td align="center"><font style="color:#FFFFFF" size="3" align="center"><span id="upgrade_tick"></span><span id="upgrade_time_tick_msg"></span></font></td>
+        </tr>
+      </table></td>
+</tr>
+<tr>
+	<td align="center">
+	<div id="alert_ok" style="display:none;" onClick="hide_alert_wait()">
+	  <input type="button" name="OK3" value="OK"  style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+	</div>
+		<table  border="0" align="center" valign="top">
+          <tr>
+            <td align="center"><input type="button" name="OK" value="OK" id="upgrade_OK" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+                <input type="button" name="CANCEL" value="CANCEL" id="upgrade_CANCEL" style="margin-left:5px; color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+            </td>
+          </tr>
+        </table>
+		<table width="89%" border="0" bordercolor="#F0F0F0">
+          <tr>
+            <td align="center"><div align="center" style="color:#FFFFFF" size="3" id="upgrade_warn"></div></td>
+          </tr>
+        </table></td>
+</tr>
+</table>
+</div> 
+ <div id="psw_change" class="white_content" align="center" width="344" height="282">
+    <table  cellpadding="0" cellspacing="0" width="344" height="236" border="0" background="img/pop-up_box.png"style="background-repeat: no-repeat;background-position:center;">
+      <tr>
+        <td align="center"><div align="center" style="color:#FFFFFF; width:89%;" size="3" id="change_psw_warn"></div></td>
+      </tr>
+      <tr>
+        <td height="90" align="center">
+	<div id="paw_warn_ok" style="display:none;" onClick="change_psw(0)">
+	  <input type="button" name="OK4" value="OK"  style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+	</div>
+		<input type="button" name="OK3" value="OK" id="OK3" onClick="change_psw(1)" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+	     <input type="button" name="CANCEL3" value="CANCEL" id="CANCEL2" onClick="change_psw(0)" style="margin-left:5px; color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+        </td>
+      </tr>
+    </table>
+  </div> 
+   <div id="devicename_change" class="white_content" align="center" width="350" height="282">
+    <table  cellpadding="0" cellspacing="0" width="350" height="236" border="0" background="img/pop-up_box.png"style="background-repeat: no-repeat;background-position:center;">
+        <tr>
+        <td align="center"><div align="center" style="color:#FFFFFF; width:89%;" size="3" id="devicename_warn_ok"></div></td>
+      </tr>
+      <tr>
+        <td height="90" align="center">
+	    <input type="button" name="SAVE_RE" value="Save & Reboot" id="OK6" onClick="change_devicename(2)" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom.png');width:105px; height:50px;">
+	     <input type="button" name="SAVE" value="Save Only" id="OK5" onClick="change_devicename(1)" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom.png');width:105px; height:50px;">
+	     <input type="button" name="CANCEL4" value="Cancel" id="CANCEL4" onClick="change_devicename(0)" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom.png');width:105px; height:50px;">
+
+        </td>
+      </tr>
+    </table>
+  </div>
+<div id="fade" class="black_overlay">
+</div> 
+</form>
+</div>
+
+<script type="text/javascript">
+var text_indeed;
+var start;
+var stop;
+var text_string;
+var text_string_global="";
+var text_string_length;
+var resolution_current_value;
+var resolution_current_value_num;
+var language_index=-1;
+var resolution_index=-1;
+var defaultmode_index=-1;
+var connection_mode_index=-1;
+var current_connection_mode_index=-1;
+var save_defaultmode_index;
+var show_waiting_tick_id=-1;
+var show_waiting_tick=12;
+var appskValue;
+var appskValue_save;
+var device_name;
+var device_name_save;
+var device_name_warn;
+var default_mode_str;
+var defaultmode_global_text;
+var function_index;
+var show_warn_dialog_tick=10;
+var show_warn_dialog_id=-1;
+var current_language_index;
+var waiting_set_language_id=-1;
+var Set_internet_icon_txt_tick_id=-1;
+var waiting_set_language_tick=1;
+var internet_icon_txt_tick=10;
+var check_OTA_first_flag=-1;
+var Upgrade_listener_flag=-1;
+var client_connect_show_flag=-1;
+var connected_ssid_flag=0;
+var show_connections_num_id=-1;
+var get_connected_ssid_id=-1;
+var screen_width,screen_height;
+var upgrade_connect_fail_OK_CANCEL_flag=-1;
+var current_resolution_index=-1;
+var auto_language_flag=-1;
+var Check_new_version_boot_id=-1;
+var get_current_language_id=-1;
+var get_ota_check_status_tick=0;
+var get_new_version_timer_id=-1;
+var delay_get_data_id=-1;
+var get_ota_status_id=-1;
+var get_multilanguage_id=-1;
+var upgrade_dialog_msg_string;
+var upgrade_warn_string;
+var PSW_LEN_string;
+var PSW_ALLOW_string;
+var LIST_WARN2_string;
+var waiting_string;
+var Language_text_string;
+var router_string;
+var direct_string;
+var router_warn_string;
+var direct_warn_string;
+var wifi_mode_status;
+var multiLanguage_array=new Array(29);
+var resolution_array=["1280x720_60P","1920x1080_24P","1920x1080_30P"];
+var defaultmode_array=["EZCast","EZMirror+Timer","EZMirror+AP"];
+var ezcastprobox=-1;
+function Get_height_width_of_screen()
+{
+	
+	if(!!(window.attachEvent && !window.opera))
+	{
+		screen_height = document.documentElement.clientHeight;
+		screen_width = document.documentElement.clientWidth;
+	}
+	else
+	{
+		screen_height =window.innerHeight;
+		screen_width = window.innerWidth;
+	}
+	//document.getElementById('msg').value  ='width:' + screen_width + '; height:'+screen_height;
+}
+function clear_timer_id(timer_id)
+{
+	if(timer_id>0)			
+	{
+		clearInterval(timer_id);
+		timer_id=-1;
+	}		
+}	
+function show_setting_dialog()
+{	
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;			
+	document.getElementById("light").style.display="block";
+	document.getElementById("light").style.position="fixed";
+	document.getElementById("light").style.left=(screen_width-344)/2+"px";
+	document.getElementById("light").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	//document.getElementById("fade").style.height=sHeight+"px";
+	
+}
+function hide_setting_dialog()
+{
+	document.getElementById("light").style.display="none";
+	document.getElementById("fade").style.display="none";
+}
+function hide_upgrade_dialog() 
+{
+	document.getElementById("upgrade_light").style.display="none";
+	document.getElementById("upgrade_light").style.height="100%";
+	document.getElementById("fade").style.display="none";
+	$('#server_text').hide();
+	$('#local_version').hide();	
+	$('#local_text').hide();
+	$('#server_version').hide();
+	$('#upgrade_OK').hide();	
+	$('#upgrade_CANCEL').hide();	
+	$('#upgrade_tick').hide();	
+	$('#upgrade_time_tick_msg').hide();	
+} 
+function show_upgrade_waiting_dialog() 
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;			
+	document.getElementById("upgrade_light").style.display="block";
+	document.getElementById("upgrade_light").style.position="fixed";
+	document.getElementById("upgrade_light").style.left=(screen_width-344)/2+"px";
+	document.getElementById("upgrade_light").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	//document.getElementById("fade").style.height=sHeight+"px";
+	$('#server_text').hide();
+	$('#local_version').hide();	
+	$('#local_text').hide();
+	$('#server_version').hide();
+	$('#upgrade_OK').hide();	
+	$('#upgrade_CANCEL').hide();	
+	$('#upgrade_tick').hide();	
+	$('#upgrade_time_tick_msg').hide();
+	$('#upgrade_warn').hide();
+	$('#upgrade_dialog_msg').text(waiting_string);
+} 
+function hide_upgrade_waiting_dialog() 
+{
+	document.getElementById("upgrade_light").style.display="none";
+	document.getElementById("fade").style.display="none";
+	$('#server_text').show();
+	$('#local_version').show();	
+	$('#local_text').show();
+	$('#server_version').show();
+	$('#upgrade_OK').show();	
+	$('#upgrade_CANCEL').show();	
+} 
+function show_upgrade_dialog() 
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;			
+	document.getElementById("upgrade_light").style.display="block";
+	document.getElementById("upgrade_light").style.position="fixed";
+	document.getElementById("upgrade_light").style.left=(screen_width-344)/2+"px";
+	document.getElementById("upgrade_light").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	//document.getElementById("fade").style.height=sHeight+"px";
+	$('#server_text').show();
+	$('#local_version').show();	
+	$('#local_text').show();
+	$('#server_version').show();
+	$('#upgrade_OK').show();	
+	$('#upgrade_CANCEL').show();
+	$('#upgrade_dialog_msg').show();
+	$('#upgrade_warn').show();	
+} 
+function hide_OTA_warn_dialog() 
+{
+	document.getElementById("upgrade_light").style.display="none";
+	document.getElementById("fade").style.display="none";
+	$('#upgrade_warn').hide();	
+
+}
+function Get_current_language()
+{
+	if(get_current_language_id>0)			
+	{
+		clearInterval(get_current_language_id);
+		get_current_language_id=-1;
+	}
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_lan_index'}, function(get_lan_index)
+	{			
+		var ret=get_lan_index.indexOf("auto");
+		if(ret>=0)
+		{
+			$('#language').val(""+multiLanguage_array[multiLanguage_array.length-1]);
+			var lan_index=get_lan_index.substring(0,get_lan_index.length-4);
+			current_language_index=multiLanguage_array.length-1;
+			auto_language_flag=1;
+		}
+		else
+		{	
+			$('#language').val(""+multiLanguage_array[get_lan_index]);
+			current_language_index=Number(get_lan_index);	
+			auto_language_flag=0;
+		}
+		language_index=current_language_index;
+	}, "text");		
+
+}
+function Get_multilanguage()
+{
+	if(get_multilanguage_id>0)			
+	{
+		clearInterval(get_multilanguage_id);
+		get_multilanguage_id=-1;
+	}
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_multilanguage'}, function(language)
+	{		
+		if(language.length>0)
+		{
+			start=0;
+			text_string_length=0;
+			text_string=language;
+			text_string_length=language.length;
+			for(var i=0;i<multiLanguage_array.length;i++)
+			{			
+				multiLanguage_array[i]=Get_text_from_textstring(text_string);		
+				text_string=text_string_global;	
+			}
+			if(get_current_language_id>0)			
+			{
+				clearInterval(get_current_language_id);
+				get_current_language_id=-1;
+			}
+			get_current_language_id=self.setInterval(Get_current_language,200);
+			//Get_current_language();
+		}			
+	}, "text");	
+}
+function Get_multilanguage_timer()
+{
+	if(get_multilanguage_id>0)			
+	{
+		clearInterval(get_multilanguage_id);
+		get_multilanguage_id=-1;
+	}
+	get_multilanguage_id=self.setInterval(Get_multilanguage,700);
+}
+
+function select_language_down()
+{
+	if(language_index<=0)
+		language_index=multiLanguage_array.length;
+	language_index=(language_index-1)%multiLanguage_array.length;
+	$('#lan_index').val(""+language_index);
+	$('#language').val(""+multiLanguage_array[language_index]);	
+	document.getElementById("resolution").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_res").src="img/select-Down_cover.png";
+	document.getElementById("select_up_res").src="img/select-up_cover.png";
+
+	document.getElementById("language").style.backgroundImage='url(img/bar.png)';
+	document.getElementById("select_down_language").src="img/select-Down.png";
+	document.getElementById("select_up_language").src="img/select-up.png";
+
+	document.getElementById("connection_mode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_connection_mode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_connection_mode").src="img/select-up_cover.png";	
+
+	document.getElementById("defaultmode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_defaultmode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_defaultmode").src="img/select-up_cover.png";	
+}
+function select_language_up()
+{
+	language_index=language_index+1;
+	if(language_index>multiLanguage_array.length-1)
+		language_index=0;
+	$('#lan_index').val(""+language_index);
+	$('#language').val(""+multiLanguage_array[language_index]);	
+	document.getElementById("resolution").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_res").src="img/select-Down_cover.png";
+	document.getElementById("select_up_res").src="img/select-up_cover.png";
+
+	document.getElementById("language").style.backgroundImage='url(img/bar.png)';
+	document.getElementById("select_down_language").src="img/select-Down.png";
+	document.getElementById("select_up_language").src="img/select-up.png";
+
+	document.getElementById("connection_mode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_connection_mode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_connection_mode").src="img/select-up_cover.png";	
+
+	document.getElementById("defaultmode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_defaultmode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_defaultmode").src="img/select-up_cover.png";
+}
+function select_resolution_up()
+{
+	resolution_index=resolution_index+1;
+	if(resolution_index>resolution_array.length-1)
+		resolution_index=0;
+	if (ezcastprobox==1){
+		switch(resolution_index)
+		{
+			case 0:
+				$('#res_value').val("2");//HDMI_1920x1080_30P
+				break;
+			case 1:
+				$('#res_value').val("4");//HDMI_1920x1080_24P
+				break;
+			case 2:
+				$('#res_value').val("5");//HDMI_1280x720_60P
+				break;
+			case 3:
+				$('#res_value').val("27");//VGA_1366x768
+				break;	
+			case 4:
+				$('#res_value').val("20");//VGA_1280x1024
+				break;
+			case 5:
+				$('#res_value').val("25");//VGA_1280x800
+				break;
+			case 6:
+				$('#res_value').val("22");//VGA_1024x768
+				break;
+			case 7:
+				$('#res_value').val("30");//CVBS_PAL
+				break;
+			case 8:
+				$('#res_value').val("31");//CVBS_NTSC
+				break;
+		}
+	}
+	else{
+		switch(resolution_index)
+		{
+			case 0:
+				$('#res_value').val("5");//FMT_1650x750_1280x720_60P
+				break;
+			case 1:
+				$('#res_value').val("4");//FMT_2750x1125_1920x1080_24P
+				break;
+			case 2:
+				$('#res_value').val("2");//FMT_2200x1125_1920x1080_30P
+				break;
+			case 3:
+				$('#res_value').val("17");//FMT_1920x1080_60P
+				break;	
+		}
+	}
+	$('#resolution').val(""+resolution_array[resolution_index]);
+	document.getElementById("resolution").style.backgroundImage='url(img/bar.png)';
+	document.getElementById("select_down_res").src="img/select-Down.png";
+	document.getElementById("select_up_res").src="img/select-up.png";
+
+	document.getElementById("language").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_language").src="img/select-Down_cover.png";
+	document.getElementById("select_up_language").src="img/select-up_cover.png";
+
+	document.getElementById("connection_mode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_connection_mode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_connection_mode").src="img/select-up_cover.png";		
+
+	document.getElementById("defaultmode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_defaultmode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_defaultmode").src="img/select-up_cover.png";
+}
+function select_resolution_down()
+{
+	if(resolution_index<=0)
+		resolution_index=resolution_array.length;
+	resolution_index=(resolution_index-1)%resolution_array.length;
+	if (ezcastprobox==1){
+		switch(resolution_index)
+		{
+			case 0:
+				$('#res_value').val("2");//HDMI_1920x1080_30P
+				break;
+			case 1:
+				$('#res_value').val("4");//HDMI_1920x1080_24P
+				break;
+			case 2:
+				$('#res_value').val("5");//HDMI_1280x720_60P
+				break;
+			case 3:
+				$('#res_value').val("27");//VGA_1366x768
+				break;	
+			case 4:
+				$('#res_value').val("20");//VGA_1280x1024
+				break;
+			case 5:
+				$('#res_value').val("25");//VGA_1280x800
+				break;
+			case 6:
+				$('#res_value').val("22");//VGA_1024x768
+				break;
+			case 7:
+				$('#res_value').val("30");//CVBS_PAL
+				break;
+			case 8:
+				$('#res_value').val("31");//CVBS_NTSC
+				break;
+		}
+	}
+	else{
+		switch(resolution_index)
+		{
+			case 0:
+				$('#res_value').val("5");//FMT_1650x750_1280x720_60P
+				break;
+			case 1:
+				$('#res_value').val("4");//FMT_2750x1125_1920x1080_24P
+				break;
+			case 2:
+				$('#res_value').val("2");//FMT_2200x1125_1920x1080_30P
+				break;
+			case 3:
+				$('#res_value').val("17");//FMT_1920x1080_60P
+				break;	
+		}
+	}
+	$('#resolution').val(""+resolution_array[resolution_index]);
+	document.getElementById("resolution").style.backgroundImage='url(img/bar.png)';
+	document.getElementById("select_down_res").src="img/select-Down.png";
+	document.getElementById("select_up_res").src="img/select-up.png";
+
+	document.getElementById("language").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_language").src="img/select-Down_cover.png";
+	document.getElementById("select_up_language").src="img/select-up_cover.png";
+	
+	document.getElementById("connection_mode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_connection_mode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_connection_mode").src="img/select-up_cover.png";	
+	
+	document.getElementById("defaultmode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_defaultmode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_defaultmode").src="img/select-up_cover.png";
+}
+function select_defaultmode()
+{
+	defaultmode_index=(defaultmode_index+1)%3;
+	switch(defaultmode_index)
+	{
+		case 0:
+			$('#Default_mode_value').val("1");
+			break;
+		case 1:
+			$('#Default_mode_value').val("2");
+			break;
+	    case 2:
+	      $('#Default_mode_value').val("3");
+	      break;
+	    default:
+	      $('#Default_mode_value').val("1");
+      	break;    
+	}
+	$('#defaultmode').val(""+defaultmode_array[defaultmode_index]);
+	document.getElementById("resolution").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_res").src="img/select-Down_cover.png";
+	document.getElementById("select_up_res").src="img/select-up_cover.png";
+
+	document.getElementById("language").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_language").src="img/select-Down_cover.png";
+	document.getElementById("select_up_language").src="img/select-up_cover.png";
+
+	document.getElementById("connection_mode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_connection_mode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_connection_mode").src="img/select-up_cover.png";	
+	
+	document.getElementById("defaultmode").style.backgroundImage='url(img/bar.png)';
+	document.getElementById("select_down_defaultmode").src="img/select-Down.png";
+	document.getElementById("select_up_defaultmode").src="img/select-up.png";
+}
+function select_connection_mode()
+{
+	connection_mode_index=(connection_mode_index+1)%2;
+	switch(connection_mode_index)
+	{
+		case 0:
+			$('#connection_mode_value').val("1");
+			$('#connection_mode').val(router_string);
+			document.getElementById("connection_mode_icon").src="img/connection_mode_router.png";
+			break;
+		case 1:
+			$('#connection_mode_value').val("0");
+			$('#connection_mode').val(direct_string);
+			document.getElementById("connection_mode_icon").src="img/connection_mode_direct.png";
+			break;
+	}
+	
+	document.getElementById("resolution").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_res").src="img/select-Down_cover.png";
+	document.getElementById("select_up_res").src="img/select-up_cover.png";
+
+	document.getElementById("language").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_language").src="img/select-Down_cover.png";
+	document.getElementById("select_up_language").src="img/select-up_cover.png";
+
+	document.getElementById("defaultmode").style.backgroundImage='url(img/bar_cover.png)';
+	document.getElementById("select_down_defaultmode").src="img/select-Down_cover.png";
+	document.getElementById("select_up_defaultmode").src="img/select-up_cover.png";	
+
+	document.getElementById("connection_mode").style.backgroundImage='url(img/bar.png)';
+	document.getElementById("select_down_connection_mode").src="img/select-Down.png";
+	document.getElementById("select_up_connection_mode").src="img/select-up.png";	
+}
+function delete_Connection_module() 
+{
+    document.getElementById('customers').deleteRow(4);
+}
+function Get_last_UI()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_last_ui'}, function(last_ui_index)
+	{			
+
+		if(last_ui_index.indexOf("1")>=0)
+		{
+			$('#defaultmode').val("EZCast");
+			defaultmode_index=0;
+			save_defaultmode_index=defaultmode_index;
+		}
+		else if(last_ui_index.indexOf("2")>=0)
+		{		
+			delete_Connection_module();	
+			$('#defaultmode').val("EZMirror+AP");
+			defaultmode_index=1;
+			save_defaultmode_index=defaultmode_index;			
+		}else if(last_ui_index.indexOf("3")>=0)
+    	{
+	      $('#defaultmode').val("EZMirror+Timer");
+	      save_defaultmode_index=defaultmode_index=2;
+    	}
+
+	}, "text");			
+}
+function Get_password()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_softap_psk'}, function(appsk) {
+	  $('#appsk').val(appsk);
+	  $('#ap_psk').text(appsk);
+	  appskValue_save = $('#appsk').val();
+	  document.getElementById("appsk").style.align="center";
+	}, "text");
+}
+function Get_text_from_textstring(text_string)
+{
+	var text_string_tmp=text_string.substring(start,text_string_length);	
+	stop=text_string_tmp.indexOf("\n");
+	start=0;
+	text_indeed=text_string_tmp.substring(start,stop);
+	start=stop+1;
+	text_string_global=text_string_tmp;
+	return text_indeed;
+}
+function Get_index_language()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_index_text'}, function(index_text_string)
+	{			
+		if(index_text_string.length)
+		{
+			start=0;
+			text_string_length=0;
+			text_string=index_text_string;
+			text_string_length=index_text_string.length;
+			$('#resolution_txt').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#password_txt').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#internet_txt').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#language_txt').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#defaultmode_txt').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#upgrade_txt').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			var temp=Get_text_from_textstring(text_string);
+			temp=temp+" :";
+			//$('#ap_ssid_txt').text(""+temp);
+			text_string=text_string_global;	
+			var temp=Get_text_from_textstring(text_string);
+			temp=temp+" :";
+			//$('#ap_psk_txt').text(""+temp);
+			text_string=text_string_global;	
+			$('#upgrade_OK').val(Get_text_from_textstring(text_string));
+			$('#OK').val($('#upgrade_OK').val());
+			text_string=text_string_global;	
+			$('#upgrade_CANCEL').val(Get_text_from_textstring(text_string));
+			$('#CANCEL').val($('#upgrade_CANCEL').val());
+			text_string=text_string_global;	
+			$('#connection_mode_txt').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			router_string=Get_text_from_textstring(text_string);
+			text_string=text_string_global;	
+			direct_string=Get_text_from_textstring(text_string);
+			text_string=text_string_global;	
+			direct_warn_string=Get_text_from_textstring(text_string);
+			text_string=text_string_global;	
+			router_warn_string=Get_text_from_textstring(text_string);
+		}
+		else
+		{
+			$('#resolution_txt').text("Resolution");
+			$('#password_txt').text("Password");
+			$('#internet_txt').text("Internet");
+			$('#language_txt').text("Language");
+			$('#defaultmode_txt').text("Default Mode");
+			$('#upgrade_txt').text("Upgrade");
+			$('#ap_ssid_txt').text("SSID : ");
+			$('#ap_psk_txt').text("Password : ");
+			$('#upgrade_OK').val("OK");
+			$('#upgrade_CANCEL').val("CANCEL");
+			$('#OK').val("OK");
+			$('#CANCEL').val("CANCEL");
+			$('#connection_mode_txt').text("Connection");
+			router_string="Via Router Allowed";
+			direct_string="Direct Link Only";
+			router_warn_string="        Due to the streaming is from your phone through router to TV, throughput is relatively small and playback may be choppy.\n Do you want to allow the connection to \"Through Router\" mode? ";
+			direct_warn_string="    Direct Link provides better local multimedia streaming throughput!";
+		}
+	}, "text");		
+}
+function Get_resolution()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_resolution'}, function(resolution)
+	{	
+
+		var res=Number(resolution);
+		if (ezcastprobox==1){
+		switch(res)
+		{
+			case 2:
+				resolution_index=0;
+				$('#res_value').val("2");//HDMI_1920x1080_30P
+				$('#resolution').val("HDMI_1920x1080_30P");
+				break;
+			case 4:
+				resolution_index=1;
+				$('#resolution').val("HDMI_1920x1080_24P");
+				$('#res_value').val("4");//HDMI_1920x1080_24P
+				break;
+			case 5:
+				resolution_index=2;
+				$('#resolution').val("HDMI_1280x720_60P");
+				$('#res_value').val("5");//HDMI_1280x720_60P
+				break;
+			case 27:
+				resolution_index=3;
+				$('#resolution').val("VGA_1366x768");
+				$('#res_value').val("27");//VGA_1366x768
+				break;	
+			case 20:
+				resolution_index=4;
+				$('#resolution').val("VGA_1280x1024");
+				$('#res_value').val("20");//VGA_1280x1024
+				break;
+			case 25:
+				resolution_index=5;
+				$('#resolution').val("VGA_1280x800");
+				$('#res_value').val("25");//VGA_1280x800
+				break;
+			case 22:
+				resolution_index=6;
+				$('#resolution').val("VGA_1024x768");
+				$('#res_value').val("22");//VGA_1024x768
+				//break;
+			case 30:
+				resolution_index=7;
+				$('#resolution').val("CVBS_PAL");
+				$('#res_value').val("30");//CVBS_PAL
+				break;
+			case 31:
+				resolution_index=8;
+				$('#resolution').val("CVBS_NTSC");
+				$('#res_value').val("31");//CVBS_NTSC
+				//break;
+			default:
+				resolution_index=0;
+				$('#resolution').val("HDMI_1920x1080_30P");
+				$('#res_value').val("2");//CVBS_NTSC
+			
+		}
+	}
+	else{
+		switch(res)
+		{
+			case 5:
+				resolution_index=0;
+				$('#resolution').val("1280x720_60P");
+				$('#res_value').val("5");//FMT_1650x750_1280x720_60P
+				break;
+			case 4:
+				resolution_index=1;
+				$('#resolution').val("1920x1080_24P");
+				$('#res_value').val("4");//FMT_2750x1125_1920x1080_24P
+				break;
+			case 2:
+				resolution_index=2;
+				$('#resolution').val("1920x1080_30P");
+				$('#res_value').val("2");//FMT_2200x1125_1920x1080_30P
+				break;
+			case 17:
+				resolution_index=3;
+				$('#resolution').val("1920x1080_60P");
+				$('#res_value').val("17");//FMT_1920x1080_60P
+				break;
+			default:
+				resolution_index=0;
+				$('#resolution').val("1280x720_60P");
+				$('#res_value').val("5");//CVBS_NTSC
+		}
+	}
+		current_resolution_index=resolution_index;
+		resolution_current_value_num=$('#res_value').val();
+		resolution_current_value=$('#resolution').val();
+	}, "text");	
+}
+function Get_set_password_text()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_password_text'}, function(OTA_string)
+	{			
+		if(OTA_string.length)
+		{
+			start=0;
+			text_string_length=0;
+			text_string=OTA_string;
+			text_string_length=OTA_string.length;
+			PSW_LEN_string=Get_text_from_textstring(text_string);
+			text_string=text_string_global;	
+			PSW_ALLOW_string=Get_text_from_textstring(text_string);
+			text_string=text_string_global;	
+			LIST_WARN2_string=Get_text_from_textstring(text_string);			
+		}
+		else
+		{
+			PSW_LEN_string="Password must be between 8 and 64 characters long.";	
+			PSW_ALLOW_string="Only the letters and numbers are allowed!";	
+			LIST_WARN2_string="Access Point will be disconnected if you press OK.";
+		}
+	}, "text");			
+}
+function appsk_apply_listener()
+{
+	$('#set_appsk_apply').click(function(e) 
+	{
+		//---------------------------------
+		var regx = /^[A-Za-z0-9]+$/; 
+ 
+		e.preventDefault();
+		appskValue = $('#appsk').val();
+		if(appskValue!=appskValue_save)
+		{
+			$('#change_psw_warn').text(LIST_WARN2_string);
+			document.getElementById("resolution").style.backgroundImage='url(img/bar_cover.png)';
+			document.getElementById("select_down_res").src="img/select-Down_cover.png";
+			document.getElementById("select_up_res").src="img/select-up_cover.png";	
+	
+			if(!regx.test(appskValue))
+			{
+				//alert("Format error! Don't type in Chinese");
+				$('#change_psw_warn').text(PSW_ALLOW_string);
+				show_psw_change_warn();
+				errorFlag = 1;	
+			}
+		else{
+		//	if(appskValue.length < 8 ||appskValue.length >64)//||(appskValue.length >12))
+		if(appskValue.length < 8 ||appskValue.length >64)
+			{
+					//alert("key must between 8 to 64 characters.");
+					$('#change_psw_warn').text(PSW_LEN_string);
+					show_psw_change_warn();
+					$('#appsk').val(""+appskValue_save);
+					document.getElementById("appsk").style.align="center";
+					errorFlag = 1;			
+			}
+			else 
+			{
+				errorFlag = 0;
+			}
+		}			
+		if( !errorFlag ) 
+		{
+		//	$.post('cgi-bin/password_POST.cgi', $('#config-form').serialize());
+			//alert("Please do re-connect if you changed password");
+			//alert("Access Point will be disconnected if you tap ok button.");
+			show_psw_change();
+
+		}			
+		}
+	});	
+}
+function Get_devicename()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_device_name'}, function(devicename) {
+	  $('#devicename').val(devicename);
+	   device_name_save = $('#devicename').val();
+	  document.getElementById("devicename").style.align="center";
+	}, "text");
+}
+
+function change_devicename(val)
+{
+	document.getElementById("devicename_change").style.display="none";
+	document.getElementById("fade").style.display="none";
+	$("#OK6").show();
+	$("#OK5").show();
+	$("#CANCEL4").show();
+
+  if(val){
+  	switch(val)
+	{
+		case 1:
+		   	document.getElementById("devicename_active").style.backgroundImage='url(img/devicename_noactive.png)';
+			$.post('cgi-bin/set_devicename.cgi', $('#config-form').serialize());
+			break;
+		case 2:
+		    document.getElementById("devicename_active").style.backgroundImage='url(img/devicename_active.png)';
+			$.post('cgi-bin/set_devicename_reboot.cgi', $('#config-form').serialize());
+			break;
+	}
+	
+	
+  }
+  else
+	{
+	$('#device_name').val(device_name_save ) ;
+    }
+
+  	//location.href="websetting_Vertical.html";
+  	
+}
+function  show_devcicename_change_warn()
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;			
+	document.getElementById("devicename_change").style.display="block";
+	document.getElementById("devicename_change").style.position="fixed";
+	document.getElementById("devicename_change").style.left=(screen_width-344)/2+"px";
+	document.getElementById("devicename_change").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	$('#OK6').show();
+	$('#OK5').show();
+	$('#CANCLE4').show();
+	$("#devicename_warn_ok").show();
+	
+}
+
+function devicename_apply_listener()
+{
+	$('#set_devicename_apply').click(function(e) 
+	{
+		//---------------------------------
+		var regx = /^[A-Za-z0-9]+$/; 
+ 
+		e.preventDefault();
+		device_name= $('#devicename').val();
+		if(device_name!=device_name_save)
+		{
+                     $('#devicename_warn_ok').text(device_name_warn);
+			if(device_name.length>18)
+				 device_name=device_name.substr(0, 18);
+			  $('#devicename').val(device_name);
+			show_devcicename_change_warn();	
+		}
+		
+		show_devcicename_change_warn();	
+		//show_psw_change_warn();
+	});	
+}
+function Set_hdmimode()
+{
+	$.post('cgi-bin/set_resolution_POST.cgi', $('#config-form').serialize());
+}
+function resolution_timetick_function()
+{
+	$('#tick').html(show_waiting_tick);	
+	if(show_waiting_tick==0)
+	{
+		if(show_waiting_tick_id>0)			
+		{
+			clearInterval(show_waiting_tick_id);
+			show_waiting_tick_id=-1;	
+			hide_setting_dialog();
+			show_waiting_tick=14;
+			//$('#tick').html("");	
+		}	
+	//倒计时结束后，自动退回原分辨�
+	$('#res_value').val(""+resolution_current_value_num);
+	$('#current_res_value').val(""+0);
+	$('#resolution').val(""+resolution_current_value);			
+	resolution_index=current_resolution_index;
+	Set_hdmimode();
+	hide_setting_dialog();	
+	}
+	else
+		show_waiting_tick=show_waiting_tick-1;	
+}
+function set_resolution_timetick()
+{
+	if(show_waiting_tick_id>0)			
+	{
+		clearInterval(show_waiting_tick_id);
+		show_waiting_tick_id=-1;
+		//$('#tick').html("");
+	}
+	show_waiting_tick=14;
+	show_waiting_tick_id=self.setInterval(resolution_timetick_function,1000);	
+}
+function Get_defaultmode_language()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_defaultmodetext'}, function(Default_modetext)
+	{			
+		if(Default_modetext.length)
+		{
+			defaultmode_global_text=""+Default_modetext;
+		}
+		else
+		{
+			defaultmode_global_text="Set boot default to";
+		}
+	}, "text");	
+}
+function Get_resolution_text()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_res_text'}, function(restext)
+	{			
+		if(restext.length)
+		{
+			start=0;
+			text_string_length=0;
+			text_string=restext;
+			text_string_length=restext.length;
+			$('#dialog_msg').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#time_tick_msg').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#reboot_msg').text(Get_text_from_textstring(text_string));
+			document.getElementById("reboot_msg").style.color="red";
+		}
+		else
+		{
+			$('#dialog_msg').text("Use the new Resolution ?");
+			$('#time_tick_msg').text("sec left to return your setting last time.");
+			$('#reboot_msg').text("System will reboot if you choose OK!");
+			document.getElementById("reboot_msg").style.color="red";
+		}
+	}, "text");		
+}
+function resolution_listener()
+{
+	$('#resolution').click(function(e) 
+	{
+		e.preventDefault();
+		if(resolution_index!=current_resolution_index)
+		{
+			$('#tick').html("15");
+			$('#current_res_value').val(""+resolution_current_value_num);
+			Set_hdmimode();
+			Get_resolution_text();
+			$('#FORGET').hide();	
+			$('#tick').show();
+			$('#time_tick_msg').show();
+			if(((1==current_resolution_index)&&(2==resolution_index))||((2==current_resolution_index)&&(1==resolution_index)))
+				$('#reboot_msg').hide();
+			else
+				$('#reboot_msg').show();
+			show_setting_dialog();
+			set_resolution_timetick();
+			function_index=1;			
+		}		
+	});
+}
+function default_mode_listener()
+{
+	$('#defaultmode').click(function(e) 
+	{
+		e.preventDefault();		
+		if(save_defaultmode_index!=defaultmode_index)
+		{
+			$('#FORGET').hide();
+			$('#tick').hide();
+			$('#time_tick_msg').hide();
+			$('#reboot_msg').hide();
+			show_setting_dialog();
+			var temp=$('#Default_mode_value').val();
+			 
+			if(temp.indexOf("1")>=0)
+			{
+				default_mode_str=defaultmode_global_text;
+				default_mode_str=default_mode_str+"  EZCast";
+				$('#dialog_msg').text(""+default_mode_str);			
+			}
+			else if(temp.indexOf("2")>=0)
+			{
+				default_mode_str=defaultmode_global_text;
+				default_mode_str=default_mode_str+"  EZMirror+Timer";
+				$('#dialog_msg').text(""+default_mode_str);	
+			}else if(temp.indexOf("3")>=0)
+	      	{
+	        	default_mode_str=defaultmode_global_text;
+	        	default_mode_str=default_mode_str+"  EZMirror+AP";
+				$('#dialog_msg').text(""+default_mode_str); 
+	      	}
+			function_index=2;			
+		}
+	});	
+}
+function Get_language_txt()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_lan_text'}, function(lan_text)
+	{			
+		if(lan_text.length)
+		{
+		//	$('#dialog_msg').text(lan_text);	
+			start=0;
+			text_string_length=0;
+			text_string=lan_text;
+			text_string_length=lan_text.length;
+			//$('#dialog_msg').text(Get_text_from_textstring(text_string));
+			Language_text_string=Get_text_from_textstring(text_string);
+			text_string=text_string_global;	
+			waiting_string=Get_text_from_textstring(text_string);
+			text_string=text_string_global;	;
+			$('#OK6').val(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#OK5').val(Get_text_from_textstring(text_string));
+			text_string=text_string_global;
+			$('#CANCEL4').val(Get_text_from_textstring(text_string));	
+			text_string=text_string_global;
+			$('#devicename_txt').val(Get_text_from_textstring(text_string));	
+			text_string=text_string_global;
+			device_name_warn=Get_text_from_textstring(text_string);
+	
+		}
+		else
+		{
+			//$('#dialog_msg').text("Use the new Language ?");
+			Language_text_string="Use the new Language ?";		
+			waiting_string="Please wait";	
+			$('#OK6').val("Save & Reboot");	
+			$('#OK5').val("Save Only");
+			$('#CANCEL4').val("Cancel");
+			$('#devicename_txt').val("Device Name");
+			text_string=text_string_global;
+			device_name_warn="New device name will be Changed after reboot!";
+		}
+	}, "text");	
+}
+function Language_listener()
+{
+	$('#language').click(function(e) 
+	{
+		e.preventDefault();
+		if(current_language_index!=language_index)
+		{
+			$('#FORGET').hide();
+			$('#tick').hide();
+			$('#time_tick_msg').hide();
+			$('#reboot_msg').hide();
+			$('#dialog_msg').text(Language_text_string);
+			//Get_language_txt();
+			show_setting_dialog();	
+			function_index=3;			
+		}
+	});	
+}
+function waiting_set_language_tick_function()
+{
+	if(waiting_set_language_tick==0)
+	{
+		if(waiting_set_language_id>0)			
+		{
+			clearInterval(waiting_set_language_id);
+			waiting_set_language_id=-1;	
+			$('#OK').show();
+			$('#CANCEL').show();		
+			waiting_set_language_tick=1;
+		}
+		hide_setting_dialog();	
+		location.href="websetting_Horizontal.html";
+	}
+	else 
+		waiting_set_language_tick=waiting_set_language_tick-1;
+}
+function waiting_set_language() 
+{
+	if(waiting_set_language_id>0)			
+	{
+		clearInterval(waiting_set_language_id);
+		waiting_set_language_id=-1;
+	}
+	waiting_set_language_id=self.setInterval(waiting_set_language_tick_function,1000);
+	$('#OK').hide();
+	$('#CANCEL').hide();
+	$('#dialog_msg').text(waiting_string);
+} 	
+function Set_internet_icon_txt_tick_function()
+{
+	if(internet_icon_txt_tick==0)
+	{
+		clearInterval(Set_internet_icon_txt_tick_id);
+		Set_internet_icon_txt_tick_id=-1;	
+		internet_icon_txt_tick=10;
+		$('#internet_icon_txt').hide();
+	}
+	internet_icon_txt_tick=internet_icon_txt_tick-1;
+}
+function Set_internet_icon_txt_tick()
+{
+	if(connected_ssid_flag==0)
+	{
+		connected_ssid_flag=1;
+		$('#internet_icon_txt').show();						
+		$('#internet_icon').show();
+		if(Set_internet_icon_txt_tick_id>0)			
+		{
+			clearInterval(Set_internet_icon_txt_tick_id);
+			Set_internet_icon_txt_tick_id=-1;
+		}
+		Set_internet_icon_txt_tick_id=self.setInterval(Set_internet_icon_txt_tick_function,1000);			
+	}
+}
+function Get_upgrade_language()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_text'}, function(OTA_string)
+	{			
+		if(OTA_string.length)
+		{
+			start=0;
+			text_string_length=0;
+			text_string=OTA_string;
+			text_string_length=OTA_string.length;
+			$('#upgrade_dialog_msg').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#server_text').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#local_text').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#upgrade_warn').text(Get_text_from_textstring(text_string));			
+			text_string=text_string_global;	
+			upgrade_dialog_msg_string=Get_text_from_textstring(text_string);		
+			text_string=text_string_global;	
+			upgrade_warn_string=Get_text_from_textstring(text_string);	
+			text_string=text_string_global;	
+			//$('#upgrade_warn').text("Access Point will be disconnected if you press OK.");	//add by cxf	
+		}
+		else
+		{
+			$('#upgrade_dialog_msg').text("Do you want to upgrade?");
+			$('#server_text').text("server version :");
+			$('#local_text').text("local version :");	
+			$('#upgrade_warn').text("Access Point will be disconnected if you press OK.");	//add by cxf	
+			upgrade_dialog_msg_string="Please wait for downloading.";
+			upgrade_warn_string="After download, wifi will be disconnected and please wait for system upgrading and reboot.";
+		}
+	}, "text");				
+}
+function show_warn_dialog_tick_function()
+{
+	if(show_warn_dialog_tick==0)
+	{
+		hide_OTA_warn_dialog();
+		clear_timer_id(show_warn_dialog_id);
+		show_warn_dialog_tick=10;	
+	}
+	show_warn_dialog_tick=show_warn_dialog_tick-1;
+	$('#upgrade_tick').html(""+show_warn_dialog_tick);
+}
+function show_OTA_warn_dialog() 
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;			
+	document.getElementById("upgrade_light").style.display="block";
+	document.getElementById("upgrade_light").style.position="fixed";
+	document.getElementById("upgrade_light").style.left=(screen_width-344)/2+"px";
+	document.getElementById("upgrade_light").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	//document.getElementById("fade").style.height=sHeight+"px";
+	$('#server_text').hide();
+	$('#local_version').hide();	
+	$('#local_text').hide();
+	$('#server_version').hide();
+	$('#upgrade_OK').show();	
+	$('#upgrade_CANCEL').show();	
+	$('#upgrade_tick').show();	
+	$('#upgrade_tick').html("10");
+	$('#upgrade_time_tick_msg').show();
+	$('#upgrade_dialog_msg').show();		
+	clear_timer_id(show_warn_dialog_id);
+	show_warn_dialog_tick=10;
+	show_warn_dialog_id=self.setInterval(show_warn_dialog_tick_function,1000);
+}
+function Get_new_version_text()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_new_ver_text'}, function(new_version_text)
+	{			
+		if(new_version_text.length)
+		{
+			$('#new_version').val(new_version_text);
+		}
+		else
+		{
+			$('#new_version').val("New Version!");	
+		}
+	}, "text");		
+}
+function set_version_string(ota_upgrade_string)
+{
+	if(ota_upgrade_string.length>0)
+	{
+		if((check_OTA_first_flag==1)||(Upgrade_listener_flag==1))
+		{
+			hide_upgrade_waiting_dialog();
+		}		
+		var warn_ret=ota_upgrade_string.indexOf("newest");
+		if(warn_ret<0)
+		{
+			document.getElementById("upgrade_status").src="img/dongle_upgrade.png";
+			if(0==connected_ssid_flag)
+			{
+				var ret=ota_upgrade_string.indexOf("\n");
+				var local_version_string=ota_upgrade_string.substring(0,ret);
+				$('#new_version').val(local_version_string);	
+			}
+			else
+				Get_new_version_text();		
+			if((check_OTA_first_flag==1)||(Upgrade_listener_flag==1))
+			{
+				if(check_OTA_first_flag==1)
+					check_OTA_first_flag=-1;
+				else if(Upgrade_listener_flag==1)
+					Upgrade_listener_flag=-1;
+				Get_upgrade_language();
+				show_upgrade_dialog();
+				var ret=ota_upgrade_string.indexOf("\n");
+				var local_version_string=ota_upgrade_string.substring(0,ret);
+				$('#local_version').val(local_version_string);	
+				var server_version_string=ota_upgrade_string.substring(ret+1,ota_upgrade_string.length);
+				$('#server_version').val(server_version_string);						
+			}
+		}	
+		else//show newest
+		{
+			if(Upgrade_listener_flag==1)
+			{
+				Upgrade_listener_flag=-1;
+				check_OTA_first_flag=-1;
+				get_OTA_warn_language(1);
+				show_OTA_warn_dialog();	
+				upgrade_connect_fail_OK_CANCEL_flag=1;
+			}
+			else
+			{
+				var ret=ota_upgrade_string.indexOf("\n");
+				var local_version_string=ota_upgrade_string.substring(0,ret);
+				$('#new_version').val(local_version_string);
+			}		
+		}
+	}		
+}
+function get_new_version_tick_function()
+{	
+	if(get_new_version_timer_id>0)			
+	{
+		clearInterval(get_new_version_timer_id);
+		get_new_version_timer_id=-1;
+	}	
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_version'}, function(ota_upgrade_string) 
+	{			
+		if(ota_upgrade_string.length)
+			set_version_string(ota_upgrade_string);										
+	}, "text");			
+}
+function get_new_version_function()
+{	
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_version'}, function(ota_upgrade_string) 
+	{			
+		if(ota_upgrade_string.length)
+		{
+			set_version_string(ota_upgrade_string);										
+		}
+	}, "text");				
+}
+function Get_AP_ssid()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_ap_ssid'}, function(ap_ssid)
+	{			
+		if(ap_ssid.length)
+		{
+			$('#ap_ssid').text(ap_ssid);		
+		}
+	}, "text");		
+}
+
+function get_OTA_warn_language(flag)
+{
+	if(flag)
+	{
+		$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_warn1_text'}, function(OTA_string)
+		{			
+			if(OTA_string.length)
+			{
+				start=0;
+				text_string_length=0;
+				text_string=OTA_string;
+				text_string_length=OTA_string.length;
+				$('#upgrade_dialog_msg').text(Get_text_from_textstring(text_string));
+				text_string=text_string_global;	
+				$('#upgrade_time_tick_msg').text(Get_text_from_textstring(text_string));
+			}
+			else
+			{
+				$('#upgrade_dialog_msg').text("Your firmware is the latest version.");		
+				$('#upgrade_time_tick_msg').text("sec left to return your setting last time.");
+			}
+		}, "text");			
+	}
+	else
+	{
+		$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_warn2_text'}, function(OTA_string)
+		{			
+			if(OTA_string.length)
+			{
+				start=0;
+				text_string_length=0;
+				text_string=OTA_string;
+				text_string_length=OTA_string.length;
+				$('#upgrade_dialog_msg').text(Get_text_from_textstring(text_string));
+				text_string=text_string_global;	
+				$('#upgrade_time_tick_msg').text(Get_text_from_textstring(text_string));
+			}
+			else
+			{
+				$('#upgrade_dialog_msg').text("The server version of firmware is unavailable.");	
+				$('#upgrade_time_tick_msg').text("sec left to return your setting last time.");
+			}
+		}, "text");			
+		
+	}	
+}
+function Get_faild_connect_language()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_faild_connect'}, function(OTA_faild_connect)
+	{			
+		if(OTA_faild_connect.length)
+		{
+			start=0;
+			text_string_length=0;
+			text_string=OTA_faild_connect;
+			text_string_length=OTA_faild_connect.length;
+			$('#upgrade_dialog_msg').text(Get_text_from_textstring(text_string));			
+			text_string=text_string_global;	
+			$('#upgrade_time_tick_msg').text(Get_text_from_textstring(text_string));		
+		}
+		else
+		{
+			$('#upgrade_dialog_msg').text("Faild to connect,please try again.");
+			$('#upgrade_time_tick_msg').text("sec left to return your setting last time.");
+		}
+	}, "text");				
+}
+function hide_faild_connect_dialog()
+{
+	document.getElementById("upgrade_light").style.display="none";
+	document.getElementById("fade").style.display="none";	
+	$('#server_text').show();
+	$('#local_version').show();	
+	$('#local_text').show();
+	$('#server_version').show();
+	$('#upgrade_OK').show();	
+	$('#upgrade_CANCEL').show();	
+	
+}
+function show_faild_connect_tick_function()
+{
+	if(show_warn_dialog_tick==0)
+	{
+		hide_faild_connect_dialog();
+		clear_timer_id(show_warn_dialog_id);
+		show_warn_dialog_tick=10;
+	}
+	show_warn_dialog_tick=show_warn_dialog_tick-1;
+	$('#upgrade_tick').html(""+show_warn_dialog_tick);
+}
+function show_faild_connect_dialog() 
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;			
+	document.getElementById("upgrade_light").style.display="block";
+	document.getElementById("upgrade_light").style.position="fixed";
+	document.getElementById("upgrade_light").style.left=(screen_width-344)/2+"px";
+	document.getElementById("upgrade_light").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	//document.getElementById("fade").style.height=sHeight+"px";
+	$('#server_text').hide();
+	$('#local_version').hide();	
+	$('#local_text').hide();
+	$('#server_version').hide();
+	$('#upgrade_tick').show();
+	$('#upgrade_tick').html("10");
+	$('#upgrade_time_tick_msg').show();	
+	$('#upgrade_OK').show();	
+	$('#upgrade_CANCEL').show();	
+	show_warn_dialog_tick=10;
+	clear_timer_id(show_warn_dialog_id);
+	show_warn_dialog_id=self.setInterval(show_faild_connect_tick_function,1000);
+	upgrade_connect_fail_OK_CANCEL_flag=1;
+}
+function show_alert_ok()
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;
+	$('#server_text').hide();
+	$('#local_version').hide();	
+	$('#local_text').hide();
+	$('#server_version').hide();
+	$('#upgrade_OK').hide();	
+	$('#upgrade_CANCEL').hide();	
+	$('#upgrade_tick').show();	
+	$('#upgrade_time_tick_msg').show();
+	$('#upgrade_warn').hide();
+	$('#upgrade_ent').hide();	
+	$('#upgrade_dialog_msg').text("Please wait until re intialization");
+	$('#alert_ok').show();		
+	document.getElementById("upgrade_light").style.display="block";
+	document.getElementById("upgrade_light").style.position="fixed";
+	document.getElementById("upgrade_light").style.left=(screen_width-344)/2+"px";
+	document.getElementById("upgrade_light").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	//document.getElementById("fade").style.height=sHeight+"px";
+	//setTimeout("window.location='ezcast://ezcast.app/back'",10000) //mod by cxf	
+	clear_timer_id(show_warn_dialog_id);
+	show_warn_dialog_tick=0;
+	show_warn_dialog_id=self.setInterval(function(){
+	if(show_warn_dialog_tick<20){
+	show_warn_dialog_tick++;
+	$('#upgrade_tick').html(show_warn_dialog_tick);
+	}
+	else{
+	clear_timer_id(show_warn_dialog_id);
+	window.location="ezcast://ezcast.app/back";	
+	}
+	},1000);	
+}
+function show_alert_wait()
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;
+	$('#server_text').hide();
+	$('#local_version').hide();	
+	$('#local_text').hide();
+	$('#server_version').hide();
+	$('#upgrade_OK').hide();	
+	$('#upgrade_CANCEL').hide();	
+	$('#upgrade_tick').hide();	
+	$('#alert_ok').hide();	
+	$('#upgrade_time_tick_msg').hide();
+	$('#upgrade_warn').hide();
+	//$('#upgrade_dialog_msg').text("Please wait for downloading.");
+	//$('#upgrade_warn').text("After download, wifi will be disconnected and please wait for system upgrading and reboot.");
+	$('#upgrade_dialog_msg').text(upgrade_dialog_msg_string);
+	$('#upgrade_warn').text(upgrade_warn_string);
+	$('#upgrade_warn').show();
+	$('#upgrade_tick').show();	
+	$('#upgrade_tick').html("");
+			
+	document.getElementById("upgrade_light").style.display="block";
+	document.getElementById("upgrade_light").style.position="fixed";
+	document.getElementById("upgrade_light").style.left=(screen_width-344)/2+"px";
+	document.getElementById("upgrade_light").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	//document.getElementById("fade").style.height=sHeight+"px";
+
+}
+function hide_alert_wait()
+{
+	document.getElementById("upgrade_light").style.display="none";
+	document.getElementById("fade").style.display="none";
+	$('#server_text').show();
+	$('#local_version').show();	
+	$('#local_text').show();
+	$('#server_version').show();
+	$('#upgrade_OK').show();	
+	$('#upgrade_CANCEL').show();
+	window.location="ezcast://ezcast.app/back";
+}
+
+function show_psw_change()
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;
+	$('#change_psw_warn').text(LIST_WARN2_string);
+	document.getElementById("psw_change").style.display="block";
+	document.getElementById("psw_change").style.position="fixed";
+	document.getElementById("psw_change").style.left=(screen_width-344)/2+"px";
+	document.getElementById("psw_change").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+}
+function  show_psw_change_warn()
+{
+	var scroll_left=document.body.scrollLeft;
+	var scroll_top= document.body.scrollTop;			
+	document.getElementById("psw_change").style.display="block";
+	document.getElementById("psw_change").style.position="fixed";
+	document.getElementById("psw_change").style.left=(screen_width-344)/2+"px";
+	document.getElementById("psw_change").style.top=(screen_height-236)/2+"px";
+	document.getElementById("fade").style.display="block";
+	$('#OK3').hide();
+	$('#CANCEL2').hide();
+	$("#paw_warn_ok").show();
+	
+}
+function change_psw(val)
+{
+	document.getElementById("psw_change").style.display="none";
+	document.getElementById("fade").style.display="none";
+	$("#OK3").show();
+	$("#CANCEL2").show();
+	$("#paw_warn_ok").hide();
+
+if(val){
+	$.post('cgi-bin/password_POST.cgi', $('#config-form').serialize());
+	window.location="ezcast://ezcast.app/back";
+	}
+else
+{
+	$('#appsk').val(appskValue_save ) ;
+}
+}
+function get_ota_check_status_tick_function()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_ota_check_status'}, function(new_ver_flag)
+	{			
+		get_ota_check_status_tick++;
+		if(get_ota_check_status_tick>20)
+		{
+			get_ota_check_status_tick=0;
+			if(Check_new_version_boot_id>0)			
+			{
+				clearInterval(Check_new_version_boot_id);
+				Check_new_version_boot_id=-1;
+			}		
+			hide_upgrade_waiting_dialog();
+		}
+		else
+		{
+			var ret=Number(new_ver_flag);
+			if(1==ret)//check finish
+			{
+				get_ota_check_status_tick=0;
+				if(Check_new_version_boot_id>0)			
+				{
+					clearInterval(Check_new_version_boot_id);
+					Check_new_version_boot_id=-1;
+				}	
+				get_new_version_function();
+			}			
+		}		
+	}, "text");		
+}
+function get_ota_check_status()
+{
+	if(Check_new_version_boot_id>0)			
+	{
+		clearInterval(Check_new_version_boot_id);
+		Check_new_version_boot_id=-1;
+	}
+	Check_new_version_boot_id=self.setInterval(get_ota_check_status_tick_function,1000);		
+}
+function get_wifi_mode()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_wifi_mode'}, function(wifi_mode) 
+	{	
+		wifi_mode_status=wifi_mode.indexOf("9");
+		if(wifi_mode_status>=0)
+		{
+			if(Upgrade_listener_flag==1)
+				show_upgrade_waiting_dialog();	
+			$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_conf'}, function() 
+			{			
+			}, "text");	
+			get_ota_check_status();
+		}
+		else
+		{
+			Get_faild_connect_language();
+			show_faild_connect_dialog(); 
+		}
+	}, "text");		
+}
+function Get_ota_status_tick()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_ota_status'}, function(ota_status) 
+	{
+	$('#upgrade_tick').html(ota_status+"%");
+		if(ota_status>=100)
+			show_alert_ok();	
+	}, "text");		
+}
+function Get_ota_status()
+{
+	if(get_ota_status_id>0)			
+	{
+		clearInterval(get_ota_status_id);
+		get_ota_status_id=-1;
+	}
+	get_ota_status_id=self.setInterval(Get_ota_status_tick,1000);	
+}
+
+function Upgrade_OK_listener()
+{
+	$('#upgrade_OK').click(function(e) 
+	{
+		e.preventDefault();	
+		if(upgrade_connect_fail_OK_CANCEL_flag==1)
+		{
+			hide_upgrade_dialog();
+			if(show_connections_num_id>0)			
+			{
+				clearInterval(show_connections_num_id);
+				show_connections_num_id=-1;
+			}	
+		}
+		else
+		{
+			$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_down_bin'}, function(return_val) 
+			{
+				var ret=return_val.indexOf("OK");
+				if(ret>=0)
+				{
+					Get_ota_status();
+				}		
+			}, "text");	
+			hide_upgrade_dialog();
+			if(show_connections_num_id>0)			
+			{
+				clearInterval(show_connections_num_id);
+				show_connections_num_id=-1;
+			}
+			//alert("Wait for download ......");		//mod by cxf	
+			show_alert_wait();
+		}
+	});	
+}
+function Upgrade_CANCEL_listener()
+{
+	$('#upgrade_CANCEL').click(function(e) 
+	{
+		e.preventDefault();	
+		hide_upgrade_dialog();
+	});		
+}
+function Upgrade_listener()
+{
+	$('#upgrade').click(function(e) 
+	{
+		e.preventDefault();	
+		Upgrade_listener_flag=1;
+		get_wifi_mode();
+	});	
+}
+function internet_listener()
+{
+	$('#internet').click(function(e) 
+	{
+		e.preventDefault();
+		if(show_connections_num_id>0)			
+		{
+			clearInterval(show_connections_num_id);
+			show_connections_num_id=-1;
+		}
+		location.href="wifi_list_Horizontal.html";
+	});
+}
+function Get_AP_mac_ip()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_mac_ip'}, function(mac_wlan1_ip)
+	{			
+		if(mac_wlan1_ip.length)
+		{
+			start=0;
+			text_string_length=0;
+			text_string=mac_wlan1_ip;
+			text_string_length=mac_wlan1_ip.length;
+			$('#connect_mac_address').text(Get_text_from_textstring(text_string));
+			text_string=text_string_global;	
+			$('#ip1_txt').text(Get_text_from_textstring(text_string));	
+			$('#ip1_txt').show();
+		}
+	}, "text");		
+}
+function init_function()
+{
+	$('#internet_icon').hide();
+	document.getElementById("upgrade_status").src="img/dongle.png";
+	//$('#new_version').hide();	
+	document.getElementById("appsk").style.align="center";
+	$('#ip0_txt').hide();	
+	$('#ip0').hide();
+}
+function OK_listener()
+{
+	$('#OK').click(function(e) 
+	{
+		e.preventDefault();	
+		if(function_index==1)
+		{
+			var temp=$('#res_value').val();
+			temp=temp+"OK";
+			$('#res_value').val(""+temp);
+			Set_hdmimode();					
+			hide_setting_dialog() ;	
+			if(show_waiting_tick_id>0)			
+			{
+				clearInterval(show_waiting_tick_id); //stop timer to send cmd,after 15s if ok is pressed
+				show_waiting_tick_id=-1;
+			}
+		}
+		else if(function_index==2)
+		{
+			$.post('cgi-bin/set_defaultmode_POST.cgi', $('#config-form').serialize());
+			save_defaultmode_index=defaultmode_index;
+			hide_setting_dialog() ;	
+		}
+		else if(function_index==3)
+		{
+			$.post('cgi-bin/set_lan_POST.cgi', $('#config-form').serialize());	
+			waiting_set_language();
+		}
+		else if(function_index==4)
+		{
+			$.post('cgi-bin/set_router_ctl_POST.cgi', $('#config-form').serialize());	
+			current_connection_mode_index=connection_mode_index;
+			if(0==current_connection_mode_index)
+			{
+				if(1==connected_ssid_flag)
+				{
+					$('#ip0_txt').show();	
+					$('#ip0').show();				
+				}				
+			}
+			else
+			{	
+				$('#ip0_txt').hide();	
+				$('#ip0').hide();			
+			}
+			hide_setting_dialog() ;	
+		}
+	});
+}
+function CANCEL_listener()
+{
+	$('#CANCEL').click(function(e) 
+	{
+		e.preventDefault();
+		if(function_index==1)
+		{
+			show_waiting_tick=15;
+			$('#tick').text("");
+			$('#res_value').val(""+resolution_current_value_num);
+			$('#current_res_value').val(""+0);
+			$('#resolution').val(""+resolution_current_value);			
+			resolution_index=current_resolution_index;
+			Set_hdmimode();
+			hide_setting_dialog();	
+			if(show_waiting_tick_id>0)			
+			{
+				clearInterval(show_waiting_tick_id);
+				show_waiting_tick_id=-1;
+			}				
+		}
+		else if(function_index==2)
+		{
+			defaultmode_index=save_defaultmode_index;
+			$('#defaultmode').val(""+defaultmode_array[defaultmode_index]);
+			hide_setting_dialog() ;	
+		}
+		else if(function_index==3)
+		{
+			hide_setting_dialog() ;	
+			language_index=current_language_index;
+			if(auto_language_flag==1)
+				$('#language').val(""+multiLanguage_array[multiLanguage_array.length-1]);
+			else
+				$('#language').val(""+multiLanguage_array[current_language_index]);
+		}
+		else if(function_index==4)
+		{
+			hide_setting_dialog() ;	
+			connection_mode_index=current_connection_mode_index;
+			if(0==connection_mode_index)
+				$('#connection_mode').val(router_string);
+			else
+				$('#connection_mode').val(direct_string);
+		}
+	});
+}
+function show_connections_num_tick()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_connections'}, function(connections_num)
+	{			
+		if(connections_num.length)
+		{
+			var ret=connections_num.indexOf("-1");
+			if(ret<0)
+			{
+				$('#dongle_icon_txt').text("( "+connections_num+" )");
+				document.getElementById("dongle_connect_status").src="img/dongle_connected.png";
+			}
+			else
+			{
+				$('#dongle_icon_txt').text("( "+0+" )");
+				document.getElementById("dongle_connect_status").src="img/dongle_not_connected.png";
+			}		
+		}
+	}, "text");			
+}
+function show_connections_num()
+{
+	show_connections_num_tick();
+	if(show_connections_num_id>0)			
+	{
+		clearInterval(show_connections_num_id);
+		show_connections_num_id=-1;
+	}
+	show_connections_num_id=self.setInterval(show_connections_num_tick,3000);			
+}
+function Get_connected_ssid_tick()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_connected_ssid'}, function(connected_ssid)
+	{		
+		var ret=connected_ssid.indexOf("to_wifi_list");
+		if(ret>=0)
+			location.href="wifi_list_Horizontal.html";
+		else
+		{
+			if(connected_ssid.length)
+			{
+				if(connected_ssid_flag==0)
+				{			
+					$('#connected_ssid').text(connected_ssid);
+					$('#internet_icon_txt').text(connected_ssid);	
+					Get_wlan0_ip_address();
+				}		
+				Set_internet_icon_txt_tick();
+				document.getElementById("client_connect_status").src="img/internet_connected.png";
+			}
+			else
+			{				
+				$('#internet_icon').hide();	
+				$('#connected_ssid').text("");
+				document.getElementById("client_connect_status").src="img/dongle_not_connected.png";
+				document.getElementById("upgrade_status").src="img/dongle.png";
+			}			
+		}
+	}, "text");		
+}
+function Get_connected_ssid()
+{
+	Get_connected_ssid_tick();
+	if(get_connected_ssid_id>0)			
+	{
+		clearInterval(get_connected_ssid_id);
+		get_connected_ssid_id=-1;
+	}
+	get_connected_ssid_id=self.setInterval(Get_connected_ssid_tick,3000);			
+}
+function Get_local_version()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_version'}, function(ota_upgrade_string) 
+	{			
+		if(ota_upgrade_string.length)
+		{
+			start=0;
+			text_string_length=0;
+			text_string=ota_upgrade_string;
+			text_string_length=ota_upgrade_string.length;
+			var local_version_string=Get_text_from_textstring(text_string);
+			text_string=text_string_global;	
+			var server_version_string=Get_text_from_textstring(text_string);
+			$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_wifi_mode'}, function(wifi_mode) 
+			{
+				wifi_mode_status=wifi_mode.indexOf("9");
+				if(wifi_mode_status>=0)
+				{
+					var ret=server_version_string.indexOf("newest");
+					if(ret<0)
+						Get_new_version_text();
+					else
+						$('#new_version').val(local_version_string);		
+				}
+				else
+				{
+					$('#new_version').val(local_version_string);
+				}				
+			}, "text");	
+		}
+	}, "text");			
+}		
+function Check_new_version_boot()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_wifi_mode'}, function(wifi_mode) 
+	{	
+		wifi_mode_status=wifi_mode.indexOf("9");
+		if(wifi_mode_status>=0)
+		{
+			$.get("cgi-bin/wifi_info_GET.cgi", {type:'enter_check_ota_boot'}, function(return_value) 
+			{			
+				var ret=Number(return_value);
+				if(0==ret)
+				{
+					$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_OTA_conf'}, function() 
+					{			
+					}, "text");	
+					get_ota_check_status();		
+				}
+			}, "text");		
+		}
+	}, "text");			
+}
+function deal_OTA_url()
+{
+	var temp = location.href;
+	var ret=temp.indexOf("back_connect_ap");
+	if(ret>=0)
+	{
+		check_OTA_first_flag=1;
+		show_upgrade_waiting_dialog();
+		get_new_version_function();
+	}
+	else
+	{
+		check_OTA_first_flag=1;
+		Check_new_version_boot();
+	}		
+}
+function Get_cpu_frequency()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_frequency'}, function(cpu_frequency)
+	{			
+		var ret=Number(cpu_frequency);
+		if(ret==1)
+		{			
+			resolution_array.push("1920x1080_60P");
+		}		
+	}, "text");	
+}
+function Get_wlan0_ip_address()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_wlan0_ip'}, function(wlan0_ip)
+	{			
+		if(wlan0_ip.length)
+		{
+			$('#ip0_txt').text(wlan0_ip);	
+		}
+	}, "text");			
+}
+function Get_router_ctl()
+{
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_router_ctl'}, function(router_ctl)
+	{			
+		var ret=Number(router_ctl);
+		if(ret==1)//router
+		{			
+			document.getElementById("connection_mode_icon").src="img/connection_mode_router.png";
+			$('#connection_mode').val(router_string);
+			connection_mode_index=0;
+			$('#connection_mode_value').val("1");
+			if(1==connected_ssid_flag)
+			{
+				$('#ip0_txt').show();	
+				$('#ip0').show();				
+			}
+		}		
+		else//direct
+		{
+			document.getElementById("connection_mode_icon").src="img/connection_mode_direct.png";
+			$('#connection_mode').val(direct_string);
+			connection_mode_index=1;
+			$('#connection_mode_value').val("0");
+			$('#ip0_txt').hide();	
+			$('#ip0').hide();	
+		}
+		$('#ip1').show();		
+		$('#ip1_txt').show();		
+		current_connection_mode_index=connection_mode_index;
+	}, "text");	
+}
+
+function Connection_mode_listener()
+{
+	$('#connection_mode').click(function(e) 
+	{
+		e.preventDefault();
+		if(current_connection_mode_index!=connection_mode_index)
+		{
+			$('#FORGET').hide();
+			$('#tick').hide();
+			$('#time_tick_msg').hide();
+			$('#reboot_msg').hide();
+			if(0==connection_mode_index)//router
+				$('#dialog_msg').text(router_warn_string);	
+			else
+				$('#dialog_msg').text(direct_warn_string);
+			show_setting_dialog();	
+			function_index=4;			
+		}
+	});	
+}
+window.onresize = window.onload = function()
+{
+	Get_height_width_of_screen();
+	$(".white_content").css("display","none");
+
+}
+
+function ezcastprobox_check()
+{
+
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'get_AM_TYPE'}, function(am_type)
+	{	
+
+		ezcastprobox=Number(am_type);
+		if(ezcastprobox==1){
+			var i=0;
+			var n=resolution_array.length;//must not use   resolution_array.length  change all the time
+			for(i=0;i<n;i++)
+				{
+					resolution_array.pop();
+				}
+				resolution_array.push("HDMI_1920x1080_30P");
+				resolution_array.push("HDMI_1920x1080_24P");
+				resolution_array.push("HDMI_1280x720_60P");
+				resolution_array.push("VGA_1366x768");
+				resolution_array.push("VGA_1280x1024");
+				resolution_array.push("VGA_1280x800");
+				resolution_array.push("VGA_1024x768");
+				resolution_array.push("CVBS_PAL");
+				resolution_array.push("CVBS_NTSC");
+				
+				
+		}
+	}, "text");
+
+
+
+}
+
+function delay_get_data_function()
+{
+	if(delay_get_data_id>0)			
+	{
+		clearInterval(delay_get_data_id);
+		delay_get_data_id=-1;
+	}
+	Get_height_width_of_screen();
+	init_function();
+	
+	Get_index_language();
+	Get_cpu_frequency();
+	ezcastprobox_check();
+	
+	show_connections_num();
+	Get_resolution();		
+	Get_password();
+	Get_set_password_text();
+	Get_last_UI();
+	Get_multilanguage_timer();
+	Get_AP_ssid();
+	Get_AP_mac_ip();
+	Get_connected_ssid();
+	Get_devicename();
+	Upgrade_listener();
+	appsk_apply_listener();
+	devicename_apply_listener();
+	resolution_listener();	
+	Get_defaultmode_language();
+	Get_local_version();
+	Get_router_ctl();
+	default_mode_listener();
+	Get_language_txt();	
+	Language_listener();
+	Upgrade_listener();
+	internet_listener();	
+	OK_listener();
+	CANCEL_listener();
+	Upgrade_OK_listener();
+	Upgrade_CANCEL_listener();
+	internet_listener();	
+	deal_OTA_url();
+	Connection_mode_listener();
+}
+function delay_get_data()
+{
+	if(delay_get_data_id>0)			
+	{
+		clearInterval(delay_get_data_id);
+		delay_get_data_id=-1;
+	}
+	delay_get_data_id=self.setInterval(delay_get_data_function,600);		
+}
+$(document).ready(function()
+ {	  
+ 	$(function() 
+	{
+		delay_get_data();	
+	});	
+ });
+
+</script>
+</body>
+</html>

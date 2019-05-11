@@ -1,0 +1,39 @@
+#! /bin/sh
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/am7x/bin
+LD_LIBRARY_PATH=/am7x/lib:/lib:/usr/lib
+runlevel=S
+prevlevel=N
+umask 022
+#export PATH runlevel prevlevel LD_LIBRARY_PATH
+#
+#       Trap CTRL-C &c only in this shell so we can interrupt subprocesses.
+#
+trap ":" INT QUIT TSTP
+/bin/mount -t proc  yan   /proc
+#/bin/mount -t tmpfs tmpfs /tmp
+/bin/mount -t sysfs sysfs /sys
+/bin/mount -o noatime -o nodiratime /dev/partitions/udisk /mnt/udisk
+/bin/mount -o noatime -o nodiratime /dev/partitions/vram /mnt/vram
+#add by liucan[2010.9.29]
+#we use mdev as the default userspace hotplug utilities
+#/proc/sys/kernel/hotplug rely on kernel config CONFIG_HOTPLUG 
+#&CONFIG_NET ,if this file does not exist,please check!
+
+echo /sbin/mdev >/proc/sys/kernel/hotplug
+mdev  -s
+echo 'Root filesystem on nand'
+echo 'Start AM7531 Console'
+#insmod /lib/modules/am7x_carddet.ko 
+#insmod /lib/modules/mmc_core.ko 
+#insmod /lib/modules/mmc_block.ko 
+#insmod /lib/modules/am7x_sd.ko
+
+#/bin/mount / -o remount,rw
+export PATH runlevel prevlevel LD_LIBRARY_PATH
+
+manager.app &
+
+#/bin/mount /dev/pts
+#/usr/sbin/telnetd
+#dmesg > /var/log/dmesg
+

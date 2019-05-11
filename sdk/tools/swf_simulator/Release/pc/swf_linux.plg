@@ -1,0 +1,125 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: swf_linux - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "X:\temp\RSPCFD.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /I "../" /I "../zlib" /I "../swf" /I "../app" /I "./" /I "swfext/" /I "../freetype/include" /I "../freetype" /I "../keyboard" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FR"Debug/" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\audioengine.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\cmmb_engine.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\ebook.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\filelist.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\flashengine.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\locale.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\photoengine.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\swfext.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\systeminfo.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\usbuiengine.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\videoengine.c"
+"Z:\LSDK\sdk\tools\swf_simulator\Release\pc\swfext\vvdengine.c"
+]
+Creating command line "cl.exe @X:\temp\RSPCFD.tmp" 
+Creating temporary file "X:\temp\RSPCFE.tmp" with contents
+[
+freepy.lib freepy_lib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib cv.lib cxcore.lib highgui.lib Debug\adler32.obj Debug\autofit.obj Debug\buddy.obj Debug\crc32.obj Debug\dbg_dump.obj Debug\dump.obj Debug\fontdrv.obj Debug\freepy.obj Debug\ftbase.obj Debug\ftbbox.obj Debug\ftbitmap.obj Debug\ftdebug.obj Debug\ftfstype.obj Debug\ftgasp.obj Debug\ftglyph.obj Debug\ftgxval.obj Debug\ftinit.obj Debug\ftlcdfil.obj Debug\ftmm.obj Debug\ftotval.obj Debug\ftstroke.obj Debug\ftsynth.obj Debug\ftsystem.obj Debug\fui_common.obj Debug\fui_input.obj Debug\Gb2312ToUni.obj Debug\Gb2312ToUtf8.obj Debug\gzio.obj Debug\inffast.obj Debug\inflate.obj Debug\inftrees.obj Debug\keyboard.obj Debug\linear.obj Debug\qsort.obj Debug\raster.obj Debug\sfnt.obj Debug\smooth.obj Debug\sprintf.obj Debug\swf_aa.obj Debug\swf_action.obj Debug\swf_action_array.obj Debug\swf_action_asBroadcaster.obj Debug\swf_action_bitmapdata.obj Debug\swf_action_boolean.obj Debug\swf_action_color.obj Debug\swf_action_colorTransform.obj Debug\swf_action_date.obj Debug\swf_action_default.obj Debug\swf_action_external.obj Debug\swf_action_function.obj Debug\swf_action_global.obj Debug\swf_action_key.obj Debug\swf_action_loadVars.obj Debug\swf_action_math.obj Debug\swf_action_matrix.obj Debug\swf_action_mouse.obj Debug\swf_action_movieClipLoader.obj Debug\swf_action_number.obj Debug\swf_action_object.obj Debug\swf_action_point.obj Debug\swf_action_rectangle.obj Debug\swf_action_selection.obj Debug\swf_action_shared_object.obj Debug\swf_action_sound.obj Debug\swf_action_sprite.obj Debug\swf_action_stage.obj Debug\swf_action_string.obj Debug\swf_action_text_format.obj Debug\swf_action_text_snapshot.obj Debug\swf_action_types.obj Debug\swf_action_xml.obj Debug\swf_action_xmlnode.obj Debug\swf_bitmap.obj Debug\swf_button.obj Debug\swf_cache.obj Debug\swf_dec.obj Debug\swf_dictionary.obj Debug\swf_displaylist.obj Debug\swf_enviroment.obj Debug\swf_font.obj Debug\swf_geometry.obj Debug\swf_gradient.obj Debug\swf_hash.obj Debug\swf_keyboard.obj Debug\swf_mem.obj Debug\swf_morph.obj Debug\swf_render.obj Debug\swf_render_2d.obj Debug\swf_render_422.obj Debug\swf_render_565.obj Debug\swf_render_888.obj Debug\swf_render_low.obj Debug\swf_shape.obj Debug\swf_sound.obj Debug\swf_sprite.obj Debug\swf_sqrt.obj Debug\swf_stat.obj Debug\swf_system.obj Debug\swf_text.obj Debug\swf_time.obj Debug\swf_util.obj Debug\swf_vvd.obj Debug\swfdec.obj Debug\table_read.obj Debug\test.obj Debug\truetype.obj Debug\ttfont.obj Debug\Utf8ToGb2312.obj Debug\work.obj Debug\zutil.obj /nologo /subsystem:console /incremental:yes /pdb:"./Debug/swf.pdb" /debug /machine:I386 /out:"./Debug/swf.exe" /pdbtype:sept /libpath:"../keyboard" 
+.\Debug\audioengine.obj
+.\Debug\cmmb_engine.obj
+.\Debug\ebook.obj
+.\Debug\filelist.obj
+.\Debug\flashengine.obj
+.\Debug\locale.obj
+.\Debug\photoengine.obj
+.\Debug\swfext.obj
+.\Debug\systeminfo.obj
+.\Debug\usbuiengine.obj
+.\Debug\videoengine.obj
+.\Debug\vvdengine.obj
+]
+Creating command line "link.exe @X:\temp\RSPCFE.tmp"
+<h3>Output Window</h3>
+Compiling...
+audioengine.c
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\audioengine.c(142) : warning C4013: 'Stop' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\audioengine.c(295) : warning C4013: 'swf_free' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\audioengine.c(296) : warning C4013: 'swf_malloc_share' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\audioengine.c(351) : warning C4113: 'int (__cdecl *)()' differs in parameter lists from 'int (__cdecl *)(void *)'
+cmmb_engine.c
+ebook.c
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\ebook.c(131) : warning C4047: 'function' : 'unsigned int ' differs in levels of indirection from 'unsigned char [512]'
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\ebook.c(131) : warning C4024: 'function through pointer' : different types for formal and actual parameter 2
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\ebook.c(136) : warning C4013: 'setlocale' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\ebook.c(136) : warning C4047: 'initializing' : 'char *' differs in levels of indirection from 'int '
+filelist.c
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\filelist.c(176) : warning C4133: 'initializing' : incompatible types - from 'char [3]' to 'unsigned short *'
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\filelist.c(202) : warning C4090: '=' : different 'const' qualifiers
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\filelist.c(188) : warning C4101: 'n' : unreferenced local variable
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\filelist.c(221) : warning C4090: 'function' : different 'const' qualifiers
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\filelist.c(221) : warning C4024: 'utf8_to_utf16' : different types for formal and actual parameter 1
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\filelist.c(226) : warning C4090: '=' : different 'const' qualifiers
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\filelist.c(213) : warning C4101: 'n' : unreferenced local variable
+flashengine.c
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\flashengine.c(302) : warning C4013: 'swf_show_osd' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\flashengine.c(322) : warning C4013: 'swf_show' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\flashengine.c(470) : warning C4013: 'cvDestroyWindow' undefined; assuming extern returning int
+locale.c
+photoengine.c
+swfext.c
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(50) : warning C4244: 'return' : conversion from 'double ' to 'float ', possible loss of data
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(97) : warning C4013: 'swfext_filelist_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(98) : warning C4013: 'swfext_pe_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(99) : warning C4013: 'swfext_music_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(100) : warning C4013: 'swfext_video_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(101) : warning C4013: 'swfext_system_info_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(102) : warning C4013: 'swfext_vvd_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(103) : warning C4013: 'swfext_ebook_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(104) : warning C4013: 'swfext_locale_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(105) : warning C4013: 'swfext_cmmb_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(106) : warning C4013: 'swfext_flashengine_register' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\swfext.c(107) : warning C4013: 'swfext_usbui_register' undefined; assuming extern returning int
+systeminfo.c
+usbuiengine.c
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\usbuiengine.c(62) : warning C4013: 'strlen' undefined; assuming extern returning int
+videoengine.c
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\videoengine.c(120) : warning C4013: 'swf_show' undefined; assuming extern returning int
+vvdengine.c
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\vvdengine.c(316) : warning C4013: 'ui_filelist_init' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\vvdengine.c(333) : warning C4013: 'ui_filelist_get_cur_filepath' undefined; assuming extern returning int
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\vvdengine.c(333) : warning C4047: '=' : 'char *' differs in levels of indirection from 'int '
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\vvdengine.c(443) : warning C4047: '=' : 'unsigned char *' differs in levels of indirection from 'int '
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\vvdengine.c(506) : warning C4047: 'function' : 'const char *' differs in levels of indirection from 'int '
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\vvdengine.c(506) : warning C4024: 'strcpy' : different types for formal and actual parameter 2
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\vvdengine.c(802) : warning C4047: 'initializing' : 'char *' differs in levels of indirection from 'int '
+Generating Code...
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\usbuiengine.c(88) : warning C4716: 'swfext_usbui_register' : must return a value
+z:\lsdk\sdk\tools\swf_simulator\release\pc\swfext\filelist.c(632) : warning C4761: integral size mismatch in argument; conversion supplied
+Linking...
+Creating temporary file "X:\temp\RSPD00.tmp" with contents
+[
+/nologo /o"Debug/swf_linux.bsc" 
+.\Debug\audioengine.sbr
+.\Debug\cmmb_engine.sbr
+.\Debug\ebook.sbr
+.\Debug\filelist.sbr
+.\Debug\flashengine.sbr
+.\Debug\locale.sbr
+.\Debug\photoengine.sbr
+.\Debug\swfext.sbr
+.\Debug\systeminfo.sbr
+.\Debug\usbuiengine.sbr
+.\Debug\videoengine.sbr
+.\Debug\vvdengine.sbr]
+Creating command line "bscmake.exe @X:\temp\RSPD00.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+swf.exe - 0 error(s), 41 warning(s)
+</pre>
+</body>
+</html>

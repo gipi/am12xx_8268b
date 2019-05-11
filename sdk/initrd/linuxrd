@@ -1,0 +1,35 @@
+#!/bin/sh
+#
+# The init script for AM7XXX initrd. This script will do:
+# 1. Load nftl driver.
+# 2. Mount real file system on nand.
+# 3. Switch root directory to real file system and clean anything of initrd.
+# 4. Create device node files automatically .
+#
+
+NEWROOT=/newroot
+OLDROOT=/boot/oldroot
+DEV=$NEWROOT/dev
+
+insmod /lib/modules/am7x_eMMCcard.ko
+###@echo /lib/modules/am7x_recover.ko
+###insmod /lib/modules/am7x_recover.ko
+mkdir $NEWROOT
+
+mount -t $AM7X_ROOTFS -o noatime -o nodiratime /dev/emmc_block1 $NEWROOT || { echo Failed to mount / >&2; exit 1; }
+#ls -l $NEWROOT/lib
+export LD_LIBRARY_PATH=/lib
+#mount -t romfs -o ro /dev/nftla1 $NEWROOT
+mount -t ramfs dev $NEWROOT/dev
+mkdir $DEV/partitions
+cp -dpR /dev/* $DEV
+cd $NEWROOT
+sh /etc/init.d/mk_part_alias_emmc #&& ls -l /dev/partitions
+cp -dpR /dev/partitions/* $DEV/partitions
+# making sure we dont keep /dev busy
+exec <$DEV/console >$DEV/console 2>&1
+pivot_root $NEWROOT $NEWROOT/$OLDROOT
+# making sure we dont keep /bootdev busy; /bootdev can be umount on init of the real file system
+#exec chroot . sh -c 'umount -n /oldroot; exec /sbin/init <dev/console >dev/console 2>&1'
+exec chroot . sh -c 'umount -n '$OLDROOT'; exec /sbin/init <dev/console >dev/console 2>&1'
+

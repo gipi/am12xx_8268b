@@ -1,0 +1,8 @@
+::sysinit:/etc/init.d/rcS
+#ttyS0::respawn:/sbin/getty 115200 ttyS0
+#ttyS0::askfirst:/bin/sh
+::askfirst:-/bin/sh
+#::ctrlaltdel:/sbin/reboot
+#::shutdown:/bin/umount ar
+#::shutdown:/bin/mount / o remount,ro
+

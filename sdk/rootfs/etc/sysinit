@@ -1,0 +1,3 @@
+#! /bin/sh
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+echo 'main task starting...'

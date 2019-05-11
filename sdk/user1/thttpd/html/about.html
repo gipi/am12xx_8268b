@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>main</title>
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="js/main.js?1.0"></script>
+<script src="js/setting.js"></script>
+<script src="js/jquery.md5.js"></script>
+<!--
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+-->
+</head>
+
+<script type="text/javascript">
+	Get_first_all_data();
+    $(document).ready(function(){
+        $('a.active').removeAttr('href');
+		//Get_height_width_of_screen();
+		//creatmenu();
+		//alert("4556746----");
+		//CGiGet_compare_psk_modfiy();
+		main();
+		self.setTimeout(about_get_data, 500);
+      });
+	  
+var screen_width;
+var screen_height;
+function Get_height_width_of_screen()
+{
+	
+	if(!!(window.attachEvent && !window.opera))
+	{
+		screen_height = document.documentElement.clientHeight;
+		screen_width = document.documentElement.clientWidth;
+	}
+	else
+	{
+		screen_height =window.innerHeight;
+		screen_width = window.innerWidth;
+	}
+	$("#windows_size").text('width:' + screen_width + '; height:'+screen_height);
+}	
+
+
+</script>
+<style type="text/css">
+<!--
+.ui-mobile .ui-page {
+//border: 10px solid #33FF00;
+	background-image: url(img/airdiskbg.jpg);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	-webkit-background-origin:content-box; /* Safari */
+	background-origin:content-box;
+}
+.ui-header .ui-title{
+margin: 0 10%;
+}
+
+.ui-page-theme-a .ui-panel-wrapper {
+ text-shadow: none;
+ font-weight:normal;
+ background-color:transparent;
+//border: 3px solid #FF0000;
+}
+
+.bb_center{  
+	position:absolute;  
+	bottom:5%;  
+	left:50%;  
+	//margin-top:-100px;  
+	margin-left:-115px;  
+	/*此时宽和高都要固定*/  
+	width:220px;  
+	//height:250px;  
+	//border: 1px solid #0000FF;
+	text-align:center;
+	font-weight:normal;
+	color:#FFFFFF;
+}
+.ui-list > li > a{
+	margin: 0px;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    list-style: outside none none;
+}
+.aa_center{  
+	position:absolute;  
+	top:10px;
+	bottom:10px;  
+	left:0px; 
+//	right:10px; 
+//	margin-top:-150px;  
+	margin:0px auto;  
+	/*此时宽和高都要固定*/  
+	width:100%;  
+	//height:80%;
+	//border: 1px solid #0000FF;
+	//text-align:center;
+	font-weight:normal;
+	color:#FFFFFF;
+}
+.line{
+	//width:290px;
+	height:80%; 
+	//border: 3px solid #ff0000;
+	display:table;
+}
+.row1
+{
+	width:240px;
+	//text-align:left;
+	display:table-cell;
+	vertical-align:middle;
+	//border: 1px solid #9D9D9D;
+}
+.row_text
+{
+	width:100%;
+	text-align:left;
+	//border: 1px solid #00ff00;
+	margin-bottom:8px;
+}
+.clear{ clear:both} 
+
+@media screen and (min-width: 900px)
+{
+	.row1
+	{
+		width:650px;
+		//border: 2px solid #9D9D9D;
+	}
+	.row_text
+	{
+		width:45%;
+		text-align:left;
+		//border: 1px solid #00ff00;
+		float:left;
+		margin-left:20px;
+	}
+}
+
+-->
+</style>
+
+<body  class="ui-mobile-viewport ui-overlay-a"  align="center">
+  <div data-role="page" id="panel-fixed-page1">
+    <div data-role="header" data-position="fixed">
+        <h1 id="about_title" style="margin:0;margin-left:40px; margin-right:80px;">About</h1>
+		
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+       <span  id="log_txt" style="position:absolute; top:13px; right:42px; font-weight:normal; font-size:80%;"></span>
+	   
+    </div><!-- /header -->
+<div role="main" class="ui-content jqm-content jqm-fullwidth ">
+
+	<div class="aa_center" align="center">
+		<div style="margin-left:auto; margin-right:auto; margin-top:auto; margin-bottom:auto; overflow:hidden;" class="line" >
+			<div class="row1" style="display:none;">
+				<div id="fw" class="row_text"><span>Firmware Version : </span><span id="current_ver"></span></div>
+				<div id="ssdi" class="row_text"><span id="ap_ssid_txt">SSID : </span><span id="about_ssid"></span></div>
+				<div id="ipadr" class="row_text"><span>IP : </span><span id="ip1_txt"></span></div>
+				<div id="mac_5g" class="row_text"><span>5G MAC : </span><span id="connect_mac_address"></span></div>
+				<div id="mac_24" class="row_text"><span>2.4G MAC : </span><span id="24G_mac_address"></span></div>
+				<div id="mac_lan" class="row_text"><span>LAN MAC : </span><span id="LAN_mac_address"></span></div>
+
+			</div>
+		</div>
+	</div>
+
+</div><!-- /main -->
+    
+
+	<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+		<ul data-role="listview" >
+            <li data-icon="delete"><a href="#" data-rel="close" id="IDS_MENU_LAN6">Close menu</a></li>
+				<span  id="add_menu" class="ui-list"></span>
+			
+		</ul>
+	</div><!-- /panel -->
+<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
+	<form class="userform" >
+		<h2 id="user_login">Login</h2>
+		<label for="name" id="IDS_MENU_LAN2">Username:</label>
+		<input type="text" name="name" id="usr_name" value="admin" data-clear-btn="true" data-mini="true" disabled="disabled" >
+		<label for="password" id="IDS_STTING_PAS">Password:</label>
+		<input type="password" name="password" id="usr_password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" id="cancle_login">Cancel</a></div>
+			<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" id="login_usrname_ok">OK</a></div>
+		</div>
+		<div id="IDS_MENU_LAN3" style="text-align:left; margin-top:20px; font-size:80%;">Forget admin password: email to forgetpassword@iezvu.com.</div> 
+	</form>
+	<div id="default_show" style="display:none;">		
+		<div style="margin-top:30px;">Default  Admin:</div>
+		<div id="admin_psk_txt" class="text_border"></div>
+		<div id="admin_psk" class="text_border"></div>
+	</div>
+
+		<div id="loginin_txt" style="display:none;"> 	
+			<div style="margin-top:20px;" align="center"><span id="show_usrname"></span> ,<span id="IDS_MENU_LAN5" >welcome</span><span> ! </span></div>
+			<p align="center"><a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="login_out">Logout</a></p>
+		</div>
+		
+	</div><!-- /panel -->
+</div><!-- /page -->
+
+</body>
+</html>

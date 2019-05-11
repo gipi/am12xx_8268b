@@ -1,0 +1,34 @@
+OUTPUT_ARCH(mips)
+
+SECTIONS
+{
+.text 0xa0000000 :
+	{
+			main.o(.entry)
+     	main.o (.text)
+	 *(.text)
+	}
+
+.rodata :
+ {
+ *(.rodata)
+ }
+
+.data :
+	{
+	 *(.data)
+	}
+
+.sbss :
+  	{
+  	 *(.sbss)
+ 	 *(.scommon)
+ 	}
+
+.bss :
+ 	{
+ 	 *(.bss)
+  	 *(COMMON)
+ 	 }
+
+ }

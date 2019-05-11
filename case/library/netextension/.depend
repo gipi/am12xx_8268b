@@ -1,0 +1,1 @@
+extensionScan.o: extensionScan.c iwlib.h wireless.h extensionScan.h

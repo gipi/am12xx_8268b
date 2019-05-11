@@ -1,0 +1,18 @@
+[HEADER]
+FORMAT=1
+VERSION=0x0
+TITLE=USB MASS STORAGE
+OUTBINFILE=..\..\data\usb_mass.bin
+[BODY]
+vid=[0x1de1][hex][2]
+pid=[0x1101][hex][2]
+manufacturer=[artek][str][63]
+products=[AM7555 DPF][str][19]
+serial number=[01234567890.][str][12]
+inquiry vendor=[artek ][str][8]
+inquiry version release=[0x1234][hex][2]
+inquiry lun1 product =[internal nand][str][16]
+inquiry lun2 product =[mmc/sd/xd slot][str][16]
+inquiry lun3 product =[cf slot][str][16]
+inquiry lun4 product =[cdrom udisk][str][16]
+

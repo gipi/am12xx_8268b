@@ -1,0 +1,6 @@
+mira_player.o: mira_player.c ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../sdk/include/av_api.h \
+  mira_player.h
+mirartp_stream.o: mirartp_stream.c ../../../sdk/include/am_types.h \
+  simple_rtp.h mira_player.h ../../../sdk/include/av_api.h
+simple_rtp.o: simple_rtp.c simple_rtp.h

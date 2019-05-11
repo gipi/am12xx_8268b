@@ -1,0 +1,121 @@
+;/*++
+;
+;Copyright (c) Actions Corporation.  All rights reserved.
+;
+;   THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+;   KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+;   IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+;   PURPOSE.
+;
+;Module Name:
+;
+;    dfuusb.INF
+;
+;Abstract:
+;    Installation inf for the Intel 82930 USB Test Board, OSR USB-FX device,
+;    FX2 MUTT and FX3 MUTT device
+;
+;--*/
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=USB
+ClassGuid={36fc9e60-c465-11cf-8056-444553540000}
+Provider=%ProviderName%
+DriverVer=12/22/2016,18.9.58.822
+CatalogFile=dfuusb.cat
+
+
+; ================= Class section =====================
+
+;[ClassInstall32]
+;Addreg=SampleClassReg     
+
+;[SampleClassReg]
+;HKR,,,0,%ClassName%
+;HKR,,Icon,,-5
+
+
+; ================= Device section =====================
+
+[Manufacturer]
+%MfgName%=Actions,NTamd64
+
+; For Win2K
+[Actions]
+%USB\VID_0547&PID_1002.DeviceDesc%=dfuusb.Dev, USB\VID_10D6&PID_ff88   ; OSR USB-FX
+%USB\VID_045E&PID_930A.DeviceDesc%=dfuusb.Dev, USB\VID_1DE1&PID_1201   ; Intel 82930
+%USB\VID_045E&PID_078E.DeviceDesc%=dfuusb.Dev, USB\VID_10D6&PID_ff63   ; FX2 MUTT
+%USB\VID_045E&PID_078F.DeviceDesc%=dfuusb.Dev, USB\VID_1DE1&PID_1205   ; FX3 MUTT
+
+; For XP and later
+[Actions.NTamd64]
+%USB\VID_0547&PID_1002.DeviceDesc%=dfuusb.Dev, USB\VID_10D6&PID_ff88   ; OSR USB-FX
+%USB\VID_045E&PID_930A.DeviceDesc%=dfuusb.Dev, USB\VID_1DE1&PID_1201   ; Intel 82930
+%USB\VID_045E&PID_078E.DeviceDesc%=dfuusb.Dev, USB\VID_10D6&PID_ff63   ; FX2 MUTT
+%USB\VID_045E&PID_078F.DeviceDesc%=dfuusb.Dev, USB\VID_1DE1&PID_1205   ; FX3 MUTT
+
+
+[dfuusb.Dev.NT]
+CopyFiles=dfuusb.Files.Ext
+
+[dfuusb.Dev.NT.Services]
+Addservice = dfuusb, 0x00000002, dfuusb.AddService
+
+[dfuusb.AddService]
+DisplayName    = %dfuusb.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\dfuusb.sys
+AddReg         = dfuusb.AddReg
+;LoadOrderGroup = Base
+
+[dfuusb.AddReg]
+HKR,"Parameters","MaximumTransferSize",0x10001,65536
+HKR,"Parameters","DebugLevel",0x10001,2
+
+[dfuusb.Files.Ext]
+dfuusb.sys
+
+[SourceDisksNames]
+1=%Disk_Description%,,,
+
+[SourceDisksFiles]
+dfuusb.sys = 1
+WdfCoInstaller01011.dll=1 ; make sure the number matches with SourceDisksNames
+
+;-------------- WDF Coinstaller installation
+[DestinationDirs]
+DefaultDestDir = 12
+CoInstaller_CopyFiles = 11
+
+[dfuusb.Dev.NT.CoInstallers]
+AddReg=CoInstaller_AddReg
+CopyFiles=CoInstaller_CopyFiles
+
+[CoInstaller_CopyFiles]
+WdfCoInstaller01011.dll
+
+[CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01011.dll,WdfCoInstaller"
+
+[dfuusb.Dev.NT.Wdf]
+KmdfService = dfuusb, dfuusb_wdfsect
+
+[dfuusb_wdfsect]
+KmdfLibraryVersion = 1.11
+
+;---------------------------------------------------------------;
+
+[Strings]
+ProviderName    = "Actions Microelectronics CO., LTD"
+MfgName         = "Actions Microelectronics CO., LTD"
+Disk_Description= "adfuusb Installation Disk"
+dfuusb.SvcDesc = "Driver for AL12xx Board service"
+
+USB\VID_0547&PID_1002.DeviceDesc="Actions USB Device"
+USB\VID_045E&PID_930A.DeviceDesc="Actions USB Device"
+USB\VID_045E&PID_078E.DeviceDesc="Actions USB Device"
+USB\VID_045E&PID_078F.DeviceDesc="Actions USB Device"
+

@@ -1,0 +1,349 @@
+From ce9686f67a2d19cfdf8cdda465edee98b1b514a7 Mon Sep 17 00:00:00 2001
+From: "amos.liu" <amos.liu@actions-micro.com>
+Date: Fri, 16 Oct 2015 10:17:01 +0800
+Subject: [PATCH] add pmap.
+
+---
+ sdk/busybox/include/applets.h |   1 +
+ sdk/busybox/include/libbb.h   |  22 +++++++++
+ sdk/busybox/include/usage.h   |   9 ++++
+ sdk/busybox/libbb/procps.c    | 104 +++++++++++++++++++++++++++++++++++++++
+ sdk/busybox/procps/Config.in  |   6 +++
+ sdk/busybox/procps/Kbuild     |   1 +
+ sdk/busybox/procps/pmap.c     | 112 ++++++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 255 insertions(+)
+ mode change 100644 => 100755 sdk/busybox/libbb/procps.c
+ create mode 100755 sdk/busybox/procps/pmap.c
+
+diff --git a/sdk/busybox/include/applets.h b/sdk/busybox/include/applets.h
+index 9b6b54e..0d32653 100644
+--- a/../include/applets.h
++++ b/../include/applets.h
+@@ -295,6 +295,7 @@ IF_PING6(APPLET(ping6, _BB_DIR_BIN, _BB_SUID_MAYBE))
+ IF_PIPE_PROGRESS(APPLET(pipe_progress, _BB_DIR_BIN, _BB_SUID_DROP))
+ IF_PIVOT_ROOT(APPLET(pivot_root, _BB_DIR_SBIN, _BB_SUID_DROP))
+ IF_PKILL(APPLET_ODDNAME(pkill, pgrep, _BB_DIR_USR_BIN, _BB_SUID_DROP, pkill))
++IF_PMAP(APPLET(pmap, _BB_DIR_USR_BIN, _BB_SUID_DROP))
+ IF_POPMAILDIR(APPLET(popmaildir, _BB_DIR_USR_SBIN, _BB_SUID_DROP))
+ IF_HALT(APPLET_ODDNAME(poweroff, halt, _BB_DIR_SBIN, _BB_SUID_DROP, poweroff))
+ IF_PRINTENV(APPLET(printenv, _BB_DIR_BIN, _BB_SUID_DROP))
+diff --git a/sdk/busybox/include/libbb.h b/sdk/busybox/include/libbb.h
+index c795e6a..800405c 100644
+--- a/../include/libbb.h
++++ b/../include/libbb.h
+@@ -1273,6 +1273,28 @@ enum { COMM_LEN = TASK_COMM_LEN };
+ enum { COMM_LEN = 16 };
+ # endif
+ #endif
++struct smaprec {
++	unsigned long mapped_rw;
++	unsigned long mapped_ro;
++	unsigned long shared_clean;
++	unsigned long shared_dirty;
++	unsigned long private_clean;
++	unsigned long private_dirty;
++	unsigned long stack;
++	unsigned long smap_pss, smap_swap;
++	unsigned long smap_size;
++	unsigned long smap_start;
++	char smap_mode[5];
++	char *smap_name;
++};
++
++#if !ENABLE_PMAP
++#define procps_read_smaps(pid, total, cb, data) \
++	procps_read_smaps(pid, total)
++#endif
++int FAST_FUNC procps_read_smaps(pid_t pid, struct smaprec *total,
++		void (*cb)(struct smaprec *, void *), void *data);
++
+ typedef struct procps_status_t {
+ 	DIR *dir;
+ 	uint8_t shift_pages_to_bytes;
+diff --git a/sdk/busybox/include/usage.h b/sdk/busybox/include/usage.h
+index 227ed80..25573e5 100644
+--- a/../include/usage.h
++++ b/../include/usage.h
+@@ -3276,6 +3276,15 @@
+ 	IF_FEATURE_PIDOF_OMIT( \
+        "$ pidof /bin/sh -o %PPID\n20351 5950")
+ 
++#define pmap_trivial_usage \
++       "[-xq] PID"
++
++#define pmap_full_usage "\n\n" \
++       "Display detailed process memory usage" \
++     "\n" \
++     "\n	-x	Show details" \
++     "\n	-q	Quiet"
++
+ #if !ENABLE_FEATURE_FANCY_PING
+ #define ping_trivial_usage \
+        "host"
+diff --git a/sdk/busybox/libbb/procps.c b/sdk/busybox/libbb/procps.c
+old mode 100644
+new mode 100755
+index 307d8d6..34023f9
+--- a/../libbb/procps.c
++++ b/../libbb/procps.c
+@@ -173,6 +173,110 @@ static char *skip_fields(char *str, int count)
+ }
+ #endif
+ 
++#if ENABLE_PMAP
++int FAST_FUNC procps_read_smaps(pid_t pid, struct smaprec *total,
++		void (*cb)(struct smaprec *, void *), void *data)
++{
++	FILE *file;
++	struct smaprec currec;
++	char filename[sizeof("/proc/%u/smaps") + sizeof(int)*3];
++	char buf[PROCPS_BUFSIZE];
++#if !ENABLE_PMAP
++	void (*cb)(struct smaprec *, void *) = NULL;
++	void *data = NULL;
++#endif
++
++	sprintf(filename, "/proc/%u/smaps", (int)pid);
++
++	file = fopen_for_read(filename);
++	if (!file)
++		return 1;
++
++	memset(&currec, 0, sizeof(currec));
++	while (fgets(buf, PROCPS_BUFSIZE, file)) {
++		// Each mapping datum has this form:
++		// f7d29000-f7d39000 rw-s FILEOFS M:m INODE FILENAME
++		// Size:                nnn kB
++		// Rss:                 nnn kB
++		// .....
++
++		char *tp = buf, *p;
++
++#define SCAN(S, X) \
++		if (strncmp(tp, S, sizeof(S)-1) == 0) {              \
++			tp = skip_whitespace(tp + sizeof(S)-1);      \
++			total->X += currec.X = fast_strtoul_10(&tp); \
++			continue;                                    \
++		}
++		if (cb) {
++			SCAN("Pss:"  , smap_pss     );
++			SCAN("Swap:" , smap_swap    );
++		}
++		SCAN("Private_Dirty:", private_dirty);
++		SCAN("Private_Clean:", private_clean);
++		SCAN("Shared_Dirty:" , shared_dirty );
++		SCAN("Shared_Clean:" , shared_clean );
++#undef SCAN
++		tp = strchr(buf, '-');
++		if (tp) {
++			// We reached next mapping - the line of this form:
++			// f7d29000-f7d39000 rw-s FILEOFS M:m INODE FILENAME
++
++			if (cb) {
++				/* If we have a previous record, there's nothing more
++				 * for it, call the callback and clear currec
++				 */
++				if (currec.smap_size)
++					cb(&currec, data);
++				free(currec.smap_name);
++			}
++			memset(&currec, 0, sizeof(currec));
++
++			*tp = ' ';
++			tp = buf;
++			currec.smap_start = fast_strtoul_16(&tp);
++			currec.smap_size = (fast_strtoul_16(&tp) - currec.smap_start) >> 10;
++
++			strncpy(currec.smap_mode, tp, sizeof(currec.smap_mode)-1);
++
++			// skipping "rw-s FILEOFS M:m INODE "
++			tp = skip_whitespace(skip_fields(tp, 4));
++			// filter out /dev/something (something != zero)
++			if (strncmp(tp, "/dev/", 5) != 0 || strcmp(tp, "/dev/zero\n") == 0) {
++				if (currec.smap_mode[1] == 'w') {
++					currec.mapped_rw = currec.smap_size;
++					total->mapped_rw += currec.smap_size;
++				} else if (currec.smap_mode[1] == '-') {
++					currec.mapped_ro = currec.smap_size;
++					total->mapped_ro += currec.smap_size;
++				}
++			}
++
++			if (strcmp(tp, "[stack]\n") == 0)
++				total->stack += currec.smap_size;
++			if (cb) {
++				p = skip_non_whitespace(tp);
++				if (p == tp) {
++					currec.smap_name = xstrdup("  [ anon ]");
++				} else {
++					*p = '\0';
++					currec.smap_name = xstrdup(tp);
++				}
++			}
++			total->smap_size += currec.smap_size;
++		}
++	}
++	fclose(file);
++
++	if (cb) {
++		if (currec.smap_size)
++			cb(&currec, data);
++		free(currec.smap_name);
++	}
++
++	return 0;
++}
++#endif
+ void BUG_comm_size(void);
+ procps_status_t* FAST_FUNC procps_scan(procps_status_t* sp, int flags)
+ {
+diff --git a/sdk/busybox/procps/Config.in b/sdk/busybox/procps/Config.in
+index 9146ff6..321edb2 100755
+--- a/../procps/Config.in
++++ b/../procps/Config.in
+@@ -54,6 +54,12 @@ config PGREP
+ 	default n
+ 	help
+ 	  Look for processes by name.
++	  
++config PMAP
++	bool "pmap"
++	default n
++	help
++		Display processes' memory mappings.
+ 
+ config PIDOF
+ 	bool "pidof"
+diff --git a/sdk/busybox/procps/Kbuild b/sdk/busybox/procps/Kbuild
+index 8e62fdf..9b000b5 100755
+--- a/../procps/Kbuild
++++ b/../procps/Kbuild
+@@ -9,6 +9,7 @@ lib-$(CONFIG_FREE)	+= free.o
+ lib-$(CONFIG_FUSER)	+= fuser.o
+ lib-$(CONFIG_KILL)	+= kill.o
+ lib-$(CONFIG_ASH)	+= kill.o  # used for built-in kill by ash
++lib-$(CONFIG_PMAP) += pmap.o
+ lib-$(CONFIG_NMETER)    += nmeter.o
+ lib-$(CONFIG_PGREP)	+= pgrep.o
+ lib-$(CONFIG_PKILL)	+= pgrep.o
+diff --git a/sdk/busybox/procps/pmap.c b/sdk/busybox/procps/pmap.c
+new file mode 100755
+index 0000000..7ad6d36
+--- /dev/null
++++ b/../procps/pmap.c
+@@ -0,0 +1,112 @@
++/*
++ * pmap implementation for busybox
++ *
++ * Copyright (C) 2010 Nokia Corporation. All rights reserved.
++ * Written by Alexander Shishkin <virtuoso@slind.org>
++ *
++ * Licensed under GPLv2 or later, see the LICENSE file in this source tree
++ * for details.
++ */
++
++//config:config PMAP
++//config:       bool "pmap"
++//config:       default y
++//config:       help
++//config:         Display processes' memory mappings.
++
++//applet:IF_PMAP(APPLET(pmap, BB_DIR_USR_BIN, BB_SUID_DROP))
++//kbuild:lib-$(CONFIG_PMAP) += pmap.o
++
++//usage:#define pmap_trivial_usage
++//usage:       "[-xq] PID"
++//usage:#define pmap_full_usage "\n\n"
++//usage:       "Display detailed process memory usage"
++//usage:     "\n"
++//usage:     "\n	-x	Show details"
++//usage:     "\n	-q	Quiet"
++
++#include "libbb.h"
++
++#if ULONG_MAX == 0xffffffff
++# define TABS "\t"
++# define AFMT "8"
++# define DASHES ""
++#else
++# define TABS "\t\t"
++# define AFMT "16"
++# define DASHES "--------"
++#endif
++
++enum {
++	OPT_x = 1 << 0,
++	OPT_q = 1 << 1,
++};
++
++static void print_smaprec(struct smaprec *currec, void *data)
++{
++	unsigned opt = (uintptr_t)data;
++
++	printf("%0" AFMT "lx ", currec->smap_start);
++
++	if (opt & OPT_x)
++		printf("%7lu %7lu %7lu %7lu ",
++			currec->smap_size,
++			currec->smap_pss,
++			currec->private_dirty,
++			currec->smap_swap);
++	else
++		printf("%7luK", currec->smap_size);
++
++	printf(" %.4s  %s\n", currec->smap_mode, currec->smap_name);
++}
++
++static int procps_get_maps(pid_t pid, unsigned opt)
++{
++	struct smaprec total;
++	int ret;
++	char buf[256];
++
++	read_cmdline(buf, sizeof(buf), pid, "no such process");
++	printf("%u: %s\n", (int)pid, buf);
++
++	if (!(opt & OPT_q) && (opt & OPT_x))
++		puts("Address" TABS "  Kbytes     PSS   Dirty    Swap  Mode  Mapping");
++
++	memset(&total, 0, sizeof(total));
++
++	ret = procps_read_smaps(pid, &total, print_smaprec, (void*)(uintptr_t)opt);
++	if (ret)
++		return ret;
++
++	if (!(opt & OPT_q)) {
++		if (opt & OPT_x)
++			printf("--------" DASHES "  ------  ------  ------  ------\n"
++				"total" TABS " %7lu %7lu %7lu %7lu\n",
++				total.smap_size, total.smap_pss, total.private_dirty, total.smap_swap);
++		else
++			printf("mapped: %luK\n", total.smap_size);
++	}
++
++	return 0;
++}
++
++int pmap_main(int argc, char **argv) MAIN_EXTERNALLY_VISIBLE;
++int pmap_main(int argc UNUSED_PARAM, char **argv)
++{
++	unsigned opts;
++	int ret;
++
++	opts = getopt32(argv, "xq");
++	argv += optind;
++
++	ret = 0;
++	while (*argv) {
++		//pid_t pid = xatoi_positive(*argv++);
++		pid_t pid = xatoi_u(*argv++);
++		/* GNU pmap returns 42 if any of the pids failed */
++		if (procps_get_maps(pid, opts) != 0)
++			ret = 42;
++	}
++
++	return ret;
++}
+-- 
+2.3.0
+

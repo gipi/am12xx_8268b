@@ -1,0 +1,1144 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <file_list.h>
+#include <unistd.h>
+#include <sys/poll.h>
+#include <sys/time.h>
+#include "swfdec.h"
+#include "fui_common.h"
+#include "swf_types.h"
+#include "sys_msg.h"
+#include "sys_buf.h"
+#include "display.h"
+#include "sys_cfg.h"
+#include "media_hotplug.h"
+#include "apps_vram.h"
+#include <sys/msg.h>
+#include "am7x_dac.h"
+#include "buf_encoder.h"
+#include <pthread.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <signal.h>
+#include <ucontext.h>
+#include <sys_pmu.h>
+
+/**
+* for cache segment fault signals.
+*/
+#define FUI_DEBUG_EN
+
+
+/**
+* for video test without FUI
+*/
+//#define VIDEO_TEST_WITHOUTUI
+
+
+/**
+* for FUI frame rate controll enable/disable.
+*/
+#define FUI_FRAMERATE_ENABLE
+
+#ifdef FUI_FRAMERATE_ENABLE
+
+#define FUI_FRAMERATE_PROCESS_INDEPENDENT
+int framerate_fds0[2];
+int framerate_fds1[2];
+
+/**
+* for seperate mouse control.
+*/
+///#define FUI_SEPERATE_MOUSE_SHOW
+
+#endif
+
+
+#ifdef FUI_DEBUG_EN
+#define __USE_GNU
+#include <link.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <dlfcn.h>
+#include <signal.h>
+#include <ucontext.h>
+#include <errno.h>
+
+#endif
+
+
+unsigned long swf_heap_logic_start=0;
+unsigned long swf_heap_physic_start=0;
+void *deinst=NULL;
+int fui_image_width=800,fui_image_height=480;
+hdmi_output_param hdmi_output_data;
+
+#ifdef FUI_DEBUG_EN
+/**
+* for debug for segment fault.
+*/
+static void fui_signal_handler(int signum, siginfo_t* siginfo, ucontext_t *lpContext)
+{
+	if (/*signum == SIGSEGV*/1) {
+//		printf("FUI Segment fault at 0x%x\n", siginfo->si_addr);
+//		printf("siginfo->si_code == 0x%x\n",siginfo->si_code);
+//		printf("siginfo->si_errno == 0x%x\n",siginfo->si_errno);
+//		printf("siginfo->si_signo == 0x%x\n",siginfo->si_signo);
+#if 1
+		mcontext_t *mc = &lpContext->uc_mcontext;
+		fprintf(stderr, "[FUI]: catch exception at 0x%x\n", mc->pc);
+		fprintf(stderr, "siginfo->si_addr == 0x%x\n", siginfo->si_addr);
+		fprintf(stderr, "stack = 0x%08x\n", lpContext->uc_stack.ss_sp);
+		fprintf(stderr, "$29 = 0x%08x\n", mc->gregs[29]);
+#endif
+		exit(1);
+	}
+}
+
+static int register_segv_handler(int sig, void *handler)
+{
+	int ret = -EINVAL;
+	sigset_t signal_set;
+	if (sigemptyset(&signal_set) >= 0) {
+		struct sigaction sa = {
+			.sa_handler  = handler,
+			.sa_mask     = signal_set,
+			.sa_flags    = SA_SIGINFO,
+			.sa_restorer = NULL
+		};
+		ret = sigaction(sig, &sa, NULL);
+		if( ret < 0 )
+			fprintf(stderr, "failed to install signal hander.\n");
+	}
+	return ret;
+}
+
+static int
+fui_dl_callback(struct dl_phdr_info *info, size_t size, void *data)
+{
+	//printf("name=%s (has %d segments)\n", info->dlpi_name, info->dlpi_phnum);
+	//printf("\t\t baseaddr 0x%x\n", (void *) (info->dlpi_addr));
+	int j;
+    	printf("name=%s (%d segments)\n", info->dlpi_name,info->dlpi_phnum);
+	printf("\t\t baseaddr 0x%x\n", (void *) (info->dlpi_addr));
+    	for (j = 0; j < info->dlpi_phnum; j++)
+         printf("\t\t header %2d: address=%10p\n", j,(void *) (info->dlpi_addr + info->dlpi_phdr[j].p_vaddr));
+
+	return 0;
+}
+
+int fui_dl_show()
+{
+	dl_iterate_phdr(fui_dl_callback, NULL);
+
+	return 0;
+}
+
+#endif
+
+/**
+* indicate in player status.
+*/
+int in_player_stat = 0;
+
+inline int gui_get_image_width()
+{
+	return fui_image_width;
+}
+
+inline int gui_get_image_height()
+{
+	return fui_image_height;
+}
+
+unsigned long fui_get_bus_address(unsigned long logicaddr)
+{
+	return swf_heap_physic_start + (logicaddr - swf_heap_logic_start);
+}
+
+unsigned long fui_get_virtual_address(unsigned long buaaddr)
+{
+	return swf_heap_logic_start + (buaaddr - swf_heap_physic_start);
+}
+
+
+static int fui_set_context()
+{
+	SWF_CONTEXTINFO ctxInfo;
+	SWF_HEAPINFO heaps[3];
+	SWF_FONTINFO fonts[3];
+	struct mem_dev basic_heap,share_heap;
+	int memfd;
+	int err;
+	static char font0_path[64],font1_path[64];
+
+	/** get heap from system buffer */
+	//basic_heap.request_size = HEAP_BASIC_SIZE;
+	//basic_heap.buf_attr = UNCACHE;
+	share_heap.request_size = HEAP_SHARE_SIZE + HEAP_BASIC_SIZE;
+	share_heap.buf_attr = CACHE;
+
+	memfd = open("/dev/sysbuf",O_RDWR);
+	if(memfd == -1)
+	{
+		printf("open /dev/sysbuf error\n");
+		return -1;
+	}
+
+	/**
+	err = ioctl(memfd,MEM_GET,&basic_heap);
+	if(err == -1){
+		printf("fui get basic heap error\n");
+		close(memfd);
+		return -1;
+	}
+	*/
+
+	err = ioctl(memfd,MEM_GET,&share_heap);
+	if(err == -1){
+		printf("fui get basic heap error\n");
+		close(memfd);
+		return -1;
+	}
+
+
+	/** for lcm physical address transformation */
+	swf_heap_logic_start = share_heap.logic_address;
+	swf_heap_physic_start = share_heap.physic_address;
+
+	ctxInfo.heaps = heaps;
+	ctxInfo.heaps[0].heap_addr = swf_heap_logic_start;
+	ctxInfo.heaps[0].heap_size = HEAP_BASIC_SIZE;
+	ctxInfo.heaps[0].heap_type = HEAP_TYPE_BASIC;
+	ctxInfo.heaps[0].heap_base_virtual_addr = swf_heap_logic_start;
+	ctxInfo.heaps[0].heap_base_phy_addr = swf_heap_physic_start;
+
+	ctxInfo.heaps[1].heap_addr = swf_heap_logic_start + HEAP_BASIC_SIZE;
+	ctxInfo.heaps[1].heap_size = HEAP_SHARE_SIZE;
+	ctxInfo.heaps[1].heap_type = HEAP_TYPE_SHARE;
+	ctxInfo.heaps[1].heap_base_virtual_addr = swf_heap_logic_start;
+	ctxInfo.heaps[1].heap_base_phy_addr = swf_heap_physic_start;
+	ctxInfo.heaps[2].heap_addr = 0;
+
+	ctxInfo.defaultFunc.decode_bitmap = (void*)fui_decode_bitmap;
+	ctxInfo.defaultFunc.play_audio = (void*)fui_play_audio;
+	ctxInfo.defaultFunc.release = (void*)fui_stop_audio;
+
+	ctxInfo.fonts = fonts;
+	sprintf(font0_path,"%s/%s",AM_CASE_DAT_DIR,"U16.bin");
+	sprintf(font1_path,"%s/%s",AM_CASE_DAT_DIR,"U24.bin");
+	ctxInfo.fonts[0].font_path = font0_path;
+	ctxInfo.fonts[0].font_size = 16;
+	ctxInfo.fonts[1].font_path = font1_path;
+	ctxInfo.fonts[1].font_size = 24;
+	ctxInfo.fonts[2].font_path = NULL;
+
+	/*
+	* ok, we let the flash player to manage the frame buffers.
+	*/
+	ctxInfo.frameBuffer[0] = 0;
+	ctxInfo.frameBuffer[1] = 0;
+	ctxInfo.frameNumber = 4;
+	ctxInfo.frameWidth  = IMAGE_WIDTH_E;
+	ctxInfo.frameHeight = IMAGE_HEIGHT_E; 
+
+	SWF_Context_Init((void *)&ctxInfo);
+
+	return 0;
+	
+}
+
+static int fui_open_lcm()
+{
+	DE_config ds_conf;
+
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	de_init(&deinst);
+
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+	
+	de_get_config(deinst,&ds_conf,DE_CFG_ALL);
+
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	hdmi_output_data.hdmi_output_width = ds_conf.input.width;
+	hdmi_output_data.hdmi_output_height = ds_conf.input.height;
+	hdmi_output_data.hdmi_out_mode = 16;
+	hdmi_output_data.hdmi_true = 1;
+	
+	ds_conf.input.enable=0;
+
+	/**
+	* save the image width and height.
+	*/
+	fui_image_height = ds_conf.input.height;
+	fui_image_width = ds_conf.input.width;
+	
+	de_set_Config(deinst,&ds_conf,DE_CFG_ALL);
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+	
+	return 0;
+}
+
+//static int fui_insmod_2d()
+//{
+//	int err;
+//	char cmd[256];
+//
+//	sprintf(cmd,"%s%s/%s","sh ",AM_CASE_SC_DIR,"driver_load_2d.sh");
+//	err = system(cmd);
+//
+//	return err;
+//}
+
+/**
+* for test purpose.
+* @brief swf-player pratical frame rate statistics.
+*/
+static void fui_framerate_statistic()
+{
+	static int cnt=0;
+	struct timeval tv;
+	int err;
+	static int sec=0;
+	static int usec=0;
+	static int total_msec=0;
+
+
+	err = gettimeofday(&tv,NULL);
+	if(err == -1){
+		cnt = 0;
+		total_msec = 0;
+		return;
+	}
+
+	if((sec==0) && (usec==0)){
+		sec = tv.tv_sec;
+		usec = tv.tv_usec;
+		cnt = 0;
+		total_msec = 0;
+		return;
+	}
+	else{
+		cnt++;
+		total_msec += (tv.tv_sec-sec)*1000+(tv.tv_usec-usec)/1000;
+		sec = tv.tv_sec;
+		usec = tv.tv_usec;
+	}
+
+	if(cnt==5){
+		printf("rate == %d\n",1000/(total_msec/cnt));
+		cnt = 0;
+		total_msec = 0;
+	}
+
+	return;
+}
+
+static int fui_apps_vram_init()
+{
+	struct sysconf_param syscfg;
+	int err;
+	
+	/** load vram library */
+	if(apps_vram_init()<0){
+		printf("fui set vram default value\n");
+		err = apps_vram_set_default();
+	}
+	else{
+		err = apps_vram_read(VRAM_ID_SYSPARAMS, (void *)&syscfg, sizeof(struct sysconf_param));
+	}
+
+	return err;
+}
+
+static void fui_out(void)
+{
+	apps_vram_release();
+}
+
+static int fui_system_resource_init()
+{
+	struct sysconf_param sys_cfg_data;
+	int sys_volume;
+	fui_apps_vram_init();
+	sys_volume_init();
+	sys_volume_ctrl(_VOLUME_CTRL_GET,(void *)&sys_volume);
+	
+	apps_vram_read(VRAM_ID_SYSPARAMS,(void*)&sys_cfg_data,sizeof(struct sysconf_param));
+	if(sys_volume!=sys_cfg_data.sys_volume)
+	{
+		sys_volume=sys_cfg_data.sys_volume;
+		sys_volume_ctrl(_VOLUME_CTRL_SET,(void *)&sys_volume);
+		
+	}
+	return 0;
+}
+static int fui_load_swf(char* swfname)
+{
+	/** add first swf */
+	int flag;
+	char swfpath[64];
+	SWF_DEC * inst;
+	SWF_INSTINFO info;
+	SWF_RECT window = {0, 0, IMAGE_WIDTH_E-1, IMAGE_HEIGHT_E-1};
+	
+	sprintf(swfpath,"%s/%s",AM_CASE_SWF_DIR,swfname);
+	flag = SWF_FULLSCREEN_FLAG | SWF_STANDALONE;// |SWF_DEBUG |SWF_ECHO
+	inst = SWF_AddInst(swfpath, &window, flag, &info);
+	if(inst == NULL){
+		printf("failed to open main.swf\n");
+		exit(1);
+	}
+	return 0;
+	
+}
+
+static int alarm_on_notice(struct am_sys_msg *msg_get)
+{
+	set_alarm_on_id((int)msg_get->dataload);
+	SWF_Message(NULL, SWF_MSG_KEY_RING, NULL);
+	SWF_Message(NULL, SWF_MSG_PLAY, NULL);
+	return 0;
+}
+
+#if 0
+static unsigned int get_count()
+{
+	struct timeval value;
+	unsigned int milisec;
+
+	gettimeofday(&value,NULL);
+	milisec = (unsigned int)(value.tv_sec*1000 + value.tv_usec/1000);
+	
+	return milisec;
+}
+
+static int print_count(int *base)
+{
+	int curr_count;
+	int rtn=0;
+	
+	curr_count = get_count();
+	rtn = curr_count - *base;
+	*base = curr_count;
+
+	return rtn;
+}
+#endif
+
+int swapflag = 1;//0: no swap; 1: swap
+
+int FUI_setSwapFlag(int flag)
+{
+	swapflag = flag;
+	return 0;	
+}
+
+unsigned long _fui_get_cur_framebuf()
+{
+	DE_config ds_conf;
+	unsigned long addr=0;
+	de_get_config(deinst,&ds_conf,DE_CFG_IN);
+	addr = (int)ds_conf.input.bus_addr;
+	return fui_get_virtual_address(addr);
+}
+
+static int _fui_snapshot_save(int key)
+{
+	if(key==SWF_MSG_KEY_SNAPSHOT){
+		char filename[128]="";
+		rtc_date_t rtc_date;
+		rtc_time_t rtc_time;
+		unsigned long framebuf_addr=0;
+		int filesize=0;
+		int w=0,h=0;
+		if(tm_get_rtc(&rtc_date,&rtc_time)!=0){
+			printf("%s,%d:Get rtc Date Error!",__FILE__,__LINE__);
+			return -1;
+		}
+		sprintf(filename,"%s%04d%02d%02d%02d%02d%02d.jpg","/mnt/udisk/",rtc_date.year,
+				rtc_date.month,rtc_date.day,rtc_time.hour,rtc_time.min,rtc_time.sec);
+		
+		framebuf_addr = _fui_get_cur_framebuf();
+		w = gui_get_image_width();
+		h = gui_get_image_height();
+		printf("Save Snapshot file=%s,bufaddr=0x%x,size=%d,w=%d,h=%d\n",filename,framebuf_addr,w,h);
+		if(jpeg_encode((void*)framebuf_addr,filename,3,&filesize,w,h,4,1)!=0){
+			printf("%s,%d:Save Snapshot Error!\n",__FILE__,__LINE__);
+			return -1;
+		}
+		else{
+			printf("%s,%d:Save Snapshot OK Size=0x%x!\n",__FILE__,__LINE__,filesize);
+			return 0;
+		}
+			
+	}
+	return 0;
+}
+
+static void _fui_deal_special_key(int key)
+{
+	fui_deal_vol_key(key);	
+	_fui_snapshot_save(key);
+}
+static void check_power_key(struct am_sys_msg *msg)
+{
+	static int long_press = 0;
+	int key_value,key_type;
+	key_value = msg->dataload & 0xFF;
+	key_type = msg->dataload >> 24;
+	//printf("@@@@dataload is 0x%x,subtype is %d,key type is %d,key value is 0x%x\n",msg->dataload,msg->subtype,key_type,key_value);
+	if(key_value==0x10 || key_value==0x07){
+		if(key_type==3){
+			//printf("number of long press is %d\n",long_press);
+			long_press++;
+		}
+		else if(key_type==1){
+			printf("number of long press is %d\n",long_press);
+			if(long_press>15){
+				printf("number of long press is %d, > 15\n",long_press);
+				if(key_value==0x10){
+					printf("now is in IR POWER\n");
+					auto_power_off(IRE_DC_MODE);
+				}
+				else if(key_value==0x07){
+					printf("now is in BOARD POWER\n");
+					auto_power_off(KEY_NDC_MODE);
+				}
+			}
+			long_press = 0;
+		}
+	}
+}
+
+#ifdef FUI_SEPERATE_MOUSE_SHOW
+static int _fui_create_mouse_show(int msgid)
+{
+	pid_t pid;
+
+	pid = fork();
+	if(pid == -1){
+		printf("create mouse show error\n");
+		return 0;
+	}
+	else if(pid == 0){
+		/**
+		* child process.
+		*/
+		char msg[16];
+		char full_path[32];
+		int ret;
+
+		sprintf(msg,"%d",msgid);
+		sprintf(full_path,"%s","/am7x/bin/mousectrl.app");
+		ret = execl(full_path,"mousectrl.app",msg,NULL);
+		if(ret == -1){
+			printf("create frame control process error\n");
+		}
+		return 0;
+
+	}
+	else{
+		return 0;
+	}
+}
+#endif
+
+
+#ifdef FUI_FRAMERATE_ENABLE
+
+static int _fui_get_current_highest_framerate()
+{
+	int framerate = 30;
+
+	framerate = SWF_GetCurretHighestFramerate();
+	if(framerate > 0){
+		return framerate;
+	}
+	else{
+		return 0;
+	}
+}
+static int _fui_create_framerate_control()
+{
+	int ret;
+	pid_t pid;
+
+	/**
+	* framerate_fds0: a pipe from parent to child
+	* framerate_fds1: a pipe from child to parent
+	*/
+
+	if(pipe(framerate_fds0) < 0){
+		printf("This should not happen for frame-rate control situations!!!!!!");
+		exit(1);
+	}
+
+	if(pipe(framerate_fds1) < 0){
+		printf("This should not happen for frame-rate control situations!!!!!!");
+		exit(1);
+	}
+
+	pid = fork();
+	if(pid == -1){
+		printf("create framerate error,exit()\n");
+		exit(-1);
+	}
+	else if(pid == 0){
+		/**
+		* child process.
+		*/
+#ifdef FUI_FRAMERATE_PROCESS_INDEPENDENT
+		char rpipe[16];
+		char wpipe[16];
+		char full_path[32];
+		int ret;
+		
+		close(framerate_fds0[1]);
+		close(framerate_fds1[0]);
+
+		sprintf(rpipe,"%d",framerate_fds0[0]);
+		sprintf(wpipe,"%d",framerate_fds1[1]);
+		sprintf(full_path,"%s","/am7x/bin/framectrl.app");
+		ret = execl(full_path,"framectrl.app",rpipe,wpipe,NULL);
+		if(ret == -1){
+			printf("create frame control process error\n");
+		}
+
+		return 0;
+#else
+		fd_set wfds,rfds;
+		struct timeval tv;
+		int retval;
+		int filedes[2];
+		char dummy=0;
+		int maxfd;
+		int framerate=30;
+
+		close(framerate_fds0[1]);
+		close(framerate_fds1[0]);
+		
+		if(pipe(filedes) < 0){
+			printf("framerate child process pipe error\n");
+			goto _FRAMERATE_OUT;
+		}
+
+		close(filedes[1]);
+
+		maxfd = filedes[0];
+
+		if(framerate_fds0[0] > maxfd){
+			maxfd = framerate_fds0[0];
+		}
+
+		while(1){
+
+			FD_ZERO(&wfds);
+			FD_ZERO(&rfds);
+			FD_SET(filedes[0], &wfds);
+			FD_SET(framerate_fds0[0], &rfds);
+
+			tv.tv_sec = 0;
+			tv.tv_usec = 1000*(1000/framerate);
+
+			retval = select(maxfd+1,&rfds,&wfds, NULL, &tv);
+
+			if(retval==0){
+				/** timeout happens*/
+				write(framerate_fds1[1],(void *)&dummy,sizeof(char));
+			}
+			else if(retval > 0){
+				if(FD_ISSET(framerate_fds0[0],&rfds)){
+					int nread;
+					int rate;
+					/**
+					* adjust the framerate.
+					*/
+					nread = read(framerate_fds0[0],&rate,sizeof(int));
+					if(nread == sizeof(int)){
+						framerate = rate;
+						///printf("do auto framerate adjustment,%d\n",framerate);
+					}
+				}
+			}
+		}
+
+_FRAMERATE_OUT:
+		return 0;
+#endif
+
+	}
+	else{
+		/** 
+		* parent process.
+		*/
+		close(framerate_fds0[0]);
+		close(framerate_fds1[1]);
+		
+		return 0;
+	}
+	
+	return 0;
+}
+#endif
+
+
+int main(int argc, char *argv[])
+{
+	int parent_msg_id;
+	int rpipe;
+	int flag;
+	SWF_DEC * inst;
+	SWF_INSTINFO info;
+	SWF_RECT window = {0, 0, IMAGE_WIDTH_E-1, IMAGE_HEIGHT_E-1};
+	int err;
+	struct pollfd fd;
+	struct am_sys_msg msg;
+	int rdnr=0;
+	int ret;
+	char mainswf[64];
+	int usbfd;
+	unsigned char usb_status[4];
+	
+	struct timeval value;
+	unsigned int milisec;
+
+#ifdef FUI_FRAMERATE_ENABLE
+	fd_set rfds;
+	int max_select_fd=-1;
+	static int auto_framerate_cnt=0;
+	static int rate_changed=0;
+	static int prev_framerate = 30;
+#endif
+
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+
+#ifdef VIDEO_TEST_WITHOUTUI
+	video_test_main(argc,(char*)argv);
+#endif
+
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	if(argc > 1){
+		if(argc != 4){
+			printf("error parameters\n");
+			exit(1);
+		}
+		parent_msg_id = (int)strtol(argv[1],NULL,10);
+		rpipe = (int)strtol(argv[2],NULL,10);
+	}
+	else{
+		printf("fui arg err\n");
+		exit(1);
+	}
+
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	fd.fd = rpipe;
+	fd.events = POLLIN;
+
+#ifdef FUI_DEBUG_EN
+	/** register debug handler */
+	///fui_dl_show();
+	register_segv_handler(SIGSEGV, fui_signal_handler);
+	register_segv_handler(SIGILL, fui_signal_handler);
+	register_segv_handler(SIGBUS, fui_signal_handler);
+#endif
+
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+	/**
+	* initialize the system resources.
+	*/
+	fui_system_resource_init();
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	/** 
+	* insmod 2d 
+	*/
+	//fui_insmod_2d();
+
+	/** 
+	* set lcm 
+	*/
+	if(fui_open_lcm() == -1){
+		printf("open lcm error\n");
+		exit(1);
+	}
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	/** 
+	* init swf-player context 
+	*/
+	if(fui_set_context()==-1){
+		printf("set contex error\n");
+		exit(1);
+	}
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	/**
+	* open the display thread if we separate display from fui main thread.
+	*/
+#ifdef INDEPENDENT_DISPLAY_EN
+	{
+		struct display_callback cb;
+
+		cb.put_display_task = put_display_task;
+		cb.get_current_display_addr = get_current_display_addr;
+		
+		open_display_workflow();
+		SWF_RegisterDisplayCallback(&cb);
+	}
+#endif
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+	
+	/** 
+	* init system res 
+	*/
+	if(system_res_init()!=0){
+		printf("system resource init error\n");
+	}
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+	
+	/** 
+	* register external engine 
+	*/
+	Swfext_Register();
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	/**
+	* initialize the key mapping.
+	*/
+	read_swfkey_cfgfile("/am7x/case/data/keymap/globalswfkey.bin");
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	/**
+	* load the main swf
+	*/
+	fui_load_swf("main.swf");
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+	
+	/** 
+	* create hotplug thread 
+	*/
+	hotplug_open_work();
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	/*
+	* register the exit function when fui out.
+	*/
+	atexit(fui_out);
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	/**
+	* alarm initialization
+	*/
+	alarm_init((void*)parent_msg_id);
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	
+	/**
+	* create image thread
+	*/
+	image_thread_create();
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+
+	/**
+	* audio dynamic library open.
+	*/
+	_audio_dll_open();
+	printf("+++++%d,%s\n",__LINE__,__FILE__);
+
+	/**
+	* create the mouse show process.
+	*/
+#if SYS_MOUSE_USED
+#ifdef FUI_SEPERATE_MOUSE_SHOW
+	Mouse_init(100,100);
+	_fui_create_mouse_show(parent_msg_id);
+#else
+	pid_t pid;
+	Mouse_init(100,100);
+	pid = fork();
+	if(pid<0)
+	{
+		printf("fork mouse move process erro\n");
+		exit(0);
+	}
+	if(pid==0)
+	{
+		mouse_draw_mainloop(parent_msg_id);
+		exit(0);
+	}
+#endif    /** FUI_SEPERATE_MOUSE_SHOW  */
+#endif    /** SYS_MOUSE_USED */
+
+	/**
+	* set the seed for SWF random()
+	*/
+	gettimeofday(&value,NULL);
+	milisec = (unsigned int)(value.tv_sec*1000 + value.tv_usec/1000);
+	srand(milisec);
+
+#ifdef FUI_FRAMERATE_ENABLE	
+	/**
+	* create the frame-rate controll process.
+	*/
+	
+	_fui_create_framerate_control();
+
+	max_select_fd = framerate_fds1[0];
+
+	if(rpipe > max_select_fd){
+		max_select_fd = rpipe;
+	}
+
+#endif	
+
+	/** 
+	* main loop 
+	*/
+	while(1){
+		
+#ifdef FUI_FRAMERATE_ENABLE	
+		FD_ZERO(&rfds);
+		FD_SET(framerate_fds1[0], &rfds);
+		FD_SET(rpipe, &rfds);
+		
+		if(select(max_select_fd+1,&rfds,NULL,NULL,NULL)>0){
+			/**
+			* receive message from manager.
+			*/
+			if(FD_ISSET(rpipe,&rfds)){
+				rdnr = read(rpipe,&msg,sizeof(struct am_sys_msg));
+				if(rdnr == sizeof(struct am_sys_msg)){
+					switch(msg.type){
+					case SYSMSG_KEY:
+					{
+						int key;
+						check_power_key(&msg);
+						if((key = swf_key_read(&msg)) != SWF_MSG_NULL){
+							printf("fui key == 0x%x\n",key);
+							_fui_deal_special_key(key);
+							SWF_Message(NULL, key, NULL);
+							SWF_Message(NULL, SWF_MSG_PLAY, NULL);
+						}
+					}
+					break;
+
+					case SYSMSG_TOUCH:
+					{
+						fui_translate_touch_msg(&msg);
+					}
+					break;
+					
+				#if SYS_MOUSE_USED
+					case SYSMSG_MOUSE:
+						fui_translate_mouse_msg(&msg);
+					break;
+				#endif
+				
+					case SYSMSG_CARD:
+						hotplug_put_msg(msg);
+					break;
+
+					case SYSMSG_USB:
+						hotplug_put_msg(msg);
+					break;
+					
+					case SYSMSG_ALARM:
+					{
+						printf("@@@@@Perfect Alarm On ID=%d@@@@@\n",msg.dataload);
+						alarm_on_notice(&msg);
+					}
+					break;
+					
+					default:
+						
+					break;
+					}
+				}
+			}
+
+			/**
+			* receive frame rate controll message.
+			*/
+			if(FD_ISSET(framerate_fds1[0],&rfds)){
+				int rt;
+				char dummy;
+				int current_framerate = 30;
+
+				if(rate_changed){
+					int nread;
+					char *buf;
+
+					buf = malloc(1024);
+					if(buf){
+						do{
+							nread = read(framerate_fds1[0],buf,1024);
+						}while(nread>=1024);
+						free(buf);
+					}
+					else{
+						read(framerate_fds1[0],&dummy,sizeof(char));
+					}
+					
+					rate_changed =0;
+				}
+				else{
+					read(framerate_fds1[0],&dummy,sizeof(char));
+				}
+				rt = SWF_Message(NULL, SWF_MSG_PLAY, NULL);
+				if(rt == -1){
+					printf("swf message full\n");
+				}
+
+				/**
+				* do auto framerate.
+				*/
+				auto_framerate_cnt++;
+				if(auto_framerate_cnt >= 10){
+					auto_framerate_cnt = 0;
+					current_framerate = _fui_get_current_highest_framerate();
+					if(current_framerate > 0){
+						if(current_framerate >=60){
+							current_framerate = 500;
+						}
+
+						if(current_framerate != prev_framerate){
+							prev_framerate = current_framerate;
+							rate_changed=1;
+							write(framerate_fds0[1],&current_framerate,sizeof(int));
+						}
+					}
+				}
+			}
+			
+		}
+		else{
+			continue;
+		}
+#else
+		err = poll(&fd,1,1);
+		
+		if(err != -1){
+			
+			if(err == 0){
+				int rt;
+				/** poll timeout */
+				rt = SWF_Message(NULL, SWF_MSG_PLAY, NULL);
+				if(rt == -1){
+					printf("swf message full\n");
+				}
+			}
+			else{
+				/** information received */
+				if(fd.revents & POLLIN){
+					rdnr = read(fd.fd,&msg,sizeof(struct am_sys_msg));
+					if(rdnr == sizeof(struct am_sys_msg)){
+						switch(msg.type){
+							case SYSMSG_KEY:
+							{
+								int key;
+								check_power_key(&msg);
+								if((key = swf_key_read(&msg)) != SWF_MSG_NULL){
+									printf("fui key == 0x%x\n",key);
+									_fui_deal_special_key(key);
+									SWF_Message(NULL, key, NULL);
+									SWF_Message(NULL, SWF_MSG_PLAY, NULL);
+								}
+							}
+							break;
+
+							case SYSMSG_TOUCH:
+							{
+								fui_translate_touch_msg(&msg);
+							}
+							break;
+						#if SYS_MOUSE_USED
+							case SYSMSG_MOUSE:
+								fui_translate_mouse_msg(&msg);
+								break;
+						#endif
+							case SYSMSG_CARD:
+								hotplug_put_msg(msg);
+							break;
+							
+							case SYSMSG_USB:
+								hotplug_put_msg(msg);
+							break;
+							case SYSMSG_ALARM:
+							{
+								printf("@@@@@Perfect Alarm On ID=%d@@@@@\n",msg.dataload);
+								alarm_on_notice(&msg);
+								break;
+							}
+							default:
+							break;
+						}
+					}
+				}
+			}
+		}
+		else{
+			continue;
+		}
+
+#endif
+
+		/**
+		* dispath messages
+		*/
+		while((ret = SWF_Dispatch()) != SWF_MSG_NULL && ret != SWF_MSG_EXIT)
+		{
+			if(ret == SWF_MSG_PLAY && swapflag == 1)
+			{
+				int frame ;
+
+				frame = SWF_Prepare(NULL);
+
+		#ifdef INDEPENDENT_DISPLAY_EN
+				/**
+				* for seperate display, do nothing here.
+				*/
+		#else
+				/*
+				* if in player status, just use one buffer.
+				*/
+				if(!in_player_stat){
+					fui_show(frame, deinst);
+				}
+		#endif
+
+				SWF_Update(NULL);
+			}
+		}
+		
+	}
+	
+	//fui_audio_engine_close();
+	_audio_dll_close();
+	printf("%s,%d:#########ERRRRRRRRR#########\n",__FILE__,__LINE__);
+	return 0;
+}
+
+int FUI_Render_CurrFrame()
+{
+	int frame;
+	frame = SWF_Prepare(NULL);
+	fui_show(frame, deinst);
+	SWF_Update(NULL);
+	//SWF_SetGUIFlag(1);
+
+	return 0;
+}
+
+
+
+

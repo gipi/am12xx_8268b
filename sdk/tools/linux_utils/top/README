@@ -1,0 +1,38 @@
+This version of the top utils is portted from the procps library (version procps-3.2.7).
+If you wanna profiling the system information especially threads status, please use this
+utils instead of the busybox top command.
+
+Section 1: How to install
+================================================
+Just run the install.sh.
+
+Section 2: How to use
+================================================
+a) Install as said in Section 1.
+b) Make a new firmware.
+c) Download the firmware.
+d) Boot the target device.
+e) Under the command line, go to the directory /usr/share/newtop/
+f) Run the newtop.sh as in Section 3. 
+
+
+Section 3: Typical newtop usage
+===============================================
+1) normal use:
+  ./newtop.sh
+  This will print the information as you normally see.
+
+2) open the thread profiling:
+  ./newtop.sh -H   
+  This will print the information which profiling the thread.
+  If too many threads, not all will be printed.
+
+3) run in batch mode:
+  ./newtop.sh -H -b -f /mnt/udisk/top.txt
+  This will log the information to /mnt/udisk/top.txt and all threads
+  will be logged.
+  
+For more plsease use "newtop.sh -h" to get detailed information. 
+
+Hope you will enjoy it!!!
+

@@ -1,0 +1,189 @@
+/* Entwrx.css - SecureWRX documentation template */
+/* $Id: entwrx.css,v 1.1.4.2 2014/06/06 11:55:46 andrews Exp $ */
+
+body { 
+	padding: 0;
+	margin: 0;
+	font-family: Arial, Helvetica, Trebuchet MS, Verdana, san-serif;
+	background-color: #fff;
+	font-size: 16px;
+	color: #666;
+	line-height: 140%;
+}
+
+
+/* Overrides */
+
+BODY,H1,H2,H3,H4,H5,H6,P,CENTER,TD,TH,UL,DL,DIV {
+	font-family: Arial, Helvetica, Trebuchet MS, Verdana, san-serif;
+}
+
+.contents {
+	padding: 40px 20px;
+	}
+
+img {
+	border: 0;
+}
+
+h1, h3 {
+	text-align: left;
+	clear: left;
+	}
+
+h1 {
+	padding-top: 30px;
+	}
+
+a, address small a {
+	color: #4591c8 !important;
+	text-decoration: none;
+}
+
+a:hover, address small a:hover {
+	color: #374878 !important;
+	background-color: transparent;
+}
+
+hr {
+	border-top: 1px solid #ccc;
+}
+
+address {
+	padding: 5px 0 15px 20px;
+	font-style: normal;
+	position: relative;
+	}
+
+address small {
+	font-size: 12px;
+	}
+
+address small img {
+	position: absolute;
+	right: 20px;
+	top: 2px;
+	}
+	
+td.indexkey, td.indexvalue {
+	background-color: #f4f4f4;
+}
+
+div.navpath {
+	width: auto;
+	border-bottom: 1px solid #ddd;
+	padding: 0px 0 10px;
+	margin-bottom: -50px;
+}
+
+.memItemLeft, .memItemRight {
+	padding-top: 4px;
+	padding-bottom: 4px;
+	}
+	
+.memitem, div.qindex {
+	background-color: #f4f4f4;
+	border: 1px solid #ddd;
+	}
+	
+.memproto {
+	width: auto;
+	padding: 4px;
+	background-color: #e4e4e4;
+	border: 1px solid #ccc;
+	}
+	
+/* Tabs */
+
+div.tabs {
+	background: url(tab_b.png) repeat-x bottom;
+	margin-bottom: 10px;
+}
+
+div.tabs ul {
+	padding-left: 0px;
+}
+	
+div.tabs a {
+	float: left;
+	background: none;
+	border-top: 1px solid #eee;
+/*	border-right: 1px solid #eee;	*/
+	padding-right: 1px;
+	border-bottom: 1px solid #ccc;
+/*	border-left: 1px solid #fff;	*/
+	margin-left: 1px;
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: none;
+	background-color: #eee;
+}
+
+div.tabs span {
+	float: left;
+	display: block;
+	background: none;
+/*	border-left: 1px solid #ddd;	*/
+	padding: 7px 12px;
+	white-space: nowrap;
+}
+
+div.tabs li.current a {
+   border-top: 1px solid #ccc;
+   border-right: 1px solid #ccc;
+   padding-right: 0px;
+   border-bottom: 1px solid #fff;
+   border-left: 1px solid #ccc;
+   margin-left: 0;
+   background-color: #fff;
+}
+
+div.tabs li.current span {
+	padding: 7px 12px;
+}
+
+
+/* Help styles */
+
+img.screenshot, img.screenshot-wide, img.screenshot-fixed {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+}
+
+table {
+	border-collapse: collapse;
+	font-size: 100%;
+}
+
+table.icondefs {
+	border-color: #ddd;
+}
+		
+.icondefs tr > td:first-child {
+	padding: 8px 0;
+	text-align: center;
+	vertical-align: top;
+}
+
+.icondefs td {
+	padding: 8px 0 8px 8px;
+/*	border-bottom: 1px solid #888888; */
+}
+
+.icondefs td img {
+	text-align: center;
+}
+
+.explanations th, .explanations td {
+	border: 1px solid #ddd;
+	padding: 2px 5px;
+	vertical-align: top;
+}
+
+.explanations th {
+	background-color: #eee;
+	font-style: italic;
+}
+

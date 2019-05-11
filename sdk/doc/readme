@@ -1,0 +1,26 @@
+# 
+1. use auto release scripts instead   
+2. the scripts will remove:
+			1. bootloader
+			2  drivers:   /card/nand/hantro/dac/2d/lcm/recover/card upgrade/usb
+      3. library:   sdk library(all)
+      4. sdk apps:  standby.bin etc 
+
+usage:
+
+#build relative binary than copy to rootfs,remove unrelease code 
+step1 :  
+		cd sdk/doc
+		sh auto_rel.sh AM_XX #e.g. AM_11 AM_13 AM_8251
+
+#build code as normal
+step2 :  
+		cd ../../scripts
+		sh am_sdk_config.sh
+		make all
+				
+when need patch the scripts:
+1. release more or less than the above
+2. driver makefile/kconfig changed a lot
+
+      

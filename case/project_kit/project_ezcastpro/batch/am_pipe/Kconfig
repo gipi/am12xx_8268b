@@ -1,0 +1,11 @@
+#
+# TEST card drivers
+#
+
+config AM_PIPE_DEV
+	tristate "AM PIPE device driver"
+	depends on BLOCK
+	default y
+	help
+	  Say Y here to enable the AM PIPE device.
+

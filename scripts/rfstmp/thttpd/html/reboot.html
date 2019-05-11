@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>Reset to default</title>
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="js/main.js?1.0"></script>
+<script src="js/jquery.md5.js"></script>
+
+<!--
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+
+-->
+</head>
+
+<script type="text/javascript">
+ 
+    $(document).ready(function(){
+		$('a.active').removeAttr('href');
+		main();
+		Get_reboot_reset_language();
+      });
+
+
+
+</script>
+<style type="text/css">
+<!--
+.ui-mobile .ui-page {
+//border: 10px solid #33FF00;
+	background-image: url(img/airdiskbg.jpg);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	-webkit-background-origin:content-box; /* Safari */
+	background-origin:content-box;
+}
+.ui-header .ui-title{
+margin: 0 10%;
+}
+
+.ui-page-theme-a .ui-panel-wrapper {
+ text-shadow: none;
+ font-weight:normal;
+ background-color:transparent;
+//border: 3px solid #FF0000;
+
+ 
+}
+
+.aa_center{  
+	position:absolute;  
+	top:50%;  
+	left:50%;  
+	margin-top:-120px;  
+	margin-left:-120px;  
+	/*此时宽和高都要固定*/  
+	width:220px;  
+	//height:250px;  
+	//border: 1px solid #0000FF;
+	text-align:center;
+	font-weight:normal;
+	color:#FFFFFF;
+}	
+
+
+
+
+.ui-list > li > a{
+	margin: 0px;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    list-style: outside none none;
+}
+
+
+.res_botn{
+	color:#FFFFFF;
+	width:50%;
+	margin:auto;
+	padding:5px;
+	border: 1px solid #ffffff;
+-webkit-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#ffffff /*{global-box-shadow-color}*/;
+-moz-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#ffffff /*{global-box-shadow-color}*/;
+	box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 			#ffffff /*{global-box-shadow-color}*/;
+	border-radius: 5px;
+-moz-border-radius:5px; /* Old Firefox */
+	text-decoration: none;
+	font-weight: normal;
+	cursor:pointer;
+}
+.res_botn:hover{
+	border: 1px solid #199DE2;
+	background-color: #199DE2;
+}
+
+@media screen and (min-width: 600px)
+{
+
+ .ui-mobile .ui-page {
+	background-image: url(img/ezcastbk.jpg);
+
+} 
+  
+}
+
+</style>
+
+<body style="" class="ui-mobile-viewport ui-overlay-a"  align="center">
+  <div data-role="page" class="jqm-demos" id="panel-fixed-page1">
+
+    <div data-role="header" data-position="fixed">
+        <h1 id="title_rbot"  style="margin:0;margin-left:40px; margin-right:80px;" ></h1>
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+       <span  id="log_txt" style="position:absolute; top:13px; right:42px; font-weight:normal; font-size:80%;"></span>
+    </div><!-- /header -->
+	
+<div role="main" class="ui-content jqm-content jqm-fullwidth aa_center">
+
+<div style="margin-bottom:50px;"><img src="img/reboot.png" width="30%"> </div>
+<p id="reboot" align="center" class="res_botn"></p>
+<p align="center" id="message_txt"></p>
+ 
+ </div><!-- /main -->
+
+
+	<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+		<ul data-role="listview">
+            <li data-icon="delete"><a href="#" data-rel="close"  id="IDS_MENU_LAN6">Close menu</a></li>
+				<span  id="add_menu" class="ui-list"></span>
+		</ul>
+	</div><!-- /panel -->
+<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
+        <form class="userform" >
+        	<h2>Login</h2>
+            <label for="name">Username:</label>
+            <input type="text" name="name" id="usr_name" value="admin" data-clear-btn="true" data-mini="true" disabled="disabled" >
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="usr_password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+            <div class="ui-grid-a">
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" id="cancle_login">Cancel</a></div>
+                <div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" id="login_usrname_ok">OK</a></div>
+			</div>
+			<div style="text-align:left; margin-top:20px; font-size:80%;">Forget admin password: email to forgetpassword@iezvu.com.</div> 
+        </form>
+		<div id="loginin_txt" style="display:none;"> 	
+			<div style="margin-top:20px;" align="center"><span id="show_usrname"></span> ,<span id="IDS_MENU_LAN5">welcome</span> <span> ! </span></div>
+			<p align="center"><a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="login_out">Logout</a></p>
+		</div>
+	</div><!-- /panel -->
+	
+<div data-role="popup" id="rebootpop" data-overlay-theme="b" style="min-width:300px;min-height:150px;">
+	 <div id="rebot_warn" style="text-align:center;border: 0px solid #26D6FE;margin-top:9%;margin-bottom:9%;"></div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="reboot_ok">Yes</a>
+		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="reboot_cancl">No</a>
+	</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!--   htmldir.html 发送文件名方法
+
+window.location.href="1.html?dir=usb1"
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+--><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+.red {
+	color: #F00;
+}
+.red_f {
+	color: #F00;
+}
+.mid {
+	text-align: left;
+}
+</style>
+
+</head>
+        
+<form method="post" enctype="multipart/form-data"  action="cgi-bin/usbfileupload.cgi">
+	   
+             <input id="file"   type="file" name="fileName" onchange="fileSelected()" />
+              <br></br>
+              <input type="submit" name="Upload" value="Upload to"/>
+            	<input type="text" id="dir" name="dir"  style="width:200px;height:30px;"  />&nbsp;
+            	<input type="checkbox" name="reboot" id="reboot"  onclick="diradd_reboot()"/>
+            	sync&amp;reboot
+            	<label for="reboot"></label>
+            	&nbsp;&nbsp;&nbsp;
+            <a id='return' href='javascript:;' onclick='window.location.href="airdisk.html"';style='text-decoration:none'><img src='img/return.png'></a>
+            
+            </form>
+<label for="warn" class="mid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;(<span class="red_f">Filepath You will upload to</span>)</label>
+<h4 style="color:#0000ff">File Information:</h4> 
+  <p id="name" style="color:#0000ff"></p>
+  <p id="size" style="color:#0000ff"></p>
+ 
+ <script >
+
+
+
+var swf_dir="/am7x/case/data" ;//swf dir 
+var html_dir="/mnt/user1/thttpd/html";//html dir
+var js_dir="/mnt/user1/thttpd/html/js";//js dir
+var app_dir="/am7x/bin" ;    //app dir
+var tmp_dir="/tmp" ;
+  
+    //	document.write("gsgsdgsdgsd");
+urlinfo=window.location.href;  //获取当前页面的url
+len=urlinfo.length;              //获取url的长度
+offset=urlinfo.indexOf("?");                       //设置参数字符串开始的位置
+if(offset==-1){                          //判断参数是否存在
+    //document.write ("没有指定参数!");
+}
+else
+{
+    newsidinfo=urlinfo.substr(offset+1,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+    newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割
+   // document.write ("您要传递的变量是"+newsids[0]);
+   // document.write ("<br/>")
+   // document.write ("您要传递的参数值是"+newsids[1]); 
+   //	var updir=
+  // 	updir=updir.concat("/");
+     document.getElementById("dir").value=decodeURI(newsids[1]);
+   
+}
+
+
+function fileSelected() {
+        var file = document.getElementById('file').files[0];
+        if (file) {
+          var fileSize = 0;
+          if (file.size > 1024 * 1024)
+            fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+          else
+            fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+          document.getElementById('name').innerHTML = 'Name: ' + file.name;
+          document.getElementById('size').innerHTML = 'Size: ' + fileSize;
+		  var fd= (file.name).lastIndexOf(".");
+		  var file_type=(file.name).substr(fd+1);
+		  
+         if(file_type=="js")
+        	 document.getElementById('dir').value =js_dir;
+         else if(file_type=="html")
+          	document.getElementById('dir').value =html_dir;
+         else if(file_type=="swf")
+          	document.getElementById('dir').value =swf_dir;
+         else if(file_type=="app")
+          	document.getElementById('dir').value =app_dir;
+         else
+         	document.getElementById('dir').value =tmp_dir;
+
+        }
+      }
+      
+ function diradd_reboot()
+ {
+	 var dir_val="";
+	 if(reboot.checked){
+	dir_val=document.getElementById('dir').value;
+	 document.getElementById('dir').value=dir_val+"&reboot";
+	 
+	 }
+	 else{
+		 dir_val=document.getElementById('dir').value;
+		 if(dir_val.indexOf("&reboot")){
+				dir_val=dir_val.substring(0,dir_val.length-7);
+				document.getElementById('dir').value=dir_val;
+				
+		 }
+		 
+		 
+		 
+	}
+	 
+}
+      
+</script>
+        
+      
+        
+

@@ -1,0 +1,5 @@
+#! /bin/sh
+PATH=/am7x/bin:$PATH
+LD_LIBRARY_PATH=/am7x/lib:/lib:/usr/lib
+export PATH  LD_LIBRARY_PATH
+

@@ -1,0 +1,10 @@
+
+#
+# /etc/fstab
+# Created by anaconda on Fri Jul  3 09:25:30 2009
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or vol_id(8) for more info
+#
+/dev/nftla1         /mnt                       vfat    defaults        1 1
+

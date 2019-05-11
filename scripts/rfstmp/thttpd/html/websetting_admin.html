@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="format-detection" content="telephone=no">
+<!--
+[sysinfo_check_ezmusic_flag][7429] -- ezmusic_flag: 0  /?
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+-->
+<!-- External CSS -->
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+
+<!--  upload bar 
+ <script src="js/jquery/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script> 
+-->
+<!--
+<script  src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+-->
+<!-- JavaScript -->
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="js/setting.js"></script>
+<script src="js/main.js?1.0"></script>
+<script src="js/jquery.md5.js"></script>
+<script type="text/javascript">
+Get_first_all_data();
+$(document).ready(function()
+ {	  
+	//delay_get_data();
+	//delay_get_data_function();
+	main();
+	delay_get_data_admin();
+	$("#list_load").find("a").css({"background-color":"transparent","font-weight":"normal","color":"#FFFFFF","text-shadow":"none","border":"0px","border-bottom":"1px inset #B7B7BB"});
+	$("#list_load").find("span").addClass("text");
+	$("#list_load").find("span").css({"width":"30%","background-color":"transparent","-webkit-border-radius":"0px","border-radius":"0px","border-color":"rgba(85, 85, 85, 0)","color":"#FFFFFF","text-shadow":"none","text-align":"right","right":"2.6em"});
+	$("#list_load").find("h1").css('width','65%');
+	$("#foot_cus").css({'border':'0px solid #e9e9e9','background-image':'url(img/footbk.jpg)',"color":"#FFFFFF","text-shadow":"none"});
+ });
+
+</script>
+<!--
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script src="js/jquery/jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+<script src="js/jquery/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+<link rel="stylesheet" href="js/jquery/jquery-ui-1.11.4.custom/jquery-ui.min.css">
+-->
+</head>
+<!-- In-document CSS -->
+<style type="text/css">
+<!--
+ul li a.ui-btn-icon-right:after {
+	background-color: #666 /*{global-icon-color}*/;
+	background-color: rgba(0,0,0,0) /*{global-icon-disc}*/;
+}
+#arrow_bk.ui-btn-icon-notext:after {
+	background-color: #666 /*{global-icon-color}*/;
+	background-color: rgba(0,0,0,0) /*{global-icon-disc}*/;
+}
+.ui-mobile .ui-page {
+	background-color:#211C39;
+}
+.ui-page-theme-a .ui-panel-wrapper {
+	text-shadow: none;
+	font-weight:normal;
+	background-color:transparent;
+	//border: 3px solid #FF0000;
+}
+.list_custom
+{
+	background-color: transparent /*{a-bup-background-color}*/;
+	border-color: #ddd /*{a-bup-border}*/;
+	color: #333 /*{a-bup-color}*/;
+	text-shadow: none;
+}
+
+
+.ui-listview>.ui-li-has-icon>img:first-child, .ui-listview>.ui-li-has-icon>.ui-btn>img:first-child {
+	//top: .5em;
+	max-height: 2em;
+	max-width: 2em;
+}
+.ui-listview>.ui-li-has-icon>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-icon {
+	padding-left: 3em;
+}
+
+.ui-list > li > a{
+	margin: 0px;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	list-style: outside none none;
+}
+<!-- progressbar css from standby jquery css lib-->
+.ui-widget-content {
+	border: 1px solid #A2A2A2;
+	background: #fcfdfd url("images/ui-bg_inset-hard_100_fcfdfd_1x100.png") 50% bottom repeat-x;
+	color: #222;
+}
+.ui-widget-header {
+	border: 1px solid #e9e9e9;
+	color: #eaf5f7;
+	font-weight: bold;
+	margin: -1px;
+	height: 100%;
+	background-color: #999999;
+	background-image: url(images/ui-bg_gloss-wave_75_2191c0_500x100.png);
+	background-repeat: repeat-x;
+	background-position: 50% 50%;
+}
+.ui-progressbar {
+	position: relative;
+	height: 2em;
+	text-align: left;
+	overflow: hidden;
+	border: 1px solid #CCCCCC;
+}
+.progress-label {
+    position: absolute;
+    left: 45%;
+    top: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+}
+.ui-popup-screen {
+	background-image: none;
+	position: fixed; 
+	//width: 100%; 
+	//height: 100%; 
+}
+.ui-overlay-a{
+	background-color: #a7a7a7 /*{a-page-background-color}*/;
+}
+.ui-btn-icon-notext:after {
+	top: 5%;
+	margin-top: 1px;
+}
+
+.bk-ico{
+	//background-color:#CCCCCC;
+	padding:2px;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+}
+.eq_bk{
+    margin: 10px auto;
+    //background-color: #CCCCCC;
+	border: 2px inset #d6d6d6;
+    border-radius: 10px;
+    max-width: 80%;
+}
+.STYLE1 {
+	font-size: 16px;
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.warn_txt {
+	font-size:13px;
+	text-align:center;
+	//margin-bottom:10px;
+	width:280px;
+	//	height:30px;
+	//border: 1px solid #d6d6d6;
+	display: block;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.text{
+	padding:5px;
+	border: 1px solid #333333;
+	background-image: url(img/bk_alph.png);
+	background-repeat:repeat;
+		
+	max-width:30%;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	-webkit-text-overflow:ellipsis;
+	-moz-text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+	-webkit-border-radius: 0px;
+	border-radiu:0px;
+	top: 40%;
+}
+
+.airviewonoff{
+	position: absolute;
+	right: 1.8em;
+	top: 15%;
+	//margin-top: -.88em;
+}
+.hdmicec_txt {
+	float:left;
+	text-align:right;
+	margin-top:13px;
+}
+.info_txt{
+	font-size:.75em;
+	font-weight:normal;
+	color:#FFFFFF;
+	text-decoration:none;
+	//margin-left:17px;
+	border: 0px solid #26D6FE;
+	//text-align:center;
+	display:inline;
+}
+.info_txt_title{
+	margin-left:17px;
+}
+.info_ico_d{
+	background-image:url(js/jquery.mobile-1.4.5/images/icons-png/carat-d-white.png);
+	background-size:14px;
+	-moz-background-size:14px; /* �ϰ汾�� Firefox */
+	background-repeat:no-repeat;	
+	background-position:0px 2px;	
+	background-origin:border-box;	
+	width:14px;
+	height:29px;
+	padding-left:17px;
+}
+.info_ico_u{
+	background-image:url(js/jquery.mobile-1.4.5/images/icons-png/carat-u-white.png);
+	background-size:14px;
+	-moz-background-size:14px; /* �ϰ汾�� Firefox */
+	background-repeat:no-repeat;	
+	//background-position:left;
+	background-position:0px 3px;	
+	background-origin:border-box;	
+	width:14px;
+	height:29px;
+	padding-left:17px;
+}
+@media screen and (min-width: 600px)
+{
+	.info_txt{
+		font-size:1em;
+	}
+}
+-->
+</style>
+<body>
+<!-- call waiting -->	
+<div id="waitbk" style="display:block;" class="ui-popup-screen ui-overlay-b in"> </div>
+<div id="waiting" style="display:block;" class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon-loading"></span><h1>loading</h1></div>
+<div data-role="page" id="pagehome" data-theme="a" data-transition="none">
+	<div data-role="header"  data-position="fixed" data-fullscreen="false">
+	
+		<a href="#nav-panel" data-icon="bars" data-iconpos="notext" id="pro_1">Menu</a>
+		<a href="#add-form" data-icon="gear" data-iconpos="notext"  id="pro_2">Add</a>
+		<span  id="log_txt" style="display:none; position:absolute; top:13px; right:42px; font-weight:normal; font-size:80%;"></span>
+		
+		<div id="for_ezmu_esca" style="display:none;">
+			<a href="#" onClick="window.location.reload()" class="ui-btn ui-corner-all ui-icon-gear ui-btn-icon-notext ui-btn-left" disable="" id="menu_left">setup</a>
+			<a href="#"  onClick="javascript:back_ezcastapp();" data-icon="back" data-iconpos="notext" class="ui-link ui-btn-right ui-btn ui-icon-back ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button" id="menu_right">back</a>
+		</div>
+			  
+		<h1 style="margin:0;margin-left:40px; margin-right:80px;"><div id="set_title_admin" style="display:block;"></div></h1>
+	</div><!-- /header -->
+  
+  
+<div style="display:none">
+	<div id="aaa" style="background-color:#CCCCCC; height:50px;"></div>
+	<span id="bbb" style="background-color:#dddddd;"></span>
+	<span id="upg_txt" style="background-color:#dddddd;">no!</span>
+	<span id="upg_txt_2" style="background-color:#dddddd;">no!</span>
+	<span id="upg_txt_3" style="background-color:#dddddd;">no!</span>
+	<span id="upg_txt_4" style="background-color:#dddddd;">no!</span>
+</div>
+
+<div id="list_load" role="main" class="ui-content" style="display:none">
+	<ul data-role="listview" data-inset="true" style="-webkit-border-radius:0.1px;border-radius:0.1px; margin-top:0px;">
+		<li id="adminpas"><a href="javascript:void(0)" onClick="To_adminpass()" target="_self"><img src="img/admin_password.png" alt="" class="ui-li-icon"><h1 id="adminpas_txt">Admin Password</h1></a></li>
+		<li id="WiFiEnterprise"><a href="javascript:void(0)" onClick="To_wifiEnterprise()" target="_self"><img src="img/Wifi_Enterprise.png" alt="WiFiEnterprise" class="ui-li-icon"><h1 id="Enterprise_txt">WiFi Enterprise</h1></a></li>
+		<li id="host_authority"><a href="javascript:void(0)" onClick="To_host_authority()" target="_self"><img src="img/Host_authority.png" alt="" class="ui-li-icon"><h1 id="host_authoryty_txt">host authority</h1></a></li>
+		<li id=""><a href="#internet_access_set" data-rel="popup"  data-position-to="window"><img src="img/network_control.png" alt="reset" class="ui-li-icon"><h1 id="Internet_Access">Internet access control</h1></a></li>
+		<li id="snmpmenu"><a href="javascript:void(0)" onClick="To_snmp()" target="_self"><img src="img/SNMP.png" alt="snmp" class="ui-li-icon"><h1 id="snmp">SNMP</h1></a></li>
+		<li id="otaserver"  style="display:none"><a href="javascript:void(0)" onClick="To_otaserver()" target="_self"><img src="img/OTA_URL.png" alt="snmp" class="ui-li-icon"><h1 id="otaserver_txt">OTA URL</h1></a></li>
+		<li id="connectionmode"><a href="#connection_sel" data-rel="popup"  data-position-to="window"><img src="img/connection_mode_direct1.png" alt="connection_mode" class="ui-li-icon" id="connection_mode_icon"><h1 id="connection_mode_txt">connection_mode_txt</h1><span class="ui-li-count" id="connection_mode"></span></a></li>
+		<li id="upgrade"><a href="#"><img src="img/upgrade_ico.png" alt="upgrade" class="ui-li-icon"><h1 id="upgrade_txt">OTA upgrade</h1><span class="ui-li-count" id="new_version"></span></a></li>
+		<li id="reset_init"><a href="#resetpop" data-rel="popup"  data-position-to="window"><img src="img/reset.png" alt="reset" class="ui-li-icon"><h1 id="title_rest">reset to default</h1></a></li>
+		
+	</ul>
+</div>   
+
+<!-- /content -->
+<form name="config-form" id="config-form" >
+	<input name="output_mode_index" type="hidden" id="output_mode_index" >
+	<input name="lan_index" type="hidden" id="lan_index">
+
+	<input  name="eq_index" type="hidden" id="eq_index" value="" width="100">
+	<input  name="eq_value" type="hidden" id="eq_value" value="" width="100">
+	<input name="custom_index" type="hidden" id="custom_index" value="">
+	<input name="custom_or_other" type="hidden" id="custom_or_other" value="">
+
+	<input name="current_res_value" type="hidden" id="current_res_value" >
+	<input name="res_value" type="hidden" id="res_value" >
+	<input name="cgi_sun_path" type="hidden" id="cgi_sun_path">
+	<input name="connection_mode_value" type="hidden" id="connection_mode_value">
+</form>
+
+<!-- popup  -->	
+<div data-role="popup" id="Autoplay_set" data-overlay-theme="b" style="min-width:300px;">
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content" >
+		<div align="center" style="margin-left:auto; margin-right:auto; width:200px;"><div class="hdmicec_txt">Auto play:</div>
+			<div id="Autoplay_control">
+			 <select name="Autoplay_val" id="Autoplay_val" data-role="flipswitch">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+			   </select>
+			</div>
+		</div>	
+		<form id="ezchanel_data">
+			<input type="hidden" value=""  name="ezchannel_cmd" id="ezchannel_cmd">
+			<input type="hidden"  value=""  name="ezchannel_open" id="ezchannel_open">
+		</form>
+	</div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_autoplay_ok">OK</a>
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_autoplay_cel">Cancel</a>
+	</p>
+</div>
+
+<div data-role="popup" id="Password" data-overlay-theme="b" style="min-width:300px;">
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content" >
+		 <div align="center" style="margin-left:auto; margin-right:auto; "><div class="hdmicec_txt" style="margin-right:10px;"><legend  id="le_password">Password:</legend></div>
+			<div id="hidenssid">
+				<fieldset>
+					<input type="text" value="" name="appsk" id="appsk" >  
+				 </fieldset>
+			</div>
+		  </div>
+
+		
+		<div id="psk_warn_txt" class="warn_txt"></div> 
+	</div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_appsk_ok">OK</a>
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_appsk_cel">Cancel</a>
+	</p>
+</div>
+
+<div data-role="popup" id="ignoressidmode" data-overlay-theme="b" style="min-width:300px;">
+
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div align="center" style="margin-left:auto; margin-right:auto; width:200px; " id="ignoressid_control"><div id="ignoressid_txt" class="hdmicec_txt">Hide SSID:</div>
+			<div id="ignoressid">
+				<select name="ignoressid_val" id="ignoressid_val" data-role="flipswitch">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+				</select>
+			</div>
+	</div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="ignoressid_ok">OK</a>
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="none" id="ignoressid_cel">Cancel</a>
+	</p>	
+</div>
+<!-- /popup end-->	
+
+<div data-role="popup" id="ezairmode" data-overlay-theme="b" style="min-width:300px;">
+
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content">
+		  <fieldset data-role="controlgroup" data-iconpos="right">
+			<legend align="center" id="ezairmode_set"></legend>
+			<label id="mode_0_txt" for="mode_0">Mirror Only</label>
+			<input type="radio" name="ezairmodemode_item" id="mode_0" value="1" >
+			<label id="mode_1_txt" for="mode_1">Mirror+Streaming</label>
+			<input type="radio" name="ezairmodemode_item" id="mode_1" value="0">	
+			  </fieldset>
+	</div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="ezairmode_ok">OK</a>
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="none" id="ezairmode_cel">Cancel</a>
+	</p>	
+</div>
+
+<div data-role="popup" id="softapconnect" data-overlay-theme="b" style="min-width:300px;">
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	 <div role="main" class="ui-content" >
+	  <fieldset data-role="controlgroup" data-iconpos="right">
+        <legend align="center" style="margin-bottom:10px; margin-left:auto; margin-right:auto;">users for direct link</legend>
+		<label for="mun_0" id="">16 link</label>
+        <input type="radio" name="softapconnect_item" id="mun_0" value="16" >
+        <label for="mun_1" id="">32 link</label>
+        <input type="radio" name="softapconnect_item" id="mun_1" value="32" >
+        <label for="mun_2" id="">64 link</label>
+        <input type="radio" name="softapconnect_item" id="mun_2" value="64">	
+      </fieldset>
+	</div>
+	<div id="softapconnect_warn" class="warn_txt"></div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="softapconnect_ok">OK</a>
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="none" id="softapconnect_cel">Cancel</a>
+	</p>	
+</div>
+<!-- /popup end-->	
+<!--connection_sel for popup-->		
+<div data-role="popup" id="connection_sel" data-overlay-theme="b" style="min-width:300px;">
+	<div id="con_sel" style="display:block;">
+			<div data-role="header">
+				<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right" id="close">Close</a>
+			<h1  style="margin:0;"></h1>
+			</div>
+		 <div role="main" class="ui-content">
+		  <fieldset data-role="controlgroup" data-iconpos="right">
+			<legend id="sel_connection"></legend>
+			<label for="con_0" id="con_0_txt"></label>
+			<input type="radio" name="connection_choose" id="con_0" value="0" >
+			<label for="con_1" id="con_1_txt"></label>
+			<input type="radio" name="connection_choose" id="con_1" value="1" >
+			<label for="con_2" id="con_2_txt"></label>
+			<input type="radio" name="connection_choose" id="con_2" value="2" >
+		  </fieldset>
+			 <div id="con_text" style="display:none"></div> 
+			 <div id="con_text2" style="display:none"></div> 
+		</div>
+		<p align="center" style="border-top:1px solid #CCCCCC">
+	<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_connection_ok">OK</a>
+	<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="none" id="set_connection_cal">Cancel</a>
+		</p>
+	</div>
+<!--  end-->	
+	<div id="con_warn" style="display:none;">
+			<div data-role="header">
+				<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right" >Close</a>
+				<h1  style="margin:0;"></h1>
+			</div>
+			<div role="main" class="ui-content">
+				<div id="con_dialog_msg" align="center" style="width:280px;"></div>
+				<div id="con_dialog_msg2" align="center" style="width:280px;"></div>
+			</div>
+				<div id="con_dialog_msg3" style="color:#ff0000; margin-top:8px; font-size:0.8em; text-align:center;"></div>
+				<p align="center" style="border-top:1px solid #CCCCCC">
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"  id="connection_ent">OK</a>
+				</p>
+	</div>
+</div>
+<!-- /popup end-->	
+
+<div data-role="popup" id="resetpop" data-overlay-theme="b" style="min-width:300px;min-height:150px;">
+	<div id="dialog1" style="display:none;">
+		<div id="reset_warn" style="text-align:center;border: 0px solid #26D6FE;margin-top:9%;margin-bottom:9%; margin-left:10px; margin-right:10px;"></div>
+		<p align="center" style="border-top:1px solid #CCCCCC">
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="reset_ent">Yes</a>
+			<a href="#pagehome" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="reset_cancl">No</a>
+		</p>
+	</div>
+	<div id="dialog2" style="display:none;">
+		<div id="reset_message_txt" style="text-align:center;border: 0px solid #26D6FE;margin-top:9%;margin-bottom:9%; margin-left:10px; margin-right:10px;"></div>
+		<p align="center" style="border-top:1px solid #CCCCCC">
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"  id="reset_ok">OK</a>
+		</p>
+	</div>
+	
+</div>
+<!-- /popup end-->
+<div data-role="popup" id="internet_access_set" data-overlay-theme="b" style="min-width:300px;">
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content" >
+		  <fieldset data-role="controlgroup" data-iconpos="right">
+			<legend id="sel_internet_access"></legend>
+			<label for="internet_access_con_0" id="con_0_txt"></label>
+			<input type="radio" name="internet_access_choose" id="internet_access_con_0" value="0" >
+			<label for="internet_access_con_1" id="con_1_txt"></label>
+			<input type="radio" name="internet_access_choose" id="internet_access_con_1" value="1" >
+			<label for="internet_access_con_2" id="con_2_txt"></label>
+			<input type="radio" name="internet_access_choose" id="internet_access_con_2" value="2" >
+		  </fieldset>
+			 <div id="con_text" style="display:none"></div> 
+			 <div id="con_text2" style="display:none"></div>
+			 
+		<p align="center" style="border-top:1px solid #CCCCCC">
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_internet_access_ok">OK</a>
+			<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_internet_access_cel">Cancel</a>
+		</p>
+	</div>
+</div>	
+<!-- /popup end-->	
+<div data-role="popup" id="wlanset" data-overlay-theme="b" style="min-width:300px;">
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content">
+			
+	<fieldset data-role="fieldcontain">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="40%" id="mode_lan">Automatic</td>
+			<td align="center">
+				<div id="lansetonoff" style="width:100px">
+				<select name="lanset" id="lanset" data-role="flipswitch">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+				</select>
+				</div>
+			</td>
+		 </tr>
+		  <tr>
+		  	<td id="ip_lan">IP Address</td>
+		    <td><input type="text" value="" name="ipaddr" id="ipaddr"></td>
+		  </tr>
+		  
+		<tr>
+	  	  <td id="gateway_lan">Gateway</td>
+	      <td><input type="text" value="" name="gateway" id="gateway"></td>
+	  </tr>
+		<tr>
+		  <td id="netmast_lan">Netmask</td>
+		  <td><input type="text" value="" name="netmask" id="netmask" ></td>
+	  </tr>
+		<tr>
+		  <td>DNS1</td>
+		  <td><input type="text" value="" name="dns1" id="dns1" ></td>
+	  </tr>
+		<tr>
+		  <td>DNS2</td>
+		  <td><input type="text" value="" name="dns2" id="dns2" ></td>
+	  </tr>
+		</table>
+
+	</fieldset>
+		
+	</div>
+	<div id="ip_format" style="text-align:center;"></div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-inline" id="lan_ent">OK</a>
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="lan_set_cancel">Cancel</a>
+	</p>
+</div>
+
+<!-- /popup end-->	
+
+<div data-role="popup" id="wifi_client_set" data-overlay-theme="b" style="min-width:300px;">
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content">
+			
+	<fieldset data-role="fieldcontain">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="40%" id="wifi_client_mode_lan">Automatic</td>
+			<td align="center">
+				<div id="wifi_client_setonoff" style="width:100px">
+				<select name="wifi_client_lanset" id="wifi_client_lanset" data-role="flipswitch">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+				</select>
+				</div>
+			</td>
+		 </tr>
+		  <tr>
+		  	<td id="wifi_client_ip_lan">IP Address</td>
+		    <td><input type="text" value="" name="wifi_client_ipaddr" id="wifi_client_ipaddr"></td>
+		  </tr>
+		  
+		<tr>
+	  	  <td id="wifi_client_gateway_lan">Gateway</td>
+	      <td><input type="text" value="" name="wifi_client_gateway" id="wifi_client_gateway"></td>
+	  </tr>
+		<tr>
+		  <td id="wifi_client_netmast_lan">Netmask</td>
+		  <td><input type="text" value="" name="wifi_client_netmask" id="wifi_client_netmask" ></td>
+	  </tr>
+		<tr>
+		  <td>DNS1</td>
+		  <td><input type="text" value="" name="wifi_client_dns1" id="wifi_client_dns1" ></td>
+	  </tr>
+		<tr>
+		  <td>DNS2</td>
+		  <td><input type="text" value="" name="wifi_client_dns2" id="wifi_client_dns2" ></td>
+	  </tr>
+		</table>
+
+	</fieldset>
+		
+	</div>
+	<div id="wifi_client_ip_format" style="text-align:center;"></div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-inline" id="wifi_ent">OK</a>
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="wifi_set_cancel">Cancel</a>
+	</p>
+</div>
+
+
+<div data-role="popup" id="ota" data-overlay-theme="b" style="min-width:300px;">
+	<div id="1" style="display:block">
+			<div data-role="header">
+			<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right" id="close">Close</a>
+			<h1  style="margin:0;"></h1>
+			</div>
+			<div role="main" class="ui-content">
+				<span id="local_text"></span><input type="text" name="textinput-1" id="local_version" placeholder="Current version" value="" >
+				<span id="server_text"></span><input type="text" name="2222" id="server_version" placeholder="Sever version" value="">
+			</div>
+				<p align="center" style="border-top:1px solid #CCCCCC">
+					<a href="#" class="ui-btn ui-shadow ui-corner-all  ui-btn-inline" id="upgrade_OK">upgrade</a>
+					<a href="#pagehome" class="ui-btn ui-shadow ui-corner-all ui-btn-inline" id="upgrade_CANCEL">Cancel</a>
+				</p>
+		</div>
+	
+		
+	<div id="2" style="display:none">  <!--because only a popup layer, so using a switch display div -->
+		<div data-role="header">
+			<h1  style="margin:0;"></h1>
+		</div>
+		<div role="main" class="ui-content">
+			<!-- Progressbar -->
+			 <div  class="ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="2">
+				 <span class="progress-label" style="margin:0;">load...</span>
+				 <div class="ui-progressbar-value ui-widget-header ui-corner-left" style="display: block; width: 0%;"></div>
+			 </div>
+		</div>
+		<div id="upgrade_warn" class="warn_txt"></div>
+		<span id="aa_txt" style="display:none;"></span>
+
+	</div>
+		
+</div>
+
+
+<div data-role="popup" id="ota_fail" data-overlay-theme="b" style="min-width:300px;">
+		<div data-role="header">
+			<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<h1  style="margin:0;"></h1>
+		</div>
+		<div role="main" class="ui-content">
+			<div id="warn"  style="display:none">
+				<div id="upgrade_dialog_msg" style="text-align:center;"></div>
+			</div>
+			<div id="warn_time"  style="display:none">
+				<div id="upgrade_dialog_msg2" style="text-align:center;"></div>
+				<div style="text-align:center;"><span id="upgrade_tick" style="width:5px;"></span><span id="upgrade_time_tick_msg"></span></div>
+			</div>
+		</div>
+			<p align="center" style="border-top:1px solid #CCCCCC">
+				<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-inline" id="ota_awrn_ok">OK</a>
+			</p>
+</div>
+
+<!-- /popup end-->	
+
+<div id="foot_cus" data-role="footer" data-position="fixed" data-fullscreen="false">
+	<div id="showinfo"  align="center" style="height:30px; width:50%; border: 0px solid #26D6FE; margin:0 auto;">
+		<span id="showinfo_ico" class="info_ico_u"><div id="info_string" class="info_txt" style="line-height:29px;">info</div></span>
+	</div>
+
+	<div id="anyinfo" class="info_txt">
+	
+	<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
+	  <tr>
+		<td width="60%"><span id="ap_ssid_txt">SSID : </span><span id="ap_ssid"></span></td>
+		<td><span id="ap_psk_txt">Password : </span><span id="ap_psk"></span></td>
+	  </tr>
+	</table>
+	</div>	
+  
+	<div id="more_info" class="info_txt" style="display:none;">
+	<table width="95%" border="0" cellspacing="0" cellpadding="0"  align="center">
+	  <tr id="for_box_mac" style="display:none">
+		<td width="60%"><span>2.4G MAC : </span><span id="24G_mac_address"></span></td>
+		<td><span>LAN MAC : </span><span id="LAN_mac_address"></span></td>
+	  </tr>
+	  <tr>
+		<td width="60%"><span id="wlan0">MAC : </span><span id="connect_mac_address"></span></td>
+		<td><span>IP : </span><span id="ip1_txt"></span></td>
+	  </tr>
+	  <tr  id="for_other">
+		<td><span>Firmware Version : </span><span id="current_ver"></span></td>
+		<td valign="middle"><div id="ip0show"><img src="img/ip0.png" name="ip0" align="absbottom" class="bk-ico" id="ip0"><span id="ip0_txt"></span></div></td>
+	  </tr>
+	  <tr  id="for_other2">
+		<td><span id="current_24channel"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="current_5channel"></span></td>
+		<td>&nbsp;</td>
+	  </tr>
+	</table>
+	</div>
+	<div id="ezwire_info" class="info_txt" style="display:none; width:95%; margin:auto;"><span>Firmware Version : </span><span id="ezwire_ver"></span></div>
+</div><!-- /footer -->
+
+	<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+		<ul data-role="listview" >
+            <li data-icon="delete"><a href="#" data-rel="close" id="IDS_MENU_LAN6">Close menu</a></li>
+				<span  id="add_menu" class="ui-list"></span>
+			<!-- 
+add by js
+			-->
+		</ul>
+	</div><!-- /panel -->
+<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
+        <form class="userform" >
+        	<h2>Login</h2>
+            <label for="name">Username:</label>
+            <input type="text" name="name" id="usr_name" value="admin" data-clear-btn="true" data-mini="true" disabled="disabled" >
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="usr_password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+            <div class="ui-grid-a">
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" id="cancle_login">Cancel</a></div>
+                <div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" id="login_usrname_ok">OK</a></div>
+			</div>
+			
+		<div style="text-align:left; margin-top:20px; font-size:80%;">Forget admin password: email to forgetpassword@iezvu.com.</div> 
+
+        </form>
+		<div id="loginin_txt" style="display:none;"> 	
+			<div style="margin-top:20px;" align="center"><span id="show_usrname"></span> ,<span id="IDS_MENU_LAN5">welcome</span> <span> ! </span></div>
+			<p align="center"><a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="login_out">Logout</a></p>
+		</div>
+	</div><!-- /panel -->
+
+
+
+</div> <!-- /page -->
+
+
+</body>
+</html>

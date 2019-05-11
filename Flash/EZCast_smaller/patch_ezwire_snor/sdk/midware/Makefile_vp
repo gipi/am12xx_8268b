@@ -1,0 +1,49 @@
+
+HEADERS_FLAG  = -I../inc
+HEADERS_FLAG += -I../../osapi
+HEADERS_FLAG += -I../../../../include
+
+OPTI_FLAG 		= -O3
+DEFINE_FLAG		= -DMIPS
+
+CCFLAG		= -EL -muclibc -msoft-float -c -mips32r2 -Wall $(OPTI_FLAG) $(HEADERS_FLAG) $(DEFINE_FLAG)
+
+LDFLAG		= -EL -muclibc -msoft-float -O1 -lpthread -lrt -ldl -lm
+
+GCC			= mips-linux-gnu-gcc
+OBJDUMP		= mips-linux-gnu-objdump
+OBJCOPY		= mips-linux-gnu-objcopy
+OBJSIZE		= mips-linux-gnu-size
+AR			= mips-linux-gnu-ar rvs
+
+CC			= $(GCC) $(CCFLAG)
+LD			= $(GCC) $(LDFLAG)
+
+OBJS  = vp_test.o
+OBJS += lib_osapi.so
+#OBJS += libvideo_player.so
+
+DEPS	 = ../../osapi/osapi.h
+DEPS	+= ../inc/av_api.h
+DEPS	+= Makefile_vp
+
+all: vp_test.out
+	$(OBJSIZE) vp_test.out
+
+vp_test.o: vp_test.c $(DEPS)
+	$(CC) -o $@ $<
+
+
+### link all obj files 
+
+vp_test.out: $(OBJS)
+	rm -f vp_test.out
+	$(LD) -o vp_test.out $(OBJS)
+	$(OBJDUMP) vp_test.out --disassemble >disasm.txt
+
+clean:
+	rm -f *.o
+	rm -f *.so
+	rm -f *.out
+	rm -f *.txt
+

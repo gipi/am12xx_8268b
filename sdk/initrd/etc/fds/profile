@@ -1,0 +1,19 @@
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+PS1='[\u@\h \W]\$ '
+
+HOSTNAME='/bin/hostname'
+
+export PATH HOSTNAME PS1
+
+alias l.='ls -d .[a-zA-Z]* --color=tty'
+
+alias rm='rm -i'
+
+alias cp='cp -i'
+
+alias mv='mv -i'
+
+export PATH=/usr/local/bin:$PATH
+
+export PATH=/usr/local/sbin:$PATH 

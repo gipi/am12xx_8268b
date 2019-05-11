@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<%download_items("charset");%>" />
+<title></title>
+<style type="text/css">
+<!--
+* {margin:0; padding:0; color:#FFF; font-size:12px; font-family:Arial,sans-serif; overflow-x:hidden;}
+td {overflow-y:hidden;}
+A {color:#FFF; text-decoration: none; font-weight: bold;}
+A:hover {text-decoration: underline;}
+#lnk td {padding-right:5px;}
+.copy_right {padding-left:10px; font-size:12px; color:#494949; font-weight: bold;}
+select {color:#000;}
+option {color:#000;}
+.tit {color:#000; font-weight: bold; font-size:14px;}
+.stat {padding-left:25px; font-size:13px;}
+.pic {background:url('image/projector_icon.bmp') no-repeat right bottom;}
+.DOWNLOAD {font-weight: normal;}
+-->
+</style>
+<script language="javascript">
+	function showIMG(obj,tp){
+		if(tp)
+			obj.style.background = "url(image/menu_f.png) no-repeat right";
+		else
+			obj.style.background = "";
+	}
+	function sendlang() {
+		document.getElementById('applybtn').click();
+	}
+</script>
+</head>
+
+<body>
+	<table bgcolor="#000" width="760" border="0" cellpadding="0" cellspacing="0" style="margin-left:auto; margin-right:auto;">
+		<!--<form name="downloadform" method="post" action="/form/download_cgi">
+			<input id="applybtn" name="lang" value="apply" type="submit" style="display:none">-->
+		<tr><td colspan="2" width="760" height="70" background="image/TopLogo.gif"></td>
+			<!--<td width="760" colspan="2" height="70"><iframe src="title.htm" scrolling="No" frameborder="no" width="760" height="70"></iframe></td>-->
+		</tr>
+		<tr>
+			<td height="25" style="font-size:12px;">
+				<form name="logoutform" method="post" action="/form/logout_cgi" style="overflow:hidden;">
+					<input id="logoutbtn" name="logout" value="log_out" type="submit" style="display:none">
+				<a href="javascript:document.getElementById('logoutbtn').click();">ACER</a><b> &gt;</b> 
+				<a href="download.asp"><%download_items("LINK_DOWNLOAD");%></a>
+				</form>
+			</td>
+			<td align="right">
+				<form name="downloadform" method="post" action="/form/download_cgi">
+					<input id="applybtn" name="lang" value="apply" type="submit" style="display:none">
+				<select name="language" id="lang" onchange="sendlang()">
+					<option value="1" <%download_value("English");%>>English</option>
+          <option value="2" <%download_value("Traditional");%>>Traditional Chinese</option>
+          <option value="3" <%download_value("Simplified");%>>Simplified Chinese</option>
+          <option value="4" <%download_value("Japanese");%>>Japanese</option>
+          <option value="5" <%download_value("German");%>>German</option>
+          <option value="6" <%download_value("French");%>>French</option>
+          <option value="7" <%download_value("Italian");%>>Italian</option>
+          <option value="8" <%download_value("Spanish");%>>Spanish</option>
+          <option value="9" <%download_value("Portugese");%>>Portugese</option>
+          <option value="10" <%download_value("Russian");%>>Russian</option>
+         </select>
+         </form>
+			</td>
+		</tr>
+			
+		<tr><td bgcolor="#000" width="200" height="180" valign="top" style="font-size:12px;">
+				<!--<iframe src="link_adm.htm" scrolling="No" frameborder="no" width="200"></iframe>-->
+			<table id="lnk" width="200" border="0" cellpadding="0" cellspacing="0">
+				<tr><td width="200" height="15"></td></tr>
+				<tr><td height="24" align="right" onmouseover="showIMG(this,1)" onmouseout="showIMG(this,0)">
+					<a href="download.asp"><%download_items("LINK_DOWNLOAD");%></a></td></tr>
+				<tr><td height="24" align="right" onmouseover="showIMG(this,1)" onmouseout="showIMG(this,0)">
+					<a href="conference.asp"><%download_items("LINK_CONFERENCE");%></a></td></tr>
+				<tr><td height="24" align="right" onmouseover="showIMG(this,1)" onmouseout="showIMG(this,0)">
+					<a href="login.asp"><%download_items("LINK_ADVANCE");%></a></td></tr>
+				<tr><td height="24" align="right" onmouseover="showIMG(this,1)" onmouseout="showIMG(this,0)">
+					<a href="crestron.asp">Crestron</a></td></tr>
+			</table>
+			</td>
+			
+			<!--<td width="5"></td>-->
+			<td bgcolor="#494949" width="560" valign="top">
+				<table width="555" class="pic" border="0" cellpadding="0" cellspacing="0">
+					<tr><td width="30" height="20"></td>
+							<td width="525"></td>
+					</tr>
+					<tr><td width="30" height=30"></td>
+							<td width="525" class="tit"><%download_items("DOWNLOAD_MSG1");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat"><%download_items("DOWNLOAD_MSG2");%></td>
+					</tr>
+					<tr><td width="30" height="45"></td>
+							<td width="525" class="stat"><img src="image/pc_icon.bmp">
+								<a href="Acer_W7.exe" class="DOWNLOAD" style="color:#d4923a">Windows OS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="EZWifi.pkg" class="DOWNLOAD" style="color:#d4923a">Mac OS</a>
+							</td>
+					</tr>
+					<tr><td width="30" height="15"></td>
+							<td width="525"></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat"><%download_items("DOWNLOAD_MSG3");%></td>
+					</tr>
+					<tr><td width="30" height="45"></td>
+							<td width="525" class="stat"><img src="image/room_view_icon.bmp">
+								<a href="http://www.crestron.com/getroomview" class="DOWNLOAD" target="_blank" style="color:#d4923a">Windows OS</a>
+							</td>
+					</tr>
+					<tr><td width="30" height=30"></td>
+							<td width="525" class="tit"><%download_items("DOWNLOAD_MSG8");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat"><%download_items("DOWNLOAD_MSG4");%> : <%download_value("wifi_set");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat"><%download_items("DOWNLOAD_MSG5");%> : <%download_value("wifi_ip");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat"><%download_items("DOWNLOAD_MSG13");%> : <%download_value("lan_ip");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat"><%download_items("DOWNLOAD_MSG6");%> : <%download_value("wifi_mac");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat"><%download_items("DOWNLOAD_MSG7");%> : <%download_value("lan_mac");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat"><%download_items("DOWNLOAD_MSG9");%> :</td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat" style="padding-left:50px;">- <%download_items("DOWNLOAD_MSG10");%> : <%download_value("sys_state");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat" style="padding-left:50px;">- <%download_items("DOWNLOAD_MSG11");%> : <%download_value("curr_src");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525" class="stat" style="padding-left:50px;">- <%download_items("DOWNLOAD_MSG12");%> : <%download_value("sys_err");%></td>
+					</tr>
+					<tr><td width="30" height="30"></td>
+							<td width="525"></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr><td class="copy_right" colspan="3" height="55" bgcolor="#000" valign="bottom">
+			Copyright &copy; 2013 Acer Inc. All Rights Reserved 
+			</td></tr>
+		<tr><td colspan="3" height="10" bgcolor="#000"></td></tr>
+		<!--</form>-->
+	</table>
+</body>
+</html>

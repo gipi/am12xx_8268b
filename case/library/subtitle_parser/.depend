@@ -1,0 +1,18 @@
+ass_parser.o: ass_parser.c
+sami_parser.o: sami_parser.c sami_parser.h \
+  ../../../case/include/subtitle_parser.h subtitle_common.h
+srt_parser.o: srt_parser.c ../../../case/include/subtitle_parser.h \
+  subtitle_common.h srt_parser.h
+ssa_parser.o: ssa_parser.c ssa_parser.h \
+  ../../../case/include/subtitle_parser.h subtitle_common.h
+subp_io_layer.o: subp_io_layer.c
+subtitle_common.o: subtitle_common.c subtitle_common.h \
+  ../../../case/include/subtitle_parser.h
+subtitle_parser.o: subtitle_parser.c \
+  ../../../case/include/subtitle_parser.h srt_parser.h subtitle_common.h \
+  ssa_parser.h sami_parser.h vobsub_parser.h vobsub_spudec.h
+vobsub_parser.o: vobsub_parser.c vobsub_parser.h \
+  ../../../case/include/subtitle_parser.h vobsub_spudec.h \
+  subtitle_common.h
+vobsub_spudec.o: vobsub_spudec.c vobsub_spudec.h vobsub_parser.h \
+  ../../../case/include/subtitle_parser.h

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="format-detection" content="telephone=no">
+<!-- External CSS -->
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<!-- JavaScript -->
+<script src="js/setting.mini.js?timeStamp="+ new Date().getTime()></script>
+<script type="text/javascript">
+
+$(document).ready(function()
+ {	  
+	delay_get_data();
+	
+ });
+ 
+</script>
+<title>Websetting</title>
+</head>
+<!-- In-document CSS -->
+<style type="text/css">
+<!--
+body {
+	font-size: 16px;
+	color: #2183ca;
+	font-family: Myriad Set Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+	//background-color: #3366CC;
+	max-width: 600px;
+	min-width: 300px;	
+	margin-left:auto;
+	margin-right:auto;
+}
+#heard{
+	margin-top: 10px;
+	font-size: 20px;
+	text-align:center;
+	font-weight: bold;
+}
+ul {
+	list-style-type:none;
+	text-decoration:none;
+	border: 0px solid #d6d6d6;
+	margin-top: 0px;
+	padding:5px;
+}
+ul li
+{
+	//color: #000000;
+    //padding-left: 1px; 
+	//border: 1px solid #d6d6d6;	
+	display: block;
+	position: relative;
+	overflow: visible;
+	//display:inline;
+	float:none;
+
+}
+ul a{
+	color: #2183ca;
+	text-decoration:none;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	list-style: outside none none;
+	font-weight: normal;
+	border: 1px solid #d6d6d6;
+	background-color: #eeeeee;
+	margin-top:5px;
+	padding:8px;
+	
+}
+ul a:link{
+	background-color: #eeeeee;
+} 
+ul a:hover{
+	background-color: #FFFFFF;
+} 
+.item_tit {
+	text-align:left;
+	font-size: 20px;
+	width:50%;
+	padding:5px;
+	//border: 1px solid #d6d6d6;
+	display:inline;
+	position:relative;
+	float:left;
+	min-width:30%;
+
+}
+.ui-li-count {
+	display:inline;
+	border: 1px solid #d6d6d6;
+	//align:right;
+	width: 35%;
+	max-width: 180px;
+	min-width:80px;
+	text-align: right;
+	text-overflow: ellipsis;
+	right: 1.6em;
+	color: #2183ca;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding:5px;
+	position:relative;
+	float:right;
+
+}
+#mask{
+	position:absolute;
+	position:fixed !important;
+	position: fixed; 
+	width:100%;
+	height: 100%;
+	background:#000;
+	opacity:0.75;
+	filter:alpha(opacity=75);
+	left:0;
+	top:0;	
+	z-index:1000;
+}
+.popup {
+	width:200px;
+	height:auto;
+	z-index:1001;
+	opacity:1;
+	background-color:#CCCCCC;
+	border-radius: 5px;
+	padding:10px;
+	position:relative;
+	left:50%;
+	top:50%;
+	color:#000000;
+	margin-left:-100px;
+	margin-top: -100px;
+	border-top-width: 1.5px;
+	border-right-width: 1.5px;
+	border-bottom-width: 1.5px;
+	border-left-width: 1.5px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFFFFF;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #FFFFFF;
+
+}
+
+.Bar{
+	position: relative;
+	width: 190px;    /* 宽度 */ 
+	border: 1px solid #000000;
+	padding: 1px;
+	//margin:5px;
+} 
+.Bar div{
+	display: block;
+	position: relative;
+	color: #333333;/* 进度条背景颜色 */
+	height: 20px; /* 高度 */
+	line-height: 20px;  /* 必须和高度一致，文本才能垂直居中 */
+	background-color: #666666;
+} 
+
+.Bar div span{
+	position: absolute;
+	width: 190px; /* 宽度 */ 
+	text-align: center;
+	font-weight: bold;
+} 
+
+
+.STYLE1 {
+	font-size: 16px;
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.warn_txt {
+	font-size:13px;
+	text-align:center;
+	//margin-bottom:10px;
+	//width:280px;
+	//	height:30px;
+	//border: 1px solid #d6d6d6;
+	display: block;
+	//margin-left: 10px;
+	//margin-right: 10px;
+}
+.warn_text{
+	text-align:center;
+	color:#FF0000;
+	font-size:85%;
+}
+.text{
+	padding:5px;
+	border: 1px solid #333333;
+	background-repeat:repeat;
+	max-width:30%;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	-webkit-text-overflow:ellipsis;
+	-moz-text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+	-webkit-border-radius: 0px;
+	border-radiu:0px;
+	top: 40%;
+}
+#bom {  
+    position:fixed;  
+    //left:0px;  
+    bottom:0;  
+    _position:absolute;  
+    _top:expression(document.documentElement.clientHeight + document.documentElement.scrollTop - this.offsetHeight);  
+}
+-->
+</style>
+
+<body>
+<form name="config-form" id="config-form" >
+	<input name="current_res_value" type="hidden" id="current_res_value" >
+	<input name="res_value" type="hidden" id="res_value" >
+	<input name="cgi_sun_path" type="hidden" id="cgi_sun_path">
+	<input name="connection_mode_value" type="hidden" id="connection_mode_value">
+</form>
+<div id="heard">Setting</div>
+<div id="list_load" style="display:display">
+	<ul>
+		<li id="li_defaultmode"><a href="#"><div  class="item_tit" id="defaultmode_txt">DefaultMode</div><div class="ui-li-count" id="default_mode" style="max:width:50%;">Airplay</div></a></li>
+	</ul>
+</div>
+
+<div id="defaultmode" style="display:none">
+	<div id="mask">
+		<div class="popup">
+		  <fieldset style="border: 0px solid #333333;">
+				<legend align="center" id="le_demode"></legend>
+				<input type="radio" name="de_item" id="de_0" value="1" >
+				<label id="dlt_0" for="de_0">Mirror Only</label>
+				<div style="margin-bottom:5px;"></div>
+				<input type="radio" name="de_item" id="de_1" value="2">	
+				<label id="dlt_1" for="de_1">Mirror+Streaming</label>
+			</fieldset>
+			<input name="Default_mode_value" type="hidden" id="Default_mode_value" value="1">
+			<div id="def-mode_text" style="display:none"></div> 
+	
+			<div align="center">
+				<button id="defmode_ok" style="margin:5px;">OK</button>
+				<button id="defmode_cel" style="margin:5px;">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

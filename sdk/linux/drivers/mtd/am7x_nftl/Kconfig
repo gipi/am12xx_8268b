@@ -1,0 +1,8 @@
+config AM_NFTL
+	tristate "AM7XXXX NFTL (NAND Flash Translation Layer) support"
+	depends on BLOCK && AM_MIPS && !NFTL
+	select MTD_BLKDEVS
+	---help---
+	Say Y here to enable the ActionsMicro NFTL driver support on
+	AM7XXXX evulation board.
+

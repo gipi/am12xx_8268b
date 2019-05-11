@@ -1,0 +1,35 @@
+Instructions for compiling the RDS RTSP library on Linux.
+
+1. Obtain the RTSP library source code from SVN.
+
+If you are reading this file, chances are you have already done this and
+you can skip this step.
+
+    svn co https://subversion.jf.intel.com/mg/mpg/mpci/Wireless_Display/Sources/WiDi/rtsp
+
+2. Obtain the global Include files for WiDi.
+
+    cd rtsp
+    svn co https://subversion.jf.intel.com/mg/mpg/mpci/Wireless_Display/Sources/WiDi/Include
+
+3. Build the library.
+
+    (Install scons if necessary: sudo apt-get install scons)
+
+    cd rtsp
+    scons
+
+4. Build the sample sink application.
+
+    cd snkapp_linux
+    scons
+
+5. Launch the sample application.
+
+    ./sinkapp
+
+6. In a separate window, launch the source tester.
+
+    python test_source_transmitter.py
+
+7. The source tester will output the results of the test.

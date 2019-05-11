@@ -1,0 +1,172 @@
+#! /bin/sh
+runlevel=S
+prevlevel=N
+umask 022
+#export PATH runlevel prevlevel LD_LIBRARY_PATH
+#
+#       Trap CTRL-C &c only in this shell so we can interrupt subprocesses.
+#
+trap ":" INT QUIT TSTP
+/bin/mount -t proc  yan   /proc
+/bin/mount -t tmpfs tmpfs /tmp
+/bin/mount -t sysfs sysfs /sys
+/bin/mount -t ramfs dev /dev
+/bin/mount -t tmpfs tmpfs /mnt
+mkdir /dev/partitions
+
+mkdir /mnt/vram
+mkdir /mnt/usb1
+mkdir /mnt/usb2
+mkdir /mnt/usb3
+mkdir /mnt/usb4
+mkdir /mnt/usb5
+mkdir /mnt/usb6
+mkdir /mnt/usb7
+mkdir /mnt/usb8
+mkdir /mnt/usb9
+mkdir /mnt/usb10
+
+
+OLDIFS="$IFS"
+IFS=,
+
+id=1
+#for name in $AM7X_PARTS
+#do
+#	cmd="mknod /dev/partitions/$name b 93 $id"
+#	echo $cmd
+#	eval $cmd
+#	id=$(expr $id + 1)
+#done
+IFS="$OLDIFS"
+
+mdev  -s
+exec </dev/console >/dev/console 2>&1
+echo "init console OK..."
+
+
+#add by kewen for usb device fs
+/bin/mount -t usbfs none /proc/bus/usb
+#if [ -b /dev/partitions/debug ]; then
+#/bin/mount -o noatime -o nodiratime /dev/partitions/debug /mnt/debug
+#fi
+#/bin/mount -o noatime -o nodiratime /dev/partitions/udisk /mnt/udisk
+
+#if [ "$?" -ne 0 ]
+#then
+#echo "format udisk"
+#/sbin/mkfs.vfat /dev/partitions/udisk
+#/bin/mount -o noatime -o nodiratime /dev/partitions/udisk  /mnt/udisk
+#fi
+
+echo "fsck.fat -a vram"
+ln -n /dev/mtdblocka2 /dev/partitions/vram
+/sbin/fsck.fat -a /dev/partitions/vram >/tmp/vram_check.txt 2>&1
+vram_check_result=`cat /tmp/vram_check.txt | grep /dev/partitions/vram`
+echo ">>>>>>vram_check_result=$vram_check_result"
+if [ "$vram_check_result" == "" ]; then
+    echo ">>>>>>>check vram error, and try again."
+	ln -n /dev/mtdblocka2 /dev/partitions/vram
+	/sbin/fsck.fat -a /dev/partitions/vram >/tmp/vram_check.txt 2>&1
+	vram_check_result=`cat /tmp/vram_check.txt | grep /dev/partitions/vram`
+	echo ">>>>>>vram_check_result=$vram_check_result"
+	if [ "$vram_check_result" == "" ]; then
+	    echo ">>>>>>>check vram error, and remake filesystem."
+		/sbin/mkfs.vfat	/dev/partitions/vram
+	fi
+	/sbin/mkfs.vfat	/dev/partitions/vram
+fi
+#/sbin/fsck.ext2 -p /dev/partitions/vram 2>&1
+/bin/mount -o noatime -o nodiratime /dev/partitions/vram  /mnt/vram
+
+#add by liucan[2010.9.29]
+#we use mdev as the default userspace hotplug utilities
+#/proc/sys/kernel/hotplug rely on kernel config CONFIG_HOTPLUG 
+#&CONFIG_NET ,if this file does not exist,please check!
+
+echo /sbin/mdev >/proc/sys/kernel/hotplug
+echo 'Root filesystem on nand'
+echo 'Start AM7531 Console'
+#insmod /lib/modules/am7x_carddet.ko 
+#insmod /lib/modules/mmc_core.ko 
+#insmod /lib/modules/mmc_block.ko 
+#insmod /lib/modules/am7x_sd.ko
+
+#/bin/mount / -o remount,rw
+. /etc/init.d/set-path
+export runlevel prevlevel
+
+#echo ">>>>>> check user1"
+#if [ -d /mnt/vram/user1 ]; then
+#	echo "/mnt/vram/user1 is exist..."
+#else
+#	mkdir /mnt/vram/user1
+#	mkdir /mnt/vram/user1/system_setting
+#	echo "MY_DPF" > /mnt/vram/user1/system_setting/hostname.dat
+#	cp -rf /am7x/ezdata /mnt/vram/user1/
+#	sync
+#fi
+
+echo ">>>>>> check dev"
+cat /etc/mkdev.conf | while read line
+do
+	if [ -n "$line" ];then
+		name=$(echo $line | awk '{print $1}')
+		if [ ! -e /dev/$name ];then
+			echo "**** mknod /dev/$line"
+			mknod /dev/$line
+		fi
+	fi
+done
+
+if [ ! -e /mnt/vram/user1 ]; then
+	echo "Create user1"
+	mkdir /mnt/vram/user1
+fi
+
+if [ ! -e /mnt/vram/wifi ]; then
+	echo "Create dir wifi"
+	mkdir /mnt/vram/wifi
+fi
+
+if [ ! -e /mnt/vram/user1/softap ]; then
+	echo "Create dir softap"
+	mkdir /mnt/vram/user1/softap
+fi
+
+if [ ! -e /mnt/vram/user1/softap/rtl_hostapd_01.conf ]; then
+	echo "Copy hostapd config file"
+	cp -dprf /usr/share/wifi/rtl_hostapd_01.conf /mnt/vram/user1/softap/
+fi
+
+if [ ! -e /mnt/vram/user1/softap/rtl_hostapd.conf ]; then
+	echo "Copy hostapd config file"
+	cp -dprf /usr/share/wifi/rtl_hostapd.conf /mnt/vram/user1/softap/
+fi
+
+if [ ! -e /mnt/vram/wifi/resolv.conf ]; then
+	echo "Copy dnsmasq config file"
+	cp -dprf /usr/share/wifi/resolv.conf /mnt/vram/wifi/
+fi
+
+if [ ! -e /mnt/user1/named/named.conf ]; then
+	echo "Copy named config file"
+	cp -dprf /usr/share/wifi/named.conf /mnt/user1/named/
+fi
+
+ln -s /mnt/vram/user1 /mnt/user1
+cp -dprf /usr/share/wifi/named.conf /tmp/
+cp -dprf /usr/share/wifi/rtl_hostapd.conf  /tmp/
+cp -dprf /usr/share/wifi/rtl_hostapd_01.conf  /tmp/
+
+manager.app &
+
+#/bin/mount /dev/pts
+#/usr/sbin/telnetd
+#dmesg > /var/log/dmesg
+
+#/sbin/fsck.ext2 -p /dev/partitions/user1 2>&1
+#/bin/mount -o noatime -o nodiratime -o sync /dev/partitions/user1 /mnt/user1
+
+#/bin/mount -o noatime -o nodiratime /dev/partitions/cdrom /mnt/cdrom
+#/bin/mount -o noatime -o nodiratime /dev/partitions/bak /mnt/bak

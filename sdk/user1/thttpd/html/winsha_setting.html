@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1.2, user-scalable=yes" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8;">
+
+<title>Ask Windows Shared Directory</title>
+<style>
+body {
+	background-color: #666666;
+	font-size: 14px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+  }
+</style>
+<script  src="js/jquery.js">
+</script>
+<body>
+<table id="customers" border="0" align="center" cellpadding="0" cellspacing="0">
+Please Enter a shared directory : //Domain/share<br>
+Example://192.168.1.101/share  <br>
+Your Shared Directory:<input type="text" id="sharedir" value=""><br>
+<br>
+<br>
+<br>
+The username  and password to access your windows:<br>
+<br>
+Username:<input type="text" id="username" value="">
+
+<input type="button" id="connect"  value="Connect"  onclick="mount_shared_dir()"style="width:80px;height:30px;" ><br>
+Password:<input type="password" id="password" value=""  >
+</table>
+</body>
+<script>
+
+function pre_setting()
+{
+	var sharedir="";
+	var username="";
+	var password="";
+	var tmp="";
+	var urlname="pre_sets";
+	var setting="";
+	$.get("cgi-bin/windir.cgi", {fullname:urlname},function(dir_list)
+	{
+		if(dir_list!="")
+		{
+			
+			tmp=dir_list.split("&");
+			sharedir=tmp[0];
+			document.getElementById("sharedir").value=sharedir;
+			username=tmp[1];
+			document.getElementById("username").value=username;
+			password=tmp[2];
+			document.getElementById("password").value=password;
+		}
+		
+		
+		
+	});	
+	//document.getElementById("sharedir").value="da";
+}
+
+function turnto_filelist()
+{
+
+	var urlname="/mnt/user1/thttpd/html/airusb/windows";
+	  //alert("umount");
+	$.get("cgi-bin/dir.cgi", {fullname:urlname}, function(dir_list)
+		{	
+
+			var errindex=dir_list.indexOf("dir open Error");
+		  	if(errindex!=-1)
+		  	{
+		  		alert("Please check WindowsShare info is correct!!!");	
+		  	}
+			else
+			{
+				if(window.orientation==90||window.orientation==-90)//hengpin
+				{
+					window.location.href="disk.html?filename=/mnt/user1/thttpd/html/airusb/windows";
+
+				}
+				else
+					window.location.href="disk.html?filename=/mnt/user1/thttpd/html/airusb/windows";
+
+			}
+	  	});
+}
+function  mount_shared_dir()
+{
+	var consta;
+	var urlname="";
+	var urlname1=document.getElementById("sharedir").value;
+	var urlname2=document.getElementById("username").value;
+	var urlname3=document.getElementById("password").value;
+	urlname=urlname1+"&"+urlname2+"&"+urlname3;
+	$.get("cgi-bin/windir.cgi", {fullname:urlname},function(dir_list)
+	{
+		
+		//alert(dir_list);
+		//window.location.href="disk.html?filename=/mnt/user1/thttpd/html/airusb/windows";
+		
+	});
+	
+	setTimeout("turnto_filelist()",2000);
+	
+}
+
+$(document).ready(function()
+{
+	
+	pre_setting();
+
+});
+</script>
+
+
+</html>

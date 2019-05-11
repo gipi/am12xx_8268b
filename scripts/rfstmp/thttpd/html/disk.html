@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+
+<!--
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script  src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+-->
+
+<script src="js/udisk.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+ {	  
+	delay_get_data();	
+ });
+</script>
+
+
+	<input type="hide" id="dir" name="dir" value="/mnt/user1/thttpd/html/airusb"  style="display:none" />
+	<input type="hide" value="showdir" onClick="show()" style="display:none" />
+	<input type="hide" id="filename" name="filename" value="/mnt/user1/thttpd/html/airusb" style="display:none" /><!--style="display:none"-->
+
+</head>
+<style type="text/css">
+<!--
+.ui-listview>.ui-li-has-icon>img:first-child, .ui-listview>.ui-li-has-icon>.ui-btn>img:first-child {
+top: .3em;
+max-height:1.5em;
+max-width: 1.5em;
+}
+.ui-listview>.ui-li-has-icon>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-icon {
+padding-left: 3em;
+}
+.ui-popup-screen {
+	//background-image: url("void.png");
+	position: fixed; 
+	//width: 100%; 
+	//height: 100%; 
+}
+
+.ui-overlay-a{
+	background-color: #a7a7a7 /*{a-page-background-color}*/;
+}
+
+.ui-popup-screen {
+	background-image: none;
+	position: fixed; 
+	//width: 100%; 
+	//height: 100%; 
+   // z-index: 109900;
+}
+
+}
+.ui-overlay-a{
+	background-color: #a7a7a7 /*{a-page-background-color}*/;
+}
+.ui-btn-icon-notext:after
+ {
+	top: 5%;
+	margin-top: 1px;
+}
+.ui-btn {
+padding: .4em 0.8em;
+}
+.bk-ico{
+background-color:#CCCCCC;
+padding:2px;
+-webkit-border-radius: 1em;
+border-radius: 1em;
+}
+.warn_txt {
+font-size:12px;
+text-align:center;
+//margin-bottom:10px;
+width:280px;
+//height:30px;
+//border: 1px solid #d6d6d6;
+}
+
+
+.div-b
+{ 
+	position: absolute;
+    height: 76px;
+    clear:both;
+    width:116px;
+    top:30%;
+    left:30%;
+	//border: 1px solid #46A3FF;
+   	border-radius: 5px;
+	background-image:url(img/pop.png);
+	z-index:901;
+}
+.div-c
+{ 
+	position: absolute;
+    height: 76px;
+    clear:both;
+    width:174px;
+    top:30%;
+    left:30%;
+	//border: 1px solid #46A3FF;
+   	border-radius: 7px;
+	background-image:url(img/pop3.png);
+	z-index:900;
+}
+.mid{
+        width: 40px;
+        height: 50px;
+        position: absolute;
+        left: 38%;
+        top: 20%;
+        margin-left:-15px; 
+        margin-top: 2px;
+       //background: #FFFFFF;
+      }
+      
+      
+ .mid0{
+          
+        height: 100%;
+        position: relative;
+        left: 40px;
+        margin-left:0px; 
+        margin-top: 5px;
+        //background: #000000;
+        border: 0px solid #999999;
+        width:90%;
+      }
+ .mid2{
+          
+        width: 30px;
+      height: 30px;
+      position: absolute;
+      left: 73px;
+      top: 15px;
+      margin-left:-5px; 
+      margin-top: 10px;
+      //background: #FFFFFF;
+      }
+.mid1{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 50%;
+        top: 0%;
+        margin-left:-10px; 
+        margin-top: 0px;
+      }
+
+.left{
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      margin-left:-5px; 
+      margin-top: 10px;
+      //background: #FFFFFF;
+  }
+.right{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 25px;
+    right:15px;
+    margin-right:5px; 
+    margin-top: 0px;
+    //background: #FFFFFF;
+}
+
+-->
+</style>
+
+<body>
+<div data-role="page" id="config-form" name="config-form" data-theme="a">
+  <div data-role="header" data-position="fixed" data-fullscreen="false">
+	<a href='javascript:' onClick="dirback()" ><img src="img/back.png" height=18px></a>
+	     <h1  style="margin:0;" id="disk_title"></h1>
+
+  </div><!-- /header -->
+
+
+	<div role="main" class="ui-content">
+	<!-- <div id="path_txt"></div> -->
+<ul data-role="listview" data-inset="true">
+
+	<!--
+		
+    <li><a href="#"><img src="img/dir.png" alt="France" class="ui-li-icon ui-corner-none">France</a></li>
+    <li><a href="#"><img src="img/dir.png" alt="Germany" class="ui-li-icon">Germany</a></li>
+    <li><a href="#"><img src="img/dir.png" alt="Great Britain" class="ui-li-icon">Great Britain</a></li>
+    <li><a href="#"><img src="img/dir.png" alt="Finland" class="ui-li-icon">Finland</a></li>
+    <li><a href="#"><img src="img/dir.png" alt="United States" class="ui-li-icon ui-corner-none">United States</a></li>
+    <li class="ui-li-has-icon"><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><img src="img/dir.png" alt="Germany" class="ui-li-icon">Germany</a></li>
+
+<li class='ui-li-has-icon ui-first-child'><a href='#' class='ui-btn ui-btn-icon-right ui-icon-carat-r'><img src='img/dir.png' alt='France' class='ui-li-icon ui-corner-none'>France</a></li>
+<li class='ui-li-has-icon'><a href='#' class='ui-btn ui-btn-icon-right ui-icon-carat-r'><img src='img/dir.png' alt='Germany' class='ui-li-icon'>Germany</a></li>
+<li class='ui-li-has-icon'><a href='#' class='ui-btn ui-btn-icon-right ui-icon-carat-r'><img src='img/dir.png' alt='Great Britain' class='ui-li-icon'>Great Britain</a></li>
+<li class='ui-li-has-icon'><a href='#' class='ui-btn ui-btn-icon-right ui-icon-carat-r'><img src='img/dir.png' alt='Finland' class='ui-li-icon'>Finland</a></li>
+<li class='ui-li-has-icon ui-last-child'><a href='#' class='ui-btn ui-btn-icon-right ui-icon-carat-r'><img src='img/dir.png' alt='United States' class='ui-li-icon ui-corner-none'>United States</a></li>
+
+-->
+</ul>
+	</div><!-- /main -->
+
+<!-- 
+<div id="listfile"></div>
+-->
+
+
+<div  data-role="footer" data-position="fixed" data-fullscreen="false">
+&nbsp;
+</div><!-- /footer -->
+<!--for file  div -->		 
+		<div id="get" class="div-b" onClick="nochange()">
+		<div class="left" id="todownload">	
+		<a href='javascript:' onClick="toDownload()"><img src="img/get.png" width=60px height=60px></a>
+		</div>
+		
+		</div>
+		
+	<!--for video  div -->	  	
+		<div id="video" class="div-b" onClick="nochange()">	
+		
+	  	<div id="videoplay" class="left">	
+		 <a href=""><img src="img/play.png"  width=40px height=40px></a>
+		 </div>
+	
+		<div   id="video_ezchannel" class="right">	
+			<a href='javascript:' onClick="toEZchannel()"><img src="img/ezchannel.png" width=40px height=40px></a>
+		</div>
+			
+		
+		</div>
+
+
+<!--for image div -->	
+ 		<div id="img" class="div-b" onClick="nochange()">	
+	  	<div id="imgplay" class="left">	
+		 <a href=""><img src="img/play.png"  width=40px height=40px></a>
+		 </div>
+		 
+		
+		<div   id="img_download" class="right">	
+			<a href='javascript:' onClick="toDownload()"><img src="img/get.png" width=40px height=40px></a>
+		</div>
+			
+		
+		</div>
+	
+<!--for mp3 div -->	  
+	    <div id="audio" class="div-c" onClick="nochange()">	
+		
+  		<div id="audioplay" class="left">	
+		 <a href=""><img src="img/play.png"  width=40px height=40px></a>
+		 </div>
+		 
+			
+		<div  id="audio_download" class="mid2" >	
+			<a href='javascript:' onClick="toDownload()"><img src="img/get.png" width=40px height=40px></a>
+		</div>
+		
+		<div  id="audio_ezchannel" class="right">	
+			<a href='javascript:' onClick="toEZchannel()"><img src="img/ezchannel.png" width=40px height=40px></a>
+		</div>
+		</div>
+
+
+</div> <!-- /page -->
+
+<script>
+	
+	
+   
+	document.getElementById("audio").style.display="none";
+	document.getElementById("get").style.display="none"; 
+	document.getElementById("video").style.display="none"; 
+	document.getElementById("img").style.display="none"; 
+	//document.getElementById("tbbg").style.display="none"; 
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+Test_upgrade.o: Test_upgrade.c ../../../../../sdk/include/sys_msg.h \
+  ../../../../../sdk/include/am_types.h \
+  ../../../../../sdk/include/sys_gpio.h \
+  ../../../../../sdk/include/sys_rtc.h \
+  ../../../../../sdk/include/sys_timer.h \
+  ../../../../../sdk/include/upgrade_fw.h

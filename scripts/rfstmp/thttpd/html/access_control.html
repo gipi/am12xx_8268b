@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>access control</title>
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="js/main.js?1.0"></script>
+<script src="js/jquery.md5.js"></script>
+
+<!--
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+-->
+</head>
+
+<script type="text/javascript">
+ 
+    $(document).ready(function(){
+        $('a.active').removeAttr('href');
+		$("#Internet_Access").css({"background-color":"transparent","font-weight":"normal","color":"rgb(255, 255, 255)","text-shadow":"none","border-width":"0px 0px 0px",});
+		$("#txt_castcode").css({"background-color":"transparent","font-weight":"normal","color":"rgb(255, 255, 255)","text-shadow":"none","border-width":"0px 0px 0px",});
+		lii="<input type='text'  onkeypress='keyPresscheck()' id='user_input' maxlength='4' size='6' class='text_input'>"
+		$("#append_input").append(lii);
+
+	//$("#Internet_Access").fine('.ui-btn-icon-right').css({"background-color":"rgba(0,0,0,0)"});
+	// Get_height_width_of_screen();
+	//creatmenu();
+	//alert("4556746----");
+	//Get_local_version();
+	//Get_password();
+       
+	main();
+	Get_control_access__language();
+	get_psk_visibility_control_text();
+	set_psk_visibility_control_listener();
+	get_passcode_text();
+	set_passcode_listener();
+	get_internet_access_control_text();
+	set_internet_access_control_listener();
+	get_miracode_text();
+	set_miracode_listener();
+      });
+
+</script>
+<style type="text/css">
+<!--
+.ui-mobile .ui-page {
+//border: 10px solid #33FF00;
+	background-image: url(img/airdiskbg.jpg);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	-webkit-background-origin:content-box; /* Safari */
+	background-origin:content-box;
+}
+.ui-header .ui-title{
+margin: 0 10%;
+}
+
+.ui-page-theme-a .ui-panel-wrapper {
+ text-shadow: none;
+ font-weight:normal;
+ background-color:transparent;
+//border: 3px solid #FF0000;
+}
+.ui-btn-icon-right:after{
+//background-color: rgba(0,0,0,0);
+}
+.aa_center{  
+	position:absolute;  
+	top:50%;  
+	left:50%;  
+	margin-top:-190px;  
+	margin-left:-130px;  
+	//margin-right:20px;
+	/*此时宽和高都要固定*/  
+	width:250px;  
+	height:inherit;  
+	//border: 1px solid #0000FF;
+	text-align:center;
+	font-weight:normal;
+	color:#FFFFFF;
+	
+}
+div#wrrap {   
+	width:55%;
+	height:45px; 
+	display:table; 
+	float:left; 
+	//border: 1px solid #00ffFF;
+}   
+.control_txt
+{
+	//width:55%;
+	//float:left;
+	display:table-cell;   
+	vertical-align:middle;   
+	text-align:right;
+	font-size:16px;
+	//margin-top:13px;
+	overflow: hidden;
+	//white-space: nowrap;
+	//text-overflow: ellipsis;
+	
+	//margin-right:5px;
+	//	border: 1px solid #0000FF;
+
+}
+
+.bb_center{  
+	position:absolute;  
+	bottom:5%;  
+	left:50%;  
+	//margin-top:-100px;  
+	margin-left:-115px;  
+	/*此时宽和高都要固定*/  
+	width:220px;  
+	//height:250px;  
+	//border: 1px solid #0000FF;
+	text-align:center;
+	font-weight:normal;
+	color:#FFFFFF;
+}
+.ui-list > li > a{
+	margin: 0px;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    list-style: outside none none;
+}
+.text_border{
+margin:1px;
+margin-top:9px;
+padding:5px;
+//border: 1px solid #9D9D9D;
+//border-color: rgba(85, 85, 85, 0.75);
+-webkit-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#DADADA /*{global-box-shadow-color}*/;
+-moz-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#DADADA /*{global-box-shadow-color}*/;
+box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 			#DADADA /*{global-box-shadow-color}*/;
+border-radius: 1px;
+-moz-border-radius:1px; /* Old Firefox */
+}
+
+.text_input{
+//margin:1px;
+padding:1px;
+//border: 1px solid #9D9D9D;
+//border-color: rgba(85, 85, 85, 0.75);
+-webkit-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#666666 /*{global-box-shadow-color}*/;
+-moz-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#666666 /*{global-box-shadow-color}*/;
+box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 			#666666 /*{global-box-shadow-color}*/;
+border-radius: 1px;
+-moz-border-radius:1px; /* Old Firefox */
+text-align:center;
+}
+
+.ui-radio input {
+left: auto;
+width: 30%;
+height: 20px;
+margin-left:10px;
+}
+
+.line{
+width:280px;
+}
+.img_bk{
+	background-image:url(img/access.png);
+	background-size:contain;
+	-moz-background-size:contain; /* 老版本的 Firefox */
+	background-repeat:no-repeat;	
+	background-position:center;	
+	width:220px;
+	height:180px;
+	margin:20px auto;
+}
+.clear{ clear:both} 
+@media screen and (min-width: 600px)
+{
+
+ .ui-mobile .ui-page {
+	background-image: url(img/ezcastbk.jpg);
+
+} 
+.aa_center{  
+	width:400px;
+	top:50%;  
+	margin-top:-180px; 
+	left:50%;  
+	margin-left:-200px;  
+ 
+	}
+.img_bk{
+	background-image:url(img/access_h.png);
+	background-size:contain;
+	-moz-background-size:contain; /* 老版本的 Firefox */
+	background-repeat:no-repeat;	
+	background-position:center;	
+	width:400px;
+	height:140px;
+	margin:20px auto;
+}
+
+}
+-->
+</style>
+
+<body  class="ui-mobile-viewport ui-overlay-a"  align="center">
+  <div data-role="page" id="panel-fixed-page1">
+    <div data-role="header" data-position="fixed">
+        <h1 id="title_access"  style="margin:0;margin-left:40px; margin-right:80px;" >Access Control</h1>
+		
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+       <span  id="log_txt" style="position:absolute; top:13px; right:42px; font-weight:normal; font-size:80%;"></span>
+	   
+    </div><!-- /header -->
+	
+<div role="main" class="ui-content jqm-content jqm-fullwidth ">
+
+<div class="aa_center">
+<div style="width:250px;margin-left:auto; margin-right:auto;">
+<div  id="host_0" style="display:none; height:45px;">	
+<div id="miracode_set"><div id="wrrap"><div id="txt_miracode" class="control_txt">Miracode control</div> </div>
+	<span id="miracode_control" style="height:45px; line-height:45px;">
+		 <select name="miracode_val" id="miracode_val" data-role="flipswitch">
+				<option value="0">Off</option>
+				<option value="1">On</option>
+		   </select>
+		</span>
+</div>	</div>
+
+<div  id="host_2"  style="display:none; height:45px;">	
+	<div id="psk_visibility_set"><div id="wrrap"><div id="txt_passhid" class="control_txt"></div> </div>
+		<span id="psk_visibility_control" style="height:45px; line-height:45px;">
+		<select name="psk_visibility_control_val" id="psk_visibility_val" data-role="flipswitch">
+			<option value="0">Off</option>
+			<option value="1">On</option>
+		</select>
+		</span>
+	</div>
+</div>	
+
+<div class="clear"></div>
+<div id="host_1"  align="right" style="display:none; margin-right:10px;"><div id="txt_castcode" class="ui-btn ui-btn-icon-right ui-icon-carat-r">passcode control</div></div>
+
+<div id="host_3"   align="right" style="display:none; margin-right:10px;"><div id="Internet_Access" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Internet access control</div></div>
+</div>
+
+
+<div style="margin-left:auto; margin-right:auto; margin-top:0px;">
+
+<div class="img_bk"></div>
+<div id="access_message"></div>
+<div style="height:30px;"></div>
+</div>
+
+
+</div><!-- /aa_center -->
+</div><!-- /main -->
+    
+
+	<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+		<ul data-role="listview" >
+            <li data-icon="delete"><a href="#" data-rel="close"  id="IDS_MENU_LAN6">Close menu</a></li>
+				<span  id="add_menu" class="ui-list"></span>
+			
+		</ul>
+	</div><!-- /panel -->
+<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
+	<form class="userform" >
+		<h2 id="user_login">Login</h2>
+		<label for="name" id="IDS_MENU_LAN2">Username:</label>
+		<input type="text" name="name" id="usr_name" value="admin" data-clear-btn="true" data-mini="true" disabled="disabled" >
+		<label for="password" id="IDS_STTING_PAS">Password:</label>
+		<input type="password" name="password" id="usr_password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" id="cancle_login">Cancel</a></div>
+			<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" id="login_usrname_ok">OK</a></div>
+		</div>
+		<div id="IDS_MENU_LAN3" style="text-align:left; margin-top:20px; font-size:80%;">Forget admin password: email to forgetpassword@iezvu.com.</div> 
+	</form>
+		<div id="loginin_txt" style="display:none;"> 	
+			<div style="margin-top:20px;" align="center"><span id="show_usrname"></span> ,<span id="IDS_MENU_LAN5">welcome</span> <span> ! </span></div>
+			<p align="center"><a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="login_out">Logout</a></p>
+		</div>
+	</div><!-- /panel -->
+	
+	
+	<div data-role="popup" id="internet_access_set" data-overlay-theme="b" style="min-width:300px;">
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content" >
+		  <fieldset data-role="controlgroup" data-iconpos="right">
+			<legend id="sel_internet_access"></legend>
+			<label for="internet_access_con_0" id="con_0_txt"></label>
+			<input type="radio" name="internet_access_choose" id="internet_access_con_0" value="0" >
+			<label for="internet_access_con_1" id="con_1_txt"></label>
+			<input type="radio" name="internet_access_choose" id="internet_access_con_1" value="1" >
+			<label for="internet_access_con_2" id="con_2_txt"></label>
+			<input type="radio" name="internet_access_choose" id="internet_access_con_2" value="2" >
+		  </fieldset>
+			 <div id="con_text" style="display:none"></div> 
+			 <div id="con_text2" style="display:none"></div>
+			 
+		<p align="center" style="border-top:1px solid #CCCCCC">
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_internet_access_ok">OK</a>
+			<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_internet_access_cel">Cancel</a>
+		</p>
+	</div>
+</div>	
+	
+<div data-role="popup" id="castcode_set" data-overlay-theme="b" style="min-width:300px;">
+	<div data-role="header">
+		<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content" >
+		<fieldset data-role="controlgroup" data-iconpos="right">
+			<legend id="sel_castcode"></legend>
+			<label for="castcode_con_0" id="castcode_txt1">OFF</label>
+			<input type="radio" name="castcode_choose" id="castcode_con_0" value="0" >
+			<label for="castcode_con_1" id="castcode_txt2">Random</label>
+			<input type="radio" name="castcode_choose" id="castcode_con_1" value="1" >
+			<label for="castcode_con_2">
+				<div style="width:100%; display:inline;" align="left">
+				<div style="display:inline;" id="castcode_txt3">Fixed</div>
+				<div id="append_input" style="display:inline;"></div>
+				</div>
+			</label>
+			<input type="radio" name="castcode_choose" id="castcode_con_2" value="2" >
+		</fieldset>
+	 	<div id="castcode_warn_text" align="center" style="color:#666666"></div> 
+		<p align="center" style="border-top:1px solid #CCCCCC">
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_castcode_ok">OK</a>
+			<a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="set_castcode_cel">Cancel</a>
+		</p>
+	</div>
+<!--  end main-->	
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

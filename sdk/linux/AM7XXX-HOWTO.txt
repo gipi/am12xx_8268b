@@ -1,0 +1,100 @@
+--------------
+How to build
+--------------
+See to case/doc/HowTo.txt
+
+
+-----------------------
+Linux boot command line
+-----------------------
+1. Write commnad line string to the file `bootarg.txt'
+2. Run ActionsMPUpdate.exe to make firmware and then upgrade to the demo board.
+3. Reboot the demo board.
+
+------
+INITRD
+------
+1. The file name for INITRD is `initrd.dat'
+2. Run the script mkinitrd.sh to create a new initrd from the source directory initrd.
+3. By default, BREC load INITRD to 0x80280000. And you can change the load address by passing
+   a boot argument `rd_start=0xXXXXXXXX' to BREC.
+   
+---------------
+ROOT Filesystem
+---------------
+1. Create rootfs image:
+   cd LSDK/scritps
+   sh mkfs.sh
+2. Run ActionsMPUpdate.exe and click the button `update' in `Linux Update' group to burn 
+   the root filesyetm onto nand.
+3. Modify `bootarg.txt' to set Linux boot command line:
+   mem=16M rd_start=0x80386000 rd_size=4M root=/dev/ram0 rw console=ttyS1,115200n8 init=/linuxrc
+4. Reboot the demo board, and shell will load the NFTL driver resident on INITRD, mount the rootfs
+   on NAND, and finally switch root directory to the rootfs.
+
+---------------------
+Firmware Upgrade Tool
+---------------------
+1. The image file name, size and type of file system are described by the keyword LINUXPART.
+2. One partition holds one file system, and at most 4 partitions can be supported.
+3. Filesystem upgrade is independent of firmware upgrade. On ADFU status, either filesystems
+   or firmware can be burn onto nand, but not both.
+
+--------------------
+Create a new partion
+--------------------
+1. fdisk /dev/nftla
+2. type `n' to create a new partion.
+3. type `p' to create a primary partition.
+4. type a number to specify the partition id and then type enter to accept the default options.
+5. type `t' and then `b' to change the partition's system id to Win95 FAT.
+6. type `w' to save and quit.
+
+--------------------
+Make a fat filesysem
+--------------------
+1. mkfs.vfat /dev/nftla1
+
+-----------------------------
+Mount/Unmount a fat filesysem
+-----------------------------
+1. mount /dev/nftla1 /mnt
+2. cd /mnt
+3. Create/remove directory and files on the fat filesystem.
+4. cd / && umount /mnt
+
+
+
+
+
+
+1.从svn服务器上下载代码
+在linux 的用户目录建立目录
+然后,进入目录
+最后,进行checkout .
+依次输入命令:
+mkdir linux-2.6.27.29
+cd ./linux-2.6.27.29
+svn checkout http://192.168.48.18/svn/linux-tmp/ .
+
+2. 解压ramdisk
+checkout成功后,在linux-2.6.27.29目录下,解压ramdisk.
+sudo tar xvfj ramdisk.tar.bz2
+(会在linux-2.6.27.29目录下解压出ramdisk目录)
+
+3.进行编译.
+输入命令:
+make
+编译完成后,会在linux-2.6.27.29/images/1203目录下生成内核镜像,syscfg.sys
+
+3. 烧写linux 内核.
+通过samba连接自己的用户目录,将目录映射成 windows的z分区
+如:在运行里面输入
+\\192.168.48.17
+然后输入用户,密码
+最后映射为windows的z分区
+
+通过windows 打开linux-2.6.27.29\tools\1201tool\Update.exe
+选中cfg文件,linux-2.6.27.29\images\7531_.cfg
+生成镜像文件,烧写....
+goodluck!!

@@ -1,0 +1,10 @@
+#  This file defines the command line passed to the AM7XXX kernel
+#  by the boot loader.
+#  A long line can be foled by a tailing back splash.
+
+# For initrd in EXT2/EXT3 format
+#rd_start=0x80400000 rd_size=__FIX_ME_ON_PACK__ reserved_mem=64M root=/dev/ram0 rw init=/linuxrc
+rd_start=0x80400000 rd_size=__FIX_ME_ON_PACK__ reserved_mem=128M root=/dev/ram0 rw init=/linuxrc
+
+# For initrd in CPIO format
+#rd_start=0x80200000 rd_size=__FIX_ME_ON_PACK__ mem=12M root=/dev/ram0 rw rdinit=/init

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Actions-Micro | index </title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+<!--
+
+body
+{
+margin:0;
+padding:0;
+    //   background:url('img/airdiskbg.jpg');    
+	background-color: #000033;	
+    //    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/ezcastbk.jpg', sizingMethod='scale');
+        width:100%;
+        height:100%;
+//	background-attachment: fixed;
+//	background-repeat: no-repeat;
+//	background-size:100% 100%;
+		zoom:0.68;
+ }
+
+.menu {
+	font-size: 14px;
+//	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.select  {
+	font-size: 14px;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 400px)
+{
+
+	#customers
+	{
+	width:100%;
+	}
+}
+
+@media screen and (min-width: 400px)
+{
+	#customers
+	{
+	width:400px;
+	}
+}
+#bg{
+position:absolute;
+position:fixed !important;
+position: fixed;
+top:0px;
+left:0px;
+z-index:-999;
+//border:1px solid #FF0000;
+}
+.background 
+{
+	background-image:url('img/airdiskbg.jpg');
+	background-repeat:no-repeat;
+	background-size:cover;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:-100;
+}
+#mask{
+	background:#000;
+	opacity:0.75;
+	filter:alpha(opacity=75);
+	width:100%;
+	position:absolute;
+	left:0;
+	top:0;	
+	z-index:1001;
+}
+.black_overlay
+{ 
+	display: none; 
+	position:fixed !important;
+	position: fixed; 
+	top: 0%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	background-color: black; 
+	z-index:1001; 
+	-moz-opacity: 0.8; 
+	opacity:.80; 
+	filter: alpha(opacity=80); 
+} 
+.white_content 
+{ 
+	display:none;
+	//width: 100%; 
+	//height: 100%; 
+	//position: absolute;
+	//top: 50%; 
+	//left: 50%; 
+	overflow: auto; 
+	//margin-left: -185px;
+	//margin-right: 0px;
+	//margin-top: -136px;
+	//margin-bottom: 0px;	
+	z-index:1002;
+	//left: auto;
+	//top: auto;
+	//right: auto;
+	//bottom: auto;
+	//visibility: hidden;
+} 
+.appsk_style
+{
+	width:121px;
+	height:27px;
+	border-radius:5px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;	
+}
+.lay2
+{
+	width:100%;
+	position: relative;
+	top: -12px;
+	border: 0px solid #FFFFFF;
+	z-index: 100;
+	left: 1px;
+}
+.lay3
+{
+	top: -10px;
+	z-index: 100;
+}
+.STYLE2 {
+	color: #FFFFFF;
+	font-size: 8px;
+}
+.STYLE3 {
+	color: #FFFFFF;
+	font-size: 1px;
+}
+.boxx{
+	position: relative;
+	//background-image:url('img/seb_board_bg.png');
+	background-repeat:repeat;
+	//background-size:cover;
+	width: 165px;
+	height: 230px;
+	border: 2px solid #26D6FE;
+	border-radius: 3px;
+	-moz-border-radius:3px; /* Old Firefox */
+
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+
+-->
+</style>
+<script type="text/javascript" src="js/jquery.js">
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+</head>
+<body>
+<div align="center">
+  <form name="config-form" id="config-form" >
+  <table width="350" border="0" align="center" cellpadding="0" cellspacing="0" id="customers">
+  
+  <tr height="46px" background="img/bk1.png">
+  <td colspan="2" align="center" valign="middle"><table width="100%" height="150%" border="0" bordercolor="#FFFF00">
+<tr >
+<td width="25%"align="left"><img src="img/logo_setting.png"></td>
+<td width="31%"align="left"><span class="STYLE2"></span></td>
+<td width="7%"align="right"><img src="img/phone.png"></td>
+<td width="10%"align="center"><img src="img/dongle_not_connected.png" id="dongle_connect_status"></td>
+<td width="10%"align="center"><img src="img/dongle.png" id="upgrade_status"></td>
+<td width="10%"align="center"><img src="img/dongle_not_connected.png" id="client_connect_status"></td>
+<td width="7%"align="left"><img src="img/internet_little.png"></td>
+</tr>
+
+</table></td>
+</tr>
+<tr>
+  <td colspan="2" align="center" valign="top" style="line-height:0px;"><div class="lay2"><table width="100%" border="0" cellpadding="0" cellspacing="0" bordercolor="#00FF00">
+    <tr>
+      <td width="55%"><table width="100%" border="0" bordercolor="#FF00FF">
+        <tr>
+          <td width="68%"><p>&nbsp;</p></td>
+          <td width="32%"align="center"><span class="STYLE2" id="dongle_icon_txt"></span></td>
+        </tr>
+      </table></td>
+      <td width="17%">&nbsp;</td>
+      <td width="17%"><table width="100%" border="0" bordercolor="#FF0000">
+        <tr>
+          <td width="100%"align="center"><span class="STYLE2" id="internet_icon_txt"></span></td>
+        </tr>
+      </table></td>
+      <td width="11%">&nbsp;</td>
+    </tr>
+  </table>
+  </div></td>
+</tr>
+<tr style="line-height:13px;" >
+	<td colspan="2" align="center">
+		<table width="100%" border="0" align="center" bordercolor="#F0F0F0" >
+			<tr>
+			<td width="80%"><table width="100%" border="0">
+  <tr>
+    <td><table width="100%" border="0">
+  <tr>
+    <td width="5%"></td>
+    <td width="17%"><font style="color:#FFFFFF;" size="2" id="ap_ssid_txt">SSID : </font></td>
+    <td width="78%"><font style="color:#FFFFFF;" size="2" id="ap_ssid"></font></td>
+  </tr>
+</table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0">
+  <tr>
+    <td width="5%"></td>
+    <td width="27%"><font style="color:#FFFFFF;" size="2" id="ap_psk_txt">Password : </font></td>
+    <td width="68%"><font style="color:#FFFFFF;" size="2" id="ap_psk"></font></td>
+  </tr>
+</table></td>
+  </tr>
+</table></td>
+			<td width="21%" align="center">&nbsp;</td>
+			<td width="9%" align="right"></td>
+			</tr>
+		</table>	</td>
+</tr>
+  <tr height="10px"  >
+  <td >&nbsp;</td>
+</tr>
+
+    <tr>
+      <td align="center" valign="top">
+	  <div class="boxx" style="background-image:url(img/music_ico.png);background-repeat:no-repeat;background-position:50% 40%;">
+ 		<table width="150">
+			<tr>
+				<td height="100" align="center">
+					<p align="center"><font style="color:#FFFFFF;" size="5" id="music_output_txt">Music Output</font></p>				</td>
+			</tr>	
+			<tr height="37">			</tr>
+			<tr>
+				<td  align="center" style="margin-top: 0px;">
+					<img src="img/select-Down_cover.png" onClick="select_music_output_down()" id="select_down_res"></td>
+			</tr>
+			<tr>
+				<td  align="center"><input name="submit3" type="submit"  id="resolution"  style="border-radius:5px;color:#FFFFFF;background:url('img/bar_cover.png');width:120px;margin-left:auto;margin-right:auto;" value="" align="center"></td>
+			</tr>
+			<tr>
+				<td  align="center" style="margin-top: 0px;">
+					<img src="img/select-up_cover.png" onClick="select_music_output_up()" id="select_up_res"></td>
+			</tr>
+	  </table>	</div></td>
+      <td align="center" valign="top" id="Set_EQ_mode">
+	    <div class="boxx"  style="background-image:url(img/eq_ico.png);background-repeat:no-repeat;background-position:50% 40%;">
+		<table width="150" border="0" bordercolor="#F0F0F0">
+			<tr >
+				<td height="100" align="center">
+					<p align="center"><font style="color:#FFFFFF;" size="5" id="EQ_txt">EQ</font></p>				</td>
+			</tr>
+			
+			<tr height="37">			</tr>
+			<tr>
+				<td  align="center" style="margin-top: 0px;">
+					<img src="img/select-Down_cover.png" onClick="select_eq_mode_down()" id="select_down_eq"></td>
+			</tr>	
+			<tr>
+				<td  align="center"><input name="EQ_default_mode" type="submit"  id="EQ_default_mode"  style="border-radius:5px;color:#FFFFFF;background:url('img/bar_cover.png');width:120px;margin-left:auto;margin-right:auto;" value="" align="center"></td>
+			</tr>
+			<tr>
+				<td  align="left" style="margin-top: 0px;">
+					<img src="img/select-up_cover.png" onClick="select_eq_mode_up()" id="select_up_eq"></td>
+			</tr>
+			<tr>
+			<td>
+			<div class="lay3">	
+			<table width="40%" align="right">
+			<tr>
+				<td  align="right" style="margin-top: 0px;">
+					<img src="img/eq_custom.png" id="set_eq_custom">				</td>
+			</tr>
+			</table>
+			</div>			</td>
+			</tr>	
+	  </table>     </div></td>
+    </tr>
+   
+    <tr>
+      <td height="235" align="center" valign="top">
+	  <div class="boxx" style="background-image:url(img/internet_icon_4.png);background-repeat:no-repeat;background-position:50% 40%;">
+		<table width="150">
+		  <tr>
+			<td height="100" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="internet_txt"></font></p></td>
+		  </tr>
+		  <tr height="37"> </tr>
+		  <tr>
+			<td align="center"><div id="internet" style="background-image:url(img/wifi_scan.png);background-position:center;background-repeat:no-repeat;background-position:50% 38%;width:101px;height:35px;"></div>			</td>
+		  </tr>
+		  <tr>
+			<td  align="center"><font style="color:#FFFFFF;" size="2" id="connect_mac_address"></font></td>
+		  </tr>
+		  <tr>
+			<td  align="center"><font style="color:#FFFFFF;" size="2" id="connected_ssid"></font></td>
+		  </tr>
+		</table>
+	  </div></td>
+      <td height="235" align="center" valign="top">
+	    <div class="boxx" style="background-image:url(img/language_ico.png);background-repeat:no-repeat;background-position:50% 40%;">
+	      <table width="150">
+            <tr>
+              <td height="100" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="language_txt"></font></p></td>
+            </tr>
+            <tr height="30"> </tr>
+            <tr>
+              <td  align="center" style="margin-top: 0px;"><img src="img/select-Down_cover.png" onClick="select_language_down()" id="select_down_language"></td>
+            </tr>
+            <tr>
+              <td  align="center"><input name="submit" type="submit"  id="language"  style="border-radius:5px;width:120px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;" value="" align="center"></td>
+            </tr>
+            <tr>
+              <td  align="center" style="margin-top: 0px;"><img src="img/select-up_cover.png" onClick="select_language_up()" id="select_up_language"></td>
+            </tr>
+          </table>
+	    </div>      </td>
+    </tr>
+    <tr>
+      <td height="235" align="center" valign="top"><div class="boxx" style="background-image:url(img/psw_icon.png);background-repeat:no-repeat;background-position:50% 40%;">
+        <table width="150" border="0" bordercolor="#F0F0F0">
+          <tr >
+            <td height="100" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="password_txt"></font></p></td>
+          </tr>
+          <tr >
+            <td height="37px"></td>
+          </tr>
+          <tr>
+            <td align="center"><input type="text"  id="appsk" name="appsk" value="" style="padding:0px;width:121px;height:27px;border-radius:5px;border:none;background:url('img/appsk_bk.png');background-repeat: no-repeat;background-position:center;color:#FFFFFF;text-align:center;"></td>
+          </tr>
+          <tr>
+            <td align="center"><input type="submit" name="APPLY" value="" id="set_appsk_apply" style="color:#FFFFFF; border:none;background:url('img/apply.png');width:101px; height:34px;background-repeat:no-repeat;" />            </td>
+          </tr>
+        </table>
+      </div></td>     
+      <td height="235"  align="center" valign="top">
+	  <div class="boxx" id="devicename_active" style="background-image:url(img/devicename_active.png);background-repeat:no-repeat;background-position:50% 40%;">
+		<table width="150" border="0" bordercolor="#F0F0F0">
+			<tr >
+				<td height="100" align="center">
+					<p align="center"><font style="color:#FFFFFF;" size="5" id="devicename_txt">Device name</font></p>				</td>
+			</tr>
+			
+			<tr >
+			  <td height="37px"></td>
+		    </tr>
+			<tr>	
+			<td align="center"><input type="text"  id="devicename" name="devicename" value="" style="padding:0px;width:121px;height:27px;border-radius:5px;border:none;background:url('img/appsk_bk.png');background-repeat: no-repeat;background-position:center;color:#FFFFFF;text-align:center;"></td>						
+			</tr>	
+			<tr>
+			<td align="center">
+			<input type="submit" name="APPLY" value="" id="set_devicename_apply" style="color:#FFFFFF; border:none;background:url('img/apply.png');width:101px; height:34px;background-repeat:no-repeat;">			</td>
+			</tr>	
+		</table>   
+		</div></td>
+    </tr>
+    <tr>
+      <td height="235" align="center" valign="top"  id="upgrade">
+	  <div class="boxx" style="background-image:url(img/upgrade_ico.png);background-repeat:no-repeat;background-position:50% 40%;">
+	  <table width="150">
+          <tr>
+            <td height="100" align="center"><p align="center"><font style="color:#FFFFFF;" size="5" id="upgrade_txt">upgrade</font></p></td>
+          </tr>
+          <tr height="60">          </tr>
+          <tr align="center">
+            <td  align="center">
+			<input name="new_version" type="submit"  id="new_version" style="border-radius:5px;width:120px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;" value="" align="center">	          </td>
+          </tr>
+      </table>
+	  </div></td>
+      <td height="235"  align="center" valign="top">&nbsp;</td>
+    </tr>
+  </table>
+  <div id="light" class="white_content" align="center" width="344" height="282">
+    <table  cellpadding="0" cellspacing="0" width="344" height="236" border="0" background="img/pop-up_box.png"style="background-repeat: no-repeat;background-position:center;">
+      <tr>
+        <td><table width="80%"  border="0" align="center">
+            <tr><td>
+              <p align="center"><font style="color:#FFFFFF" size="3" id="dialog_msg" align="center"></font></p>
+            </td></tr>
+            <tr><td>
+			<p align="center"><font style="color:#FFFFFF" size="3" align="center"><span id="tick"></span><span id="time_tick_msg"></span></font></p>
+            </td></tr>
+        </table></td>
+      </tr>
+      <tr>
+        <td><table  border="1" align="center">
+            <tr>
+              <p align="center">
+              <input type="submit" name="OK2" value="OK" id="OK" style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+                <input type="submit" name="CANCEL2" value="CANCEL" id="CANCEL" style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+                <input type="submit" name="FORGET" value="FORGET" id="FORGET" style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+              </p>
+            </tr>
+            <tr>
+              <p align="center"><font style="color:#FFFFFF" size="3" id="reboot_msg" align="center"></font></p>
+            </tr>
+        </table></td>
+      </tr>
+    </table>
+    <input name="output_mode_index" type="hidden" id="output_mode_index" >
+    <input name="Default_mode_value" type="hidden" id="Default_mode_value" value="1">
+    <input name="lan_index" type="hidden" id="lan_index">
+	<input  name="eq_index" type="hidden" id="eq_index" value="" width="100">
+	<input  name="eq_value" type="hidden" id="eq_value" value="" width="100">
+	 <input name="custom_index" type="hidden" id="custom_index" value="">
+	 <input name="custom_or_other" type="hidden" id="custom_or_other" value="">
+  </div>
+  <div id="upgrade_light" class="white_content" align="center">
+<table  cellpadding="0" cellspacing="2" width="344" height="236" border="0"  background="img/pop-up_box.png" style="background-repeat: no-repeat;background-position:center;">
+<tr>
+	<td align="center"><table width="100%" border="0" cellspacing="0" bordercolor="#F0F0F0">
+	<tr>
+	<td height="15">	</td>
+	</tr>
+      <tr>
+        <td align="center" valign="top"><span><font style="color:#FFFFFF" size="3" id="upgrade_dialog_msg"></font></span></td>
+      </tr>
+    </table>
+	
+	  <table width="90%" border="0" bordercolor="#F0F0F0">
+        <tr>
+          <td><p align="center"><font style="color:#FFFFFF" size="3" id="server_text" align="center"></font></p></td>
+          <td><p align="center"><input type="text"  id="local_version"  value="" align="center" style="width:110px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;"></p></td>
+        </tr>
+        <tr>
+          <td><p align="center"><font style="color:#FFFFFF" size="3" id="local_text" align="center"></font></p></td>
+          <td><p align="center"><input type="text"  id="server_version"  value="" align="center" style="width:110px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;"></p></td>
+        </tr>
+      </table>
+	  
+	  <table width="100%" border="0" bordercolor="#F0F0F0">
+        <tr>
+          <td align="center">
+              <font style="color:#FFFFFF" size="3" align="center"><span id="upgrade_tick"></span><span id="upgrade_time_tick_msg"></span></font></td>
+        </tr>
+      </table></td>
+</tr>
+<tr>
+	<td align="center">
+	<div id="alert_ok" style="display:none;" onClick="hide_alert_wait()">
+	  <input type="button" name="OK3" value="OK"  style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+	</div>
+		<table  border="0" align="center" valign="top">
+          <tr>
+            <td align="center"><input type="button" name="OK" value="OK" id="upgrade_OK" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+            <input type="button" name="CANCEL" value="CANCEL" id="upgrade_CANCEL" style="margin-left:5px; color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">            </td>
+          </tr>
+        </table>
+		<table width="89%" border="0" bordercolor="#F0F0F0">
+          <tr>
+            <td align="center"><div align="center" style="color:#FFFFFF" size="3" id="upgrade_warn"></div></td>
+          </tr>
+        </table></td>
+</tr>
+</table>
+</div>
+ <div id="psw_change" class="white_content" align="center" width="344" height="282">
+    <table  cellpadding="0" cellspacing="0" width="344" height="236" border="0" background="img/pop-up_box.png"style="background-repeat: no-repeat;background-position:center;">
+      <tr>
+        <td align="center"><div align="center" style="color:#FFFFFF; width:89%;" size="3" id="change_psw_warn"></div></td>
+      </tr>
+      <tr>
+        <td height="90" align="center">
+	<div id="paw_warn_ok" style="display:none;" onClick="change_psw(0)">
+	  <input type="button" name="OK4" value="OK"  style="color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+	</div>
+		<input type="button" name="OK3" value="OK" id="OK3" onClick="change_psw(1)" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+	     <input type="button" name="CANCEL3" value="CANCEL" id="CANCEL2" onClick="change_psw(0)" style="margin-left:5px; color:#FFFFFF; border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+        </td>
+      </tr>
+    </table>
+  </div> 
+<div id="devicename_change" class="white_content" align="center" width="350" height="282">
+    <table  cellpadding="0" cellspacing="0" width="350" height="236" border="0" background="img/pop-up_box.png"style="background-repeat: no-repeat;background-position:center;">
+        <tr>
+        <td align="center"><div align="center" style="color:#FFFFFF; width:89%;" size="3" id="devicename_warn_ok"></div></td>
+      </tr>
+      <tr>
+        <td height="90" align="center">
+	    <input type="button" name="SAVE_RE" value="Save & Reboot" id="OK6" onClick="change_devicename(2)" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom.png');width:105px; height:50px;">
+	     <input type="button" name="SAVE" value="Save Only" id="OK5" onClick="change_devicename(1)" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom.png');width:105px; height:50px;">
+	     <input type="button" name="CANCEL4" value="Cancel" id="CANCEL4" onClick="change_devicename(0)" style="margin-right:5px; color:#FFFFFF; border:none;background:url('img/buttom.png');width:105px; height:50px;">
+        </td>
+      </tr>
+    </table>
+</div>
+<div id="fade" class="black_overlay"></div> 
+</form>
+</div>
+<script src="js/settingwp.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+ {	  
+ 	$(function() 
+	{
+		delay_get_data();	
+	});	
+ });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+#1601 Quantum Plaza, No.27 Zhichun Road, Haidian District, Beijing, Actions MicroElectronics Co., Ltd.
+TARGET_TYPE = bin
+
+ROOT_DIR  = ./../../../..
+IMAGE     = fmcover
+TARGET    = $(IMG_DIR)/$(IMAGE_BIN)
+#SDK_BOOTLOADER_DIR = $(ROOT_DIR)/sdk/bootloader/include
+#SDK_BOOTLOADER_LIB = $(ROOT_DIR)/sdk/bootloader/lib
+#dir_src = $(ROOT_DIR)/case/apps/sys/recover
+
+#OBJ_DIR := objs
+#SRC_DIR := dir1 dir2
+
+LDSCRIPT = link.xn
+
+INCS = $(SDK_DIR)/include \
+		 $(SDK_DIR)/linux/include \
+	
+
+LIBS = $(SDK_LIB_DIR)/libbootdisplay.a
+
+
+	
+include $(ROOT_DIR)/scripts/common.mak
+
+CFLAGS_EXTRA += -fno-builtin
+
+#$(warning $(LIBS))

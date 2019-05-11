@@ -1,0 +1,16 @@
+[HEADER]
+FORMAT=1
+VERSION=0x1
+TITLE=VERSION
+OUTHFILE=..\..\..\scripts\version_cfg.h
+[BODY]
+vram=[FALSE][str][8][Partion upgrade or not: TRUE:upgrade this partion,FALSE:do't upgrade this partion]
+udisk=[TRUE][str][8][Partion upgrade or not: TRUE:upgrade this partion,FALSE:do't upgrade this partion]
+SOFTWARE=[AM8251.DEMO.001][str][128][Software version]
+PATCH=[Patch.0][str][128][Patch version]
+HARDWARE=[AM8251.QC.SZ&TP][str][40][Hardware version]
+PROCESSOR=[AM8251][str][16][Processor type]
+VENDOR=[Actions-Microelectronics.Co.,Ltd.][str][128][Vendor name]
+PRODUCT=[EZ.BOX][str][128][Product name]
+FIRMWARE=[14533][num][8][Firmware version]
+MODEL=[am_8258N_ezwire-mobile_miraplug][str][64][The product]

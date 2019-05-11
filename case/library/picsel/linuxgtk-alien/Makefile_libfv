@@ -1,0 +1,106 @@
+# $Id: makefile,v 1.16 2013/03/15 10:15:06 hugh Exp $
+#
+# Copyright (C) Picsel 2006-2007
+
+include target-info.mk
+
+# To reduce binary size only enable only the required languages here
+
+LANGDEFINES =  -DALIEN_EN_GB_FULL
+#LANGDEFINES += -DALIEN_EN_GB_SUBSET
+#LANGDEFINES += -DALIEN_JA_JP
+#LANGDEFINES += -DALIEN_KO_KR
+#LANGDEFINES += -DALIEN_ZH_CN
+#LANGDEFINES += -DALIEN_ZH_TW
+LANGDEFINES += -DALIEN_AR_AR
+#LANGDEFINES += -DALIEN_TH_TH
+#LANGDEFINES += -DALIEN_BN_IN
+#LANGDEFINES += -DALIEN_GU_IN
+#LANGDEFINES += -DALIEN_DE_VA
+#LANGDEFINES += -DALIEN_KN_IN
+#LANGDEFINES += -DALIEN_PA_IN
+#LANGDEFINES += -DALIEN_TA_IN
+#LANGDEFINES += -DALIEN_TE_IN
+#LANGDEFINES += -DALIEN_VI_VN
+
+
+#CFLAGS = -g -Wall -Werror -Wno-switch $(TARGETINCS) $(TARGETDEFINES) $(EXTRADEFINES) $(LANGDEFINES)
+#CFLAGS = -g -Wall -Werror -Wno-switch -EL -mips32r2 -fPIC -msoft-float -O2 $(EXTRADEFINES) $(LANGDEFINES)
+CFLAGS = -EL -mips32r2 -Wall -fPIC -msoft-float -O2 $(EXTRADEFINES) $(LANGDEFINES)
+
+#LIBS = -lm -lpthread $(TARGETLIBS)
+LIBS = -EL -lm -lpthread -lrt -shared -lstdc++ -msoft-float 
+
+data_FILES = $(TARGETDATAFILES)
+
+DEFS = $(TARGETDEFS)
+
+BINDIR = /tmp/$(USER)-picselapp
+DATADIR = /tmp/$(USER)-picselapp
+
+install_sh = install
+install_sh_DATA = $(install_sh) -c -m 644
+
+INCLUDES = -I. -I../alien-include -I../alien-internal -I/usr/kerberos/include \
+           -I../linux-alien-common
+
+
+#OBJ = gtk-alien.o                                   \
+#      gtk-alien-callbacks.o                         \
+#      gtk-screen.o                                  \
+#      gtk-recent.o                                  \
+#      gtk-prefsdialog.o                             
+OBJ = fileviewer.o									\
+	  fv_common.o									\
+	  alien_callback.o								\
+      ../linux-alien-common/linux-alien.o           \
+      ../linux-alien-common/linux-alien-config.o    \
+      ../linux-alien-common/linux-alien-config-fv.o \
+      ../linux-alien-common/alien-file.o            \
+      ../linux-alien-common/alien-thread.o          \
+      ../linux-alien-common/touchscreen.o           \
+      ../linux-alien-common/preferences.o           \
+      ../linux-alien-common/excel-format.o          \
+      ../alien-common/alien-entrypoint.o
+
+STATICLIB = ../libraries/picsellinux.a
+
+.SUFFIXES : .c .o
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDES) $(DEFS) -c $? -o $@
+
+#all: rebuild-preferences $(TARGET) langfiles
+all: rebuild-preferences $(TARGET)
+
+install: install-exec install-data
+
+install-exec: all
+	@if test ! -d $(BINDIR) ; then \
+	    mkdir -p $(BINDIR) ; \
+	 fi
+	cp $(TARGET) $(BINDIR)
+
+install-data:
+	@if test ! -d $(DATADIR) ; then \
+	    mkdir -p $(DATADIR) ; \
+	 fi
+	list='$(data_FILES)'; for f in $$list ; do \
+	    $(install_sh_DATA) $$f $(DATADIR) ; \
+	done
+
+$(TARGET): $(OBJ) $(STATICLIB)
+	$(CC) $(OBJ) $(STATICLIB) $(LIBS) -o $@
+#	$(CXX) -Wl,-Map,map.txt $(OBJ) $(STATICLIB) $(LIBS) -o $@
+
+#langfiles:
+#	./gtklang.sh
+
+rebuild-preferences:
+	echo "Forcing rebuild of preferences" ; touch ../linux-alien-common/preferences.c
+
+clean:
+	rm -f *.o ../alien-common/*.o $(OBJ) $(TARGET) map.txt
+
+.PHONY: rebuild-preferences all install install-exec install-data clean
+

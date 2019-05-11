@@ -1,0 +1,20 @@
+db_audio.o: db_audio.c db_audio.h ../../../sdk/include/sqlite3.h \
+  ../../../sdk/include/mnavi_fop.h ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h ../../../sdk/include/id3.h \
+  ../../../sdk/include/osapi.h ../../../sdk/include/audio_midware.h
+db_office.o: db_office.c db_office.h ../../../sdk/include/sqlite3.h \
+  ../../../sdk/include/mnavi_fop.h ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h ../../../sdk/include/id3.h \
+  ../../../sdk/include/osapi.h
+db_photo.o: db_photo.c db_photo.h ../../../sdk/include/sqlite3.h \
+  ../../../sdk/include/mnavi_fop.h ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h ../../../sdk/include/id3.h \
+  ../../../sdk/include/osapi.h
+db_video.o: db_video.c db_video.h ../../../sdk/include/sqlite3.h \
+  ../../../sdk/include/mnavi_fop.h ../../../case/include/file_list.h \
+  ../../../sdk/include/mnavi_api.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/ipc_key.h ../../../sdk/include/id3.h \
+  ../../../sdk/include/osapi.h

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title> Actions-Micro | Infomation </title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+
+      body {
+        background-color: #000;
+      }
+
+      #main {
+        background-image: url('img/background.jpg');
+        background-repeat: no-repeat;
+        font-family: "Arial";
+      }
+
+      #menu, #content {
+	      margin-top: 20px;
+      }
+
+      #banner {
+        height: 130px;
+      }
+
+      #menu > ul {
+        margin-left: 50px;
+      }
+
+      #menu > ul > li {
+        font-size: 16px;
+        font-family: "Arial";
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .active {
+        color: rgb(60, 130, 220) !important;
+        cursor:  default;
+        pointer-events: none;
+      }
+
+      #menu a {
+        color: #FFF;
+      }
+
+      #menu a:hover {
+        text-decoration: none;
+      }
+
+      #content {
+        color: #FFF;
+        height: 400px;
+      }
+
+    </style>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('a.active').removeAttr('href');
+      });
+    </script>
+
+  </head>
+
+  <body>
+
+	  <script type="text/javascript">
+  $(function() {
+
+	  /* setup form */
+	  $.get("cgi-bin/myall.cgi", {type:'apssid'}, function(apssid) {
+		  $('#apssid').val(apssid);
+	  }, "text");
+
+
+ $.get("cgi-bin/myall.cgi", {type:'apip'}, function(apip) {
+		  $('#apip').val(apip);
+	  }, "text");
+	  
+	   $.get("cgi-bin/myall.cgi", {type:'appsk'}, function(appsk) {
+		  $('#appsk').val(appsk);
+	  }, "text");
+	  
+	   $.get("cgi-bin/myall.cgi", {type:'clientssid'}, function(clientssid) {
+		  $('#clientssid').val(clientssid);
+	  }, "text");
+	  
+	   $.get("cgi-bin/myall.cgi", {type:'clientip'}, function(clientip) {
+		  $('#clientip').val(clientip);
+	  }, "text");
+	  
+	   $.get("cgi-bin/myall.cgi", {type:'lanip'}, function(lanip) {
+		  $('#lanip').val(lanip);
+	  }, "text");
+	  
+	   $.get("cgi-bin/myall.cgi", {type:'lanmask'}, function(lanmask) {
+		  $('#lanmask').val(lanmask);
+	  }, "text");
+	  
+	   $.get("cgi-bin/myall.cgi", {type:'langateway'}, function(langateway) {
+		  $('#langateway').val(langateway);
+	  }, "text");
+	  });
+	  </script>
+
+    <div class="container">
+      <div class="row">
+
+        <div class="span12">
+          <div id="main">
+            <div id="banner">&nbsp;</div>
+
+            <div class="row">
+              <div id="menu" class="span2">
+                <ul class="unstyled">                 
+               	 <li><a id="information" href="information.html"  class="active" >Information</a></li>
+                  <li><a id="download" href="index.html"   >Download</a></li>
+                  <li><a id="configure" href="configure.html"  >Configure</a></li>
+                  <li><a id="conference" href="conference.html"  >Conference Control</a></li>
+                </ul>
+              </div>
+              <div id="content" class="span9">
+	<form id="info-form" class="form-horizontal">
+	<fieldset>
+    <legend>EZ Box Device Information</legend>
+
+    <div class="control-group">
+      <label class="control-label align-left" for="apinfo">SSID</label>
+      <div class="controls">
+        <input type="text" name="apssid" id="apssid" disabled='disabled' maxlength="20" />
+        <span class="help-inline"></span>
+      </div>
+    </div>
+    
+     <div class="control-group">
+      <label class="control-label align-left" for="apinfo">PSK</label>
+      <div class="controls">
+        <input type="text" name="appsk" id="appsk" disabled='disabled' maxlength="20" />
+        <span class="help-inline"></span>
+      </div>
+    </div>
+      
+     <div class="control-group">
+      <label class="control-label align-left" for="apinfo">IP</label>
+      <div class="controls">
+        <input type="text" name="apip" id="apip" disabled='disabled' maxlength="20" />
+        <span class="help-inline"></span>
+      </div>
+    </div>
+     
+     
+      <legend>WiFi Client Mode (Infrastructure)</legend>
+
+    <div class="control-group">
+      <label class="control-label align-left" for="apinfo">Connected AP</label>
+      <div class="controls">
+        <input type="text" name="clientssid" id="clientssid" disabled='disabled' maxlength="20" />
+        <span class="help-inline"></span>
+      </div>
+    </div>
+    
+        
+     <div class="control-group">
+      <label class="control-label align-left" for="apinfo">IP</label>
+      <div class="controls">
+        <input type="text" name="clientip" id="clientip" disabled='disabled' maxlength="20" />
+        <span class="help-inline"></span>
+      </div>
+    </div>
+        
+        <legend>LAN Information</legend>
+
+    <div class="control-group">
+      <label class="control-label align-left" for="apinfo">IP</label>
+      <div class="controls">
+        <input type="text" name="lanip" id="lanip" disabled='disabled' maxlength="20" />
+        <span class="help-inline"></span>
+      </div>
+    </div>
+    
+     <div class="control-group">
+      <label class="control-label align-left" for="apinfo">Mask</label>
+      <div class="controls">
+        <input type="text" name="lanmask" id="lanmask" disabled='disabled' maxlength="20" />
+        <span class="help-inline"></span>
+      </div>
+    </div>
+      
+     <div class="control-group">
+      <label class="control-label align-left" for="apinfo">Gateway</label>
+      <div class="controls">
+        <input type="text" name="langateway" id="langateway" disabled='disabled' maxlength="20" />
+        <span class="help-inline"></span>
+      </div>
+    </div>  
+  </fieldset>
+</form>        	
+
+
+
+       	
+  <style type="text/css">
+  form, label {
+    font-size: 16px;
+    color: #FFF;
+    padding-left:40px;
+  }
+
+  #config-form div.control-group {
+    margin-bottom: 10px;
+    margin-top:10px;
+  }
+
+  #config-form p {
+    margin-bottom:0;
+  }
+
+  #config-form legend {
+	  margin-bottom: 0;
+	  line-height: 30px;
+  }
+
+  #config-form .controls {
+	  margin-left: 0;
+  }
+  label.control-label.align-left {
+    text-align:left;
+    padding-left: 0;
+    width: 130px;
+  }
+
+  legend {
+    color: rgb(255, 160, 0);
+    border: none;
+    font-size: 16px;
+  }
+
+  #apply {
+    margin-left: 30px;
+    margin-top: 10px;
+  }
+
+  #message {
+	  color: rgb(255, 160, 0);
+  }
+
+</style>
+
+
+
+
+
+&nbsp;
+  </div>
+
+</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </body>
+  
+
+</html>

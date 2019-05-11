@@ -1,0 +1,23 @@
+
+2.Scalercom (Patch Scalercom @Evan_20120315)
+		cp -rf scalercom/ ../../sdk/linux/drivers/uartcom
+
+		sdk/linux/drivers/Kconfig
+			在endmenu前加入一行source "drivers/uartcom/Kconfig"
+
+		sdk/linux/drivers/Makefile
+			最後一行加入obj-$(CONFIG_SCALER_COM)  += uartcom/
+		
+		sdk/include/uartcom.h
+
+		
+		sdk/linux/include/linux/major.h
+			加入#define AM_UARTCOM_MAJOR		231
+			
+		case/apps/sys/config/config.c
+			在main中的	_apps_vram_init();及 _lcm_init();間加入
+			sprintf(cmd,"%s c %d %d","mknod /dev/uartcom",231,0);
+			err = system(cmd);
+			
+		case\project_kit\project_**\batch\scripts\am_syscfg.sh
+			加入insmod的部分

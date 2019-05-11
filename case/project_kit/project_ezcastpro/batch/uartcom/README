@@ -1,0 +1,79 @@
+---------------
+Uartcom README
+---------------
+
+===============
+Data Structures
+===============
+
+State
+  表示 uart 傳輸進來的處理狀態(狀態機)，
+  狀態依序是傳輸格式的順序， 例如 Header -> RW -> CMD -> ...
+
+Event
+  當 State 處理到最後一個狀態，並成功解析出內容，會傳回解析結果，
+  此形態是代表結果的種類，目前有兩種Event: Key, Data 
+
+header_table
+  Event 的種類是根據 header 所決定，這個陣列的順序必須跟 Event 的順序一樣，
+  當要判斷 Event 的種類時，查表即可，請見 search_event
+
+KeyType
+  紀錄 key 的值
+
+Pair
+  表示一組傳輸進來的資料，兩個 index 分別表示資料在 RingBuffer 中的起始
+  和結束位址
+
+RingBuffer
+  一個 RingBuffer ，其中有一組 Pair 表示目前接收中的資料
+
+DispatchEvent
+  handler 會接收到的 type ，裡面包含 event type 和 raw_data (用 pair 表示)
+
+
+================
+Global Variables
+================
+
+int header_count = 2;
+  計算目前是第幾個 header byte
+
+State current_status = HEADER;
+  目前停留在哪一個狀態(狀態機)
+
+Event current_event = E_NULL;
+  目前 parsing 出來的 Event Type ，還無法 parsing 的時候，其值是 E_NULL
+
+INT16U raw_header = 0;
+  目前 header 是 2 byte ，這個變數用來把 2 byte shift 成一個，方便查表
+
+int length = 0;
+  傳輸進來的資料是不定長度，資料中會有定義每次中的資料長度，當拿到 length 
+  後，之後進來的資料都會 count 直到為零
+
+
+=====
+Notes
+=====
+
+- 如果傳輸格式有改，必須更改狀態機的流程，會比較麻煩。狀態機的 parsing 主要是在
+  interrupt 中完成。必須注意效能的問題，不能處理太久，越簡單越好。
+
+- key 跟 data 兩個 event ，分別註冊了兩個 handler ，各自的處理邏輯請寫在裡面。
+
+- 如果要新增新的 Event Type ，參考 key 跟 data 的方式，新增 event 然後在註冊對應的
+  handler 即可
+
+- Tasklet 是 kernel 提供的非同步機制，一些不需要馬上作的事情先進去佇列晚點在處理，
+  我們的 handler 都是用 tasklet 來執行的，這樣的好處是可以讓 interrupt 的處理時間變短
+
+- handler 接收到的參數是 malloc 出來的一組 Pair 表示接收到的 raw data 方便作處理，
+  用完記得要 free
+
+RingBuffer 的操作可以用以下三組 function
+
+  - put_to_ring_buffer(INT8U byte)
+  - reset_ring_buffer
+  - ring_buffer_go_forward
+

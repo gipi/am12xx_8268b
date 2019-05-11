@@ -1,0 +1,7 @@
+[HEADER]
+FORMAT=1
+VERSION=0x1
+TITLE=COUNTY_REGION
+OUTBINFILE=..\..\data\channel_region.bin
+[BODY]
+Channel_region=[CHINA][str][63]

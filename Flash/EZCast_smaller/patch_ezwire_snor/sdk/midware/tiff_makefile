@@ -1,0 +1,99 @@
+#################################################
+##   libtiff
+##   Using GNU gcc Compiler
+##   First created by Lei Yuan 2011-1-20
+##
+#################################################
+
+
+TARGET := libtiff.a
+CC := mips-linux-gnu-gcc
+AR := mips-linux-gnu-ar rvs
+
+INCLUDES = -I. -I../libjpeg -I../zlib
+
+DEFS =	-DMIPS \
+		-DAVOID_WIN32_FILEIO	\
+		-DCHECK_JPEG_YCBCR_SUBSAMPLING	\
+		-DDEFAULT_EXTRASAMPLE_AS_ALPHA	\
+		-DSTRIPCHOP_DEFAULT=TIFF_STRIPCHOP	\
+		-DSTRIP_SIZE_DEFAULT=8192	\
+		-DZIP_SUPPORT	\
+		-DJPEG_SUPPORT	\
+		-DOJPEG_SUPPORT	\
+		-DLOGLUV_SUPPORT	\
+		-DNEXT_SUPPORT	\
+		-DTHUNDER_SUPPORT	\
+		-DLZW_SUPPORT	\
+		-DPACKBITS_SUPPORT	\
+		-DCCITT_SUPPORT	\
+		-DTIF_PLATFORM_CONSOLE	\
+		-DFILLODER_LSB2MSB
+
+CFLAGS = -EL -muclibc -msoft-float -fPIC -fvisibility=hidden -mips32r2 -Wall -O3
+
+LIBS = -lm -lpthread -lrt
+
+OBJ_SYSDEP_MODULE = tif_unix.o
+
+OBJ	= \
+	tif_aux.o \
+	tif_close.o \
+	tif_codec.o \
+	tif_color.o \
+	tif_compress.o \
+	tif_dir.o \
+	tif_dirinfo.o \
+	tif_dirread.o \
+	tif_dirwrite.o \
+	tif_dumpmode.o \
+	tif_error.o \
+	tif_extension.o \
+	tif_fax3.o \
+	tif_fax3sm.o \
+	tif_getimage.o \
+	tif_jbig.o \
+	tif_jpeg.o \
+	tif_ojpeg.o \
+	tif_flush.o \
+	tif_luv.o \
+	tif_lzw.o \
+	tif_next.o \
+	tif_open.o \
+	tif_packbits.o \
+	tif_pixarlog.o \
+	tif_predict.o \
+	tif_print.o \
+	tif_read.o \
+	tif_swab.o \
+	tif_strip.o \
+	tif_thunder.o \
+	tif_tile.o \
+	tif_version.o \
+	tif_warning.o \
+	tif_write.o \
+	tif_zip.o \
+	tif_jbig.o \
+	$(OBJ_SYSDEP_MODULE)
+
+#	tif_stream.o \
+
+STATICLIB = 
+
+.SUFFIXES : .c .o
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDES) $(DEFS) -c $? -o $@
+
+all: $(TARGET)
+
+
+$(TARGET): $(OBJ) $(STATICLIB)
+	$(AR) $(TARGET) $(OBJ)
+
+
+clean:
+	rm -f $(OBJ) $(TARGET)
+
+
+

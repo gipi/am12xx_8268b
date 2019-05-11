@@ -1,0 +1,572 @@
+var CGI_URL='./cgi-bin/conference_control.cgi?'
+var IMAGE_FOLDER='./img/conference/'
+var intervalID;
+
+var LanguageEnglish  = {    	
+    Conf_Control          			: 'Conference Control',
+    ConfCtrl_on_display   			: 'ON',
+    ConfCtrl_off_display  			: 'OFF',
+    HostName              			: 'User Name',
+    CtrlAction            			: 'Display Location',
+    IpAddress             			: 'IP address'   
+}
+
+var LanguageGerman  = {    	
+    Conf_Control          			: 'Konferenzsteuerung',
+    ConfCtrl_on_display   			: 'Ein',
+    ConfCtrl_off_display  			: 'Aus',
+    HostName              			: 'Benutzername',
+    CtrlAction            			: 'Anzeigeort',
+    IpAddress             			: 'IP-Adresse'   
+}
+
+var LanguageFrench  = {    	
+    Conf_Control          			: 'Controle de conference ',
+    ConfCtrl_on_display   			: 'Activ.',
+    ConfCtrl_off_display  			: 'Desact.',
+    HostName              			: 'Non dutilisateur',
+    CtrlAction            			: 'Emplacement daffichage',
+    IpAddress             			: 'Adresse IP '   
+}
+
+var LanguageItalian  = {    	
+    Conf_Control          			: 'Controllo conferenza',
+    ConfCtrl_on_display   			: 'ON',
+    ConfCtrl_off_display  			: 'OFF',
+    HostName              			: 'Nome utente',
+    CtrlAction            			: 'Posizione display',
+    IpAddress             			: 'Indirizzo IP'   
+}
+
+var LanguageSpain  = {    	
+    Conf_Control          			: 'Control de conferencias',
+    ConfCtrl_on_display   			: 'Activado',
+    ConfCtrl_off_display  			: 'Desactivado',
+    HostName              			: 'Nombre de usuario',
+    CtrlAction            			: 'Ubicacion de visualizacion',
+    IpAddress             			: 'Direccion IP'   
+}
+
+var LanguagePortuguese  = {    	
+    Conf_Control          			: 'Controlo de conferencia',
+    ConfCtrl_on_display   			: 'Ligar',
+    ConfCtrl_off_display  			: 'Desligar',
+    HostName              			: 'Nome do utilizador',
+    CtrlAction            			: 'Mostrar localizacao',
+    IpAddress             			: 'Endereco IP'   
+}
+
+var LanguageJP  = {
+    Conf_Control                    : '?議???????',
+    ConfCtrl_on_display             : '??',
+    ConfCtrl_off_display            : '??',
+    HostName                    	: '????名',
+    CtrlAction                      : '表示場所',
+    IpAddress                       : 'IP ????'    
+}
+                                	
+var LanguageTC  = {         		
+    Conf_Control           			: '會議控制',
+    ConfCtrl_on_display    			: '開啟',
+    ConfCtrl_off_display   			: '關閉',
+    HostName               			: '使用者名稱',
+    CtrlAction             		  	: '顯示器位置',
+    IpAddress              	  		: 'IP 位址'     
+}
+
+var LanguageSC  = {
+    Conf_Control                    : '??控制',
+    ConfCtrl_on_display             : '打?',
+    ConfCtrl_off_display            : '??',
+    HostName                        : '用?名',
+    CtrlAction                      : '?示位置',
+    IpAddress                       : 'IP 地址'    
+}
+
+var LanguagePolish  = {    	
+    Conf_Control          			: 'Sterowanie konferencyjne',
+    ConfCtrl_on_display   			: 'W?.',
+    ConfCtrl_off_display  			: 'Wy?.',
+    HostName              			: 'Nazwa u?ytkownika',
+    CtrlAction            			: 'Lokalizacja wy?wietlacza',
+    IpAddress             			: 'Adres IP'   
+}
+
+var LanguageRussian  = {    	
+    Conf_Control          			: '?????????? ????????????',
+    ConfCtrl_on_display   			: '???.',
+    ConfCtrl_off_display  			: '????.',
+    HostName              			: '??? ????????????',
+    CtrlAction            			: '?????????????? ???????',
+    IpAddress             			: 'IP-?????'   
+}
+
+var LanguageThai  = {    	
+    Conf_Control          			: '????????????????????',
+    ConfCtrl_on_display   			: '????',
+    ConfCtrl_off_display  			: '???',
+    HostName              			: '??????????',
+    CtrlAction            			: '???????????',
+    IpAddress             			: '??????? IP'   
+}
+
+var LanguageDutch  = {    	
+    Conf_Control          			: 'Vergaderingbesturing',
+    ConfCtrl_on_display   			: 'Aan',
+    ConfCtrl_off_display  			: 'Uit',
+    HostName              			: 'Gebruikersnaam',
+    CtrlAction            			: 'Locatie weergeven',
+    IpAddress             			: 'IP-adres'   
+}
+
+var LanguageCzech  = {    	
+    Conf_Control          			: 'Konferen?ni ovladani',
+    ConfCtrl_on_display   			: 'Zapnuto',
+    ConfCtrl_off_display  			: 'Vypnuto',
+    HostName              			: 'U?ivatelske jmeno',
+    CtrlAction            			: 'Umist?ni displeje',
+    IpAddress             			: 'Adresa IP'   
+}
+
+var LanguageSwedish  = {    	
+    Conf_Control          			: 'Konferenskontroll',
+    ConfCtrl_on_display   			: 'Pa',
+    ConfCtrl_off_display  			: 'Av',
+    HostName              			: 'Anvandarnamn',
+    CtrlAction            			: 'Skarmplats',
+    IpAddress             			: 'IP-adress'   
+}
+
+var LanguageTurkish  = {    	
+    Conf_Control          			: 'Konferans kontrolu',
+    ConfCtrl_on_display   			: 'Ac?k',
+    ConfCtrl_off_display  			: 'Kapal?',
+    HostName              			: 'Kullan?c? Ad?',
+    CtrlAction            			: 'Gosterim Konumu',
+    IpAddress             			: 'IP Adresi'   
+}
+
+var LanguageKorean  = {    	
+    Conf_Control          			: '?? ??',
+    ConfCtrl_on_display   			: '??',
+    ConfCtrl_off_display  			: '??',
+    HostName              			: '??? ??',
+    CtrlAction            			: '????? ??',
+    IpAddress             			: 'IP ??'   
+}
+
+var LanguageHungarian  = {    	
+    Conf_Control          			: 'Konferencia vezerles',
+    ConfCtrl_on_display   			: 'Be',
+    ConfCtrl_off_display  			: 'Ki',
+    HostName              			: 'Felhasznalonev',
+    CtrlAction            			: 'Kijelz? helye',
+    IpAddress             			: 'IP cim'   
+}
+
+var LanguageCroatian  = {    	
+    Conf_Control          			: 'Konferencijsko upravljanje',
+    ConfCtrl_on_display   			: 'Uklj.',
+    ConfCtrl_off_display  			: 'Isklj.',
+    HostName              			: 'Korisni?ko ime',
+    CtrlAction            			: 'Smje?taj zaslona',
+    IpAddress             			: 'IP adresa'   
+}
+
+var LanguageRomanian  = {    	
+    Conf_Control          			: 'Control conferin??',
+    ConfCtrl_on_display   			: 'Pornit',
+    ConfCtrl_off_display  			: 'Oprit',
+    HostName              			: 'Nume utilizator',
+    CtrlAction            			: 'Loca?ie afi?aj',
+    IpAddress             			: 'Adres? IP'   
+}
+
+var LanguageNorwegian  = {    	
+    Conf_Control          			: 'Konferansekontroll',
+    ConfCtrl_on_display   			: 'Pa',
+    ConfCtrl_off_display  			: 'Av',
+    HostName              			: 'Brukernavn',
+    CtrlAction            			: 'Visning fra',
+    IpAddress             			: 'IP-adresse'   
+}
+
+var LanguageDanish  = {    	
+    Conf_Control          			: 'Konferencekontrol',
+    ConfCtrl_on_display   			: 'Til',
+    ConfCtrl_off_display  			: 'Fra',
+    HostName              			: 'Brugernavn',
+    CtrlAction            			: 'Skarmplacering',
+    IpAddress             			: 'IP-adresse'   
+}
+
+var LanguageBulgarian  = {    	
+    Conf_Control          			: '?????????? ?? ???????????',
+    ConfCtrl_on_display   			: '???.',
+    ConfCtrl_off_display  			: '????.',
+    HostName              			: '????????????? ???',
+    CtrlAction            			: '?????????????? ?? ???????',
+    IpAddress             			: 'IP ?????'   
+}
+
+var LanguageFinnish  = {    	
+    Conf_Control          			: 'Konferenssin ohjaus',
+    ConfCtrl_on_display   			: 'Paalle',
+    ConfCtrl_off_display  			: 'Pois',
+    HostName              			: 'Kayttajanimi',
+    CtrlAction            			: 'Nayton sijainti',
+    IpAddress             			: 'IP-osoite'   
+}
+
+function LanguageSelection()
+{
+	var lang = navigator.language || navigator.userLanguage;
+
+	L10NString = LanguageEnglish;
+	
+	if (lang.substring(0,2) == "de")
+	{
+		L10NString = LanguageGerman;
+	}
+	else if (lang.substring(0,2) == "fr")
+	{
+		L10NString = LanguageFrench;	
+	}
+	else if (lang.substring(0,2) == "it")
+	{
+		L10NString = LanguageItalian;	
+	}
+	else if (lang.substring(0,2) == "es")
+	{
+		L10NString = LanguageSpain;	
+	}
+	else if (lang.substring(0,2) == "pt")
+	{
+		L10NString = LanguagePortuguese;	
+	}
+	else if (lang.substring(0,2) == "ja")
+	{
+		L10NString = LanguageJP;	
+	}
+	else if (lang.substring(0,2) == "zh")
+	{
+		if (lang.toLowerCase() == "zh-tw" || lang.toLowerCase() == "zh-hk")
+		{
+			L10NString = LanguageTC;
+		}
+		else
+		{
+			L10NString = LanguageSC;
+		}
+	}
+	else if (lang.substring(0,2) == "pl")
+	{
+		L10NString = LanguagePolish;	
+	}
+	else if (lang.substring(0,2) == "ru")
+	{
+		L10NString = LanguageRussian;	
+	}
+	else if (lang.substring(0,2) == "ts")
+	{
+		L10NString = LanguageThai;	
+	}
+	else if (lang.substring(0,2) == "nl")
+	{
+		L10NString = LanguageDutch;	
+	}
+	else if (lang.substring(0,2) == "cs")
+	{
+		L10NString = LanguageCzech;	
+	}
+	else if (lang.substring(0,2) == "sv")
+	{
+		L10NString = LanguageSwedish;	
+	}
+	else if (lang.substring(0,2) == "tr")
+	{
+		L10NString = LanguageTurkish;	
+	}
+	else if (lang.substring(0,2) == "ko")
+	{
+		L10NString = LanguageKorean;	
+	}
+	else if (lang.substring(0,2) == "hu")
+	{
+		L10NString = LanguageHungarian;	
+	}
+	else if (lang.substring(0,2) == "hr")
+	{
+		L10NString = LanguageCroatian;	
+	}
+	else if (lang.substring(0,2) == "ro")
+	{
+		L10NString = LanguageRomanian;	
+	}
+	else if (lang.substring(0,2) == "no")
+	{
+		L10NString = LanguageNorwegian;	
+	}
+	else if (lang.substring(0,2) == "da")
+	{
+		L10NString = LanguageDanish;	
+	}
+	else if (lang.substring(0,2) == "bg")
+	{
+		L10NString = LanguageBulgarian;	
+	}
+	else if (lang.substring(0,2) == "fi")
+	{
+		L10NString = LanguageFinnish;	
+	}
+
+	document.getElementById('Conf_Control').innerHTML = L10NString['Conf_Control'];
+	document.getElementById('ConfCtrl_on_display').innerHTML = L10NString['ConfCtrl_on_display'];
+	document.getElementById('ConfCtrl_off_display').innerHTML = L10NString['ConfCtrl_off_display'];
+	document.getElementById('HostName').innerHTML = L10NString['HostName'];
+	document.getElementById('CtrlAction').innerHTML = L10NString['CtrlAction'];
+	document.getElementById('IpAddress').innerHTML = L10NString['IpAddress'];
+}
+
+function setCookie(c_name,value,expiredays)
+{
+	var exdate=new Date()
+	exdate.setDate(exdate.getDate()+expiredays)
+	document.cookie=c_name+ "=" +escape(value)+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+}
+
+function getCookie(c_name)
+{
+	if (document.cookie.length>0)
+	{
+		c_start=document.cookie.indexOf(c_name + "=")
+		if (c_start!=-1)
+		{ 
+			c_start=c_start + c_name.length+1 
+			c_end=document.cookie.indexOf(";",c_start)
+			if (c_end==-1) c_end=document.cookie.length
+			return unescape(document.cookie.substring(c_start,c_end))
+		} 
+	}
+	return ""
+}
+
+window.onload = function() 
+{
+	LanguageSelection();
+	
+	if (getCookie('ConfCtrl') == 'on')
+	{
+		document.getElementById('conference_on').checked = true;
+	}
+	
+	ConfCrtl_onoff();
+}
+
+function Disconnect(obj)
+{
+     var tbl=document.getElementById('Connection_Status');
+     var ip = tbl.rows[obj+2].cells[5].innerHTML;
+
+    $.ajax({
+            type: 'GET',
+			cache: false,
+            url: CGI_URL+"type=control&control=control_disconnect&ip_address="+ip,
+            dataType: 'text',
+            success: function (data) {
+				if(data == 1)
+				{
+					ConfCrtl_onoff();
+				}
+			},
+           error: function (e) {
+               }
+           });
+}
+
+function Stop(obj)
+{
+     var tbl=document.getElementById('Connection_Status');
+     var ip = tbl.rows[obj+2].cells[5].innerHTML;
+
+    $.ajax({
+            type: 'GET',
+			cache: false,
+            url: CGI_URL+"type=control&control=control_stop&ip_address="+ip,
+            dataType: 'text',
+            success: function (data) {
+				if(data == 1)
+				{
+					ConfCrtl_onoff();
+				}
+           },
+           error: function (e) {
+               }
+           });
+}
+
+function Change(obj, splitCount, position)
+{
+     var tbl=document.getElementById('Connection_Status');
+     var ip = tbl.rows[obj+2].cells[5].innerHTML;
+
+    $.ajax({
+            type: 'GET',
+			cache: false,
+            url: CGI_URL+"type=control&control=control_change&split_count="+splitCount+"&position="+position+"&ip_address="+ip,
+            dataType: 'text',
+            success: function (data) {
+				if(data == 1)
+				{
+					ConfCrtl_onoff();
+				}
+                },
+           error: function (e) {
+               }
+           });
+}
+
+function AddStatus(obj,splitCount,position,RowId)
+{
+  var ConnectionStatus="<table cellpadding=\"0\" cellspacing=\"0\" ><tbody><tr><td>";
+  //var ConnectionStatus="<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" ><tr><td rowspan=2>";
+  /*if(splitCount == 1 && position == 1)
+     ConnectionStatus = ConnectionStatus + " <img src=\""+IMAGE_FOLDER+"full_disable.gif\"  />";
+  else
+     ConnectionStatus = ConnectionStatus +" <a href=\"#\"><img src=\""+IMAGE_FOLDER+"full_enable.gif\" onclick =\"Change("+RowId+",1,1)\" /></a>";
+  var ConnectionStatus = ConnectionStatus +"&nbsp</td><td rowspan=2>";
+  
+
+  if(splitCount == 2 && position == 1)
+        ConnectionStatus = ConnectionStatus + " <img src=\""+IMAGE_FOLDER+"L-1.bmp\"  />";
+  else
+      ConnectionStatus = ConnectionStatus + " <a href=\"#\"><img src=\""+IMAGE_FOLDER+"L.bmp\"  onclick =\"Change("+RowId+",2,1)\" /></a>";
+
+  var ConnectionStatus = ConnectionStatus +"</td><td rowspan=2>";
+	  
+  if(splitCount == 2 && position == 2)
+        ConnectionStatus = ConnectionStatus + " <img src=\""+IMAGE_FOLDER+"R-1.bmp\"   />";
+  else
+      ConnectionStatus = ConnectionStatus + " <a href=\"#\"><img src=\""+IMAGE_FOLDER+"R.bmp\"   onclick =\"Change("+RowId+",2,2)\" /></a>";
+*/
+  //var ConnectionStatus = ConnectionStatus +"&nbsp&nbsp</td><td width=\"14\" height=\"28\">";
+  var ConnectionStatus = ConnectionStatus +"<table cellpadding=0 cellspacing=0 height=20 bgcolor=\"#000\"><tbody><tr>";
+  if(splitCount == 4 && position == 1)
+        ConnectionStatus = ConnectionStatus + "<img src=\""+IMAGE_FOLDER+"1_disable.gif\" width=\"14\" height=\"10\" />";
+  else
+      ConnectionStatus = ConnectionStatus + "<td><a href=\"#\"><img src=\""+IMAGE_FOLDER+"1_enable.gif\" onclick =\"Change("+RowId+",4,1)\"></a></td>";
+	  
+  if(splitCount == 4 && position == 2)
+        ConnectionStatus = ConnectionStatus + "<img src=\""+IMAGE_FOLDER+"2_disable.gif\"   />";
+  else
+      ConnectionStatus = ConnectionStatus + "<td><a href=\"#\"><img src=\""+IMAGE_FOLDER+"2_enable.gif\" onclick =\"Change("+RowId+",4,2)\"></a></td>";
+
+  //ConnectionStatus = ConnectionStatus + "<td rowspan=2> <a href=\"#\"><img src=\""+IMAGE_FOLDER+"stop_enable.gif\"  onclick = \"Disconnect("+RowId+")\"/></a> </td></tr><tr><td"
+  ConnectionStatus = ConnectionStatus + "</tr><tr>";
+  if(splitCount == 4 && position == 3)
+        ConnectionStatus = ConnectionStatus + "<img src=\""+IMAGE_FOLDER+"3_disable.gif\"   />";
+  else
+      ConnectionStatus = ConnectionStatus + "<td><a href=\"#\"><img src=\""+IMAGE_FOLDER+"3_enable.gif\"  onclick =\"Change("+RowId+",4,3)\"></a></td>";
+
+  ConnectionStatus = ConnectionStatus + "</td>";
+	  
+  if(splitCount == 4 && position == 4)
+        ConnectionStatus = ConnectionStatus + "<img src=\""+IMAGE_FOLDER+"4_disable.gif\"  />";
+  else
+      ConnectionStatus = ConnectionStatus + "<td><a href=\"#\"><img src=\""+IMAGE_FOLDER+"4_enable.gif\"  onclick =\"Change("+RowId+",4,4)\"></a></td>";
+    
+  ConnectionStatus = ConnectionStatus + "</tr></tbody>";
+  ConnectionStatus = ConnectionStatus + "</td></tr></tbody></table>";
+  
+  
+  /*if(position == 0)
+     ConnectionStatus = ConnectionStatus + " <img src=\""+IMAGE_FOLDER+"8.png\" width=\"21\" height=\"20\" border=\"0\" style=' margin:0 3px 0 3px' />";
+  else
+     ConnectionStatus = ConnectionStatus + " <a href=\"#\"><img src=\""+IMAGE_FOLDER+"8-1.png\" width=\"21\" height=\"20\" border=\"0\" style=' margin:0 3px 0 3px' onclick = \"Stop("+RowId+")\" /></a>";
+*/
+  obj.innerHTML = ConnectionStatus;
+}
+
+function AddNewRow(statusFrame, RowId, hn, splitCount, position, ip)
+{
+    var newTR = statusFrame.insertRow(statusFrame.rows.length);
+	
+	var HeadPicture = "<img src=\""+IMAGE_FOLDER+"UserIconb.bmp\"/ >"
+	if(RowId%2==1)
+	{
+		newTR.style.backgroundColor="#626262";
+		var HeadPicture = "<img src=\""+IMAGE_FOLDER+"UserIconw.bmp\"/ width=\"40\" height=\"37\"  >"
+	}
+	var head = newTR.insertCell(0);
+	head.style.backgroundColor="#626262";
+	if(RowId%2==1)
+	{
+		head.style.backgroundColor="#000";
+	}
+	head.innerHTML = HeadPicture;
+	
+	newTR.insertCell(1);
+    var newHostname = newTR.insertCell(2);
+    newTR.insertCell(3);
+	newTR.insertCell(4);
+	var newstatus = newTR.insertCell(5)
+	//newstatus.colSpan="2"
+	//newstatus.rowSpan="2"
+	var newipaddress = newTR.insertCell(6);
+	newTR.insertCell(7);
+    newHostname.innerHTML = hn;
+    AddStatus(newstatus,splitCount,position,RowId);
+    newipaddress.innerHTML = ip;
+}
+
+function ConfCrtl_onoff()
+{
+	
+	window.clearTimeout(intervalID);
+
+	var statusFrame = document.getElementById('Connection_Status');
+
+	for(var i=statusFrame.rows.length-1;i>=4;i--)
+	{
+		statusFrame.deleteRow(i);
+	}
+
+	var rowID=2;
+	var teststatus = statusFrame+ "bgcolor = \"#111111\"";
+	AddNewRow(statusFrame, rowID++, "mydpf1", 1, 1, "192.168.32.10");
+	AddNewRow(statusFrame, rowID++, "mydpf2", 2, 2, "192.168.32.10");
+	AddNewRow(statusFrame, rowID++, "mydpf3", 2, 1, "192.168.32.10");
+	
+	if(document.getElementById('conference_on').checked == true)
+	{
+		$.ajax({
+			type: 'GET',
+			cache: false,
+			url: CGI_URL + 'type=query_tcp_connections',
+			dataType: 'xml',
+			success: function (data) {
+				var splitCount = $(data).find("ConnectInfo").find("SplitCount").text();
+				var statusFrame = document.getElementById('Connection_Status');
+				var rowID =2;
+				$(data).find("Connection").each(function() {
+					var $Connection = $(this);
+					var hostname = $Connection.find("HostName").text();
+					var position = $Connection.find("Position").text();
+					var ipaddress = $Connection.find("IPAddress").text();
+					AddNewRow(statusFrame, rowID++, hostname, splitCount, position, ipaddress);
+				});
+				
+			},
+			error: function (e) {
+			}
+		});
+		
+		setCookie('ConfCtrl', 'on', 1);
+	}
+	else
+	{
+		setCookie('ConfCtrl', 'off', 1);
+	}
+	
+	intervalID = window.setTimeout("ConfCrtl_onoff();",1500000000);
+}

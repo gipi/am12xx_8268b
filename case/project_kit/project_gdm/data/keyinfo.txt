@@ -1,0 +1,11 @@
+[HEADER]
+TYPE=KEY
+VERSION=0x100
+[KEYS]
+ALIAS0=主板按键1_Left
+ALIAS1=主板按键2_Right
+ALIAS2=主板按键3_ESC
+ALIAS3=主板按键4_Enter
+ALIAS4=主板按键5_void
+ALIAS5=主板按键6_void
+ALIAS6=主板按键7_void

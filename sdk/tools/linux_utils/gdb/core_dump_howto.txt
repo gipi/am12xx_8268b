@@ -1,0 +1,87 @@
+a)打开kernel的elf coredump支持
+make .menuconfig
+General Setup--->Configure standard kernel features(for small systems)--->Enable ELF core dumps
+
+b)Scripts/common.mak修改两处地方
+1.将cp -f $@ $(notdir $(TARGET)),cp -f $@ $(unstripped-elf); $(STRIP) --strip-unneeded $@))
+中的; $(STRIP) --strip-unneeded $@去除
+strip的功能是通过除去绑定程序和符号调试程序使用的信息，减少扩展公共对象文件格式（XCOFF）的对象文件的大小。
+所以这个地方要去除strip，以便保留debug symbol
+
+2.将arch-flags := -mips32r2 $(endian-flag) -msoft-float $(CFLAG_LIBC)修改为
+arch-flags := -g -mips32r2 $(endian-flag) -msoft-float $(CFLAG_LIBC)
+添加-g的选项以便生成调试信息
+
+c)中间件Makefile加入-g
+sdk/library/midware/build/Makefile	
+ARCH_CCFLAGS := -g -EL $(CFLAG_LIBC) -msoft-float -fPIC -fvisibility=hidden
+
+d)Sdk/initrd/linuxrc文件的修改
+将mount -t $AM7X_ROOTFS -o noatime -o nodiratime -o ro /dev/nftla1 $NEWROOT || { echo Failed to mount / >&2; exit 1; }
+中的-o -ro去掉变为
+mount -t $AM7X_ROOTFS -o noatime -o nodiratime /dev/nftla1 $NEWROOT || { echo Failed to mount / >&2; exit 1; }
+目的去掉rootfs的readonly属性
+
+e)case/apps/fui/fui.c修改
+去掉define FUI_DEBUG_EN宏，以便去掉fui对信号的捕捉。
+
+f)sdk/rootfs/etc/init.d/rcS文件的修改
+注释掉manager.app & 以便手动启动manager.app
+
+g)拷贝gdb和prepare_for_core.sh到sdk/rootfs/am7x/bin文件夹下面
+后面需要运行。
+下面是prepare_for_core.sh脚本内容
+#!/bin/sh
+echo "1" > /proc/sys/kernel/core_uses_pid
+cat /proc/sys/kernel/core_uses_pid
+ulimit -c unlimited
+
+说明：
+/proc/sys/kernel/core_uses_pid可以控制core文件的文件名中是否添加pid作为扩展。文件内容为1，表示添加pid作为扩展名，生成的core文件格式为core.xxxx；为0则表示生成的core文件同一命名为core。
+ulimit -c unlimited用来生成大小不受限制的core文件
+存储core文件的位置也可以修改：
+proc/sys/kernel/core_pattern可以控制core文件保存位置和文件名格式。
+可通过以下命令修改此文件：
+echo "/corefile/core-%e-%p-%t" >core_pattern，可以将core文件统一生成到/corefile目录下，产生的文件名为core-命令名-pid-时间戳
+以下是参数列表:
+%p - insert pid into filename 添加pid 
+%u - insert current uid into filename 添加当前uid  
+%g - insert current gid into filename 添加当前gid 
+%s - insert signal that caused the coredump into the filename
+添加导致产生core的信号
+%t - insert UNIX time that the coredump occurred into filename
+添加core文件生成时的unix时间
+%h - insert hostname where the coredump happened into filename
+添加主机名 
+%e - insert coredumping executable name into filename
+添加命令名
+
+用gdb查看core文件:
+下面我们可以在发生运行时信号引起的错误时发生coredump了.
+发生coredump之后,
+用gdb进行查看core文件的内容,
+以定位文件中引发coredump的行.
+gdb [execfile] [core file]
+如:gdb ./test test.core
+在进入gdb后,用bt命令查看backtrace以检查发生程序运行到哪里,来定位core dump的文件->行.
+
+h)sdk/bin/1211/bootarg.txt修改
+rd_start=0x80400000 rd_size=__FIX_ME_ON_PACK__ reserved_mem=35M root=/dev/ram0 rw init=/linuxrc
+
+i)case/apps/fui/include/fui_common.h文件修改
+#define HEAP_SHARE_SIZE   (28*1024*1024+512*1024)
+
+reserved_mem和HEAP_SHARE_SIZE减少相同大小
+
+j)make all生成固件，烧完固件之后重新上电，出现控制台命令行
+运行
+. am7x/bin/prepare_for_core.sh
+ulimit -a
+manager.app &
+如果出现了dump，执行gdb /am7x/bin/fui.app core.***
+
+可用kill -s SIGSEGV $$试试看是否生成core文件
+echo 1 > /proc/sys/kernel/core_uses_pid
+ulimit -c unlimited
+ulimit -a
+manager.app &

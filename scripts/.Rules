@@ -1,0 +1,68 @@
+.PHONY: libapps_vram.a
+libapps_vram.a: ; @echo "  ENTER case/library/apps_vram"&&$(MAKE) -C $(TOPDIR)/case/library/apps_vram $(MAKE_ACTION)&&echo
+
+.PHONY: libsubtitle_parser.a
+libsubtitle_parser.a: ; @echo "  ENTER case/library/subtitle_parser"&&$(MAKE) -C $(TOPDIR)/case/library/subtitle_parser $(MAKE_ACTION)&&echo
+
+.PHONY: libalarm.a
+libalarm.a: ; @echo "  ENTER case/library/alarms"&&$(MAKE) -C $(TOPDIR)/case/library/alarms $(MAKE_ACTION)&&echo
+
+.PHONY: libfilelist.so
+libfilelist.so: ; @echo "  ENTER case/library/filelist"&&$(MAKE) -C $(TOPDIR)/case/library/filelist $(MAKE_ACTION)&&echo
+
+.PHONY: libftp_client.so
+libftp_client.so: ; @echo "  ENTER case/library/ftp_client"&&$(MAKE) -C $(TOPDIR)/case/library/ftp_client $(MAKE_ACTION)&&echo
+
+.PHONY: libfv.so
+libfv.so: ; @echo "  ENTER case/library/picsel"&&$(MAKE) -C $(TOPDIR)/case/library/picsel $(MAKE_ACTION)&&echo
+
+.PHONY: libstream.so
+libstream.so: ; @echo "  ENTER case/library/stream"&&$(MAKE) -C $(TOPDIR)/case/library/stream $(MAKE_ACTION)&&echo
+
+.PHONY: libqrcode.so
+libqrcode.so: ; @echo "  ENTER case/library/qrcode"&&$(MAKE) -C $(TOPDIR)/case/library/qrcode $(MAKE_ACTION)&&echo
+
+.PHONY: libsqldb.so
+libsqldb.so: ; @echo "  ENTER case/library/sqldb"&&$(MAKE) -C $(TOPDIR)/case/library/sqldb $(MAKE_ACTION)&&echo
+
+.PHONY: libmirartp_stream.so
+libmirartp_stream.so: ; @echo "  ENTER case/library/mirartp"&&$(MAKE) -C $(TOPDIR)/case/library/mirartp $(MAKE_ACTION)&&echo
+
+.PHONY: libamsocket.so
+libamsocket.so: ; @echo "  ENTER case/library/socket"&&$(MAKE) -C $(TOPDIR)/case/library/socket $(MAKE_ACTION)&&echo
+
+.PHONY: manager.app
+manager.app: ; @echo "  ENTER case/apps/task_manager"&&$(MAKE) -C $(TOPDIR)/case/apps/task_manager $(MAKE_ACTION)&&echo
+
+.PHONY: recover.bin
+recover.bin: ; @echo "  ENTER case/apps/sys/welcome"&&$(MAKE) -C $(TOPDIR)/case/apps/sys/welcome $(MAKE_ACTION)&&echo
+
+.PHONY: fmcover.bin
+fmcover.bin: ; @echo "  ENTER case/apps/sys/recover"&&$(MAKE) -C $(TOPDIR)/case/apps/sys/recover $(MAKE_ACTION)&&echo
+
+.PHONY: fui.app
+fui.app: ; @echo "  ENTER case/apps/fui"&&$(MAKE) -C $(TOPDIR)/case/apps/fui $(MAKE_ACTION)&&echo
+
+.PHONY: chpll.app
+chpll.app: ; @echo "  ENTER case/apps/chpll"&&$(MAKE) -C $(TOPDIR)/case/apps/chpll $(MAKE_ACTION)&&echo
+
+.PHONY: config.app
+config.app: ; @echo "  ENTER case/apps/sys/config"&&$(MAKE) -C $(TOPDIR)/case/apps/sys/config $(MAKE_ACTION)&&echo
+
+.PHONY: framectrl.app
+framectrl.app: ; @echo "  ENTER case/apps/fui/framectrl"&&$(MAKE) -C $(TOPDIR)/case/apps/fui/framectrl $(MAKE_ACTION)&&echo
+
+.PHONY: pthsystem.app
+pthsystem.app: ; @echo "  ENTER case/apps/pthSystem"&&$(MAKE) -C $(TOPDIR)/case/apps/pthSystem $(MAKE_ACTION)&&echo
+
+.PHONY: linein.app
+linein.app: ; @echo "  ENTER case/apps/linein"&&$(MAKE) -C $(TOPDIR)/case/apps/linein $(MAKE_ACTION)&&echo
+
+case-targets = libapps_vram.a libsubtitle_parser.a libalarm.a libfilelist.so libftp_client.so libfv.so libstream.so libqrcode.so libsqldb.so libmirartp_stream.so libamsocket.so manager.app recover.bin fmcover.bin fui.app chpll.app config.app framectrl.app pthsystem.app linein.app 
+sdk-targets = 
+.PHONY: .case .sdk .targets .casetargets .sdktargets
+.case: $(case-targets)
+.sdk:  $(sdk-targets)
+.targets:      ; @echo $(case-targets) $(sdk-targets)
+.casetargets: ; @echo $(case-targets)
+.sdktargets:  ; @echo $(sdk-targets)

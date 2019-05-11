@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="js/jquery.js">
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+<title>无标题文档</title>
+
+<style type="text/css">
+<!--
+body
+{
+        //background:url('img/ezcastbk.jpg');    
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/ezcastbk.jpg', sizingMethod='scale');
+        width:100%;
+        height:100%;
+ }
+.main {
+	margin: 2px;
+	float: left;
+	height: 50%;
+	width: 30%;
+	border: 1px inset #FFFFFF;
+	position: absolute;
+	left: 1px;
+	font-size: 180%;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding: 10px;
+	top: 1px;
+}
+#bg{
+position:absolute;
+position:fixed !important;
+position: fixed;
+top:0px;
+left:0px;
+z-index:-999;
+}
+.background 
+{
+	background-image:url(img/ezcastbk.jpg);
+	background-repeat: repeat-y;
+	width: 100%; 
+	height: 100%; 
+	top: 0%; 
+	left: 0%; 
+}
+.STYLE1 {
+	font-size: 16px;
+	color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.menu {
+	font-size: 14px;
+//	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.select  {
+	font-size: 18px;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 600px)
+{
+
+	#customers
+	{
+	width:100%;
+	}
+}
+
+@media screen and (min-width: 600px)
+{
+	#customers
+	{
+	width:400px;
+	}
+}
+input[type="range"] {
+    width: 95%;
+}
+
+input[type="range"] {
+    -webkit-appearance: none !important;
+    -webkit-box-shadow: 0 1px 0 0px #424242,
+        0 1px 0 #060607 inset,
+        0px 5px 2px 0px rgba(0, 0, 0, 0.5) inset,
+        1px 0px 2px rgba(0, 0, 0, 0.4) inset,
+        0 0px 1px rgba(0, 0, 0, 0.6) inset;
+    margin-top: 2px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    width: 90%;
+	height: 10px;
+	//border: 1px inset #d6d6d6;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    cursor: default;
+    top: 1px;
+    height: 20px;
+    width: 18px;
+//	background-image:url(img/EQ-mode-select_06.png);
+    background: none repeat scroll 0 0 #eee;
+    border-radius:18px;
+    -webkit-box-shadow: 0 -1px 1px black inset;
+}
+.STYLE3 {font-size: 18px; color: #FFFFFF; font-family: Arial, Helvetica, sans-serif; }
+
+-->
+</style>
+</head>
+<script type="text/javascript" src="js/eq.js"></script>
+<script language="javascript">
+$(document).ready(function()
+ {	  
+ 	$(function() 
+	{
+		var w,h
+		if(!!(window.attachEvent && !window.opera))
+		{
+			h = document.documentElement.clientHeight;
+			w = document.documentElement.clientWidth;
+		}else{
+			h =	window.innerHeight;
+			w = window.innerWidth;
+		}
+		var bgImg = document.getElementById('bg').getElementsByTagName('img')[0];
+		bgImg.width = (w);
+		bgImg.height= (h) ;	 
+		delay_get_data();	
+	});	
+ });
+</script>
+<body>
+<div id="bg"><img  src="img/airdiskbg.jpg" alt="HIGH"></div>
+<form id="config-form">
+<input  name="eq_index" type="hidden" id="eq_index" value="" width="100">
+<input  name="eq_value" type="hidden" id="eq_value" value="" width="100">
+ <input name="custom_index" type="hidden" id="custom_index" value="">
+ <input name="custom_or_other" type="hidden" id="custom_or_other" value="">
+</form>
+<table width="100%" border="0">
+  <tr>
+    <td align="right"><input type="submit" name="Home"  id="Home" value="" style="border:none;background:url('img/return.png');background-repeat: no-repeat;width:52px;height:41px;"></td>
+	<td width="20%">
+	</td>
+  </tr>
+</table>
+<table border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="0" id="customers">
+    <tr>
+	<td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">70Hz</span></td>
+    <td width="215" align="center" valign="middle"><input id="eq70" min="0" max="100" step="1" type="range" onchange='javascript:setValue(0,"eq70")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+
+    <tr>
+	<td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">180Hz</span></td>
+    <td align="center" valign="middle"><input id="eq180" min="0" max="100" step="1" type="range" onchange='javascript:setValue(1,"eq180")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+
+    <tr>
+    <td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">320Hz</span></td>
+    <td align="center" valign="middle"><input id="eq320" min="0" max="100" step="1" type="range" onchange='javascript:setValue(2,"eq320")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">600Hz</span></td>
+    <td align="center" valign="middle"><input id="eq600" min="0" max="100" step="1" type="range" onchange='javascript:setValue(3,"eq600")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">1KHz</span></td>
+    <td align="center" valign="middle"><input id="eq1K" min="0" max="100" step="1" type="range" onchange='javascript:setValue(4,"eq1K")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">3KHz</span></td>
+    <td align="center" valign="middle"><input id="eq3K" min="0" max="100" step="1" type="range" onchange='javascript:setValue(5,"eq3K")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">6KHz</span></td>
+    <td align="center" valign="middle"><input id="eq6K" min="0" max="100" step="1" type="range" onchange='javascript:setValue(6,"eq6K")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">12KHz</span></td>
+    <td align="center" valign="middle"><input id="eq12K" min="0" max="100" step="1" type="range" onchange='javascript:setValue(7,"eq12K")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">14KHz</span></td>
+    <td align="center" valign="middle"><input id="eq14K" min="0" max="100" step="1" type="range" onchange='javascript:setValue(8,"eq14K")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="60" height="55" align="center" style="color:#FFFFFF"><span class="STYLE1">16KHz</span></td>
+    <td align="center" valign="middle"><input id="eq16K" min="0" max="100" step="1" type="range" onchange='javascript:setValue(9,"eq16K")' /></td>
+    <td width="13" align="center" valign="middle"  style="color:#FFFFFF">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

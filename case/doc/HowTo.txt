@@ -1,0 +1,28 @@
+/********************************************
+How to use AM LSDK
+********************************************/
+Step 1: Login linux server
+	-There are sereral ways to connet linux server. Here we recommand SecureCRT 
+	Configuration for SecureCRT:
+		Protocal:  ssh2
+		Hostname: 192.168.48.16
+		Port: 22
+		Username: xxx
+Step 2: Checkout LSDK from svn: 
+	-svn checkout http://192.168.48.18/svn/am12xx/trunk/LSDK/  $(local_lsdk_dir)
+Step 3: Compile
+	-cd $(local_lsdk_dir)/scripts
+	-sh am_sdk_config.sh AM_XX (EX: AM_11)
+	-make all
+Step 4: Make and upgrade firmware
+	-open linux tool (sdk/tools/linuxtool/LinuxTool.exe)
+	-open lnx file (case/case/projectpacket/project_demo/xxx.lnx,depending on the project:QC/DEMO/PHD..)
+	-click the ¡°get the resource file¡± button
+	-sh mkfs.sh
+	-open ActionsMPUpdate.exe in $(local_lsdk_dir)/tools/
+	-Config: $(local_lsdk_path)/case/images/fwimage_12xx.cfg
+	-SaveAs: generate FM
+	-Linux update Download
+
+//test tp 32.11 svn sync 0714 again test again
+

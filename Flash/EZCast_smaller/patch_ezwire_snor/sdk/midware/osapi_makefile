@@ -1,0 +1,84 @@
+#################################################
+##   OS API Lib
+##   Using GNU gcc Compiler
+##   First created by NeoYuan 2010-05-03
+##
+#################################################
+
+### add your directory here
+
+OPTI_FLAG 		= -O3
+
+HEADERS_FLAG	= -I./
+DEFINE_FLAG		= -DMIPS -DDEBUG -D_FILE_OFFSET_BITS=64 -D_LARGE_FILE
+
+ifneq ($(ARCH_CCFLAGS),)
+CCFLAG		= $(ARCH_CCFLAGS) -fvisibility=default -c -mips32r2 -Wall $(OPTI_FLAG) $(HEADERS_FLAG) $(DEFINE_FLAG)
+CCFLAG2		= $(ARCH_CCFLAGS) -c -mips32r2 -Wall -O1
+else
+CCFLAG		= -EL -muclibc -msoft-float -fPIC -c -mips32r2 -Wall $(OPTI_FLAG) $(HEADERS_FLAG) $(DEFINE_FLAG)
+CCFLAG2		= -EL -muclibc -c -mips32r2 -Wall -O1 
+endif
+
+ifneq ($(ARCH_LDFLAGS),)
+LDFLAG		= $(ARCH_LDFLAGS) -O1
+LDFLAG2		= $(ARCH_LDFLAGS) -O1 -lpthread -lrt -ldl -shared -lm
+else
+LDFLAG		= -EL -muclibc -O1
+LDFLAG2		= -EL -muclibc -msoft-float -O1 -lpthread -lrt -ldl -shared -lm
+endif
+
+GCC			= mips-linux-gnu-gcc
+OBJDUMP		= mips-linux-gnu-objdump
+OBJCOPY		= mips-linux-gnu-objcopy
+OBJSIZE		= mips-linux-gnu-size
+
+CC			= $(GCC) $(CCFLAG)
+CC2			= $(GCC) $(CCFLAG2)
+AR			= mips-linux-gnu-ar rvs
+LD			= $(GCC) $(LDFLAG)
+LD2			= $(GCC) $(LDFLAG2)
+
+
+ALL_OBJS	 = os_linux.o
+ALL_OBJS	+= os_mq.o
+ALL_OBJS	+= os_heap.o
+
+DEPS	 = osapi.h
+DEPS	+= makefile
+
+all: lib_osapi.so mut.out
+	$(OBJSIZE) lib_osapi.so
+	$(OBJSIZE) mut.out
+
+os_linux.o: os_linux.c $(DEPS)
+	$(CC) -o $@ $<
+	
+os_mq.o: os_mq.c $(DEPS)
+	$(CC) -o $@ $<
+	
+os_heap.o: os_heap.c $(DEPS)
+	$(CC) -o $@ $<
+
+mut.o: mut.c makefile
+	$(CC2) -o $@ $<
+
+### link all obj files 
+
+
+lib_osapi.so: $(ALL_OBJS)
+	rm -f lib_osapi.so
+	$(LD2) -o lib_osapi.so $(ALL_OBJS)
+	$(OBJDUMP) lib_osapi.so --disassemble >osapi_disasm.txt
+	cp -f lib_osapi.so ./test
+
+mut.out: mut.o
+	rm -f mut.out
+	$(LD) -o mut.out mut.o
+	$(OBJDUMP) mut.out --disassemble >mut_disasm.txt
+
+clean:
+	rm -f *.o
+	rm -f *.so
+	rm -f *.out
+	rm -f *.txt

@@ -1,0 +1,220 @@
+<cnx>
+	<company name="Optoma" logo="Test" banner="top.swf" />
+	<!-- <ui hidetransport="true" color="0x21A3F8" />					-->
+	<ui edit="0" color="0xD4923A" link1="http://www.crestron.com" link2="http://www.crestron.com/getroomviewresources"  deflang="1" />	
+	<msg dhcp="Reconnect" static="Static reconnect" />
+	<device model=" " firmware="2.1.0" control="2.1.0" restartlen="10" hasdhcp="1" />
+	<volume_bar_visibility show_bar="true"/>
+	<show_test_output show="false"/>
+	<ui_elems>
+		<ui_elem name="powertext" hidden="false" text="Power" />
+		<ui_elem name="languagetext" hidden="false" text="Language" />
+		<ui_elem name="voldowntext" hidden="false" text="Vol -" />
+		<ui_elem name="voluptext" hidden="false" text="Vol +" />
+		<ui_elem name="mutetext" hidden="false" text="Mute" />
+
+		<ui_elem name="voldownbtn" hidden="false" />
+		<ui_elem name="volupbtn" hidden="false" />
+		<ui_elem name="mutebtn" hidden="false" />
+
+		<ui_elem name="FillAll" hidden="false" text="FillAll" />
+		<ui_elem name="DoNotMatch" hidden="false" text="DoNotMatch" />
+		<ui_elem name="InvalidPW" hidden="false" text="InvalidPW" />
+		<ui_elem name="InvalidAddr" hidden="false" text="InvalidAddr" />
+		<ui_elem name="InvalidHost" hidden="false" text="InvalidHost" />
+		
+		<ui_elem name="tools_txt" hidden="false" text="Tools" />
+		<ui_elem name="info_txt" hidden="false" text="Info" />
+		<ui_elem name="help_txt" hidden="false" text="Contact IT Help" />
+		<ui_elem name="logout_txt" hidden="false" text="Logout" />
+		
+		<ui_elem name="transportControls.menubtn" hidden="true" /> 
+    <ui_elem name="transportControls.exitbtn" hidden="true" /> 
+		<ui_elem name="transportControls.menutext" hidden="false" text=" " />
+		<ui_elem name="transportControls.lblExt1" hidden="false" text="RESYNC" />
+		<ui_elem name="transportControls.lblExt2" hidden="false" text="SOURCE" />
+		<ui_elem name="transportControls.lblExt3" hidden="false" text="FREEZE" />
+		<ui_elem name="transportControls.lblExt4" hidden="false" text="HIDE" />
+		<ui_elem name="transportControls.uptext" hidden="false" text=" " />
+		<ui_elem name="transportControls.lefttext" hidden="false" text=" " />
+		<ui_elem name="transportControls.righttext" hidden="false" text=" " />
+		<ui_elem name="transportControls.downtext" hidden="false" text=" " />
+		<ui_elem name="transportControls.oktext" hidden="false" text="MENU" />
+		<ui_elem name="transportControls.exittext" hidden="false" text=" " />.
+		
+		<ui_elem name="InfoMC.lblProjectorInformation" hidden="false" show_item="true" text="Projector Information" />.
+		<ui_elem name="InfoMC.lblProjectorName" hidden="false" show_item="true" text="Projector Name" />.
+		<ui_elem name="InfoMC.lblLocation" hidden="false" show_item="true" text="Location" />.
+		<ui_elem name="InfoMC.lblFirmware" hidden="false" show_item="true" text="Firmware Version" />.
+		<ui_elem name="InfoMC.lblMacAddress" hidden="false" show_item="true" text="Mac Address" />.
+		<ui_elem name="InfoMC.lblResolution" hidden="false" show_item="true" text="Resolution" />.
+		<ui_elem name="InfoMC.lblLampHours" hidden="false" show_item="true" text="Lamp Hours" />.
+		<ui_elem name="InfoMC.lblLampHours2" hidden="true" show_item="false" text="LampHours2" />.
+		<ui_elem name="InfoMC.lblAssignedTo" hidden="false" show_item="true" text="Assigned To" />.
+		<ui_elem name="InfoMC.lblProjectorStatus" hidden="false" show_item="true" text="Projector Status" />.
+		<ui_elem name="InfoMC.lblPowerStatus" hidden="false" show_item="true" text="Power Status" />.
+		<ui_elem name="InfoMC.lblSource" hidden="false" show_item="true" text="Source" />.
+		<ui_elem name="InfoMC.lblPresetMode" hidden="false" show_item="true" text="Display Mode" />.
+		<ui_elem name="InfoMC.lblProjectorPosition" hidden="false" show_item="true" text="Projection" />.
+		<ui_elem name="InfoMC.lblLampMode" hidden="false" show_item="true" text="ECO Mode" />.
+		<ui_elem name="InfoMC.lblErrorStatus" hidden="false" show_item="true" text="Error Status" />.
+		<ui_elem name="InfoMC.exittext" hidden="false" text="exit" />.
+		
+		<ui_text_limit name="ToolsMC.txtIpAddr" char_limit="15" can_edit="true" default_limit="16"/>
+		<ui_text_limit name="ToolsMC.txtIpId" char_limit="4" can_edit="true" default_limit="4"/>
+		<ui_text_limit name="ToolsMC.txtPort" char_limit="5" can_edit="true" default_limit="5"/>
+		
+		<ui_text_limit name="ToolsMC.txtProjectorName" char_limit="22"  can_edit="true" default_limit="32"/>
+		<ui_text_limit name="ToolsMC.txtLocation" char_limit="22"  can_edit="true" default_limit="32"/>
+		<ui_text_limit name="ToolsMC.txtName" char_limit="22"  can_edit="true" default_limit="32"/>
+		
+		<ui_text_limit name="ToolsMC.txtIpAddress" char_limit="15"  can_edit="true" default_limit="16"/>
+		<ui_text_limit name="ToolsMC.txtSubnetMask" char_limit="15"  can_edit="true" default_limit="16"/>
+		<ui_text_limit name="ToolsMC.txtDefaultGateway" char_limit="15"  can_edit="true" default_limit="16"/>
+		<ui_text_limit name="ToolsMC.txtDNSServer" char_limit="15"  can_edit="true" default_limit="16"/>
+		<ui_text_limit name="ToolsMC.txtHostname" char_limit="22"  can_edit="true" default_limit="32"/>
+		
+		<ui_text_limit name="ToolsMC.txtPassword" char_limit="15"  can_edit="true" default_limit="32"/>
+		<ui_text_limit name="ToolsMC.txtConfirmPassword" char_limit="15"  can_edit="true" default_limit="32"/>
+		<ui_text_limit name="ToolsMC.txtAdminPassword" char_limit="15"  can_edit="true" default_limit="32"/>
+		<ui_text_limit name="ToolsMC.txtConfirmAdminPassword" char_limit="15" can_edit="true"  default_limit="32"/>
+		
+		<ui_chkDHCP_Edit name="ToolsMC.chkDHCP"  can_edit="true"/>
+		
+		<ui_elem name="ToolsMC.lblCrestronControl" hidden="false" show_item="true" text="Crestron Control" />.
+		<ui_elem name="ToolsMC.lblIpAddr" hidden="false" show_item="true" text="Ip Address" />.
+		<ui_elem name="ToolsMC.lblIpId" hidden="false" show_item="true" text="IP ID" />.
+		<ui_elem name="ToolsMC.lblPort" hidden="false" show_item="true" text="Port" />.
+		<ui_elem name="ToolsMC.CSendTXT2" hidden="false" show_item="true" text="Send" />.
+		<ui_elem name="ToolsMC.lblDefaultLanguage" hidden="false" show_item="true" text="DefaultLanguage" />
+		<ui_elem name="ToolsMC.lblProjector" hidden="false" show_item="true" text="Projector" />.
+		<ui_elem name="ToolsMC.lblProjectorName" hidden="false" show_item="true" text="Projector Name" />.
+		<ui_elem name="ToolsMC.lblLocation" hidden="false" show_item="true" text="Location" />.
+		<ui_elem name="ToolsMC.lblName" hidden="false" show_item="true" text="Assigned To" />.
+		<ui_elem name="ToolsMC.CSendTXT10" hidden="false" show_item="true" text="Send" />.
+		<ui_elem name="ToolsMC.lblIpAddress" hidden="false" show_item="true" text="Ip Address" />.
+		<ui_elem name="ToolsMC.lblSubnetMask" hidden="false" show_item="true" text="Subnet Mask" />.
+		<ui_elem name="ToolsMC.lblDefaultGateway" hidden="false" show_item="true" text="Default Gateway" />.
+		<ui_elem name="ToolsMC.lblDNSServer" hidden="false" show_item="true" text="DNS Server" />.
+		<ui_elem name="ToolsMC.lblHostname" hidden="true" show_item="false" text="Hostname" />
+		<ui_elem name="ToolsMC.lblDHCP" hidden="false" show_item="true" text="DHCP" />.
+		<ui_elem name="ToolsMC.lblDHCPEnabled" hidden="false" show_item="true" text="Enabled" />.
+		<ui_elem name="ToolsMC.CSendTXT" hidden="false" show_item="true" text="Send" />.
+		<ui_elem name="ToolsMC.lblUserPass" hidden="false" text="User Password" />.
+		<ui_elem name="ToolsMC.lblPassword" hidden="false" text="New Password" />
+		<ui_elem name="ToolsMC.lblPasswordEnabled" hidden="false" text="Enabled" />.
+		<ui_elem name="ToolsMC.lblConfirmPassword" hidden="false" text="Confirm" />.
+		<ui_elem name="ToolsMC.USendTXT" hidden="false" text="Send" />.
+		<ui_elem name="ToolsMC.lblAdminPass" hidden="false" text="Admin Password" />.
+		<ui_elem name="ToolsMC.lblAdminPassword" hidden="false" text="New Password" />
+		<ui_elem name="ToolsMC.lblAdminPasswordEnabled" hidden="false" text="Enabled" />.
+		<ui_elem name="ToolsMC.lblConfirmAdminPassword" hidden="false" text="Confirm" />.
+		<ui_elem name="ToolsMC.ASendTXT" hidden="false" text="Send" />.
+		<ui_elem name="ToolsMC.exittext" hidden="false" text="exit" />.
+
+		<ui_elem name="ToolsMC.CSendDefaultLanguage" hidden="false" text="LSendTXT" />	
+		
+		<ui_elem name="HelpDesk.lblTitle" hidden="false" text="HELP DESK" />
+		<ui_elem name="HelpDesk.lblSend" hidden="false" text="Send" />
+		
+		<ui_elem name="AdminrMC.ExitTXT" hidden="false" text="exit" />
+		<ui_elem name="AdminrMC.lblPassword" hidden="false" text="Password" />
+		<ui_elem name="AdminrMC.UserLogin" hidden="false" text="UserLogin" />
+		<ui_elem name="AdminrMC.AdminLogin" hidden="false" text="AdminLogin" />
+		<ui_elem name="AdminrMC.USendTXT" hidden="false" text="Send" />
+		<ui_elem name="AdminrMC.Incorrect" hidden="false" text="Incorrect" />
+		
+		
+		<ui_elem name="EmergencyMC.DefaultText" hidden="false" text="Emergency" />
+		<ui_elem name="EmergencyMC.SendTXT" hidden="false" text="Send" />
+		<ui_elem name="EmergencyMC.txtEmergencyTitle" hidden="false" text="Emergency Alert" />		
+		
+		<ui_elem name="e_General" hidden="false" text="General" />
+		<ui_elem name="e_Building" hidden="false" text="Building" />
+		<ui_elem name="e_Environmental" hidden="false" text="Environmental" />
+		<ui_elem name="e_Fire" hidden="false" text="Fire" />
+		<ui_elem name="e_Medical" hidden="false" text="Medical" />
+		<ui_elem name="e_Police" hidden="false" text="Police" />
+		<ui_elem name="e_Safety" hidden="false" text="Safety" />
+		<ui_elem name="e_Weather" hidden="false" text="Weather" />
+		<ui_elem name="e_Alert" hidden="false" text="Alert" />
+								
+		<ui_elem name="PowerPrompt.lblPrompt" hidden="false" text=" " />
+		<ui_elem name="PowerPrompt.lblSure" hidden="false" text="Are you sure?" />
+		<ui_elem name="PowerPrompt.lblYes" hidden="false" text="Yes" />
+		<ui_elem name="PowerPrompt.lblNo" hidden="false" text="No" />
+		
+		<ui_elem name="warmingPopup.lblWarming" hidden="false" text="Warming" />
+		<ui_elem name="warmingPopup.prompt_txt_warming" hidden="false" text="Warming Up" />
+		<ui_elem name="warmingPopup.prompt_txt_cooling" hidden="false" text="Cooling Down" />
+		
+		<ui_elem name="loadingMC.lbl_loadingMC_txt" hidden="false" text="Loading" />
+		<ui_elem name="loadingMC.loadingText" hidden="false" text="Reconnect" />
+		
+
+		<ui_elem name="lblConnecting" hidden="false" text="Connecting" />
+		<ui_elem name="lblConnectingErr" hidden="false" text="Error connecting" />
+		<ui_elem name="lblWaiting" hidden="false" text="Waiting" />
+		<ui_elem name="lblRetrying" hidden="false" text="Retrying" />		
+		<ui_elem name="lblUpdateComplete" hidden="false" text="UpdateComplete" />		
+		<ui_elem name="SourceList.lblSourceList" hidden="false" text="Source List" />		
+		<ui_elem name="headerBar" hidden="false" tint="0.4" color="0xD4923A" />
+	</ui_elems>
+	<scs>
+		<sc name="Power_ON" join="5" />
+		<sc name="Power_OFF" join="6" />
+		<sc name="vol_up" join="5115" btnlabel="Vol 		." />
+		<sc name="vol_down" join="5116" btnlabel="Vol  		." />
+		<sc name="mute" join="5117" />
+		<sc name="mute_off" join="5118" />
+		<sc name="menu" join="5155" />
+		<sc name="up" join="5151" />
+		<sc name="down" join="5152" />
+		<sc name="left" join="5153" />
+		<sc name="right" join="5154" />
+		<sc name="exit" join="5155"  />
+		<sc name="enter" join="5150" />		
+
+		<sc name="volume" join="5012" />
+		<sc name="warming_up" join="5160" />
+		<sc name="warming_val" join="5010" />
+		<sc name="help_msg" join="1" />
+		<sc name="menu_ext1" join="5171" btnlabel="RESYNC" />
+		<sc name="menu_ext2" join="6000" btnlabel="SOURCE" />
+		<sc name="menu_ext3" join="5105" btnlabel="FREEZE" />
+		<sc name="menu_ext3_t" join="5106" />
+		<sc name="menu_ext4" join="5103" btnlabel="HIDE" />
+		<sc name="menu_ext4_t" join="5104" />
+	</scs>
+	<ecs>
+		<ec name="Zoom In" join="5178" index="1" cmdtype="Momentary" />
+		<ec name="Freeze" join0="5105" join1="5106" digfb="5105" index="2" cmdtype="Toggle" />
+		<ec name="Contrast" rampup="5111" rampdown="5112" ramped="5003" index="3" cmdtype="Ramp" />
+		<ec name="Color" rampup="5107" rampdown="5108" ramped="5001" index="4" cmdtype="Ramp" />
+		<ec name="Brightness" rampup="5109" rampdown="5110" ramped="5002" index="5" cmdtype="Ramp" />
+		<ec name="Sharpness" rampup="5113" rampdown="5114" ramped="5004" index="6" cmdtype="Ramp"  sd="4" />
+	</ecs>
+	
+	<langs>
+		<lang name="(Czech)" ident="cs" />
+		<lang name="(Danish)" ident="da" />
+		<lang name="(Dutch)" ident="nl" />
+		<lang name="(English)" ident="en" />
+		<lang name="(Finnish)" ident="fi" />
+		<lang name="(French)" ident="fr" />
+		<lang name="(German)" ident="de" />
+		<lang name="(Hungarian)" ident="hu" />
+		<lang name="(Italian)" ident="it" />
+		<lang name="(Japanese)" ident="ja" />
+		<lang name="(Korean)" ident="ko" />
+		<lang name="(Norwegian)" ident="no" />
+		<lang name="(Polish)" ident="pl" />
+		<lang name="(Portuguese)" ident="pt" />
+		<lang name="(Russian)" ident="ru" />		
+		<lang name="(Simplified Chinese)" ident="zh-CN" />	
+		<lang name="(EspaÃ±ol (Spanish)" ident="sp" />	
+		<lang name="(Swedish)" ident="sv" />				
+		<lang name="ç¹é?ä¸­æ? (Tranditional Chinese)" ident="zh-TW" />
+		<lang name="(Turkish)" ident="tr" />				
+	</langs>	
+</cnx>

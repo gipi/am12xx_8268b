@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Actions-Micro | add_network</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+<!--
+body
+{
+        //background:url('img/ezcastbk.jpg');    
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/ezcastbk.jpg', sizingMethod='scale');
+        width:100%;
+        height:100%;
+ }
+.STYLE1 {
+	font-size: 14px;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.menu {
+	font-size: 14px;
+//	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.select  {
+	font-size: 14px;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 400px)
+{
+
+	#customers
+	{
+	width:100%;
+	}
+}
+
+@media screen and (min-width: 400px)
+{
+	#customers
+	{
+	width:400px;
+	}
+}
+#bg{
+position:absolute;
+position:fixed !important;
+position: fixed;
+top:0px;
+left:0px;
+z-index:-999;
+//border:1px solid #FF0000;
+}
+.background 
+{
+		background-image:url('img/airdiskbg.jpg');
+
+	background-repeat:no-repeat;
+	background-size:cover;
+	position:fixed;
+	position:fixed !important;
+	position: fixed;
+	left:0;
+	top:0;
+	width: 100%;
+	height: 100%;
+//	border:1px solid #FF0000;
+	z-index:-100;
+	overflow: scroll;
+}
+.black_overlay
+{ 
+	display: none; 
+	position: fixed; 
+	top: 0%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	background-color: black; 
+	z-index:1001; 
+	-moz-opacity: 0.8; 
+	opacity:.80; 
+	filter: alpha(opacity=80); 
+} 
+.white_content 
+{ 
+	display: none; 
+	position: absolute; 
+	top: 30%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	//padding: 16px; 
+	//border: 6px solid orange; 
+	//background-color: white; 
+	//background-image: url(img/pop-up_box.png);
+	//background-repeat: no-repeat;
+	z-index:1002; 
+	overflow: auto; 
+} 
+.lay2
+{
+	width:100%;
+	position: relative;
+	top: -12px;
+	border: 0px solid #FFFFFF;
+	z-index: 100;
+	left: 1px;
+}
+.STYLE2 {
+	color: #FFFFFF;
+	font-size: 8px;
+}
+    li{
+        list-style: none;
+    }
+-->
+</style>
+<script type="text/javascript" src="js/jquery.js">
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+</head>
+<script>
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsWM = sUserAgent.match(/windows phone/i) == "windows phone";
+    if (bIsWM)
+    {	    document.write("<body style='zoom:0.68'>");
+    }
+    else{
+        document.write("<body>");
+    }
+</script>
+<div id="bg"><img  src="img/airdiskbg.jpg" alt="HIGH"></div>
+<form id="config-form" name="config-form">
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="customers">
+<tr height="46px" background="img/bk1.png">
+  <td colspan="2" align="center" valign="middle"><table width="100%" height="150%" border="0" bordercolor="#FFFF00">
+<tr >
+<td width="25%"align="left"><img src="img/logo_setting.png"></td>
+<td width="31%"align="left">&nbsp;</td>
+<td width="7%"align="right"><img src="img/phone.png"></td>
+<td width="10%"align="center"><img src="img/dongle_not_connected.png" id="dongle_connect_status"></td>
+<td width="10%"align="center"><img src="img/dongle.png" id="upgrade_status"></td>
+<td width="10%"align="center"><img src="img/dongle_not_connected.png" id="client_connect_status"></td>
+<td width="7%"align="left"><img src="img/internet_little.png"></td>
+</tr>
+
+</table></td>
+</tr>
+<tr>
+  <td colspan="2" align="center" valign="top" style="line-height:0px;"><div class="lay2"><table width="100%" border="0" bordercolor="#00FF00">
+    <tr>
+      <td width="77%"><table width="100%" border="0" bordercolor="#FF00FF">
+        <tr>
+          <td width="76%">&nbsp;</td>
+          <td width="24%"align="center"><span class="STYLE2" id="dongle_icon_txt"></span></td>
+        </tr>
+      </table></td>
+      <td width="23%"><table width="100%" border="0" bordercolor="#FF0000">
+        <tr>
+          <td width="100%"align="center"><span class="STYLE2" id="internet_icon_txt"></span></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table></div></td>
+</tr>
+<tr style="line-height:13px;">
+	<td colspan="2" align="center">
+		<table width="100%" border="0" align="center" bordercolor="#F0F0F0" >
+			<tr>
+			<td width="60%"><table width="100%" border="0" bordercolor="#FF0000">
+  <tr>
+    <td><table width="100%" border="0">
+  <tr>
+    <td width="5%"></td>
+    <td width="17%"><font style="color:#FFFFFF;" size="2" id="ap_ssid_txt">SSID : </font></td>
+    <td width="78%"><font style="color:#FFFFFF;" size="2" id="ap_ssid"></font></td>
+  </tr>
+</table>
+</td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0">
+  <tr>
+    <td width="5%"></td>
+    <td width="30%"><font style="color:#FFFFFF;" size="2" id="ap_psk_txt">Password : </font></td>
+    <td width="65%"><font style="color:#FFFFFF;" size="2" id="ap_psk"></font></td>
+  </tr>
+</table>
+</td>
+  </tr>
+</table>
+</td>
+			<td width="21%" align="left"><input type="button" name="Home"  id="Home" value="" style="border:none;background:url('img/return.png');background-repeat: no-repeat;width:52px;height:41px;"></td>
+			<td width="9%" align="right"></td>
+			</tr>
+		</table>	</td>
+</tr>
+  <tr align="center">
+    <td><p>&nbsp;</p>
+    <table width="350" height="350" border="0" align="center"  cellpadding="0" cellspacing="0" bordercolor="#F0F0F0" background="img/pop-up_box_big.png" style="background-repeat: no-repeat;background-position:center;">
+    <tr >
+      <td width="31" rowspan="6"></td>
+      <td width="50" height="25"></td>
+      <td  align="center" height="25"style="vertical-align: middle;">&nbsp;</td>
+    </tr>
+    <tr >
+      <td>      </td>
+      <td height="35"  align="center"style="vertical-align: middle;">      
+	<img src="img/add_net_up.png" align="middle" onClick="select_security_up()"></td>
+    </tr>
+    <tr >
+      <td align="center">
+    <font color="#FFFFFF" size="3" id="Security_text"></font></td>
+      <td height="30" valign="middle">
+      <div align="center">
+        <input style="width:150px;color:#FFFFFF;text-align:center;margin-left:auto;margin-right:auto;background:transparent;" name="Security" type="text" id="Security" value=""></div>      </td>
+    </tr>
+    <tr >
+      <td width="50" height="35">      </td>
+      <td  align="center" height="35" style="vertical-align: top;">      
+	<img src="img/add_net_down.png" align="top" onClick="select_security_down()">      </td>
+    </tr>
+    <tr >
+      <td width="50" height="20" align="center" valign="top">
+	    <img src="img/internet_icon.png"></td>
+      <td width="269" >
+   		<p align="center">
+   		  <input style="width:150px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;align:center;" name="ssid" type="text" id="ssid" size="200" onKeyPress="next()">
+   		</p></td>
+    </tr>
+    <tr>
+      <td width="50" height="20" align="center" valign="middle">
+	    <img src="img/logo_password.png" name="logo_password" align="top" id="logo_password"></td>
+      <td><p align="center"><input style="width:150px;color:#FFFFFF;margin-left:auto;margin-right:auto;background:transparent;align:center;" name="psk" type="text" id="psk" value="" size="200" onKeyPress="enterkey()"></p></td>
+    </tr>
+    <tr>
+      <td height="20" colspan="3"><label>
+        <li><p align="center"><input type="button" name="OK"  id="OK" value="OK" style="color:#FFFFFF; margin-right:5px;border:none;background:url('img/buttom_little.png');width:80px; height:30px;">
+		<input type="button" name="CANCEL"  id="CANCEL" value="CANCEL" style="color:#FFFFFF; margin-left:5px;border:none;background:url('img/buttom_little.png');width:80px; height:30px;"></p></li>
+      </label></td>
+    </tr>
+    <tr>
+      <td height="20" colspan="3" style="vertical-align: top;">
+ <p align="center"><font color="#FFFFFF" size="1" id="warn1_txt"></font></p>      </td>
+    </tr>
+  </table></td>
+  </tr>
+</table>
+   <input name="AuthenType" type="hidden" id="AuthenType" value="1">
+  <div id="light" class="white_content" align="center">
+ <table  cellpadding="0" cellspacing="0" width="344" height="236" border="0" align="center" background="img/pop-up_box.png" style="background-repeat: no-repeat;background-position:center;">
+<tr>
+<td height="100">
+ <p align="center"><font color="#FFFFFF" size="1" id="warn_txt"></font></p>
+ </td>
+</tr>
+</table>
+ </div> 
+<div id="fade" class="black_overlay">
+</div> 
+</form>
+<script type="text/javascript" src="js/addwifi.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+ {	
+ 	$(function() 
+	{
+  			var w,h
+			if(!!(window.attachEvent && !window.opera))
+			{
+				h = document.documentElement.clientHeight;
+				w = document.documentElement.clientWidth;
+			}else{
+				h =	window.innerHeight;
+				w = window.innerWidth;
+			}
+		var bgImg = document.getElementById('bg').getElementsByTagName('img')[0];
+		bgImg.width = (w);
+		bgImg.height= (h) ;	 
+		delay_get_data();	
+	});	
+ });
+</script>
+</body>
+</html>

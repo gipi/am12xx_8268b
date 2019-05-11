@@ -1,0 +1,107 @@
+=============================================================
+Firmware version:14818000,date:2016-03-21
+=============================================================
+Update Note:
+1. Improve compatibility for mp4/mov videos
+2. Improve airplay A/V synchronization issue
+3. Improve DLNA player compatibility, such as windows 10 edge browser
+4. For ezmusic only: autoplay music in USB drive or SD card after power on.
+
+1. 改善mp4/mov 视频文件兼容性
+2. 改善Airplay 影音同步问题
+3. 改善DLNA兼容性
+4. 新增支持外挂USB或SD卡的列表播放
+
+
+=============================================================
+Firmware version:14720000,date:2016-01-28
+=============================================================
+Update Note:
+1. Improve security
+2. Fix Airplay A/V synchronization issue
+3. Fix Surface Pro 3/4, Huawei P8 Miracast issue
+4. Optimize EZChannel auto play
+
+
+=============================================================
+Firmware version:14583000,date:2016-01-04
+=============================================================
+Update Note:
+1. Optimize DLNA function
+2. Add "Via Router Only" connection mode
+3. Optimize UI
+4. Optimize m4a music playback
+5. Enable password hidden even after reboot
+
+
+=============================================================
+Firmware version:14180000,date:2015-10-27
+=============================================================
+Update Note:
+1. Improve iOS 9 & OS X El Capitan Airplay
+2. Fix some music playback issues
+3. Fix remote control security issues
+4. Fix EZChannel playback issues
+5. Add WiFi reconnect mechanism
+6. Fix some H.264 videos playback issues
+7. Support RTMP web streaming
+8. Improve streaming user experience.
+
+
+=============================================================
+Firmware version:13891,date:2015-10-4
+=============================================================
+1. Fix iOS9 airplay, including mirroring, photo, video, music
+
+
+=============================================================
+Firmware version:13886,date:2015-08-14
+=============================================================
+Update Note:
+1. Fix Miracast timeout issue
+2. Fix occasional iPhone 3G/4G connection fail issue
+3. Enable iPhone's 3G/4G when EZCast does not connect to a router
+4. Fix some translation issues
+5. Support Airplay auto rotation
+6. Support AirParrot
+7. Add auto poweroff function
+8. Improve DLNA and Airplay stability
+9. Support Sohu Airplay
+10.Fix occasional video-dither-on-seeking issue
+11.Fix some subtitle issues
+
+
+=============================================================
+Firmware version:13761,date:2015-05-28
+=============================================================
+Update Note:
+1. Fix Airplay mirror issue.
+
+
+=============================================================
+Firmware version:13715,date:2015-04-28
+=============================================================
+Update Note:
+1. Add EZChannel function
+2. Fix Dropbox playback issue
+3. Fix m3u8 seek issue
+4. Fix Airplay volume reset issue
+5. Fix some French translation issues
+6. Fix m4a/aac seek issue
+7. Fix some UI abnorml issues
+8. Improve video playback stability
+
+
+=============================================================
+Firmware version:13414,date:2015-02-07
+=============================================================
+Update Note:
+1. Rename "EZMirror First" mode to "EZMirror+AP" mode
+2. Add EZMirror+Timer mode
+3. Add "Device Name" setup
+4. New Setting UI
+5. Add 3G/4G mode
+6. Fix Arabic and Hebrew language abnormal issue
+7. Optimize video stream playback
+8. Optimize Airplay music playback
+9. Optimize system stability

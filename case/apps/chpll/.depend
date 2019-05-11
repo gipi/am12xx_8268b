@@ -1,0 +1,3 @@
+chpll.o: chpll.c ../../../sdk/include/sys_pmu.h \
+  ../../../sdk/include/sys_rtc.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h

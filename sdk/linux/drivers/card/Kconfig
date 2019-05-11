@@ -1,0 +1,24 @@
+#
+# MMC subsystem configuration
+#
+
+menuconfig AM7X_CRC
+	bool "AM7XXX Card Reader Controler support"
+	depends on HAS_IOMEM
+	select AM7X_CRC_CORE
+	help
+	  MMC is the "multi-media card" bus protocol.
+
+	  If you want MMC support, you should say Y here and also
+	  to the specific driver for your MMC interface.
+
+if AM7X_CRC
+
+
+config AM7X_CRC_CORE
+	bool
+	
+endif # CRC_CARD
+
+
+

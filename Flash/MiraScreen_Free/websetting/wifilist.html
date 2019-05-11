@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+
+<script src="js/wifilist_mini.js?timeStamp=20181011001"></script>
+<script type="text/javascript">
+$(document).ready(function()
+ {	  
+	delay_get_data();	
+ });
+</script>
+
+</head>
+<style type="text/css">
+	body {
+		font-size: 16px;
+		color: #2183ca;
+		font-family: Myriad Set Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+		/*background-color: #3366CC;*/
+		max-width: 600px;
+		min-width: 300px;	
+		margin-left:auto;
+		margin-right:auto;
+	}
+	a:link {color: #2183ca;}
+	a:visited {color: #2183ca}
+	a:hover {color: #2183ca}
+	a:active {color: #2183ca}
+	.content{
+		width:100%;
+	}
+	#heard{
+		margin-top: 8px;
+		font-size: 20px;
+		text-align:center;
+		font-weight: bold;
+		line-height: 32px;
+		padding-bottom: 10px;
+	}
+	.head_a{
+		text-decoration: none;
+		vertical-align:middle;
+		font-size: 16px;
+		line-height: 32px;
+	}
+	.head_a img{
+		height: 20px;
+		width: 20px;
+		margin: 0px 4px;
+		vertical-align: -4px;
+	}
+	.menu_left{
+		color: #2183ca;
+		float:left;
+		position:relative;
+		display:inline;
+		/*width:100px;*/
+		height:auto;
+		line-height:25px;
+		/*border: 1px solid #d6d6d6;	*/
+		padding:2px;
+		text-decoration: none;
+	}
+	.menu_right{
+		float:right;
+		position:relative;
+		display:inline; 
+		/*width:100px;*/
+		text-align:right;
+		height:auto;
+		line-height:25px;
+		/*border: 1px solid #d6d6d6;	*/
+		padding:2px;
+		text-decoration: none;
+	}
+	ul {
+		list-style-type:none;
+		text-decoration:none;
+		border: 1px solid #d6d6d6;
+		margin-top: 0px;
+		padding:1px;
+	}
+	ul li
+	{
+		/*color: #000000;*/
+	    /*padding-left: 1px; */
+		border: 0px solid #0066FF;	
+		display: block;
+		position: relative;
+		overflow: visible;
+		/*display:inline;*/
+		float:none;
+		margin-bottom: 1px;
+
+	}
+	ul a{
+		color: #2183ca;
+		text-decoration:none;
+		display: block;
+		position: relative;
+		text-align: center;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		list-style: outside none none;
+		font-weight: normal;
+		/*border: 1px solid #d6d6d6;*/
+		background-color: #eeeeee;
+		/*margin-top:5px;*/
+		padding:5px;
+		
+	}
+	ul a:link{
+		background-color: #eeeeee;
+	} 
+	ul a:hover{
+		background-color: #FFFFFF;
+	}
+	.ui-li-icon{
+		float:right;
+		right:10px;
+		display: block;
+		position: relative;
+		/*border: 1px solid #d6d6d6;*/
+		height:25px;
+
+	}
+	.ui-li-icon_select{
+		float:right;
+		right:20px;
+		/*padding-right:10px;*/
+		display: block;
+		position: relative;
+		/*border: 1px solid #d6d6d6;*/
+		height:25px;
+	}
+	.ui-li-text{
+		text-align:left;
+		/*border: 1px solid #d6d6d6;*/
+		position:relative;
+		float:left;
+		display:inline;
+		line-height:25px;
+		margin-left:10px;
+	}
+	.ui-loader{
+		text-align:center;
+	}
+	#mask{
+		position: fixed; 
+		width:100%;
+		min-height:100%;
+		background:rgba(0,0,0,.66);
+		left:0;
+		top:0;	
+		z-index:1000;
+		overflow-y: auto;
+	}
+	.popup {
+		position: absolute;
+		width: 85%;
+		max-width: 560px;
+		top: 40px;
+		left: 50%;
+		transform: translate(-50%, 0);
+		height: auto;
+		z-index: 1001;
+		background-color: #fafafa;
+		padding: 10px;
+		color: #000000;
+		box-shadow: 1px 2px 3px 2px rgba(0,0,0,0.2);
+		margin-bottom: 40px;
+		text-align: center;
+	}
+	.warn_txt {
+		font-size:12px;
+		text-align:center;
+		margin-bottom:10px;
+		width:100%;
+		/*height:30px;*/
+		border: 1px solid #d6d6d6;
+	}
+	label{
+		line-height: 1.2em;
+		display: inline-block;
+		width: calc( 100% - 28px);
+		vertical-align: middle;
+		margin: 0 0 8px;
+	}
+	input[type="text"] {
+	    width: 100%; 
+	    padding: 0 8px; 
+	    height: 32px; 
+	    line-height: 32px; 
+	    box-sizing: border-box;
+	    border: 1px solid #aaa;
+	    outline: none;
+	    margin: 0 0 16px 0;
+	}
+	button{
+		font-size: 16px;
+		font-weight: bold;
+		background-color: #2183ca;
+		color: white;
+		display: inline-block;
+		min-width: 32px;
+		height: 32px;
+		line-height: 32px;
+		padding: 0 16px;
+		outline: none;
+		border: none;
+		border-radius: 4px;
+	}
+</style>
+
+<body>
+<div class="content">
+	<div class="menu_left"><a href="websetting.html" target="_self" class="head_a"><img src="svg/back.svg"><a id="setup">Setting</a></a></div>
+	<div class="menu_right"><a id="refresh">Refresh</a><a href="#"  onClick="window.location.reload()" class="head_a" ><img src="svg/refresh.svg"></a></div>
+	<div id="heard">WiFi Setup</div>
+</div>
+
+<div align="center" style="margin: 0 6px 3px;display: block;background-color: #eeeeee;padding: 8px 0;border: 1px solid white;outline: 1px solid #ccc; display:none" id="add_net_button">
+  <a href="#" id="addnetwork">
+	  <div class="ui-btn" id="addnetwork">Add network</div>
+  </a>
+</div>
+	<div class="ui-content" style="padding: 0 5px;">
+		<ul id="wifilist">
+		<!-- js  
+		<li><a href='#list' onClick='readmsg("+i+","+href_string[i]+")'><div class='ui-li-text'> Actions-micro-2.4G</div><img src='svg/wifi1.png'  id="+ssid_signal_img_id[i]+" class='ui-li-icon'></a></li>
+		<li><a href='#list' onClick='readmsg("+i+","+href_string[i]+")'><div class="ui-li-text"> Actions-micro-2.4G</div><img src='svg/wifi3.png'  id="+ssid_signal_img_id[i]+" class='ui-li-icon'></a></li>
+		<li><a href='#list' onClick='readmsg("+i+","+href_string[i]+")'> <div class="ui-li-text"> Actions-micro-2.4G</div><img src='svg/wifi4.png'  id="+ssid_signal_img_id[i]+" class='ui-li-icon'></a></li>
+		<li><a href='#list' onClick='readmsg("+i+","+href_string[i]+")'><div class="ui-li-text"> Actions-micro-2.4G</div><img src='svg/wifi2.png'  id="+ssid_signal_img_id[i]+" class='ui-li-icon'></a></li>
+		-->
+		</ul>
+	</div><!-- /content -->
+<!-- call waiting 
+h1 style="font-size:15px;width:500px;heigth:100%;color:#000000;">scan... wifi hotspot</h1>
+-->	
+<div id="waiting" style="display:none;" class="ui-loader">
+	<div id="scan_string">Scan WiFi hotspot</div>
+	<div id="waiting_string">waiting...</div>
+</div>
+
+<!-- /popup -->	
+<div id="list" style="display:none">
+	<div id="mask">
+		<div class="popup" style="text-align: center;">
+			<fieldset style="border: 0px solid #333333;">
+				<form name="save_ssid" id="save_ssid" onKeyDown="if(event.keyCode==13){return false;}" style="text-align: left;">
+					<div style="display: inline-block;">SSID:</div>
+					<div id="ssid_txt" style="height:30px;padding-top:0.4em;padding-left:0.4em;display: inline-block;"></div>
+					<label for="psk">Password:</label>
+					<input type="text" name="psk" id="psk" value="" style="font-size:16px;" />
+					
+					<input type="hidden" name="ssid_scan" id="ssid_scan" value="" Disabled="false">
+					<input type="hidden" name="ssid" id="ssid" value="">
+					<input type="hidden" name="ssid_index" id="ssid_index" value="">
+					<input type="hidden" name="AuthenType" id="AuthenType" value="0">
+				</form>
+			</fieldset>
+			<div id="message" class="warn_txt"></div> 
+			<div style="display:none"><span id="disptxt">0</span> <span id="ssid_scan">aa</span></div>
+			<div  style="display:none"><span id="dispwarn_txt">0</span></div>
+			<div align="center" style="display:inline;">
+				<button id="saveok" style="margin: 2px; ">OK</button>
+				<button id="close" style="margin: 2px; ">Cancel</button>
+				<button id="forgetpsk" style="margin: 2px; ">Forget</button>
+			</div>
+			<div id="list_warn_txt" style="font-size:10px; text-align:center; font-size: 14px; margin-top: 8px"></div>
+		
+		</div>
+	</div>
+</div>
+
+
+<div id="hotspot" style="display:none">
+	<div id="mask">
+		<div class="popup" >
+
+		<form name="save_ssid" id="save_hotspot" onKeyDown="if(event.keyCode==13){return false;}">
+			<fieldset style="border: 0px solid #333333;">
+			   <legend  align="center">Security:</legend>
+				<input type="radio" name="security" id="WPA" value="0">
+				<label for="WPA">WPA/WPA2</label>
+				<div style="margin-bottom:5px;"></div>
+				<input type="radio" name="security" id="OPEN" value="1">
+				<label for="OPEN">OPEN</label>
+
+			</fieldset>
+			<div id="show_add_ssid">
+				<label for="add_ssid">SSID:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" data-mini="true"  name="add_ssid" id="add_ssid" value="">
+			</div>
+			<div id="Identity_set"  style="display:none;">
+				<label for="Identity">Identity:</label>
+				<input  type="text" data-mini="true"  name="Identity" id="Identity" value="">
+			</div>
+			<div id="key_psk_set"   style="display:none;">
+				<label for="key_psk">key_psk:</label>
+				<input  type="text" data-mini="true"  name="key_psk" id="key_psk" value="">
+			</div>			
+			<div id="showpassword">
+				<label for="add_password">Password:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input  type="text" data-mini="true"  name="add_password" id="add_password" value="">
+			</div>
+		</form>
+	 <div style="display:none"><span id="sel_txt">0</span></div>
+		<div align="center">
+			<button id="add_net_saveok" style="margin:5px; ">OK</button>
+			<button id="close2" style="margin:5px;">Cancel</button>
+		</div>
+		<div id="addwarn_txt" style="font-size:10px; text-align:center;"></div>
+
+		</div>
+	</div>
+</div>
+
+<div id="connect_fail_pop" style="display:none">
+	<div id="mask">
+		<div class="popup" >
+			 <div id="warn_txt"></div>
+			 <div id="warn1_txt"></div>
+			 <div id="warn2_txt"></div>
+			 <div id="warn3_txt"></div>
+			<div align="center">
+				<button id="connect_fail" style="margin:5px;">OK</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div id="warn_pop" style="display:none">
+	<div id="mask">
+		<div class="popup" >
+			<div id="ok_warn_txt" style="text-align:center;"></div>
+		</div>
+	</div>
+</div>
+
+<div id="wait_pop" style="display:none">
+	<div id="mask">
+		<div class="popup" >
+			<div id="wait_txt" style="text-align:center;"></div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+#define CUSTOMER_SSID "EZProjector_"

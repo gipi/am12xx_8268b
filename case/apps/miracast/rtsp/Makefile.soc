@@ -1,0 +1,38 @@
+CC=$(SMP86XX_TOOLCHAIN_PATH)/bin/mips-linux-gnu-gcc
+LD=$(SMP86XX_TOOLCHAIN_PATH)/bin/mips-linux-gnu-ld
+CXX=$(SMP86XX_TOOLCHAIN_PATH)/bin/mips-linux-gnu-c++
+KSRC=$(UCLINUX_KERNEL)
+
+LIBNAME=librdsrtsp.a
+
+SRCS= bufferqueue.c \
+	getparam.c \
+	options.c \
+	parse_response.c \
+	play.c \
+	rdsparser.c \
+	rtspparser.c \
+	setparam.c \
+	setup.c \
+	teardown.c \
+	rdsrtsp.c \
+
+OBJS=$(SRCS:.c=.o)
+
+CFLAGS=-c -Wall -g -I./ -I./Include -I$(KSRC)/include -I$(KSRC)/include/asm/gcc -Wundef -Wno-trigraphs -O2 -EL -Wa,-mips32r2 -march=24kf -DSIGMA_SOC
+
+LDFLAGS= -EL -L$(SMP86XX_ROOTFS_PATH)/cross_rootfs/lib/
+
+all: $(SRCS) $(LIBNAME)
+	
+$(LIBNAME): $(OBJS) 
+	$(LD) -r $(LDFLAGS) $(OBJS) -o $@
+
+.c.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+install:
+
+clean:
+	-rm -rf $(OBJS) $(LIBNAME)
+

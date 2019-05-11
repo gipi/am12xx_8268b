@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<!--
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<script  src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+-->
+<script src="js/wifilist.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+ {	  
+	delay_get_data();	
+ });
+</script>
+
+</head>
+<style type="text/css">
+<!--
+.ui-listview>.ui-li-has-icon>img:first-child, .ui-listview>.ui-li-has-icon>.ui-btn>img:first-child {
+top: .5em;
+max-height: 2em;
+max-width: 2em;
+float:right;
+position: static;
+}
+.ui-listview>.ui-li-has-icon>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-icon {
+padding-left: 2em;
+}
+
+.ui-popup-screen {
+	//background-image: url("void.png");
+	position: fixed; 
+	//width: 100%; 
+	//height: 100%; 
+}
+
+.ui-overlay-a{
+	background-color: #a7a7a7 /*{a-page-background-color}*/;
+}
+
+.ui-popup-screen {
+	background-image: none;
+	position: fixed; 
+	//width: 100%; 
+	//height: 100%; 
+   // z-index: 109900;
+}
+
+}
+.ui-overlay-a{
+	background-color: #a7a7a7 /*{a-page-background-color}*/;
+}
+.ui-btn-icon-notext:after
+ {
+	top: 5%;
+	margin-top: 1px;
+}
+.bk-ico{
+background-color:#CCCCCC;
+padding:2px;
+-webkit-border-radius: 1em;
+border-radius: 1em;
+}
+.warn_txt {
+font-size:12px;
+text-align:center;
+//margin-bottom:10px;
+width:280px;
+//height:30px;
+//border: 1px solid #d6d6d6;
+}
+.info_txt{
+
+	font-size:.75em;
+	font-weight:normal;
+	color:#000000;
+	//text-decoration:none;
+	margin-left:10px;
+	border: 0px solid #26D6FE;
+}
+
+@media screen and (min-width: 600px)
+{
+.info_txt{
+	font-size:1em;
+}
+}
+-->
+</style>
+
+<body>
+<div data-role="page" id="config-form" name="config-form" data-theme="a">
+  <div data-role="header" data-position="fixed" data-fullscreen="false">
+	<a href="networksetup.html" target="_self"  id="setup_txt" class="ui-btn ui-corner-all ui-icon-gear ui-btn-icon-notext ui-btn-left" >setup</a>
+	<a href="#"  onClick="window.location.reload()" data-icon="back" data-iconpos="notext" class="ui-link ui-btn-right ui-btn ui-icon-recycle ui-btn-icon-notext ui-shadow ui-corner-all" data-role="button" role="button">back</a>
+    <h1  style="margin:0;">wifi setup</h1>
+  </div><!-- /header -->
+  <div style="display:none">
+  <span id="text1">aa</span><span id="text2">aa</span>
+  <span id="text3">aa</span>
+  </div>
+  <div align="center" style="width:230px; min-width:200px;margin:0 auto; display:none" id="add_net_button">
+  <a href="#hotspot" data-rel="popup" data-transition="none" data-position-to="window">
+	  <div class="ui-btn ui-icon-plus ui-btn-icon-left ui-shadow ui-corner-all" id="addnetwork">Add network</div>
+  </a></div>
+	<div role="main" class="ui-content">
+		<ul data-role="listview" data-inset="true" id="wifilist">
+		<!-- js -->
+		</ul>
+	</div><!-- /content -->
+<!-- popup -->
+<div data-role="popup" id="list" data-overlay-theme="b" style="min-width:300px;" data-transition="none">
+	<div data-role="header">
+		<a href="#page" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content">
+		<form name="save_ssid" id="save_ssid" onkeydown="if(event.keyCode==13){return false;}">
+
+		<div>SSID:</div>
+		<div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset" id="ssid_txt" style="height:30px;padding-top:0.4em;padding-left:0.4em;">
+		</div>
+		<label for="psk">Password:</label>
+		<input type="text" name="psk" id="psk" value="">
+		
+		<input type="hidden" name="ssid_scan" id="ssid_scan" value="" Disabled="false">
+
+		<input type="hidden" name="ssid" id="ssid" value="">
+		<input name="ssid_index" type="hidden" id="ssid_index" value="">
+		<input name="AuthenType" type="hidden" id="AuthenType" value="0">
+
+	</form>
+	</div>
+	  <div id="message" class="warn_txt"></div> 
+	 <div style="display:none"><span id="disptxt">0</span> <span id="ssid_scan">aa</span></div>
+	 <div  style="display:none"><span id="dispwarn_txt">0</span></div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="saveok">OK</a>
+		<a href="#page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="none" id="close">Cancel</a>
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="forgetpsk">Forget</a>
+	</p>
+	 <div id="list_warn_txt" style="font-size:10px; text-align:center;"></div>
+</div>
+
+<div data-role="popup" id="hotspot" data-overlay-theme="b" style="min-width:320px;" data-transition="none">
+	<div data-role="header">
+		<a href="#page" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+		<h1  style="margin:0;"></h1>
+	</div>
+	<div role="main" class="ui-content">
+		<form name="save_ssid" id="save_hotspot" onkeydown="if(event.keyCode==13){return false;}">
+			<fieldset data-role="controlgroup" data-iconpos="right" data-type="horizontal" data-mini="true">
+			   <legend id="Security_text">security:</legend>
+				<label for="WPA">WPA/WPA2</label>
+				<input type="radio" name="security" id="WPA" value="0">
+				<label for="OPEN">OPEN</label>
+				<input type="radio" name="security" id="OPEN" value="1">
+				<label for="EAP">802.1xEAP</label>
+				<input type="radio" name="security" id="EAP" value="2">
+			</fieldset>
+			<fieldset data-role="controlgroup" data-iconpos="right" data-type="horizontal" data-mini="true" id="EAP_SEL" style="display:none;">
+			   <legend id="EAP_SET">EAP:</legend>
+				<label for="PEAP">PEAP</label>
+				<input type="radio" name="EAP_SET" id="PEAP" value="2" checked="true">
+				<label for="PEAP2">PEAP(MSCHAPv2)</label>
+				<input type="radio" name="EAP_SET" id="PEAP2" value="4">
+				<label for="TLS">TLS</label>
+				<input type="radio" name="EAP_SET" id="TLS" value="3">
+			</fieldset>
+			<div id="show_add_ssid">
+				<label for="add_ssid">SSID:</label>
+				<input type="text" data-mini="true"  name="add_ssid" id="add_ssid" value="">
+			</div>
+			<div id="Identity_set"  style="display:none;">
+				<label for="Identity">Identity:</label>
+				<input  type="text" data-mini="true"  name="Identity" id="Identity" value="">
+			</div>
+			<div id="key_psk_set"   style="display:none;">
+				<label for="key_psk">key_psk:</label>
+				<input  type="text" data-mini="true"  name="key_psk" id="key_psk" value="">
+			</div>			
+			<div id="showpassword">
+				<label for="add_password">Password:</label>
+				<input  type="text" data-mini="true"  name="add_password" id="add_password" value="">
+			</div>
+		</form>
+	 </div>
+	 <div style="display:none"><span id="sel_txt">0</span></div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="add_net_saveok">OK</a>
+		<a href="#page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="none" id="close2">Cancel</a>
+	</p>
+		<div id="addwarn_txt" style="font-size:10px; text-align:center;"></div>
+
+</div>
+
+<div data-role="popup" id="connect_fail_pop" data-overlay-theme="b" style="min-width:300px;" data-transition="none">
+<div style="margin:10px;">
+	 <div id="warn_txt"></div>
+	 <div id="warn1_txt"></div>
+	 <div id="warn2_txt"></div>
+	 <div id="warn3_txt"></div>
+</div>
+	<p align="center" style="border-top:1px solid #CCCCCC">
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="connect_fail">OK</a>
+	</p>
+</div>
+
+<div data-role="popup" id="warn_pop" data-overlay-theme="b" style="min-width:300px;min-height:150px;" data-transition="none">
+
+	 <div id="ok_warn_txt" style="text-align:center;border: 0px solid #26D6FE;margin-top:20%;"></div>
+
+</div>
+
+<div data-role="popup" id="wait_pop" data-overlay-theme="b" style="min-width:300px;min-height:150px;" data-transition="none">
+
+	 <div id="wait_txt" style="text-align:center;border: 0px solid #26D6FE;margin-top:20%;"></div>
+
+</div>
+<!-- call waiting 
+h1 style="font-size:15px;width:500px;heigth:100%;color:#000000;">scan... wifi hotspot</h1>
+-->	
+<div id="waitbk" style="display:none;" class="ui-popup-screen ui-overlay-b in"> </div>
+<div id="waiting" style="display:none;" class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon-loading"></span><h1 style="color:#000000;">scan... wifi hotspot</h1></div>
+
+<!-- /popup -->	
+<div  data-role="footer" data-position="fixed" data-fullscreen="false">
+	<div id="showinfo" style="height:30px; width:20%; border: 0px solid #26D6FE; margin:auto;">
+	<span class="ui-icon-carat-u ui-btn-icon-notext"></span>
+	<div class="info_txt" style="margin-left:55px; margin-top:8px; font-size:80%; font-weight:normal; text-align:center; ">info</div>
+	</div>
+	<div  class="info_txt">
+  	<table width="95%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<td width="60%"><span id="ap_ssid_txt">SSID : </span><span id="ap_ssid"></span></td>
+		<td><span id="ap_psk_txt">Password : </span><span id="ap_psk"></span></td>
+	  </tr>
+	</table>
+	</div>	
+	<div id="more_info" class="info_txt" style="display:none;">
+	<table width="95%" border="0" cellspacing="0" cellpadding="0">
+	  <tr>
+		<td width="60%"><span >MAC : </span><span id="connect_mac_address"></span></td>
+		<td><span>IP : </span><span id="ip1_txt"></span></td>
+	  </tr>
+	  <tr>
+		<td><span >Firmware Version : </span><span id="cur_ver"></span></td>
+		<td valign="middle"></td>
+	  </tr>
+	  <tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	  </tr>
+	</table>
+	</div>
+
+</div><!-- /footer -->
+</div> <!-- /page -->
+</body>
+</html>

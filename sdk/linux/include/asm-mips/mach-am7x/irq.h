@@ -1,0 +1,205 @@
+#ifndef __ASM_MACH_MIPS_IRQ_H
+#define __ASM_MACH_MIPS_IRQ_H
+/**
+*@file irq.h
+*
+*@author yekai
+*@date 2010-01-28
+*@version 0.1
+*/
+
+/**total number of global irq resource*/
+#if CONFIG_AM_CHIP_ID == 1203
+#define NR_IRQS	32
+#elif CONFIG_AM_CHIP_ID == 1211
+#define NR_IRQS	36
+#elif CONFIG_AM_CHIP_ID == 1220
+#define NR_IRQS	39
+#elif CONFIG_AM_CHIP_ID == 1213
+#define NR_IRQS 40
+#endif
+
+#include <actions_regs.h>
+#include_next <irq.h>
+
+//#ifndef _LANGUAGE_ASSEMBLY
+
+/**
+ *@brief IRQ num as follow.
+ */
+typedef enum
+{
+#if CONFIG_AM_CHIP_ID==1203
+	AM7X_IRQ_END   = 31,
+	AM7X_IRQ_START = 0,
+
+	IRQ_HANTRO = 0,
+	IRQ_SDIO,
+	IRQ_TWOD,
+	IRQ_Card,
+	IRQ_USB,
+	IRQ_DCACHE,
+	IRQ_6,
+	IRQ_PC,
+	IRQ_WD,
+	IRQ_TIMER1,
+	IRQ_TIMER0,
+	IRQ_RTC,
+	IRQ_DMA,
+	IRQ_KEY,
+	IRQ_EXT, /*External 0,1*/
+	IRQ_TP,
+	IRQ_SPI,
+	IRQ_IIC2,
+	IRQ_IIC1,
+	IRQ_UART2,
+	IRQ_UART1,
+	IRQ_ADC,
+	IRQ_DAC,
+	IRQ_IRREMOTE,
+	IRQ_NAND,
+	IRQ_25,
+	IRQ_DE,
+	IRQ_EXT23,
+	IRQ_2HZ,
+	IRQ_29,
+	IRQ_TS,
+
+IRQ_MAX = IRQ_TS,
+#elif CONFIG_AM_CHIP_ID == 1211
+	AM7X_IRQ_END   = 35,
+	AM7X_IRQ_START = 0,
+
+	IRQ_HANTRO = 0,
+	IRQ_SDIO,
+	IRQ_TWOD,
+	IRQ_Card,
+	IRQ_USB,
+	IRQ_SPDIF,
+	IRQ_MAC,
+	IRQ_PC,
+	IRQ_WD,
+	IRQ_TIMER1,
+	IRQ_TIMER0,
+	IRQ_RTC,
+	IRQ_DMA,
+	IRQ_KEY,
+	IRQ_EXT, /*External 0,1*/
+	IRQ_TP,
+	IRQ_SPI,
+	IRQ_IIC2,
+	IRQ_IIC1,
+	IRQ_UART2,
+	IRQ_UART1,
+	IRQ_ADC,
+	IRQ_DAC,
+	IRQ_IRREMOTE,
+	IRQ_NAND,
+	IRQ_USB2,
+	IRQ_DE,
+	IRQ_EXT23,
+	IRQ_2HZ,
+	IRQ_HDMI,
+	IRQ_TS,
+	IRQ_CRC,
+	IRQ_TK,
+	IRQ_TIMER2,
+	IRQ_TIMER3,
+	IRQ_KDS,
+
+IRQ_MAX = IRQ_KDS,
+#elif CONFIG_AM_CHIP_ID == 1220
+	AM7X_IRQ_END   = 38,
+	AM7X_IRQ_START = 0,
+
+	IRQ_HANTRO = 0,
+	IRQ_SDIO,
+	IRQ_TWOD,
+	IRQ_Card,
+	IRQ_USB,
+	IRQ_SPDIF,
+	IRQ_MAC,
+	IRQ_PC,
+	IRQ_WD,
+	IRQ_TIMER1,
+	IRQ_TIMER0,
+	IRQ_RTC,
+	IRQ_DMA,
+	IRQ_KEY,
+	IRQ_EXT, /*External 0,1*/
+	IRQ_TP,
+	IRQ_SPI,
+	IRQ_IIC2,
+	IRQ_IIC1,
+	IRQ_UART2,
+	IRQ_UART1,
+	IRQ_ADC,
+	IRQ_DAC,
+	IRQ_IRREMOTE,
+	IRQ_NAND,
+	IRQ_USB2,
+	IRQ_DE,
+	IRQ_EXT23,
+	IRQ_2HZ,
+	IRQ_HDMI,
+	IRQ_TS,
+	IRQ_CRC,
+	IRQ_TK,
+	IRQ_TIMER2,
+	IRQ_TIMER3,
+	IRQ_KDS,
+	IRQ_EMMC,
+	IRQ_SPI0,
+	IRQ_AMDDRC,
+
+IRQ_MAX = IRQ_AMDDRC,
+#elif CONFIG_AM_CHIP_ID == 1213
+	AM7X_IRQ_END   = 39,
+	AM7X_IRQ_START = 0,
+
+	IRQ_HANTRO = 0,
+	IRQ_SDIO,
+	IRQ_TWOD,
+	IRQ_Card,
+	IRQ_USB,
+	IRQ_SPDIF,
+	IRQ_MAC,
+	IRQ_PC,
+	IRQ_WD,
+	IRQ_TIMER1,
+	IRQ_TIMER0,
+	IRQ_RTC,
+	IRQ_DMA,
+	IRQ_KEY,
+	IRQ_EXT, /*External 0,1*/
+	IRQ_TP,
+	IRQ_SPI,
+	IRQ_IIC2,
+	IRQ_IIC1,
+	IRQ_UART2,
+	IRQ_UART1,
+	IRQ_ADC,
+	IRQ_DAC,
+	IRQ_IRREMOTE,
+	IRQ_NAND,
+	IRQ_USB2,
+	IRQ_DE,
+	IRQ_EXT23,
+	IRQ_2HZ,
+	IRQ_HDMI,
+	IRQ_TS,
+	IRQ_CRC,
+	IRQ_TK,
+	IRQ_TIMER2,
+	IRQ_TIMER3,
+	IRQ_KDS,
+	IRQ_EMMC,
+	IRQ_SPI0,
+	IRQ_AMDDRC,
+	IRQ_AMVEC,
+
+IRQ_MAX = IRQ_AMVEC,
+#endif
+}AMIRQ_Def;
+
+#endif /* __ASM_MACH_MIPS_IRQ_H */

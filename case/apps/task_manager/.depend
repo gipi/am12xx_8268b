@@ -1,0 +1,20 @@
+taskmanager_deal_sysmsg.o: taskmanager_deal_sysmsg.c \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h
+taskmanager_mainloop.o: taskmanager_mainloop.c taskmanager_message.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  taskmanager_debug.h taskmanager_task.h \
+  ../../../case/include/ezcastpro.h ../../../sdk/include/sys_cfg.h \
+  ../../../sdk/include/am_types.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h
+taskmanager_message.o: taskmanager_message.c taskmanager_message.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  taskmanager_debug.h taskmanager_task.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/key_map.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/swf_types.h
+taskmanager_syskey_map.o: taskmanager_syskey_map.c taskmanager_message.h \
+  ../../../sdk/include/sys_msg.h ../../../sdk/include/am_types.h \
+  taskmanager_debug.h ../../../case/include/key_map.h
+taskmanager_task.o: taskmanager_task.c taskmanager_task.h \
+  taskmanager_debug.h ../../../case/include/ezcastpro.h

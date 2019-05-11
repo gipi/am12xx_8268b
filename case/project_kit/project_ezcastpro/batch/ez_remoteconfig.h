@@ -1,0 +1,256 @@
+
+#ifndef  _EZ_REMOTECONFIG_H_
+#define  _EZ_REMOTECONFIG_H_
+
+
+static struct {
+	char *key;
+	uint32_t service;
+	int hostonly;
+	struct {
+		uint32_t ezcast, ezcastpro, ezcastmusic;
+	} os_bmp;
+} ezremoteservicestable[] = {
+	{ "photo", EZREMOTE_SERVICE_PHOTO, 0,
+		{
+		OS_BMP_MOBILE,
+		OS_BMP_MOBILE,
+		OS_BMP_NONE,
+		}
+	},
+	{ "camera", EZREMOTE_SERVICE_CAMERA, 0,
+		{
+		OS_BMP_MOBILE,
+		OS_BMP_MOBILE,
+		OS_BMP_NONE,
+		}
+	},
+	{ "music", EZREMOTE_SERVICE_MUSIC, 0,
+		{
+		OS_BMP_ALL,
+		OS_BMP_NONE,
+		OS_BMP_ALL,
+		}
+	},
+	{ "video", EZREMOTE_SERVICE_VIDEO, 0,
+		{
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		OS_BMP_NONE,
+		}
+	},
+	{ "dlna", EZREMOTE_SERVICE_DLNA, 1,
+		{
+#if CONFIG_DLNA_DMR
+		OS_BMP_ALL,
+		OS_BMP_NONE,
+		OS_BMP_ALL,
+#else
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+#endif
+		}
+	},
+	{ "ezmirror", EZREMOTE_SERVICE_EZMIRROR, 1,
+		{
+#if CONFIG_MIRACAST_RECEIVER
+		OS_BMP_ANDROID|OS_BMP_WINDOWS|OS_BMP_WINDOWSPHONE,
+		OS_BMP_ANDROID|OS_BMP_WINDOWS|OS_BMP_WINDOWSPHONE,
+		OS_BMP_NONE,
+#else
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+#endif
+		}
+	},
+	{ "document", EZREMOTE_SERVICE_DOCUMENT, 0,
+		{
+		OS_BMP_MOBILE,
+		OS_BMP_MOBILE,
+		OS_BMP_NONE,
+		}
+	},
+	{ "web", EZREMOTE_SERVICE_WEB, 0,
+		{
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		}
+	},
+	{ "setting", EZREMOTE_SERVICE_SETTING, 1,
+		{
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		OS_BMP_NONE,
+		}
+	},
+	{ "ezair", EZREMOTE_SERVICE_EZAIR, 1,
+		{
+#if CONFIG_AIRPLAY_SERVER
+		OS_BMP_IOS|OS_BMP_MAC,
+		OS_BMP_NONE,
+		OS_BMP_IOS|OS_BMP_MAC,
+#else
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+#endif
+		}
+	},
+	{ "cloud_video", EZREMOTE_SERVICE_CLOUD_VIDEO, 0,
+		{
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		OS_BMP_NONE,
+		}
+	},
+	{ "map", EZREMOTE_SERVICE_MAP, 0,
+		{
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		}
+	},
+	{ "cloud_storage", EZREMOTE_SERVICE_CLOUD_STORAGE, 0,
+		{
+		OS_BMP_MOBILE,
+		OS_BMP_MOBILE,
+		OS_BMP_MOBILE,
+		}
+	},
+	{ "tv", EZREMOTE_SERVICE_TV, 0,
+		{
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		}
+	},
+	{ "split_screen", EZREMOTE_SERVICE_SPLIT_SCREEN, 1,
+		{
+#if CONFIG_SPLIT_SCREEN
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		OS_BMP_NONE,
+#else
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+#endif
+		}
+	},
+	{ "ezcast", EZREMOTE_SERVICE_EZCAST, 0,
+		{
+		OS_BMP_DESKTOP,
+		OS_BMP_DESKTOP,
+		OS_BMP_DESKTOP,
+		}
+	},
+	{ "comment", EZREMOTE_SERVICE_COMMENT, 0,
+		{
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		}
+	},
+	{ "update", EZREMOTE_SERVICE_UPDATE, 0,
+		{
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		}
+	},
+	{ "news", EZREMOTE_SERVICE_NEWS, 0,
+		{
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		}
+	},
+	{ "messages", EZREMOTE_SERVICE_MESSAGES, 0,
+		{
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		}
+	},
+	{ "social", EZREMOTE_SERVICE_SOCIAL, 0,
+		{
+		OS_BMP_MOBILE,
+		OS_BMP_NONE,
+		OS_BMP_MOBILE,
+		}
+	},
+	{ "preference", EZREMOTE_SERVICE_PREFERENCE, 0,
+		{
+		OS_BMP_NONE,
+		OS_BMP_ALL,
+		OS_BMP_NONE,
+		}
+	},
+	{ "aircontrol", EZREMOTE_SERVICE_NONE, 1,
+		{
+		OS_BMP_NONE,
+//		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		OS_BMP_NONE,		
+		OS_BMP_NONE,
+		}
+	},
+	{ "airdisk", EZREMOTE_SERVICE_NONE, 1,
+		{
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+//		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		OS_BMP_NONE,		
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		}
+	},
+	{ "game", EZREMOTE_SERVICE_NONE, 0,
+		{
+		OS_BMP_ANDROID|OS_BMP_IOS,
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		}
+	},
+	{ "airsetup", EZREMOTE_SERVICE_NONE, 1,
+		{
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+//		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		OS_BMP_NONE,		
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		}
+	},
+	{ "radio", EZREMOTE_SERVICE_NONE, 0,
+		{
+		OS_BMP_NONE,
+		OS_BMP_NONE,
+		OS_BMP_MOBILE|OS_BMP_WINDOWS,
+		}
+	},
+	{ "airview", EZREMOTE_SERVICE_NONE, 0,
+		{
+		OS_BMP_NONE,
+//		OS_BMP_ALL,
+		OS_BMP_NONE,		
+		OS_BMP_NONE,
+		}
+	},
+	{ NULL, EZREMOTE_SERVICE_HOST_CONTROL, 0,
+		{
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		}
+	},
+	{ NULL, EZREMOTE_SERVICE_CLIENT_MODE, 0,
+		{
+		OS_BMP_NONE,
+		OS_BMP_ALL,
+		OS_BMP_ALL,
+		}
+	},
+};
+
+
+#endif //_EZ_REMOTECONFIG_H_
+

@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+<title>无标题文档</title>
+
+<style type="text/css">
+<!--
+body {
+	background-color: #666666;
+	font-size: 14px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+  }
+.main {
+	margin: 2px;
+	float: left;
+	height: 50%;
+	width: 30%;
+	border: 1px inset #FFFFFF;
+	position: absolute;
+	left: 1px;
+	font-size: 180%;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding: 10px;
+	top: 1px;
+}
+.STYLE1 {
+	font-size: 14px;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.menu {
+	font-size: 14px;
+//	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.select  {
+	font-size: 14px;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 600px)
+{
+
+	#customers
+	{
+	width:100%;
+	}
+}
+
+@media screen and (min-width: 600px)
+{
+	#customers
+	{
+	width:400px;
+	}
+}
+-->
+</style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('a.active').removeAttr('href');
+      });
+    </script>
+	<script src="js/rs232.js"></script>
+</head>
+
+
+<script type="text/javascript">
+  var errorFlag = 0;
+  $(document).ready(function(){
+	console.log( "ready!" );
+/*
+	var i;
+	for (i = 0;i < id_table.length; i++){
+		if (typeof id_table[i].array == 'undefined'){
+			//Query value only
+			document.getElementById(id_table[i].ElementId).innerHTML = GetCurrentValue(id_table[i].catelog, id_table[i].query, null);
+		}
+		else{
+			//Query setting, and table lookup
+			document.getElementById(id_table[i].ElementId).innerHTML = GetCurrentSetting(id_table[i].catelog, id_table[i].query, id_table[i].array, null);
+		}
+	}
+	
+	*/
+	});
+</script>
+
+
+
+<script language="javascript">
+
+</script>
+<body>
+
+<span id="log">nothing</span>   <div align="center"><span  id="log"> Baud Rate:19200</span><div>
+<span  id= "con_log" align="center" style="font-size:30px"> Connecting......</span>
+<div id="hid_div"  style="width:50%; height:1px; overflow:hidden;">
+
+<table id="customers" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="350" colspan="3" align="center" valign="top" background="img_rs232/remote_bg.png"><table width="80%" height="76" border="0">
+      <tr>
+        <td align="center"><img src="img_rs232/power.png" name="power" onclick="pow11()"/></td>
+      </tr>
+    </table>
+      <table width="80%" height="10" border="0">
+        <tr>
+          <td></td>
+        </tr>
+      </table>
+      <table width="90%" height="194" border="0" align="center" cellpadding="1" cellspacing="0">
+      <tr>
+        <td width="496" align="center"><a  onClick="javascript:menu(this)"><div class="menu">MENU</div></a></td>
+        <td width="1" bgcolor="#000000"></td>
+        <td width="657" align="center"><a  onclick="sendCmdArg('miscel','up')" onmouseover="mouseOver('up')" onmouseout="mouseOut('up')" ><img src="img_rs232/up.png" name="up" border="0"/></a></td>
+        <td width="1" bgcolor="#000000"></td>
+        <td width="496" align="center"><a  onClick="sendCmdArg('miscel','enter')" onmousedown="style.color='gray'" onmouseup="style.color='black'"><span class="menu">AUTO</span></a></td>
+      </tr>
+      <tr>
+        <td height="1" colspan="5" align="center" bgcolor="#000000"></td>
+        </tr>
+      <tr>
+        <td align="center"><a  onClick="sendCmdArg('miscel','left')" onmouseover="mouseOver('left')" onmouseout="mouseOut('left')" ><img src="img_rs232/left.png" name="left" border="0" /></a></td>
+        <td bgcolor="#000000"></td>
+        <td align="center"><a  onClick="sendCmdArg('miscel','enter')" onmousedown="style.color='gray'" onmouseup="style.color='black'"><span class="menu">ENTER</span></a></td>
+        <td bgcolor="#000000"></td>
+		<td align="center"><a  onClick="sendCmdArg('miscel','right')" onmouseover="mouseOver('right')" onmouseout="mouseOut('right')" ><img src="img_rs232/right.png" name="right" border="0" /></a></td>
+      </tr>
+      <tr>
+        <td height="1" colspan="5" align="center" bgcolor="#000000"></td>
+      </tr>
+      <tr>
+        <td align="center"><a  onClick="javascript:blank(this)"><span class="menu">BLANK</span></a></td>
+        <td bgcolor="#000000"></td>
+        <td align="center"><a  onclick="sendCmdArg('miscel','down')" onmouseover="mouseOver('down')" onmouseout="mouseOut('down')" ><img src="img_rs232/down.png" name="down" border="0"/></a></td>
+        <td bgcolor="#000000"></td>
+        <td align="center"><a  onClick="javascript:freeze(this)"><span class="menu">FREEZE</span></a></td>
+      </tr>
+    </table>
+    <br />
+    <table width="80%" border="0">
+      <tr>
+	<td width="60" height="45" ><a  onclick="javascript:vol('left')"><img src="img_rs232/decrease.png" width="19" height="4" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" ><table width="80%" border="0">
+  <tr>
+    <td width="50%" align="right"><img src="img_rs232/Volume.png" name="mute" width="20" height="16" border="0" onclick="mute11()"/></td>
+    <td><div id="vol">NULL</div></td>
+  </tr>
+</table>
+</td>
+    <td width="60" valign="middle" ><a  onclick="javascript:vol('right')"><img src="img_rs232/Volup.png" width="19" height="19" border="0" /></a></td>
+
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Source Selection</span></td>
+  </tr>
+  <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:source_change('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="source" class="select">NULL</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:source_change('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr>
+      <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Picture Mode</span></td>
+  </tr>
+  <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:Picture('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="Picture" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:Picture('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr>
+<!--
+      <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Audio source select</span></td>
+  </tr>
+  <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:Audiosource('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="Audiosource" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:Audiosource('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr>
+  -->
+      <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Color TempList</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:color('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="color" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:color('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr>
+        <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Aspect List</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:aspect('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="aspect" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:aspect('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr>
+
+   <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">PrjPos List</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:prjpos('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="prjpos" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:prjpos('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr>
+ <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Lamp Control</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:lambctl('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="lambctl" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:lambctl('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr>
+  <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">3D List</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:d3('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="d3" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:d3('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr>
+  <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Remote RecvList</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:rrecv('left')"><img src="img_rs232/left.png" width="15" height="17" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="rrecv" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:rrecv('right')"><img src="img_rs232/right.png" width="15" height="17" border="0" /></a></td>
+  </tr> 
+  <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Contrast</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:Contrast('left')"><img src="img_rs232/decrease.png" width="19" height="4" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="Contrast" class="select">NULL</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:Contrast('right')"><img src="img_rs232/Volup.png" width="19" height="19" border="0" /></a></td>
+  </tr>
+    <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Brightness</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:Brightness('left')"><img src="img_rs232/decrease.png" width="19" height="4" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="Brightness" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:Brightness('right')"><img src="img_rs232/Volup.png" width="19" height="19" border="0" /></a></td>
+  </tr>
+     <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Color</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:Color('left')"><img src="img_rs232/decrease.png" width="19" height="4" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="Color" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:Color('right')"><img src="img_rs232/Volup.png" width="19" height="19" border="0" /></a></td>
+  </tr>
+      <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Sharpness</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:Sharpness('left')"><img src="img_rs232/decrease.png" width="19" height="4" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="Sharpness" class="select">Null</div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:Sharpness('right')"><img src="img_rs232/Volup.png" width="19" height="19" border="0" /></a></td>
+  </tr>
+  <tr>
+    <td height="28" colspan="3" align="center" valign="middle" background="img_rs232/function_bg@2x.png"><span class="STYLE1">Zoom</span></td>
+  </tr>
+    <tr>
+    <td width="60" height="45" background="img_rs232/options_bg.png"><a  onclick="javascript:Zoom('left')"><img src="img_rs232/decrease.png" width="19" height="4" border="0" align="right" /></a></td>
+    <td align="center" valign="middle" background="img_rs232/options_bg.png"><div id="Zoom" class="select"><script>document.write(Zoom_i)</script></div></td>
+    <td width="60" valign="middle" background="img_rs232/options_bg.png"><a  onclick="javascript:Zoom('right')"><img src="img_rs232/Volup.png" width="19" height="19" border="0" /></a></td>
+  </tr>
+</table>
+</div>
+
+</body>
+</html>

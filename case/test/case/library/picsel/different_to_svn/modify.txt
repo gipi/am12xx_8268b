@@ -1,0 +1,26 @@
+1.UI的改动
+用ui_swf中的ebook.swf替换case/data中的ebook.swf
+2。库的改动
+ebook_engine.c中
+#define AM		0
+#define HYF		1
+#define PICSEL  2
+//#define EBOOK AM 
+#define EBOOK PICSEL 
+3.swf key的修改
+用ui_swf中的global_key.txt代替LSDK/case/project_kit/project_qc/config/key_swf下的global_key.txt，然后利用LinuxTool导出资源文件
+
+具体按键功能说明：
+UP	——	上一页
+DOWN	——	下一页
+LEFT	——	缩小
+RIGHT	——	放大
+ENTER	——	进入
+ESC	——	退出
+VIEW	——	控制ebookOSD的显示
+PLAY	——	显示模式(在fit_width、fit_height和fit_screen间切换)
+ROTATE	——	旋转
+REV	——	页内PageUp
+FWD	——	页内PageDown
+PRE	——	页内PageLeft
+NEXT	——	页内PageRight

@@ -1,0 +1,44 @@
+avstring.o: avstring.c avstring.h
+base64.o: base64.c common.h attributes.h base64.h \
+  ../../../sdk/include/am_types.h
+cookies.o: cookies.c cookies.h http.h mp_msg.h config.h
+fast_memcpy.o: fast_memcpy.c
+http.o: http.c config.h http.h url.h mp_msg.h stream.h m_option.h \
+  network.h demuxer.h help_mp.h base64.h
+mathematics.o: mathematics.c
+m_option.o: m_option.c config.h m_option.h mp_msg.h url.h avstring.h \
+  m_struct.h
+mp_msg.o: mp_msg.c config.h mp_msg.h
+mp_strings.o: mp_strings.c mp_strings.h
+m_struct.o: m_struct.c config.h m_option.h m_struct.h mp_msg.h
+network.o: network.c config.h mp_msg.h help_mp.h stream.h m_option.h \
+  url.h network.h http.h demuxer.h m_config.h mpcommon.h tcp.h cookies.h
+open.o: open.c config.h mp_msg.h help_mp.h m_option.h stream.h url.h \
+  network.h http.h demuxer.h
+rtp.o: rtp.c config.h network.h stream.h m_option.h mp_msg.h url.h http.h \
+  rtp.h
+stream_api.o: stream_api.c stream.h config.h m_option.h mp_msg.h url.h \
+  network.h http.h stream_api.h ../../../sdk/include/am_types.h \
+  fast_memcpy.h ../../../sdk/include/ez_stream.h \
+  ../../../sdk/include/av_api.h ../../../sdk/include/ez_gstream.h \
+  ../../../sdk/include/ez_stream.h
+stream.o: stream.c config.h mp_msg.h help_mp.h network.h stream.h \
+  m_option.h url.h http.h demuxer.h common.h attributes.h m_struct.h \
+  cache2.h
+stream_file.o: stream_file.c config.h mp_msg.h stream.h m_option.h url.h \
+  network.h http.h help_mp.h m_struct.h
+stream_ftp.o: stream_ftp.c config.h mp_msg.h network.h stream.h \
+  m_option.h url.h http.h help_mp.h m_struct.h tcp.h
+stream_netstream.o: stream_netstream.c config.h mp_msg.h stream.h \
+  m_option.h url.h network.h http.h help_mp.h m_struct.h common.h \
+  attributes.h mpbswap.h bswap.h stream_netstream.h tcp.h
+stream_rtp.o: stream_rtp.c config.h mp_msg.h network.h stream.h \
+  m_option.h url.h http.h udp.h rtp.h
+stream_udp.o: stream_udp.c config.h mp_msg.h network.h stream.h \
+  m_option.h url.h http.h udp.h
+tcp.o: tcp.c config.h mp_msg.h help_mp.h network.h stream.h m_option.h \
+  url.h http.h tcp.h avstring.h
+timer-linux.o: timer-linux.c config.h timer.h
+udp.o: udp.c config.h mp_msg.h network.h stream.h m_option.h url.h http.h \
+  udp.h
+url.o: url.c url.h mp_msg.h config.h mp_strings.h help_mp.h

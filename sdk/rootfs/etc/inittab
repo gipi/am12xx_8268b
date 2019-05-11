@@ -1,0 +1,8 @@
+::sysinit:/etc/init.d/rcS
+#ttyS0::respawn:/sbin/getty 115200 ttyS0
+#-/bin/sh means a login shell
+::askfirst:/bin/login
+::ctrlaltdel:/sbin/reboot
+::shutdown:/bin/umount ar
+::shutdown:/bin/mount / o remount,ro
+

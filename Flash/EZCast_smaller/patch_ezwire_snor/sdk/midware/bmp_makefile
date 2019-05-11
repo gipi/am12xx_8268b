@@ -1,0 +1,41 @@
+#################################################
+##   libtiff
+##   Using GNU gcc Compiler
+##   First created by Lei Yuan 2011-1-20
+##
+#################################################
+
+
+TARGET := libbmp.a
+CC := mips-linux-gnu-gcc
+AR := mips-linux-gnu-ar rvs
+
+INCLUDES = -I.
+
+DEFS =	-DMIPS
+
+CFLAGS = -EL -muclibc -msoft-float -fPIC -fvisibility=hidden -mips32r2 -Wall -O3
+
+LIBS = -lm -lpthread -lrt
+
+OBJ	= bmpdec.o
+
+STATICLIB = 
+
+.SUFFIXES : .c .o
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDES) $(DEFS) -c $? -o $@
+
+all: $(TARGET)
+
+
+$(TARGET): $(OBJ) $(STATICLIB)
+	$(AR) $(TARGET) $(OBJ)
+
+
+clean:
+	rm -f $(OBJ) $(TARGET)
+
+
+

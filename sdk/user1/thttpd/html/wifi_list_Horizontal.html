@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Actions-Micro | wifi_list </title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+<!--
+body
+{
+      //  background:url('img/ezcastbk.jpg');    
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/ezcastbk.jpg', sizingMethod='scale');
+        width:100%;
+        height:100%;
+ }
+.menu {
+	font-size: 14px;
+//	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.select  {
+	font-size: 14px;
+	color: #ffffff;
+	font-family: Arial, Helvetica, sans-serif;
+}
+@media screen and (max-width: 800px)
+{
+
+	#customers
+	{
+	width:100%;
+	}
+}
+
+@media screen and (min-width: 800px)
+{
+	#customers
+	{
+	width:800px;
+	}
+}
+.background 
+{
+	background-image:url('img/ezcastbk.jpg');
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	position:fixed;
+	position:fixed !important;
+	position: fixed;
+	left:0;
+	top:0;
+	width: 100%;
+	height: 100%;
+//	border:1px solid #FF0000;
+	z-index:-100;
+	overflow: scroll;
+}
+.black_overlay
+{ 
+	display: none; 
+	position: absolute; 
+	top: 0%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	background-color: black; 
+	z-index:1001; 
+	-moz-opacity: 0.8; 
+	opacity:.80; 
+	filter: alpha(opacity=80); 
+} 
+.white_content 
+{ 
+	display: none; 
+	position: absolute; 
+	top: 30%; 
+	left: 0%; 
+	width: 100%; 
+	height: 100%; 
+	//padding: 16px; 
+	//border: 6px solid orange; 
+	//background-color: white; 
+	//background-image: url(img/pop-up_box.png);
+	//background-repeat: no-repeat;
+	z-index:1002; 
+	overflow: auto; 
+} 
+.lay1
+{
+	width:100%;
+	position: relative;
+	top: -4px;
+	border: 0px solid #FFFFFF;
+	z-index: 101;
+	left: 1px;
+}
+.lay2
+{
+	width:100%;
+	position: relative;
+	top: -18px;
+	border: 0px solid #FFFFFF;
+	z-index: 100;
+	left: 1px;
+}
+.STYLE2 {
+	color: #FFFFFF;
+	font-size: 8px;
+}
+.STYLE3 {color: #FFFFFF}
+-->
+</style>
+<script type="text/javascript" src="js/jquery.js">
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="HandheldFriendly" content="true">
+</head>
+<script src="js/wifilist.js"></script>
+<script type="text/javascript">
+$(document).ready(function()
+ {	  
+ 	$(function() 
+	{
+		delay_get_data();	
+	});	
+ });
+</script>
+<body>
+<div id="bk" class="background">
+<form id="config-form" name="config-form">
+  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="customers">
+<tr background="img/bk1.png">
+  <td colspan="3" align="center" valign="top"><table width="100%" height="150%" border="0" bordercolor="#FF0000">
+<tr >
+<td width="16%"align="left"><img src="img/logo_setting.png"></td>
+<td width="7%"align="left"valign="bottom" ><div class="lay1"><table width="100%" height="100%" border="0">
+  <tr>
+    <td><p align="left"><font style="color:#FFFFFF;" size="3" id="ap_ssid_txt">SSID : </font></p></td>
+  </tr>
+</table></div>
+</td>
+<td width="19%"align="left" valign="bottom"><div class="lay1"><table width="100%" height="100%" border="0">
+  <tr>
+    <td><p align="left"><font style="color:#FFFFFF;" size="3" id="ap_ssid"></font></p></td>
+  </tr>
+</table></div></td>
+<td width="12%"align="left" valign="bottom"><div class="lay1"><table width="100%" height="100%" border="0">
+  <tr>
+    <td><p align="left"><font style="color:#FFFFFF;" size="3" id="ap_psk_txt">Password : </font></p></td>
+  </tr>
+</table></div></td>
+<td width="7%"align="left" valign="bottom"><div class="lay1"><table width="100%" height="100%" border="0">
+  <tr>
+    <td><p align="left"><font style="color:#FFFFFF;" size="3" id="ap_psk"></font></p></td>
+  </tr>
+</table></div></td>
+<td width="5%"align="right"><img src="img/phone.png"></td>
+<td width="8%"align="center"><img src="img/dongle_not_connected.png" id="dongle_connect_status"></td>
+<td width="10%"align="center"><img src="img/dongle.png" id="upgrade_status"></td>
+<td width="8%"align="center"><img src="img/dongle_not_connected.png" id="client_connect_status"></td>
+<td width="5%"align="left"><img src="img/internet_little.png"></td>
+</tr>
+
+</table></td>
+</tr>
+<tr>
+  <td colspan="3" align="center" valign="top" style="line-height:0px;"><div class="lay2"><table width="100%" border="0" bordercolor="#00FF00">
+    <tr>
+      <td width="75%"><table width="100%" border="0" cellpadding="0" cellspacing="0" bordercolor="#FF00FF">
+        <tr>
+          <td width="94%">&nbsp;</td>
+          <td width="6%"align="center"><span class="STYLE2" id="dongle_icon_txt"></span></td>
+        </tr>
+      </table></td>
+      <td width="25%"><table width="100%" border="0" cellpadding="0" cellspacing="0" bordercolor="#FF0000">
+        <tr>
+		<td width="33%"align="center">&nbsp;</td>
+         <td width="67%"align="center"><span class="STYLE2" id="internet_icon_txt"></span></td>
+        </tr>
+      </table></td>
+    </tr>
+  </table></div></td>
+</tr>
+</table></td>
+</tr>
+  </table>
+  <table width="100%" border="0" align="center">
+   <tr>
+   <td width="15%">
+   </td>
+   <td width="65%" align="center"><input name="submit" type="submit" id="add_network" style="color:#FFFFFF; border:none;background:url('img/add_network.png');width:175px; height:34px;" value="" align="center">
+   </td>
+  <td width="20%"><input type="submit" name="Home"  id="Home2" value="" style="border:none;background:url('img/return.png');background-repeat: no-repeat;width:52px;height:41px;">  </td>
+  </tr>
+  </table>
+  <table  border="0" align="center" id="myTable">
+<tr>
+<td>
+</td>
+</tr>
+</table>
+ <div id="light" class="white_content" align="center" height="100%">
+ <table  cellpadding="0" cellspacing="0" width="344" height="236" border="0" align="center" id="pop_up_box" style="background-image:url('img/pop-up_box.png');background-repeat: no-repeat;background-position:center;">
+ <tr>
+ <td width="3%">
+ <td/>
+ <td height="30%" width="97%">
+ </td>
+ </tr>
+<tr height="10%">
+ <td width="3%">
+ <td/>
+<td width="97%">
+ <div id="warn" align="center"><font style="color:#FFFFFF" size="3" id="warn_txt" ></font></div>
+ </td>
+ </tr>
+<tr height="10%">
+ <td width="3%">
+ <td/>
+<td width="97%">
+ <div id="warn1" align="center"><font style="color:#FFFFFF" size="3" id="warn1_txt" ></font></div>
+ </td>
+ </tr>
+<tr height="10%">
+ <td width="3%">
+ <td/>
+<td width="97%">
+<div id="warn2" align="center"><font style="color:#FFFFFF" size="3" id="warn2_txt" ></font></div>
+ </td>
+ </tr>
+<tr height="10%">
+ <td width="3%">
+ <td/>
+<td width="97%">
+<div id="warn3" align="center"><font style="color:#FFFFFF" size="3" id="warn3_txt" ></font></div>
+ </td>
+ </tr>
+  <tr>
+   <td width="3%">
+ <td/>
+ <td height="30%" width="97%">
+ </td>
+ </tr>
+ </table>
+ </div> 
+<div id="fade" class="black_overlay">
+</div> 
+</form>
+</div>
+
+</body>
+</html>

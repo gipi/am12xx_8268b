@@ -1,0 +1,16 @@
+[HEADER]
+FORMAT=1
+VERSION=0x1
+TITLE=VERSION
+OUTHFILE=..\..\..\scripts\version_cfg.h
+[BODY]
+vram=[TRUE][str][8][Partion upgrade or not: TRUE:upgrade this partion,FALSE:do't upgrade this partion]
+udisk=[TRUE][str][8][Partion upgrade or not: TRUE:upgrade this partion,FALSE:do't upgrade this partion]
+SOFTWARE=[AM8250.Demo.001][str][128][Software version]
+PATCH=[Patch.0][str][128][Patch version]
+HARDWARE=[AM8250.QC.SZ&TP][str][40][Hardware version]
+PROCESSOR=[AM8250][str][16][Processor type]
+VENDOR=[Actions-Microelectronics.Co.,Ltd.][str][128][Vendor name]
+PRODUCT=[EZ.BOX][str][128][Product name]
+FIRMWARE=[12209][num][8][Firmware version]
+MODEL=[ezcastpro][str][64][The product]

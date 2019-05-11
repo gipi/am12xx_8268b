@@ -1,0 +1,57 @@
+#################################################
+##   Lib JPEG
+##   Using GNU gcc Compiler
+##   First created by Lei Yuan 2011-1-20
+##
+#################################################
+
+
+TARGET := libjpeg.a
+CC := mips-linux-gnu-gcc
+AR := mips-linux-gnu-ar rvs
+
+
+DEFS = -DMIPS
+
+CFLAGS = -EL -msoft-float -muclibc -fPIC -fvisibility=hidden -mips32r2 -Wall -O3
+
+LIBS = -lm -lpthread -lrt
+
+INCLUDES = -I.
+
+SYSDEPMEM= jmemnobs.o
+
+COMOBJECTS= jcomapi.o jutils.o jerror.o jmemmgr.o $(SYSDEPMEM)
+
+CLIBOBJECTS= jcapimin.o jcapistd.o jctrans.o jcparam.o jdatadst.o \
+        jcinit.o jcmaster.o jcmarker.o jcmainct.o jcprepct.o \
+        jccoefct.o jccolor.o jcsample.o jchuff.o jcphuff.o \
+        jcdctmgr.o jfdctfst.o jfdctflt.o jfdctint.o
+
+DLIBOBJECTS= jdapimin.o jdapistd.o jdtrans.o jdatasrc.o \
+        jdmaster.o jdinput.o jdmarker.o jdhuff.o jdphuff.o \
+        jdmainct.o jdcoefct.o jdpostct.o jddctmgr.o jidctfst.o \
+        jidctflt.o jidctint.o jidctred.o jdsample.o jdcolor.o \
+        jquant1.o jquant2.o jdmerge.o
+
+OBJ	+= $(CLIBOBJECTS) $(DLIBOBJECTS) $(COMOBJECTS)
+
+STATICLIB = 
+
+.SUFFIXES : .c .o
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDES) $(DEFS) -c $? -o $@
+
+all: $(TARGET)
+
+
+$(TARGET): $(OBJ) $(STATICLIB)
+	$(AR) $(TARGET) $(OBJ)
+
+
+clean:
+	rm -f $(OBJ) $(TARGET)
+
+
+

@@ -1,0 +1,5 @@
+main.o: main.c ../../../../sdk/include/boot_display_api.h \
+  ../../../../sdk/include/syscfg.h ../../../../sdk/include/sys_cfg.h \
+  ../../../../sdk/include/am_types.h welcome.h \
+  ../../../include/ezcast_public.h ../../../include/ezcastpro.h \
+  ../../../include/ezcast_config.h ../../../../scripts/mconfig.h

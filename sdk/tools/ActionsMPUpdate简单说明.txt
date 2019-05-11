@@ -1,0 +1,25 @@
+    对于ActionsMPUpdate，量产工具与升级工具整合在一起，目前方便生产与
+研发。此版本主要增加一个功能，增加EraseNAND 功能。基本功能是，可以实现
+单独擦除，以及擦除+升级。
+    第一步：让小机进入ADFU升级状态。
+    第二步：在复选框主要选中EraseNand，并且选择芯片类型，如AM7555_ACM_11,
+擦除级别默认选择level_1,
+    第三步：点击Download按钮后，就会开始扫描当前NAND FLASH擦除，并且标记
+坏块。
+     有几点说明如下：
+   1.升级提示失败，查看flash 是不是在支持列表中， 
+   2.此nand flash 硬件没有焊接好，以及短路。
+   3.目前已经增加AM7555,AM8250,AM8251
+   4.EraseNand文件夹，ActionsMassProduct.ini，ActionsMPUpdate.exe
+ActionsMPUpdate简单说明.txt，四个文件夹或者文件。同时拷贝。
+   5.对于升级级别说明如下：
+    Level_0: No Erase Block,nand Check Data,主要来检测是否白片
+    Level_1:Erase bad block， 擦除所有block，并标记坏块。
+    Level_2:Erase Bad Block 55 AA ，在上一个级别，增加读写数据55或者AA
+    Level_3:Erase Bad Block 55 AA & Random ， 在上一个级别，增加随机数写
+    Level_4:No Erase Bad Block ,and Erase Good block 
+    Level_5:No Erase Bad Block ,and Erase Good block AA 55 
+
+
+
+

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>Host authority</title>
+<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="js/main.js?1.0"></script>
+<script src="js/jquery.md5.js"></script>
+
+<!--
+<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+-->
+</head>
+
+<script type="text/javascript">
+ 
+    $(document).ready(function(){
+        $('a.active').removeAttr('href');
+		
+	// Get_height_width_of_screen();
+	//creatmenu();
+	//alert("4556746----");
+	//Get_local_version();
+	//Get_password();
+	main();
+	Get_host_authority_language();
+	setTimeout(set_host_authority_value,500);
+	set_host_authority_listener();
+      });
+
+</script>
+<style type="text/css">
+<!--
+.ui-mobile .ui-page {
+//border: 10px solid #33FF00;
+	background-image: url(img/airdiskbg.jpg);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	-webkit-background-origin:content-box; /* Safari */
+	background-origin:content-box;
+}
+.ui-header .ui-title{
+margin: 0 10%;
+}
+
+.ui-page-theme-a .ui-panel-wrapper {
+ text-shadow: none;
+ font-weight:normal;
+ background-color:transparent;
+//border: 3px solid #FF0000;
+}
+
+.aa_center{  
+	position:absolute;  
+//	top:50%;  
+//	left:50%;  
+	margin-top:-30px;  
+	margin-left:1px;  
+	margin-right:20px;
+	/*此时宽和高都要固定*/  
+//	width:280px;  
+	height:inherit;  
+//	border: 1px solid #0000FF;
+	text-align:center;
+	font-weight:normal;
+	color:#FFFFFF;
+	
+}
+div#wrrap {   
+	width:50%;
+	height:45px; 
+	display:table; 
+	float:left; 
+	//border: 1px solid #00ffFF;
+}   
+
+.control_txt
+{
+	//width:55%;
+	display:table-cell;   
+	vertical-align:middle;   
+	//float:left;
+	text-align:right;
+	font-size:16px;
+	//margin-top:13px;
+	//margin-right:10px;
+	//padding-right:10px;
+	overflow: hidden;
+	//text-overflow: ellipsis;
+	//white-space: nowrap;
+	//border: 1px solid #0000FF;
+}
+.bb_center{  
+	position:absolute;  
+	bottom:5%;  
+	left:50%;  
+	//margin-top:-100px;  
+	margin-left:-115px;  
+	/*此时宽和高都要固定*/  
+	width:220px;  
+	//height:250px;  
+	//border: 1px solid #0000FF;
+	text-align:center;
+	font-weight:normal;
+	color:#FFFFFF;
+}
+.ui-list > li > a{
+	margin: 0px;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    list-style: outside none none;
+}
+.text_border{
+	margin:1px;
+	margin-top:9px;
+	padding:5px;
+	//border: 1px solid #9D9D9D;
+	//border-color: rgba(85, 85, 85, 0.75);
+	-webkit-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#DADADA /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 		#DADADA /*{global-box-shadow-color}*/;
+	box-shadow: 0px 0px 2px /*{global-box-shadow-size}*/ 			#DADADA /*{global-box-shadow-color}*/;
+	border-radius: 1px;
+	-moz-border-radius:1px; /* Old Firefox */
+}
+.line{
+width:290px;
+}
+.line2{
+width:200px;
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px)
+{
+
+.ui-mobile .ui-page {
+	background-image: url(img/ezcastbk.jpg);
+
+} 
+ 
+.aa_center {
+	left:50%;  
+	margin-left:-290px; 
+	top:50%;  
+	margin-top:-180px;  
+	}
+
+.line{
+width:580px;
+//float:left;
+}
+
+.line2{
+width:580px;
+//float:left;
+}  
+.row1
+{
+width:50%;
+//position:relative;
+//display:inline;
+float:left;
+
+}
+.row2
+{
+width:50%;
+//position:relative;
+//display:inline;
+float:left;
+}
+.mis_css{
+width:33%;
+float:left;
+}
+.meeting_css{
+width:33%;
+float:left;
+}
+.meeting_css{
+width:33%;
+float:left;
+}
+.clean{
+clear:left;
+}
+}
+@media screen and (min-width: 900px)
+{
+.aa_center {
+	left:50%;  
+	margin-left:-300px;  
+	top:50%;  
+	margin-top:-179px;  
+	}
+ .line{
+	width:580px;
+	//float:left;
+	}
+.line2{
+	width:680px;
+	//float:left;
+	}  
+.row1
+	{
+	width:50%;
+	//position:relative;
+	//display:inline;
+	float:left;
+	
+	}
+.row2
+	{
+	width:50%;
+	//position:relative;
+	//display:inline;
+	float:left;
+	}
+.mis_css{
+width:33%;
+float:left;
+margin-top:20px;
+}
+.meeting_css{
+width:33%;
+float:left;
+margin-top:20px;
+}
+.meeting_css{
+width:33%;
+float:left;
+margin-top:20px;
+}
+.clean{
+clear:left;
+}
+}
+.clear{ clear:both} 
+-->
+</style>
+
+<body  class="ui-mobile-viewport ui-overlay-a"  align="center">
+  <div data-role="page" id="panel-fixed-page1">
+    <div data-role="header" data-position="fixed">
+		<div><a href="javascript:void(0)" onClick="To_adminsetup()" target="_self"><img src="img/return.png" class="bk-ico ui-btn-right" style="width:40px;"></a></div>
+        <h1 id="title_host" style="margin:0;margin-left:40px; margin-right:80px;" ></h1>
+    </div><!-- /header -->
+	
+<div role="main" class="ui-content jqm-content jqm-fullwidth " style="z-index:10000;">
+
+<div class="aa_center">
+
+<div style="margin-left:auto; margin-right:auto; margin-top:32px; overflow:hidden;" class="line" >
+	<div class="row1">
+	
+		<div id="Conference_set" style="height:45px;"><div id="wrrap"><div id="txt_confer" class="control_txt"></div></div> 
+			<span id="Conference_onoff" style="height:45px; line-height:45px;">
+				<select name="Conference_con" id="Conference_val" data-role="flipswitch">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+				</select>
+				</span>
+		</div>		
+
+		<div id="Device_set" style="height:45px;"><div id="wrrap"><div id="txt_device" class="control_txt">Device manager control</div></div>
+			<span id="deviceset_onoff" style="height:45px; line-height:45px;">
+				<select name="deviceset_con" id="deviceset_val" data-role="flipswitch">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+				</select>
+			</span>
+		</div>
+	</div><!--row1-->
+	<div class="row2">
+		<div id="Network_set" style="height:45px;"><div id="wrrap"><div id="txt_network" class="control_txt">Network setup control</div></div>
+			<span id="networkset_onoff" style="height:45px; line-height:45px;">
+				<select name="networkset_con" id="network_val" data-role="flipswitch">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+				</select>
+			</span>
+		</div>
+
+		<div id="reboot_set" style="height:45px;"><div id="wrrap"><div id="txt_rebotcot" class="control_txt"></div></div>
+			<span id="reboot_onoff" style="height:45px; line-height:45px;">
+				<select name="reboot_con" id="reboot_val" data-role="flipswitch">
+					<option value="0">Off</option>
+					<option value="1">On</option>
+				</select>
+			</span>
+		</div>
+	</div><!-- /row2 -->
+	
+</div>
+<div class="clear"></div>
+
+<div style="margin-left:auto; margin-right:auto; margin-top:30px;" class="line2">
+	<div class="mis_css" style="margin-bottom:30px;" >
+	<img src="img/Admin.png" width="85%">
+	<div id="txt_mis"></div>
+	</div>
+
+	<div class="meeting_css" style="margin-bottom:30px;">
+	<img src="img/Host.png" width="85%">
+	<div id="txt_meet"></div>
+	<div id="txt_meet2"></div>
+	</div>
+
+	<div class="meeting_css" style="margin-bottom:30px;">
+	<img src="img/Guest.png" width="85%">
+	<div id="txt_guset"></div>
+	<div id="txt_guset2"></div>
+	</div>
+</div>
+
+<div id="host_message" class="clean"></div>
+	
+</div><!-- /center -->
+
+</div><!-- /main -->
+    
+
+<div data-role="popup" id="aivew_rate" data-overlay-theme="b" style="min-width:300px;">
+	<div id="channel_sel" style="display:block;">
+		<div data-role="header">
+			<a href="#pagehome" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right" id="close">Close</a>
+			<h1  style="margin:0;"></h1>
+		</div>
+
+		<div role="main" class="ui-content">
+			<div align="center" style="margin-top:10px; margin-bottom:10px;">Refresh Rate configuration</div>
+			<select name="rate" id="rate_val" >
+				<option value="5000">5 seconds</option>
+				<option value="15000">15 seconds</option>
+				<option value="30000">30 seconds</option>
+				<option value="60000">1 minute</option>
+				<option value="0">Manual update</option>
+			</select>
+		</div>
+		<p align="center" style="border-top:1px solid #CCCCCC">
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="Refresh_Rate">OK</a>
+			<a href="#page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="none" id="cal">Cancel</a>
+		</p>
+	</div>
+</div>
+
+
+<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
+	<ul data-role="listview" >
+		<li data-icon="delete"><a href="#" data-rel="close"  id="IDS_MENU_LAN6">Close menu</a></li>
+			<span  id="add_menu" class="ui-list"></span>
+		
+	</ul>
+</div><!-- /panel -->
+
+<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
+	<form class="userform" >
+		<h2 id="user_login">Login</h2>
+		<label for="name" id="IDS_MENU_LAN2">Username:</label>
+		<input type="text" name="name" id="usr_name" value="admin" data-clear-btn="true" data-mini="true" disabled="disabled" >
+		<label for="password" id="IDS_STTING_PAS">Password:</label>
+		<input type="password" name="password" id="usr_password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini" id="cancle_login">Cancel</a></div>
+			<div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini" id="login_usrname_ok">OK</a></div>
+		</div>
+		<div id="IDS_MENU_LAN3" style="text-align:left; margin-top:20px; font-size:80%;">Forget admin password: email to forgetpassword@iezvu.com.</div> 
+	</form>
+		<div id="loginin_txt" style="display:none;"> 	
+			<div style="margin-top:20px;" align="center"><span id="show_usrname"></span> ,<span id="IDS_MENU_LAN5">welcome</span> <span> ! </span></div>
+			<p align="center"><a href="#pagehome" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="login_out">Logout</a></p>
+		</div>
+	</div><!-- /panel -->
+</div><!-- /page -->
+
+</body>
+</html>

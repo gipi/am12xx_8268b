@@ -1,0 +1,7 @@
+multialarm.o: multialarm.c ../../../case/include/multialarm.h \
+  ../../../sdk/include/sys_rtc.h ../../../case/include/apps_vram.h \
+  ../../../sdk/include/sys_vram.h \
+  ../../../case/include/apps_vram_default.h \
+  ../../../case/include/multialarm.h ../../../sdk/include/sys_pmu.h \
+  ../../../sdk/include/sys_gpio.h ../../../case/include/ezcast_public.h \
+  ../../../case/include/ezcastpro.h ../../../case/include/ezcast_config.h

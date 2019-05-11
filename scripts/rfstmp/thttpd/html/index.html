@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0"/>
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+
+<title>set</title>
+<script type="text/javascript">
+ 		var number = Math.random();
+	number = Math.ceil(number * 1000); 
+	var ezpro_url ="main.html?random="+number;
+	var ezmucast_url ="websetting.html?random="+number;
+	var ezcast_url ="ezcastmain.html";
+	
+    $(document).ready(function(){
+        $('a.active').removeAttr('href');
+		//alert("4556746----");
+		check_type();
+      });
+
+function check_type(){
+	$.get("cgi-bin/wifi_info_GET.cgi", {type:'EZMUSIC_ENABLE'}, function(ezmusic_enable) 
+	{	
+	//alert("--index_ezcast.html---"+ezmusic_enable);
+	var value=Number(ezmusic_enable);
+		switch (value){
+			case 1:
+			case 2://ezcast
+			case 3:  //EZWILAN_ENABLE
+			case 7:  //ezwire
+			case 8:  //ezwire no audio
+				window.location.replace(ezmucast_url)
+			break;
+			case 4:  //EZCASTPRO_MODE
+			case 5:  //EZCASTPROWILAN
+			case 6:  //EZCAST pro box
+			case 9:  //EZCAST probox lan only
+				window.location.replace(ezpro_url)
+			break;
+		    default:
+			break;
+			}
+
+	}, "text");		
+}
+
+</script>
+
+
+<style type="text/css">
+
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 24px;
+	font-size: 14px;
+	color: #555;
+	background-image: url(img/airdiskbg.jpg);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size:cover;
+	-moz-background-size:cover; /* 老版本的 Firefox */
+}
+<!--
+a:hover{
+	text-decoration: none;
+}
+a:link{
+	text-decoration: none;
+}
+.sebk{
+	width:80%;
+	height:50px;
+	//background-color: #CCCCCC;
+	background-image: url(img/bk.png);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size:100% 100%;
+	color: #ffffff;
+	/* Firefox */
+display:box;
+-moz-box-pack:center;
+-moz-box-align:center;
+	/* Safari, Chrome, and Opera */
+display:-webkit-box;
+-webkit-box-pack:center;
+-webkit-box-align:center;
+	/* W3C */
+display:box;
+	box-pack:center;
+	box-align:center;
+	background-position: center;
+	text-align: center;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #666666;
+	border-right-color: black;
+	border-bottom-color: black;
+	border-left-color: #666666;
+	margin-top: 20px;
+//	border-radius:5px;
+//-moz-border-radius:5px; /* Old Firefox */
+//	box-shadow: 1px 2px 5px #ffffff inset;
+//	box-shadow: 0px 20px 50px #ffffff inset;
+//box-shadow: 10px 10px 10px #ffffff;
+	margin-bottom: 20px;
+	margin-right: auto;
+	margin-left: auto;
+	text-decoration: none;
+	font-size: 16px;
+}
+
+-->
+    </style>
+
+</head>
+
+<body>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<center><a href="./websetting.html"><div class="sebk"><p>Airsetup</p></div></a></center>
+<!-- <center><a href="./airdisk.html"><div class="sebk"><p>Airdisk</p></div></a></center> -->
+</body>
+</html>

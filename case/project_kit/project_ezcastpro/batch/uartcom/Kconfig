@@ -1,0 +1,11 @@
+#
+# TEST card drivers
+#
+
+config UART_COM
+	tristate "Using uart to communicate"
+	depends on BLOCK
+	default y
+	help
+	  Say Y here to enable the UART communication
+

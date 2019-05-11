@@ -1,0 +1,12 @@
+1. depend on boot_display_api.h
+2. must cfg some like 
+	SETPATH=.\..\..\case\images
+	FWIM=recover.bin
+	SETPATH=.\..\..\case\data
+	FWIM=lcm.bin
+	FWIM=backlight.bin
+	FWIM=recover.dat
+	SETPATH=.\..\..\sdk\bin\1211\cfg
+	FWIM=gpio.bin  
+	in the config file 
+3. 	

@@ -1,0 +1,17 @@
+[HEADER]
+FORMAT=1
+VERSION=0x100
+TITLE=Global_value
+OUTBINFILE=..\..\data\global_value.bin
+OUTHFILE=..\..\data\global_value.h
+[BODY]
+de_input_width=[320][num][4][de input width]
+de_input_height=[240][num][4][de input heigh]
+de_default_color=[0][num][4][de default color]
+de_pix_format=[5][num][4][de pixel format]
+de_output_dispmode=[2][num][4][de output display mode]
+board_poweroff=[0x1][hex][4][board power key index]
+board_poweron=[73][num][4][IR power key index]
+IR_poweroff=[0x8][hex][4][board power on GPIO]
+IR_poweron=[0x19][hex][4][IP power on key]
+str0=[sample string][str][32][string 0]

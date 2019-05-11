@@ -1,0 +1,1 @@
+Rootfs for NAND Flash

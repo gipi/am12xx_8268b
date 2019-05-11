@@ -1,0 +1,16 @@
+#!/bin/sh
+
+RAMDISKPATH=../ramdisk/dev
+
+sudo mknod -m 600 RAMDISKPATH/mem c 1 1
+sudo mknod -m 666 RAMDISKPATH/null c 1 3
+sudo mknod -m 666 RAMDISKPATH/zero c 1 5
+sudo mknod -m 644 RAMDISKPATH/random c 1 8
+sudo mknod -m 600 RAMDISKPATH/console c 5 1
+sudo mknod -m 666 RAMDISKPATH/ttyS0 c 4 64
+sudo mknod -m 666 RAMDISKPATH/ttyS1 c 4 65
+
+
+
+
+

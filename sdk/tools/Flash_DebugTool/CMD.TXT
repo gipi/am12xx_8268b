@@ -1,0 +1,257 @@
+//flg:
+-------------------------------------------------       
+  b0.  |  0.   in  (read)    
+       |  1.   out (write)
+-------------------------------------------------
+  b1.  |  0.   not    
+       |  1.   verify
+-------------------------------------------------       
+  b2.  |  0.   not
+       |  1.   repeat  
+-------------------------------------------------
+  b3.  |  0.   not
+       |  1.   add
+-------------------------------------------------    
+  b4.  |  0.   Not
+       |  1.    Boot Code Read/Write
+-------------------------------------------------      
+//
+
+[scode]
+@cmd:6f 80 10 00 00 00 00 00 01 00
+@flg:2
+@end:
+
+[scodebak]
+@cmd:6f 80 11 00 00 00 00 00 01 00
+@flg:2
+@end:
+
+[vram]
+@cmd:6f 80 12 00 00 00 00 00 01 00
+@end:
+
+[scodebak1]
+@cmd:6f 80 13 00 00 00 00 00 01 00
+@flg:2
+@end:
+
+[user]
+@cmd:6f 80 14 00 00 00 00 00 01 00
+@flg:2
+@end:
+
+[userbak]
+@cmd:6f 80 15 00 00 00 00 00 01 00
+@end:
+
+[autorun]
+@cmd:6f 80 16 00 00 00 00 00 01 00
+@end:
+
+[udisk]
+@cmd:6f 80 17 00 00 00 00 00 01 00
+@end:
+
+[totalflash]
+@cmd:6f 80 18 00 00 00 00 00 01 00
+@end:
+
+[get_flash_info]
+@cmd:6f 80 40 00 00 00 00 00 01 00
+@flg:0
+@end:
+
+[CHECK_BOOTDATA]
+@cmd:6f 80 4d 03 00 00 00 00 00 01 00
+@flg:0
+@ex0:LBA
+@ex1:sector
+@rul: dln = ev1 * 512
+@rul: cmd[9s] = ev1
+@rul: cmd[3l] = ev0
+@ev1:1:128
+@end:
+
+[phy_read_block]
+@cmd:6f 80 41 00 00 00 00 00 00 01 00
+@flg:4
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[phy_write_block]
+@cmd:6f 81 42 03 00 00 00 01 00 01 00
+@flg:5
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[logical_read_block]
+@cmd:6f 80 43 03 00 00 00 00 00 01 00
+@flg:0
+@ex0:address
+@ex1:sector
+@rul: dln = ev1 * 512
+@rul: cmd[9s] = ev1
+@rul: cmd[3l] = ev0
+@ev1:1:128
+@end:
+
+[logical_write_block]
+@cmd:6f 81 44 03 00 00 00 01 00 01 00
+@flg:1
+@ex0:address
+@ex1:sector
+@rul: dln = ev1 * 512
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev1:1:128
+@end:
+
+[erase_phy_block]
+@cmd:6f 80 45 00 00 00 00 00 00 01 00
+@flg:0
+@ex0:block
+@ex1:count
+@rul: cmd[3l] = ev0
+@rul: cmd[9s] = ev1
+@end:
+//0x10
+[read_boot_block]
+@cmd:6f 80 46 00 00 00 00 00 00 01 00
+@flg:0x10 
+@ex0:block
+@ex1:Secotr
+@ex2:Count
+@rul: dln = ev2 * 512
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+//0x11 
+[write_boot_block]
+@cmd:6f 81 47 00 00 00 00 00 00 01 00
+@flg:0x11
+@ex0:block
+@ex1:Secotr
+@ex2:Count
+@rul: dln = ev2 * 512
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev1:1:128
+@end:
+
+[read_whole_page_512]
+@cmd:6f 80 48 03 00 00 00 01 00 01 00
+@flg:c
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: dln = ev2 * 512
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[write_whole_page_1kb]
+@cmd:6f 81 49 03 00 00 00 01 00 01 00
+@flg:d
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: dln = ev2 * 512
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[read_whole_page_1kb]
+@cmd:6f 80 4a 03 00 00 00 01 00 01 00
+@flg:c
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: dln = ev2 * 512
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[write_whole_page_1kb]
+@cmd:6f 81 4b 03 00 00 00 01 00 01 00
+@flg:d
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: dln = ev2 * 512
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[read_spare_area]
+@cmd:6f 80 4c 03 00 00 00 01 00 01 00
+@flg:4
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: dln = ev2 * 512
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[read_blkECCInfo]
+@cmd:6f 80 4f 04 00 00 00 04 00 01 00
+@flg:4
+@ex0:EndBlk
+@ex1:ReadLen
+@ex2:sector
+@rul: dln = ev2 * 512
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[phy_read_Oneblock]
+@cmd:6f 80 50 00 00 00 00 00 00 01 00
+@flg:4
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:
+
+[phy_write_Oneblock]
+@cmd:6f 81 51 03 00 00 00 01 00 01 00
+@flg:5
+@ex0:block
+@ex1:page
+@ex2:sector
+@rul: cmd[9s] = ev2
+@rul: cmd[7s] = ev1
+@rul: cmd[3l] = ev0
+@ev2:1:128
+@end:

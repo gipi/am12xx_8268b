@@ -1,0 +1,16 @@
+[HEADER]
+TYPE=KEY
+VERSION=0x100
+[KEYS]
+ALIAS0=开关键_Power
+ALIAS1=主板按键1_ESC
+ALIAS2=主板按键2_Left
+ALIAS3=主板按键3_Right
+ALIAS4=主板按键4_Enter
+ALIAS5=主板按键5_Menu
+ALIAS6=主板按键6_GButton
+ALIAS7=主板按键7_void
+ALIAS8=红外键01_copy
+ALIAS9=红外键02_Mute
+ALIAS10=红外键03_Vol+
+ALIAS11=红外键03_Vol-

@@ -1,0 +1,1 @@
+am_socket.o: am_socket.c am_socket.h ../../../sdk/include/am_types.h

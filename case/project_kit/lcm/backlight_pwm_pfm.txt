@@ -1,0 +1,15 @@
+[HEADER]
+FORMAT=1
+VERSION=0x100
+TITLE=Backlight
+OUTBINFILE=..\..\data\backlight.bin
+[BODY]
+BL_EN=[1][num][1]
+SWITCH=[3][num][1][PWM]
+ADJUST=[5][num][1][PWM]
+bl_clt=[0x2803][hex][4][PWM]
+ana_amu_ctl=[0x8][hex][4][PWM]
+cmu_fmclk=[0xa28][hex][4][PWM]
+pwm0_ctl=[0x0][hex][4][PWM]
+pwm1_ctl=[0x0][hex][4][PWM]
+gpio=[255][num][1][PWM]

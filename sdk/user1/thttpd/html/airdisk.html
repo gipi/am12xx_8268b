@@ -1,0 +1,401 @@
+
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.7, minimum-scale=0.7, maximum-scale=1, user-scalable=yes" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8;">
+
+<title id="title">Bit Mask</title>
+<style>
+#bg {height:100%;width:100%;position:relative; border: 0px solid #999999; }
+#bg{
+position:absolute;
+position:fixed !important;
+position: fixed;
+top:0px;
+left:0px;
+z-index:-999;
+}
+#wrap {height:100%;width:100%; left:0;top:0;position:absolute; border: 0px solid #999999;}
+#wrap1 {height:100%;width:100%;margin-top:2%;border: 0px solid #999999;}
+/*
+#airdisk{
+	position: relative;
+    height:35%!important;
+    width:80%!important;
+    top:30px;
+    left:0px;
+	margin-bottom:20px;
+    border: 1px solid #999999;
+    
+   // background-image:url(img/airdisk.png);
+
+}
+#usb{
+	position: relative;
+    height: 15%!important;
+    width:80%!important;
+     top:10px;
+    border: 1px solid #999999;
+    
+   // background-image:url(img/usb.png);
+}
+#sdcard{
+	position: relative;
+    height: 15%!important;
+    width:80%!important;
+    top:10px;
+    border: 1px solid #999999;
+    
+    //background-image:url(img/sdcard.png);
+
+}
+
+#memory{
+	position: relative;
+    height:15%!important;
+    width:80%!important;
+     top:10px;
+    border: 0px solid #999999;
+    
+    //background-image:url(img/memory.png);
+}
+*/
+.pic{
+	position:relative!important;
+	max-width:400px!important;
+	width:70%!important;
+	//float:left;
+	margin:1% auto;
+	//border: 1px solid #999999;
+
+}
+
+.pic img{
+	vertical-align:middle;
+	max-width: 60%;
+	width:60%;
+}
+@media screen and (max-width: 690px)
+{
+
+	#wrap1
+	{
+	width:100%;
+	height:90%;
+	left:0;
+	top:0;
+	}
+	.pic2{
+	margin:5% auto;
+	}
+}
+@media screen and (min-width: 691px)
+{
+	#wrap1 {
+	height:90%;
+	max-width:900px!important;
+	width:90%;
+	margin:1% auto;
+	//border: 1px solid #FF0000;
+	}
+	.pic{
+	position:relative;
+	max-width:400px!important;
+	width:60%!important;
+	height:auto!important;
+	float:left;
+	margin:auto 1% ;
+	//border: 1px solid #FF0000;
+	}
+	.pic img{
+	vertical-align:middle;
+	max-width: 80%;
+	width:80%;
+	}
+	.pic2{
+	position:relative;
+	max-width:450px!important;
+	width:47%!important;
+	height:auto!important;
+	float:right;
+	margin:5% auto 1% auto;
+	}
+}
+
+</style>
+
+<script src="js/jquery.js">
+</script>
+
+</head>
+<body>
+<div id="wrap">
+<div id="bg"><img src="img/airdiskbg.jpg" width=100% height=100%></div>
+<div id="wrap1">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center" valign="middle"><div id="airdisk" class="pic"><img src="img/airdisk.png" /></div>
+<div id="sdcard" class="pic pic2"></div>
+<div id="usb" class="pic pic2"></div></td>
+  </tr>
+</table>
+
+
+</div>
+</div>
+</body>
+<script>
+
+var oldsdstatus=2;
+var oldusbstatus=2;
+var oldmemstatus=2;
+
+var  cgiurl; //for win phone
+
+
+function checksdcard()
+{
+
+	var hrefid0=document.getElementById("sdcard");
+	var urlname0="card_sta";
+	var cardin_flag="";
+	cgiurl = "cgi-bin/dir.cgi?timeStamp=" + new Date().getTime();	
+	$.get(cgiurl, {fullname:urlname0}, function(dir_list)
+	{	
+		//alert("");
+		//in
+		   cardin_flag=dir_list.indexOf("card_sta0");//in
+			//alert(dir_list);
+		  if((cardin_flag!=-1)&&(oldsdstatus!=0))  //last stat is out sd hot plug in 
+		  {
+		  	oldsdstatus=0; //card in 
+		  	hrefid0.innerHTML="<a href='javascript:;' onclick=\"sdcard()\"  ><img src=\"img/sdcard0.png\"></a>";
+		  
+		  }
+		  //out    default 
+		  if((cardin_flag==-1)&&(oldsdstatus==0)) ///last stat is in   sd hot plug out 
+		  {
+
+			oldsdstatus=2;//card out 
+			hrefid0.innerHTML=" ";
+			//hrefid0.innerHTML="<img src=\"img/sdcard1.png\">";
+
+		  }
+		},"text");
+
+
+
+}
+
+
+function checkusb()
+{
+	var hrefid1=document.getElementById("usb");
+	var usbin_flag="";
+	
+	//hrefid1.innerHTML="<a href='javascript:;' onclick=\"usb()\"  ><img src=\"img/usb0.png\" width=80% height=80%></a>";
+	var urlname1="usb_sta";
+	cgiurl = "cgi-bin/dir.cgi?timeStamp=" + new Date().getTime();	
+	$.get(cgiurl, {fullname:urlname1}, function(dir_list)
+	{	
+		  usbin_flag=dir_list.indexOf("usb_sta0");
+		 //alert(dir_list);
+		  if((usbin_flag!=-1)&&(oldusbstatus!=0))  //last stat is out usb hot plug in 
+		  {
+		  	oldusbstatus=0; //usb in 
+			
+		  	hrefid1.innerHTML="<a href='javascript:;' onclick=\"usb()\"  ><img src=\"img/usb0.png\"></a>";
+
+		  
+		  }
+		  //out 
+		  if((usbin_flag==-1)&&(oldusbstatus==0)) ///last stat is in   usb hot plug out 
+		  {
+
+			oldusbstatus=2;//usb out 
+			hrefid0.innerHTML=" ";
+			//hrefid1.innerHTML="<img src=\"img/usb1.png\">";
+
+		  }
+		},"text");
+
+}
+function checkmemory()
+{
+	var hrefid2=document.getElementById("memory");
+	var urlname2="/mnt/user1/thttpd/html/airusb/memory";
+	$.get("cgi-bin/dir.cgi", {fullname:urlname2}, function(dir_list)
+	{	
+			
+		  errindex=dir_list.indexOf("dir open Error");
+		  if((errindex==-1)&&(oldmemstatus!=1))  //last stat is out usb hot plug in 
+		  {
+		  	oldmemstatus=1; //card in 
+		  	hrefid2.innerHTML="<a href='javascript:;' onclick=\"memory()\"  ><img src=\"img/memory0.png\" width=80% height=80%></a>";
+
+		  
+		  }
+		  //out 
+		  if((errindex!=-1)&&(oldmemstatus!=0)) ///last stat is in   usb hot plug out 
+		  {
+
+			oldmemstatus=0;//usb out 
+			hrefid0.innerHTML=" ";
+			//hrefid2.innerHTML="<img src=\"img/memory1.png\" width=80% height=80%>";
+
+		  }
+	},"text");
+}
+
+
+///cookies
+function setCookie(name,value) 
+{ 
+var Days = 30; 
+var exp = new Date(); 
+exp.setTime(exp.getTime() + Days*24*60*60*1000); 
+document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString(); 
+} 
+//¶¡cookies 
+function getCookie(name) 
+{ 
+var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)"); 
+if(arr=document.cookie.match(reg)) return unescape(arr[2]); 
+else return null; 
+} 
+//ɾ³�es 
+function delCookie(name) 
+{ 
+var exp = new Date(); 
+exp.setTime(exp.getTime() - 1); 
+var cval=getCookie(name); 
+if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
+} 
+
+$(document).ready(function()
+{
+	//var hrefid2=document.getElementById("memory");
+	checksdcard();
+	checkusb();
+	//hrefid2.innerHTML="<a href='javascript:;' onclick=\"turnto_filelist()\"  ><img src=\"img/memory0.png\" width=80% height=80%></a>";
+	//checkmemory();
+	//if(navigator.userAgent.match(/iPad/i))
+
+	//{
+	//var tmp=document.getElementById("bg");
+	//tmp.style.height=0.7*document.body.clientHeight;
+
+
+	//var tmp1=document.getElementById("wrap");
+	//tmp1.style.height=0.7*document.body.clientHeight;
+
+	//var tmp2=document.getElementById("wrap1");
+	
+	//tmp2.style.height=0.7*document.body.clientHeight;
+
+	//}
+	//if((window.orientation==180||window.orientation==0))
+
+//	h_size();
+	setInterval(checksdcard,3000);
+	setInterval(checkusb,5000);
+	//setInterval(function(){},5000);
+
+	//setInterval("checkmemory();",3000);
+	});
+
+
+
+
+
+///change the div size when turn to hengping
+function h_size()
+{
+
+
+	if(window.orientation==180||window.orientation==0)//shupin
+		{
+			;
+		}
+	//if(window.orientation==90||window.orientation==-90)//hengpin
+	else{
+
+
+		
+		test1=document.getElementById("airdisk");
+    	test1.style.height=0.50*document.body.clientHeight;
+		test1.style.width=0.5*document.body.clientWidth;
+		test2=document.getElementById("sdcard");
+    	test2.style.height=0.15*document.body.clientHeight;
+		test2.style.width=0.5*document.body.clientWidth;
+		test3=document.getElementById("usb");
+    	test3.style.height=0.15*document.body.clientHeight;
+		test3.style.width=0.5*document.body.clientWidth;
+		test4=document.getElementById("memory");
+    	test4.style.height=0.15*document.body.clientHeight;
+		test4.style.width=0.5*document.body.clientWidth;
+
+	}
+	 
+	
+
+
+}
+
+function sdcard()
+{
+/*
+	if(window.orientation==90||window.orientation==-90)//hengpin
+	{
+		window.location.href="diskh.html?filename=/mnt/user1/thttpd/html/airusb/sdcard";
+	}
+	else
+	*/
+	window.location.href="disk.html?filename=/mnt/user1/thttpd/html/airusb/sdcard";
+
+
+}
+function usb()
+{
+	/*
+	if(window.orientation==90||window.orientation==-90)//hengpin
+	{
+		window.location.href="diskh.html?filename=/mnt/user1/thttpd/html/airusb/usb";
+	}
+	else
+	*/
+	window.location.href="disk.html?filename=/mnt/user1/thttpd/html/airusb/usb";
+
+}
+
+function turnto_filelist()
+{
+
+	var urlname="/mnt/user1/thttpd/html/airusb/windows";
+	  //alert("umount");
+	$.get("cgi-bin/dir.cgi", {fullname:urlname}, function(dir_list)
+	{	
+
+			var errindex=dir_list.indexOf("dir open Error");
+		  	if(errindex!=-1)
+		  	{
+		  		window.location.href="winsha_setting.html";
+		  	}
+			else
+			{
+			/*
+				if(window.orientation==90||window.orientation==-90)//hengpin
+				{
+					window.location.href="diskh.html?filename=/mnt/user1/thttpd/html/airusb/windows";
+				}
+				else
+				*/
+				window.location.href="disk.html?filename=/mnt/user1/thttpd/html/airusb/windows";
+			}
+	  	});
+}
+</script>
+
+
+</html>

@@ -1,0 +1,5 @@
+ftp_api.o: ftp_api.c ../../../case/include/ftp.h \
+  ../../../sdk/include/ipc_key.h ../../../sdk/include/am_types.h \
+  ../../../sdk/include/sys_cfg.h ../../../sdk/include/am_types.h
+ftp.o: ftp.c ftp_socket.h ../../../case/include/ftp.h
+ftp_socket.o: ftp_socket.c ftp_socket.h

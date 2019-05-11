@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="format-detection" content="telephone=no">
+<!-- External CSS -->
+<script  src="js/jquery/jquery-1.8.3.min.js"></script>
+<!-- JavaScript -->
+<script src="js/setting.mini.js?timeStamp="+ new Date().getTime()></script>
+<script type="text/javascript">
+
+$(document).ready(function()
+ {	  
+	delay_get_data();
+	
+ });
+ 
+</script>
+<title>Websetting</title>
+</head>
+<!-- In-document CSS -->
+<style type="text/css">
+<!--
+body {
+	font-size: 16px;
+	color: #2183ca;
+	font-family: Myriad Set Pro,Helvetica Neue,Helvetica,Arial,sans-serif;
+	//background-color: #3366CC;
+	max-width: 600px;
+	min-width: 300px;	
+	margin-left:auto;
+	margin-right:auto;
+}
+#heard{
+	margin-top: 10px;
+	font-size: 20px;
+	text-align:center;
+	font-weight: bold;
+}
+ul {
+	list-style-type:none;
+	text-decoration:none;
+	border: 0px solid #d6d6d6;
+	margin-top: 0px;
+	padding:5px;
+}
+ul li
+{
+	//color: #000000;
+    //padding-left: 1px; 
+	//border: 1px solid #d6d6d6;	
+	display: block;
+	position: relative;
+	overflow: visible;
+	//display:inline;
+	float:none;
+
+}
+ul a{
+	color: #2183ca;
+	text-decoration:none;
+	display: block;
+	position: relative;
+	text-align: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	list-style: outside none none;
+	font-weight: normal;
+	border: 1px solid #d6d6d6;
+	background-color: #eeeeee;
+	margin-top:5px;
+	padding:8px;
+	
+}
+ul a:link{
+	background-color: #eeeeee;
+} 
+ul a:hover{
+	background-color: #FFFFFF;
+} 
+.item_tit {
+	text-align:left;
+	font-size: 20px;
+	width:50%;
+	padding:5px;
+	//border: 1px solid #d6d6d6;
+	display:inline;
+	position:relative;
+	float:left;
+	min-width:30%;
+
+}
+.ui-li-count {
+	display:inline;
+	border: 1px solid #d6d6d6;
+	//align:right;
+	width: 35%;
+	max-width: 180px;
+	min-width:80px;
+	text-align: right;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	right: 1.6em;
+	color: #2183ca;
+	border-radius: 3px;
+	background-color: #ffffff;
+	padding:5px;
+	position:relative;
+	float:right;
+
+}
+#mask{
+	position:absolute;
+	position:fixed !important;
+	position: fixed; 
+	width:100%;
+	height: 100%;
+	background:#000;
+	opacity:0.85;
+	filter:alpha(opacity=75);
+	left:0;
+	top:0;	
+	z-index:1000;
+}
+.popup {
+	width:200px;
+	height:auto;
+	z-index:1001;
+	opacity:1;
+	background-color:#CCCCCC;
+	border-radius: 5px;
+	padding:10px;
+	position:relative;
+	left:50%;
+	top:50%;
+	color:#000000;
+	margin-left:-100px;
+	margin-top: -100px;
+	border-top-width: 1.5px;
+	border-right-width: 1.5px;
+	border-bottom-width: 1.5px;
+	border-left-width: 1.5px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFFFFF;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #FFFFFF;
+
+}
+
+.Bar{
+	position: relative;
+	width: 190px;    /* 宽度 */ 
+	border: 1px solid #000000;
+	padding: 1px;
+	//margin:5px;
+} 
+.Bar div{
+	display: block;
+	position: relative;
+	color: #333333;/* 进度条背景颜色 */
+	height: 20px; /* 高度 */
+	line-height: 20px;  /* 必须和高度一致，文本才能垂直居中 */
+	background-color: #666666;
+} 
+
+.Bar div span{
+	position: absolute;
+	width: 190px; /* 宽度 */ 
+	text-align: center;
+	font-weight: bold;
+} 
+
+
+.STYLE1 {
+	font-size: 16px;
+	color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.warn_txt {
+	font-size:13px;
+	text-align:center;
+	//margin-bottom:10px;
+	//width:280px;
+	//	height:30px;
+	//border: 1px solid #d6d6d6;
+	display: block;
+	//margin-left: 10px;
+	//margin-right: 10px;
+}
+.warn_text{
+	text-align:center;
+	color:#FF0000;
+	font-size:85%;
+}
+.text{
+	padding:5px;
+	border: 1px solid #333333;
+	background-repeat:repeat;
+	max-width:30%;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	-webkit-text-overflow:ellipsis;
+	-moz-text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;
+	-webkit-border-radius: 0px;
+	border-radiu:0px;
+	top: 40%;
+}
+-->
+</style>
+
+<body>
+<form name="config-form" id="config-form" >
+	<input name="current_res_value" type="hidden" id="current_res_value" >
+	<input name="lan_index" type="hidden" id="lan_index">
+	<input name="res_value" type="hidden" id="res_value" >
+	<input name="cgi_sun_path" type="hidden" id="cgi_sun_path">
+	<input name="connection_mode_value" type="hidden" id="connection_mode_value">
+</form>
+<div id="heard">Setting</div>
+<div id="list_load" style="display:display">
+	<ul>
+		<li id="wifilist"><a href="javascript:void(0)" onClick="To_wifilist()" target="_self" ><div class="item_tit" id="internet_txt">Internet</div><div class="ui-li-count" id="connected_ssid" ></div></a></li>
+		<li id="li_language"><a href="#"><div class="item_tit" id="lang_txt">Language</div><div class="ui-li-count" id="lang_sel" ></div></a></li>
+		<li id="pass_sel"><a href="#"><div class="item_tit" id="password_txt">WIFI Password</div><div class="ui-li-count" id="app_sk"></div></a></li>
+		<li id="li_defaultmode"><a href="#"><div  class="item_tit" id="defaultmode_txt">DefaultMode</div><div class="ui-li-count" id="default_mode" style="max:width:50%;">Airplay</div></a></li>
+		<li id="resolution_all"><a href="#"><div  class="item_tit" id="resolution_txt">Resolution</div><div class="ui-li-count" id="resolution_sel"></div></a></li>
+        <li id="ezair"><a href="#"><div class="item_tit" id="ezairmode_title">EZAir</div><div class="ui-li-count" id="ezairmode_txt"></div></a></li>
+		<li id="upgrade"><a href="#"><div  class="item_tit" id="upgrade_txt">Upgrade</div><div class="ui-li-count" id="new_version"></div></a></li>
+	</ul>
+</div>
+
+<div id="Password" style="display:none">
+	<div id="mask">
+		<div class="popup" >
+			<legend>Password:</legend>
+			<fieldset style="border: 0px solid #333333;">
+				<input type="text" value="" name="appsk" id="appsk" >  
+			</fieldset>
+			<div id="psk_warn_txt" class="warn_txt"></div> 
+			<div align="center">
+				<button id="set_appsk_ok" style="margin:5px; ">OK</button>
+				<button id="set_appsk_cel" style="margin:5px; ">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="defaultmode" style="display:none">
+	<div id="mask">
+		<div class="popup">
+		  <fieldset style="border: 0px solid #333333;">
+				<legend align="center" id="le_demode"></legend>
+				<input type="radio" name="de_item" id="de_0" value="1" >
+				<label id="dlt_0" for="de_0">Airplay</label>
+				<div style="margin-bottom:5px;"></div>
+				<input type="radio" name="de_item" id="de_1" value="2">	
+				<label id="dlt_1" for="de_1">Miracast</label>
+			</fieldset>
+			<input name="Default_mode_value" type="hidden" id="Default_mode_value" value="1">
+			<div id="def-mode_text" style="display:none"></div> 
+	
+			<div align="center">
+				<button id="defmode_ok" style="margin:5px;">OK</button>
+				<button id="defmode_cel" style="margin:5px;">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="ezairmode" style="display:none">
+	<div id="mask">
+		<div class="popup">
+			<fieldset style="border: 0px solid #333333;">
+                <legend align="center" id="ezairmode_set"></legend>
+                <input type="radio" name="ezairmodemode_item" id="mode_0" value="1" >
+                <label id="mode_0_txt" for="mode_0">Mirror Only</label>
+                <div  class="warn_text" style="margin-left:22px; text-align:left;">(for iOS10/9)</div>
+                <div style="margin-bottom:5px;"></div>
+                <input type="radio" name="ezairmodemode_item" id="mode_1" value="0">
+                <label id="mode_1_txt" for="mode_1">Mirror+Streaming</label>
+                <div  class="warn_text" style="margin-left:22px; text-align:left;">(for iOS11)</div>
+			</fieldset>
+			<div id="ezairmode_warn_txt" class="warn_text" style="margin-top:3px; padding-top:3px; border-top: 1px solid #aaaaaa;">Changes take effect after reboot</div>
+			<div align="center">
+				<button id="ezairmode_ok" style="margin:5px; ">OK</button>
+				<button id="ezairmode_cel" style="margin:5px; ">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+		
+<div id="Resolution" style="display:none">
+	<div id="mask">
+		<div class="popup">
+		
+			<div id="res_sel" style="display:block;">
+				<fieldset style="border: 0px solid #333333;">
+					<legend id="le_resolution"></legend>
+					<input type="radio" name="resolution_choose" id="res_0" value="0" >
+					<label for="res_0" id="res_0_txt"></label>
+					<div style="margin-bottom:5px;"></div>
+					<input type="radio" name="resolution_choose" id="res_1" value="1" >
+					<label for="res_1" id="res_1_txt"></label>
+					<div style="margin-bottom:5px;"></div>
+					<input type="radio" name="resolution_choose" id="res_2" value="2">
+					<label for="res_2" id="res_2_txt"></label>
+					<div style="margin-bottom:5px;"></div>
+					<input type="radio" name="resolution_choose" id="res_3" value="3">
+					<label for="res_3" id="res_3_txt"></label>
+					<div style="margin-bottom:5px;"></div>
+					<input type="radio" name="resolution_choose" id="res_4" value="4">
+					<label for="res_4" id="res_4_txt"></label>
+					<div style="margin-bottom:5px;"></div>
+					<input type="radio" name="resolution_choose" id="res_5" value="5">
+					<label for="res_5" id="res_5_txt"></label>
+					<div style="margin-bottom:5px;"></div>
+				</fieldset>
+				<div align="center">
+					<button id="set_resolution_ok" style="margin:5px; ">OK</button>
+					<button id="set_resolution_cal" style="margin:5px; ">Cancel</button>
+				</div>
+			</div>
+			
+			<div id="res_warn" style="display:none;">
+					<div id="dialog_msg2" align="center" style="display:none;"></div>
+					<div id="dialog_msg" align="center"></div>
+					<div align="center"><span id="resolution_tick" style="width:5px">15</span><span id="time_tick_msg"></span></div>
+					<div align="center">
+						<button id="resolution_ent" style="margin:5px; ">OK</button>
+						<button id="resolution_cancle" style="margin:5px; ">Cancel</button>
+					</div>
+				<div id="reboot_msg" class="warn_txt"></div>
+			</div> 
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="ota" style="display:none">
+	<div id="mask">
+		<div class="popup">
+			
+			<div id="1" style="display:block">
+				<span id="local_text">Current version :</span><input type="text" name="" id="local_version" value="" >
+				<span id="server_text">Sever version :</span><input type="text" name="" id="server_version" value="">
+				<div align="center">
+					<button id="upgrade_OK" style="margin:5px; ">upgrade</button>
+					<button id="upgrade_CANCEL" style="margin:5px; ">Cancel</button>
+				</div>
+			</div>
+		
+		
+			<div id="2" style="display:none">  <!--because only a popup layer, so using a switch display div  <span>load...</span><div class="" style="display: block; width: 0%;"></div>-->
+				<!-- Progressbar -->
+				 <div class="Bar"> 
+					<div id="progressbar" style="width: 0%;"> 
+						<span id="progress_label">0%</span> 
+					</div> 
+				</div> 
+				
+				<div id="upgrade_warn" class="warn_txt" style="margin-top: 5px;"></div>
+				
+			</div>
+		  
+		</div>
+	</div>
+</div>		
+	
+<div id="ota_fail" style="display:none">
+	<div id="mask">
+		<div class="popup">	
+		
+			<div id="warn"  style="display:none">
+				<div id="upgrade_dialog_msg" style="text-align:center;"></div>
+			</div>
+			<div id="warn_time"  style="display:none">
+				<div id="upgrade_dialog_msg2" style="text-align:center;"></div>
+				<div style="text-align:center;"><span id="upgrade_tick" style="width:5px;"></span><span id="upgrade_time_tick_msg"></span></div>
+			</div>
+			<div align="center">
+				<button id="ota_awrn_ok" style="margin:5px; ">OK</button>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<div id="language_sel" style="display:none">
+	<div id="mask">
+    
+		<div class="popup" style="width:300px; top:25%; margin-left:-160px;">
+            <fieldset style="border: 0px solid #333333;">
+            <div  id="langlist_left" style="border: 0px solid #333333; float:left; width:45%">
+            
+            </div>
+            <div  id="langlist_right" style="border: 0px solid #333333; float:right; width:50%">
+            
+            </div>
+            </fieldset>
+            <div align="center">
+                <button id="lang_ok" style="margin:5px; ">OK</button>
+                <button id="lang_cancel" style="margin:5px; ">Cancel</button>
+            </div>
+		</div>
+        
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+am7x_qrcode_api.o: am7x_qrcode_api.c qrspec.h qrencode.h qrinput.h \
+  bitstream.h split.h qrencode_inner.h am7x_qrcode_api.h
+bitstream.o: bitstream.c bitstream.h
+mask.o: mask.c qrencode.h qrspec.h mask.h
+mmask.o: mmask.c qrencode.h mqrspec.h mmask.h
+mqrspec.o: mqrspec.c mqrspec.h qrencode.h
+qrencode.o: qrencode.c qrencode.h qrspec.h mqrspec.h bitstream.h \
+  qrinput.h rscode.h split.h mask.h mmask.h
+qrinput.o: qrinput.c qrencode.h qrspec.h mqrspec.h bitstream.h qrinput.h
+qrspec.o: qrspec.c qrspec.h qrencode.h qrinput.h bitstream.h
+rscode.o: rscode.c rscode.h
+split.o: split.c qrencode.h qrinput.h bitstream.h qrspec.h split.h

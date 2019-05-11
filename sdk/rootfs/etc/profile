@@ -1,0 +1,6 @@
+#! /bin/sh
+. /etc/init.d/set-path
+
+export GDB_REMOTE_HOST=8.8.8.6
+export GDB_REMOTE_PORT=8888
+alias gdbserver="/bin/gdbserver $GDB_REMOTE_HOST:$GDB_REMOTE_PORT"

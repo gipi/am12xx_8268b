@@ -1,0 +1,6 @@
+config_loader.o: config_loader.c include/rs232_main.h
+msg_queue.o: msg_queue.c include/rs232_main.h
+result_parser.o: result_parser.c include/rs232_main.h
+rs232_main.o: rs232_main.c include/rs232_main.h \
+  ../../../sdk/include/uartcom.h ../../../sdk/include/sys_msg.h \
+  ../../../sdk/include/am_types.h
