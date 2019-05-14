@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #LIBS='sdk/lib/libAA1.so case/lib/libBB1.so -L case/lib -lBB2'
 if [ -z "$LIBS" ]; then exit 0; fi
 awk '{
